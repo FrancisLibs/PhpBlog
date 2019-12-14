@@ -1,0 +1,7 @@
+# Lines starting with `#` are comments.
+
+# Ce fichier permet à git d'ignorer les fichiers et dossiers qui y sont répertoriés.
+
+# Le dossier divers contient tous les éléments ne faisant pas partie du site
+
+/vendor
