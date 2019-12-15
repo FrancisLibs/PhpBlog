@@ -3,7 +3,7 @@ namespace Entity;
 
 use \OCFram\Entity;
 
-class Post extends Entity
+class Posts extends Entity
 {
   protected $auteur,
             $titre,
