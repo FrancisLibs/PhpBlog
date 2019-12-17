@@ -30,32 +30,12 @@ abstract class BackController extends ApplicationComponent
       throw new \RuntimeException('L\'action "'.$this->action.'" n\'est pas définie sur ce module');
     }
 
-    // CACHE : Système de mise en cache de la vue
-    // On défini le nome du fichier de la vue
-    $this->app->setFileName = $this->app->cache()->defineFileName(__DIR__.'/../../tmp/cache/views/', $this->app->name(), $this->module, $this->view);
-
-    if(!$this->app->cache()->FileExist($this->app->fileName) || !$this->app->cache()->fileIsExpired($this->app->fileName)) // Si la vue n'est pas créé ou le tps est dépassé, elle est créée.
-    {
-      echo 'backController ligne '. __LINE__ ;
-      // Création fichier
-      $this->$method($this->app->httpRequest());
-    }
-    else
-    {
-      echo 'backController ligne '. __LINE__ ;
-      //lecture du fichier
-      $this->httpResponse->send($this->app->fileName);
-    }
+    $this->$method($this->app->httpRequest());
   }
 
   public function page()
   {
     return $this->page;
-  }
-
-  public function module()
-  {
-    return $this->module;
   }
 
   public function setModule($module)
