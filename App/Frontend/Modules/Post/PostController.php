@@ -1,5 +1,5 @@
 <?php
-namespace App\Frontend\Modules\Posts;
+namespace App\Frontend\Modules\Post;
 
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
@@ -7,7 +7,7 @@ use \Entity\Comments;
 use \FormBuilder\CommentsFormBuilder;
 use \OCFram\FormHandler;
 
-class PostsController extends BackController
+class PostController extends BackController
 {
   public function executeIndex(HTTPRequest $request)
   {
@@ -17,39 +17,40 @@ class PostsController extends BackController
     // On ajoute une définition pour le titre.
     $this->page->addVar('title', 'Liste des '.$nombrePosts.' derniers posts');
 
-    // On récupère le manager des news.
-    $manager = $this->managers->getManagerOf('Posts');
+    // On récupère le manager des posts.
+    $manager = $this->managers->getManagerOf('Post');
 
     $listePosts = $manager->getList(0, $nombrePosts);
 
+
     foreach ($listePosts as $post)
     {
-      if (strlen($post->contenu()) > $nombreCaracteres)
+      if (strlen($post->contents()) > $nombreCaracteres)
       {
-        $debut = substr($post->contenu(), 0, $nombreCaracteres);
+        $debut = substr($post->contents(), 0, $nombreCaracteres);
         $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
 
-        $posts->setContenu($debut);
+        $post->setContents($debut);
       }
     }
 
-    // On ajoute la variable $listeNews à la vue.
+    // On ajoute la variable $liste à la vue.
     $this->page->addVar('listePosts', $listePosts);
   }
 
   public function executeShow(HTTPRequest $request)
   {
-    $post = $this->managers->getManagerOf('Posts')->getUnique($request->getData('id'));
+    $post = $this->managers->getManagerOf('Post')->getUnique($request->getData('id'));
 
-    if (empty($posts))
+    if (empty($post))
     {
       $this->app->httpResponse()->redirect404();
     }
 
-    $this->page->addVar('title', $news->titre());
+    $this->page->addVar('title', $post->title());
     $this->page->addVar('post', $post);
 
-    $this->page->addVar('comments', $this->managers->getManagerOf('Comments')->getListOf($news->id()));
+    $this->page->addVar('comments', $this->managers->getManagerOf('Comments')->getListOf($post->id()));
   }
 
   public function executeInsertComment(HTTPRequest $request)
@@ -59,8 +60,8 @@ class PostsController extends BackController
     {
       $comment = new Comment([
         'post' => $request->getData('post'),
-        'auteur' => $request->postData('auteur'),
-        'contenu' => $request->postData('contenu')
+        'author' => $request->postData('author'),
+        'contents' => $request->postData('contents')
       ]);
     }
     else

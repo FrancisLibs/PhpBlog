@@ -2,25 +2,25 @@
 namespace Model;
 
 use \OCFram\Manager;
-use \Entity\Posts;
+use \Entity\Post;
 
-abstract class PostsManager extends Manager
+abstract class PostManager extends Manager
 {
   /**
    * Méthode permettant d'ajouter un post.
    * @param $post Posts Le post à ajouter
    * @return void
    */
-  abstract protected function add(Posts $post);
+  abstract protected function add(Post $post);
 
   /**
-   * Méthode permettant d'enregistrer une post.
-   * @param $post Posts le post à enregistrer
+   * Méthode permettant d'enregistrer un post.
+   * @param $post Post le post à enregistrer
    * @see self::add()
    * @see self::modify()
    * @return void
    */
-  public function save(Posts $post)
+  public function save(Post $post)
   {
     if ($post->isValid())
     {
@@ -49,7 +49,7 @@ abstract class PostsManager extends Manager
    * Méthode retournant une liste de posts demandés.
    * @param $debut int Le premier post à sélectionner
    * @param $limite int Le nombre de posts à sélectionner
-   * @return array La liste des posts. Chaque entrée est une instance de Posts.
+   * @return array La liste des posts. Chaque entrée est une instance de Post.
    */
   abstract public function getList($debut = -1, $limite = -1);
 
@@ -62,8 +62,8 @@ abstract class PostsManager extends Manager
 
   /**
    * Méthode permettant de modifier un post.
-   * @param $posts Post le post à modifier
+   * @param $post Post le post à modifier
    * @return void
    */
-  abstract protected function modify(Posts $post);
+  abstract protected function modify(Post $post);
 }
