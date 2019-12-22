@@ -12,7 +12,6 @@ body {
 
 p {
   line-height: 1.5;
-  margin: 30px 0;
 }
 
 p a {
@@ -127,7 +126,7 @@ img::-moz-selection {
     color: rgba(255, 255, 255, 0.8);
   }
   #mainNav .navbar-nav > li.nav-item > a {
-    padding: 10px 20px;
+    padding: 4px 20px;
     color: #fff;
   }
   #mainNav .navbar-nav > li.nav-item > a:focus, #mainNav .navbar-nav > li.nav-item > a:hover {
@@ -175,6 +174,7 @@ header.masthead {
   background-attachment: scroll;
   position: relative;
   background-size: cover;
+  height : 600px;
 }
 
 header.masthead .overlay {
@@ -194,17 +194,13 @@ header.masthead .site-heading {
   color: white;
 }
 
+
 @media only screen and (min-width: 768px) {
   header.masthead .page-heading,
   header.masthead .post-heading,
   header.masthead .site-heading {
-    padding: 200px 0;
+    padding: 270px 0;
   }
-}
-
-header.masthead .page-heading,
-header.masthead .site-heading {
-  text-align: center;
 }
 
 header.masthead .page-heading h1,
@@ -390,7 +386,6 @@ footer .copyright {
   padding: 15px 25px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  border-radius: 0;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
