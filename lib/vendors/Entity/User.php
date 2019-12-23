@@ -6,7 +6,7 @@ use \OCFram\Entity;
 class User extends Entity
 {
   protected $id,
-            $name,
+            $login,
             $email,
             $password,
             $create_date,
@@ -14,23 +14,23 @@ class User extends Entity
             $level;
 
   const USER_INVALIDE = 1;
-  const NAME_INVALIDE = 2;
+  const LOGIN_INVALIDE = 2;
   const EMAIL_INVALIDE = 3;
   const PASSWORD_INVALIDE = 4;
 
   public function isValid()
   {
-    return !(empty($this->email) || empty($this->name) || empty($this->password));
+    return !empty($this->login) || (empty($this->email) || empty($this->password));
   }
 
 
   // SETTERS //
 
-  public function setName($name)
+  public function setLogin($login)
   {
-    if (!is_string($name) || empty($name))
+    if (!is_string($login) || empty($login))
     {
-      $this->erreurs[] = self::NAME_INVALIDE;
+      $this->erreurs[] = self::LOGIN_INVALIDE;
     }
 
     $this->auteur = $author;
@@ -84,9 +84,9 @@ class User extends Entity
     return $this->id;
   }
 
-  public function name()
+  public function login()
   {
-    return $this->name;
+    return $this->login;
   }
 
   public function email()

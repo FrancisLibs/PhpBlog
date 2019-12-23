@@ -7,9 +7,9 @@ class UserManagerPDO extends UserManager
 {
   protected function add(User $user)
   {
-    $requete = $this->dao->prepare('INSERT INTO users SET name = :name, email = :email, password = :password, edition_date = NOW(), status = :status, level = :level');
+    $requete = $this->dao->prepare('INSERT INTO users SET login = :login, email = :email, password = :password, edition_date = NOW(), status = :status, level = :level');
 
-    $requete->bindValue(':name',      $user->name());
+    $requete->bindValue(':login',     $user->login());
     $requete->bindValue(':email',     $user->emailr());
     $requete->bindValue(':password',  $user->password());
     $requete->bindValue(':satus',     $user->status());
@@ -25,7 +25,7 @@ class UserManagerPDO extends UserManager
 
   public function getUser($id)
   {
-    $requete = $this->dao->prepare('SELECT id, name, email, password, edition_date, status, level FROM users WHERE id = :id');
+    $requete = $this->dao->prepare('SELECT id, login, email, password, edition_date, status, level FROM users WHERE id = :id');
     $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
     $requete->execute();
 
@@ -43,9 +43,9 @@ class UserManagerPDO extends UserManager
 
   protected function update(User $user)
   {
-    $requete = $this->dao->prepare('UPDATE users SET name = :name, email = :email, password = :password, modify_date = NOW(), status = :status, level = :level WHERE id = :id');
+    $requete = $this->dao->prepare('UPDATE users SET login = :login, email = :email, password = :password, modify_date = NOW(), status = :status, level = :level WHERE id = :id');
 
-    $requete->bindValue(':name',      $user->name());
+    $requete->bindValue(':login',     $user->login());
     $requete->bindValue(':email',     $user->email());
     $requete->bindValue(':password',  $user->password());
     $requete->bindValue(':id',        $user->id(), \PDO::PARAM_INT);
