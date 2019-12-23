@@ -5,7 +5,8 @@ use \OCFram\Entity;
 
 class Comment extends Entity
 {
-  protected $author,
+  protected $post,
+            $author,
             $contents,
             $edition_date,
             $modify_date,
@@ -17,6 +18,12 @@ class Comment extends Entity
   public function isValid()
   {
     return !(empty($this->auteur) || empty($this->contenu));
+  }
+   // SETTERS //
+
+  public function setId($id)
+  {
+    $this->id = $id;
   }
 
   public function setNews($news)
@@ -54,9 +61,9 @@ class Comment extends Entity
     $this->modify_date = $date;
   }
 
-  public function news()
+  public function post()
   {
-    return $this->news;
+    return $this->post;
   }
 
   public function auteur()

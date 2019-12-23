@@ -25,6 +25,11 @@ class Post extends Entity
 
   // SETTERS //
 
+  public function setId($id)
+  {
+    $this->id = $id;
+  }
+
   public function setAuthor($author)
   {
     if (!is_string($author) || empty($author))

@@ -7,14 +7,16 @@ class PostManagerPDO extends PostManager
 {
   protected function add(Post $post)
   {
-    $requete = $this->dao->prepare('INSERT INTO post SET author = :author, title = :title, chapo = :chapo, contents = :contents, edition_date = NOW(), modify_date = NOW()');
+    $q = $this->dao->prepare('INSERT INTO posts SET author = :author, title = :title, chapo = :chapo, contents = :contents, edition_date = NOW(), modify_date = NOW()');
 
-    $requete->bindValue(':title',   $post->title());
-    $requete->bindValue(':author',  $post->author());
-    $requete->bindValue(':chapo',   $post->chapo());
-    $requete->bindValue(':contents', $post->contents());
+    $q->bindValue(':title',   $post->title());
+    $q->bindValue(':author',  $post->author());
+    $q->bindValue(':chapo',   $post->chapo());
+    $q->bindValue(':contents', $post->contents());
 
-    $requete->execute();
+    $q->execute();
+
+    $post->setId($this->dao->lastInsertId());
   }
 
   public function count()

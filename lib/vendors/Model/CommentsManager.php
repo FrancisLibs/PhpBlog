@@ -36,7 +36,7 @@ abstract class CommentsManager extends Manager
   {
     if ($comment->isValid())
     {
-      $comment->isNew() ? $this->add($comment) : $this->modify($comment);
+      $comment->isNew() ? $this->add($comment) : $this->update($comment);
     }
     else
     {
@@ -46,7 +46,7 @@ abstract class CommentsManager extends Manager
 
   /**
    * Méthode permettant de récupérer une liste de commentaires.
-   * @param $news La news sur laquelle on veut récupérer les commentaires
+   * @param $post Le post duquel on veut récupérer les commentaires
    * @return array
    */
   abstract public function getListOf($post);
@@ -56,7 +56,7 @@ abstract class CommentsManager extends Manager
    * @param $comment Le commentaire à modifier
    * @return void
    */
-  abstract protected function modify(Comment $comment);
+  abstract protected function update(Comment $comment);
 
   /**
    * Méthode permettant d'obtenir un commentaire spécifique.
@@ -64,4 +64,16 @@ abstract class CommentsManager extends Manager
    * @return Comment
    */
   abstract public function get($id);
+
+  /**
+   * Méthode renvoyant le nombre total de commentaires.
+   * @return int
+   */
+  abstract public function count();
+
+  /**
+   * Méthode renvoyant le nombre de commentaires non validés.
+   * @return int
+   */
+  abstract public function countUnvalidate();
 }
