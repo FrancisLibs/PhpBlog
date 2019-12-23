@@ -74,7 +74,7 @@ class PostManagerPDO extends PostManager
     return null;
   }
 
-  protected function modify(Post $post)
+  protected function update(Post $post)
   {
     $requete = $this->dao->prepare('UPDATE post SET author = :author, title = :title, chapo = :chapo, contents = :contents, modify_date = NOW() WHERE id = :id');
 

@@ -97,12 +97,13 @@ class PostController extends BackController
       $post = new Post([
         'author' => $request->postData('author'),
         'title' => $request->postData('title'),
+        'chapo' => $request->postData('chapo'),
         'contents' => $request->postData('contents')
       ]);
 
       if ($request->getExists('id'))
       {
-        $news->setId($request->getData('id'));
+        $post->setId($request->getData('id'));
       }
     }
     else
@@ -118,7 +119,7 @@ class PostController extends BackController
       }
     }
 
-    $formBuilder = new NewsFormBuilder($post);
+    $formBuilder = new PostFormBuilder($post);
     $formBuilder->build();
 
     $form = $formBuilder->form();
@@ -127,7 +128,7 @@ class PostController extends BackController
 
     if ($formHandler->process())
     {
-      $this->app->user()->setFlash($news->isNew() ? 'La news a bien été ajoutée !' : 'La news a bien été modifiée !');
+      $this->app->user()->setFlash($post->isNew() ? 'Le post a bien été ajoutée !' : 'Le post a bien été modifiée !');
 
       $this->app->httpResponse()->redirect('/admin/');
     }

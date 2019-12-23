@@ -14,4 +14,19 @@ body{
 
 .post-title{
   color: white;
+  font-size: 0.8em;
 }
+
+.post-chapo{
+  color: white;
+  font-size: 0.8em;
+}
+
+.ligne-titre{
+  padding-top: 50px;
+}
+
+.post-box{
+  padding-top: 50px;
+}
+

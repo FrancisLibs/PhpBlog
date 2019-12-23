@@ -65,5 +65,5 @@ abstract class PostManager extends Manager
    * @param $post Post le post à modifier
    * @return void
    */
-  abstract protected function modify(Post $post);
+  abstract protected function update(Post $post);
 }
