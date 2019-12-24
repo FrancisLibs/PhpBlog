@@ -9,7 +9,6 @@ class Comment extends Entity
             $author,
             $contents,
             $edition_date,
-            $modify_date,
             $status;
 
   const AUTEUR_INVALIDE = 1;
@@ -26,7 +25,7 @@ class Comment extends Entity
     $this->id = $id;
   }
 
-  public function setNews($news)
+  public function setPost($news)
   {
     $this->news = (int) $news;
   }

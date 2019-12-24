@@ -45,7 +45,7 @@ abstract class CommentsManager extends Manager
   }
 
   /**
-   * Méthode permettant de récupérer une liste de commentaires.
+   * Méthode permettant de récupérer une liste de commentaires d'un post.
    * @param $post Le post duquel on veut récupérer les commentaires
    * @return array
    */
