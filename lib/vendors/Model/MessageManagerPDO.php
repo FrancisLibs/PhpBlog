@@ -1,7 +1,7 @@
 <?php
 namespace Model;
 
-use \Entity\Post;
+use \Entity\Message;
 
 class ContactManagerPDO extends MessageManager
 {
@@ -27,7 +27,7 @@ class ContactManagerPDO extends MessageManager
   public function getList()
   {
 
-    $sql = 'SELECT id, author, title, chapo, contents, edition_date, modify_date FROM messages ORDER BY id DESC';
+    $sql = 'SELECT id, name, email, message, edition_date FROM messages ORDER BY id DESC';
 
     $requete = $this->dao->query($sql);
 
