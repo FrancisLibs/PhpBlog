@@ -32,7 +32,7 @@ class PostManagerPDO extends PostManager
   public function getList($debut = -1, $limite = -1)
   {
 
-    $sql = 'SELECT id, author, title, chapo, contents, edition_date, modify_date FROM post ORDER BY id DESC';
+    $sql = 'SELECT id, author, title, chapo, contents, edition_date, modify_date FROM posts ORDER BY id DESC';
 
     if ($debut != -1 || $limite != -1)
     {

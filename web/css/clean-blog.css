@@ -168,13 +168,7 @@ img::-moz-selection {
   }
 }
 
-header.masthead {
-  background: no-repeat center center;
-  background-color: #868e96;
-  background-attachment: scroll;
-  position: relative;
-  background-size: cover;
-}
+
 
 header.masthead .overlay {
   position: absolute;
@@ -214,7 +208,7 @@ header.masthead .site-heading h1 {
 
 header.masthead .page-heading .subheading,
 header.masthead .site-heading .subheading {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 300;
   line-height: 1.1;
   display: block;

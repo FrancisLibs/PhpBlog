@@ -26,7 +26,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand" href="index.html">My php blog<br />Francis Libs</a>
+        <a class="navbar-brand" href="/">My php blog<br />Francis Libs</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -34,13 +34,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Accueil</a>
+              <a class="nav-link" href="/">Accueil</a>
             </li>
             <li class="nav-item">
-             <a class="nav-link" href="post.html">Posts</a>
+             <a class="nav-link" href="posts.html">Posts</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link float-right btn btn-outline-primary" href="contact.html">Connexion</a>
+              <a class="nav-link float-right" href="contact.html">Connexion</a>
             </li>
           </ul>
         </div>
@@ -48,16 +48,16 @@
     </nav>
     <!-- Fin navigation  -->
 
-    <header class="masthead" style="background-image: url('images/plageGuadeloupe.jpg')">
+    <header class="masthead">
       <div class="overlay"></div><!-- Voile sur le background -->
       <div class="container">
         <?php
-        if($accueil){  ?>
+        if($action == "index"){ ?>
         <div class="row">
           <div class="col-lg-7 col-md-10 ligne-titre">
             <div class="site-heading">
               <h1>La Webuzine</h1>
-              <span class="subheading">Le trait d'union entre votre immagination et le Web</span>
+              <span class="subheading">Le trait d'union entre votre immagination et votre communication Web</span>
             </div>
           </div>
           <div class="col-lg-5 post-box">
@@ -69,9 +69,12 @@
             </div>
           </div>
         </div>
-      <?php }
-      else {
-      }?>
+        <?php
+          }
+        else { ?>
+          <?= $content ?>
+        <?php
+        }?>
     </header>
 
 
@@ -108,6 +111,10 @@
               </li>
             </ul>
           </div>
+          <div class="col-lg-2 col-md-10">
+            <a class="btn btn-link" href="posts.html" role="button">Link</a>
+          </div>
+
         </div>
       </div>
     </footer>

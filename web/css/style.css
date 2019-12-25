@@ -1,7 +1,3 @@
-body{
-  background-color: black;
-}
-
 .masthead .ligne-nom{
   padding-top: 4%;
   padding-left: 34px;
@@ -30,3 +26,10 @@ body{
   padding-top: 50px;
 }
 
+header.masthead {
+  margin:0;
+  padding:0;
+  background: url(../images/plageGuadeloupe.jpg) no-repeat center fixed;
+  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  background-size: cover; /* version standardisée */
+}

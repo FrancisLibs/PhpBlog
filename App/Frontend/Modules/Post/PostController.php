@@ -15,13 +15,12 @@ class PostController extends BackController
     $nombreCaracteres = $this->app->config()->get('nombre_caracteres');
 
     // On informe le layout que c'est la page d'accueil
-    $this->page->addVar('accueil', true);
+    $this->page->addVar('action', $this->action);
 
     // On récupère le manager des posts.
     $manager = $this->managers->getManagerOf('Post');
 
     $listePosts = $manager->getList(0, $nombrePosts);
-
 
     foreach ($listePosts as $post)
     {
@@ -42,6 +41,9 @@ class PostController extends BackController
   {
     $nombrePosts = $this->app->config()->get('nombre_posts');
     $nombreCaracteres = $this->app->config()->get('nombre_caracteres');
+
+    // On informe le layout que c'est la page d'accueil
+    $this->page->addVar('action', $this->action);
 
     // On ajoute une définition pour le titre.
     $this->page->addVar('title', 'Liste des '.$nombrePosts.' derniers posts');
