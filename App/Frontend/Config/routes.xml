@@ -2,6 +2,6 @@
 <routes>
   <route url="/" module="Post" action="index" />
   <route url="/posts.html" module="Post" action="ShowPosts" />
-  <route url="/post-([0-9]+)\.html" module="Post" action="show" vars="id"/>
+  <route url="/post-([0-9]+)\.html" module="Post" action="Show" vars="id"/>
   <route url="/commenter-([0-9]+)\.html" module="Post" action="insertComment" vars="post" />
 </routes>

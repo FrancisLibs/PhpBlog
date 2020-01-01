@@ -15,8 +15,8 @@ class PostController extends BackController
   {
     $postId = $request->getData('id');
 
-    $this->managers->getManagerOf('Post')->delete($postId);
     $this->managers->getManagerOf('Comments')->deleteFromPost($postId);
+    $this->managers->getManagerOf('Post')->delete($postId);
 
     $this->app->user()->setFlash('Le post a bien été supprimé !');
 
@@ -95,10 +95,10 @@ class PostController extends BackController
     if ($request->method() == 'POST')
     {
       $post = new Post([
-        'author' => $request->postData('author'),
+        'name' => $request->postData('name'),
         'title' => $request->postData('title'),
         'chapo' => $request->postData('chapo'),
-        'contents' => $request->postData('contents')
+        'contenu' => $request->postData('contenu')
       ]);
 
       if ($request->getExists('id'))

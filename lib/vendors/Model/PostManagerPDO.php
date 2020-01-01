@@ -7,12 +7,12 @@ class PostManagerPDO extends PostManager
 {
   protected function add(Post $post)
   {
-    $q = $this->dao->prepare('INSERT INTO posts SET author = :author, title = :title, chapo = :chapo, contents = :contents, edition_date = NOW(), modify_date = NOW()');
+    $q = $this->dao->prepare('INSERT INTO posts SET author = :author, title = :title, chapo = :chapo, contenu = :contenu, edition_date = NOW(), modify_date = NOW()');
 
     $q->bindValue(':title',   $post->title());
     $q->bindValue(':author',  $post->author());
     $q->bindValue(':chapo',   $post->chapo());
-    $q->bindValue(':contents', $post->contents());
+    $q->bindValue(':contenu', $post->contenu());
 
     $q->execute();
 
@@ -21,18 +21,18 @@ class PostManagerPDO extends PostManager
 
   public function count()
   {
-    return $this->dao->query('SELECT COUNT(*) FROM post')->fetchColumn();
+    return $this->dao->query('SELECT COUNT(*) FROM posts')->fetchColumn();
   }
 
   public function delete($id)
   {
-    $this->dao->exec('DELETE FROM post WHERE id = '.(int) $id);
+    $this->dao->exec('DELETE FROM posts WHERE id = '.(int) $id);
   }
 
   public function getList($debut = -1, $limite = -1)
   {
 
-    $sql = 'SELECT id, author, title, chapo, contents, edition_date, modify_date FROM posts ORDER BY id DESC';
+    $sql = 'SELECT posts.id, users.name, title, chapo, contenu, edition_date, modify_date FROM posts INNER JOIN users ON posts.users_id = users.id ORDER BY id DESC';
 
     if ($debut != -1 || $limite != -1)
     {
@@ -59,7 +59,8 @@ class PostManagerPDO extends PostManager
 
   public function getUnique($id)
   {
-    $requete = $this->dao->prepare('SELECT id, author, title, chapo, contents, edition_date, modify_date FROM post WHERE id = :id');
+    $requete = $this->dao->prepare('SELECT posts.id, users.name, title, chapo, contenu, edition_date, modify_date FROM posts INNER JOIN users ON posts.users_id = users.id WHERE posts.id = :id');
+
     $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
     $requete->execute();
 
@@ -78,12 +79,12 @@ class PostManagerPDO extends PostManager
 
   protected function update(Post $post)
   {
-    $requete = $this->dao->prepare('UPDATE post SET author = :author, title = :title, chapo = :chapo, contents = :contents, modify_date = NOW() WHERE id = :id');
+    $requete = $this->dao->prepare('UPDATE posts SET name = :name, title = :title, chapo = :chapo, contenu = :contenu, modify_date = NOW() WHERE id = :id');
 
     $requete->bindValue(':title',   $post->title());
-    $requete->bindValue(':author',  $post->author());
+    $requete->bindValue(':name',    $post->name());
     $requete->bindValue(':chapo',   $post->chapo());
-    $requete->bindValue(':contents', $post->contents());
+    $requete->bindValue(':contenu', $post->contenu());
     $requete->bindValue(':id',      $post->id(), \PDO::PARAM_INT);
 
     $requete->execute();

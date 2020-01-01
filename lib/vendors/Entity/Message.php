@@ -3,35 +3,47 @@ namespace Entity;
 
 use \OCFram\Entity;
 
-class Contact extends Entity
+class Message extends Entity
 {
   protected $id,
-            $login,
+            $lastName,
+            $firstName,
             $email,
             $message,
             $edition_date;
 
   const USER_INVALIDE = 1;
-  const LOGIN_INVALIDE = 2;
-  const EMAIL_INVALIDE = 3;
-  const MESSAGE_INVALIDE = 4;
+  const NOM_INVALIDE = 2;
+  const PRENOM_INVALIDE = 3;
+  const EMAIL_INVALIDE = 4;
+  const MESSAGE_INVALIDE = 5;
 
   public function isValid()
   {
-    return !empty($this->login) || (empty($this->email) || empty($this->message));
+    return !empty($this->lastName) || (empty($this->firstName) || empty($this->email) || empty($this->message));
   }
 
 
   // SETTERS //
 
-  public function setLogin($login)
+  public function setLastName($lastName)
   {
-    if (!is_string($login) || empty($login))
+    if (!is_string($lastName) || empty($lastName))
     {
-      $this->erreurs[] = self::LOGIN_INVALIDE;
+      $this->erreurs[] = self::NOM_INVALIDE;
     }
 
-    $this->login = $login;
+    $this->lastName = $lastName;
+  }
+
+   public function setFirstName($firstName)
+  {
+    if (!is_string($firstName) || empty($firstName))
+    {
+      $this->erreurs[] = self::PRENOM_INVALIDE;
+    }
+
+    $this->firstName = $firstName;
   }
 
   public function setEmail($email)
@@ -72,9 +84,14 @@ class Contact extends Entity
     return $this->id;
   }
 
-  public function login()
+  public function lastName()
   {
-    return $this->login;
+    return $this->lastName;
+  }
+
+  public function firstName()
+  {
+    return $this->firstName;
   }
 
   public function email()

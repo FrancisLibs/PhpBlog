@@ -24,20 +24,21 @@ class CommentsManagerPDO extends CommentsManager
     $this->dao->exec('DELETE FROM comments WHERE id = '.(int) $id);
   }
 
-  public function deleteFromPost($post)
+  public function deleteFromPost($postId)
   {
-    $this->dao->exec('DELETE FROM comments WHERE post = '.(int) $post);
+    $this->dao->exec('DELETE FROM comments WHERE post_id = '.(int) $postId);
   }
 
-  public function getListOf($post)
+  public function getListOf($postId)
   {
-    if (!ctype_digit($post))
+    if (!ctype_digit($postId))
     {
       throw new \InvalidArgumentException('L\'identifiant du post passé doit être un nombre entier valide');
     }
 
-    $q = $this->dao->prepare('SELECT contents, edition_date, modify_date, status, userId, postId FROM comments WHERE postId = :post');
-    $q->bindValue(':post', $post, \PDO::PARAM_INT);
+    $q = $this->dao->prepare('SELECT contenu, edition_date, modify_date, validity, name FROM comments INNER JOIN users ON comments.user_id = users.id WHERE post_id = :postId');
+
+    $q->bindValue(':postId', $postId, \PDO::PARAM_INT);
     $q->execute();
 
     $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
@@ -46,7 +47,8 @@ class CommentsManagerPDO extends CommentsManager
 
     foreach ($comments as $comment)
     {
-      $comment->setDate(new \DateTime($comment->date()));
+      $comment->setEdition_date(new \DateTime($comment->edition_date()));
+      $comment->setModify_date(new \DateTime($comment->modify_date()));
     }
 
     return $comments;

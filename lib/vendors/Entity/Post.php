@@ -5,10 +5,10 @@ use \OCFram\Entity;
 
 class Post extends Entity
 {
-  protected $author,
+  protected $name,
             $title,
             $chapo,
-            $contents,
+            $contenu,
             $edition_date,
             $modify_date;
 
@@ -19,7 +19,7 @@ class Post extends Entity
 
   public function isValid()
   {
-    return !(empty($this->author) || empty($this->title) || empty($this->chapo) || empty($this->contents));
+    return !(empty($this->author) || empty($this->title) || empty($this->chapo) || empty($this->contenu));
   }
 
 
@@ -30,14 +30,14 @@ class Post extends Entity
     $this->id = $id;
   }
 
-  public function setAuthor($author)
+  public function setName($name)
   {
-    if (!is_string($author) || empty($author))
+    if (!is_string($name) || empty($name))
     {
       $this->erreurs[] = self::AUTEUR_INVALIDE;
     }
 
-    $this->auteur = $author;
+    $this->name = $name;
   }
 
   public function setTitle($title)
@@ -60,14 +60,14 @@ class Post extends Entity
     $this->chapo = $chapo;
   }
 
-  public function setContents($contents)
+  public function setContenu($contenu)
   {
-    if (!is_string($contents) || empty($contents))
+    if (!is_string($contenu) || empty($contenu))
     {
       $this->erreurs[] = self::CONTENU_INVALIDE;
     }
 
-    $this->contents = $contents;
+    $this->contenu = $contenu;
   }
 
   public function setEdition_date(\DateTime $edition_date)
@@ -82,9 +82,9 @@ class Post extends Entity
 
   // GETTERS //
 
-  public function auteur()
+  public function name()
   {
-    return $this->auteur;
+    return $this->name;
   }
 
   public function title()
@@ -97,9 +97,9 @@ class Post extends Entity
     return $this->chapo;
   }
 
-  public function contents()
+  public function contenu()
   {
-    return $this->contents;
+    return $this->contenu;
   }
 
   public function edition_date()

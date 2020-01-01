@@ -6,7 +6,13 @@ foreach ($listePosts as $post)
     <h4 ><a href="post-<?= $post['id'] ?>.html"><?= $post['title'] ?></a></h4>
   </div>
   <div class="post-chapo">
-    <p><?= nl2br($post['chapo']) ?></p>
+    <p>Chapo : <?= nl2br($post['chapo']) ?></p>
+  </div>
+   <div class="post-autheur">
+    <p>Auteur : <?= nl2br($post['name']) ?></p>
+  </div>
+   <div class="post-chapo">
+    <p>DateModif. :<?= $post['modify_date']->format('d/m/Y à H\hi') ?></p>
   </div>
 <?php
-}
+} ?>

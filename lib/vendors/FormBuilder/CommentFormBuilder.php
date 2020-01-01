@@ -19,6 +19,7 @@ class CommentFormBuilder extends FormBuilder
           new MaxLengthValidator('L\'auteur spécifié est trop long (20 caractères maximum)', 20),
           new NotNullValidator('Merci de spécifier l\'auteur du post'),
         ],
+        'className' => 'auteur',
        ]))
        ->add(new StringField([
         'label' => 'title',

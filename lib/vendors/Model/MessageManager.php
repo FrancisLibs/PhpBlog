@@ -24,7 +24,7 @@ abstract class MessageManager extends Manager
    * Méthode retournant une liste de messages demandés.
    * @return array La liste des messages. Chaque entrée est une instance de Message.
    */
-  abstract public function getList;
+  abstract public function getList();
 
   /**
    * Méthode retournant un message précis.

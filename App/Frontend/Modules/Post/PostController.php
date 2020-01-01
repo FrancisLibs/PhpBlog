@@ -5,17 +5,54 @@ use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \Entity\Comments;
 use \FormBuilder\CommentsFormBuilder;
+use \FormBuilder\MessageFormBuilder;
 use \OCFram\FormHandler;
+use \Entity\Message;
+
+
 
 class PostController extends BackController
 {
   public function executeIndex(HTTPRequest $request)
   {
+    // Traitement du formulaire de message si le formulaire a été envoyé.
+    if ($request->method() == 'POST')
+    {
+      $comment = new Message([
+        'firstName' =>  $request->postData('firstName'),
+        'lastName' =>   $request->postData('lastName'),
+        'email' =>      $request->postData('email'),
+        'message' =>    $request->postData('message')
+      ]);
+    }
+    else
+    {
+      $message = new Message;
+    }
+
+    $formBuilder = new MessageFormBuilder($message);
+    $formBuilder->build();
+
+    $form = $formBuilder->form();
+
+    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Message'), $request);
+
+    if ($formHandler->process())
+    {
+      $this->app->user()->setFlash('Le message a bien été envoyé, merci !');
+
+      $this->app->httpResponse()->redirect('post-'.$request->getData('post').'.html');
+    }
+
+    $this->page->addVar('message', $message);
+    $this->page->addVar('form', $form->createView());
+
+
+     // On ajoute une définition pour le titre.
+    $this->page->addVar('title', 'Mon blog PHP');
+
     $nombrePosts = $this->app->config()->get('nombre_posts');
     $nombreCaracteres = $this->app->config()->get('nombre_caracteres');
-
-    // On informe le layout que c'est la page d'accueil
-    $this->page->addVar('action', $this->action);
 
     // On récupère le manager des posts.
     $manager = $this->managers->getManagerOf('Post');
@@ -24,12 +61,12 @@ class PostController extends BackController
 
     foreach ($listePosts as $post)
     {
-      if (strlen($post->contents()) > $nombreCaracteres)
+      if (strlen($post->contenu()) > $nombreCaracteres)
       {
-        $debut = substr($post->contents(), 0, $nombreCaracteres);
+        $debut = substr($post->contenu(), 0, $nombreCaracteres);
         $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
 
-        $post->setContents($debut);
+        $post->setContenu($debut);
       }
     }
 
@@ -42,9 +79,6 @@ class PostController extends BackController
     $nombrePosts = $this->app->config()->get('nombre_posts');
     $nombreCaracteres = $this->app->config()->get('nombre_caracteres');
 
-    // On informe le layout que c'est la page d'accueil
-    $this->page->addVar('action', $this->action);
-
     // On ajoute une définition pour le titre.
     $this->page->addVar('title', 'Liste des '.$nombrePosts.' derniers posts');
 
@@ -56,12 +90,12 @@ class PostController extends BackController
 
     foreach ($listePosts as $post)
     {
-      if (strlen($post->contents()) > $nombreCaracteres)
+      if (strlen($post->contenu()) > $nombreCaracteres)
       {
-        $debut = substr($post->contents(), 0, $nombreCaracteres);
+        $debut = substr($post->contenu(), 0, $nombreCaracteres);
         $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
 
-        $post->setContents($debut);
+        $post->setContenu($debut);
       }
     }
 
@@ -71,6 +105,7 @@ class PostController extends BackController
 
   public function executeShow(HTTPRequest $request)
   {
+
     $post = $this->managers->getManagerOf('Post')->getUnique($request->getData('id'));
 
     if (empty($post))
@@ -79,9 +114,12 @@ class PostController extends BackController
     }
 
     $this->page->addVar('title', $post->title());
+
     $this->page->addVar('post', $post);
 
-    $this->page->addVar('comments', $this->managers->getManagerOf('Comments')->getListOf($post->id()));
+    $comments = $this->managers->getManagerOf('Comments')->getListOf($post->id());
+
+    $this->page->addVar('comments', $comments);
   }
 
   public function executeInsertComment(HTTPRequest $request)
@@ -90,9 +128,8 @@ class PostController extends BackController
     if ($request->method() == 'POST')
     {
       $comment = new Comment([
-        'post' => $request->getData('post'),
-        'author' => $request->postData('author'),
-        'contents' => $request->postData('contents')
+        'contenu' =>  $request->postData('contenu')
+//'status'  =>
       ]);
     }
     else

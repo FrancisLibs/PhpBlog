@@ -12,8 +12,11 @@ class PostFormBuilder extends FormBuilder
   public function build()
   {
     $this->form->add(new StringField([
-        'label' => 'author',
-        'name' => 'author',
+        'divClassName'=>'form-group',
+        'label' => 'auteur',
+        'name' => 'name',
+        'labelClass' => 'labelnom col-lg-2 col-form-label col-form-label-sm',
+        'widgetClass' => 'widgetNom form-control form-control-sm',
         'maxLength' => 20,
         'validators' => [
           new MaxLengthValidator('L\'auteur spécifié est trop long (20 caractères maximum)', 20),
@@ -21,8 +24,11 @@ class PostFormBuilder extends FormBuilder
         ],
        ]))
        ->add(new StringField([
-        'label' => 'title',
+        'divClassName'=>'form-group',
+        'label' => 'titre',
         'name' => 'title',
+        'labelClass' => 'labelTitre col-lg-2 col-form-label col-form-label-sm',
+        'widgetClass' => 'widgetTitre form-control form-control-sm',
         'maxLength' => 100,
         'validators' => [
           new MaxLengthValidator('Le titre spécifié est trop long (100 caractères maximum)', 100),
@@ -30,16 +36,23 @@ class PostFormBuilder extends FormBuilder
         ],
        ]))
        ->add(new StringField([
+        'divClassName'=>'form-group',
         'label' => 'chapo',
         'name' => 'chapo',
+        'labelClass' => 'labelChapo col-lg-2 col-form-label col-form-label-sm',
+        'widgetClass' => 'widgetChapo form-control form-control-sm',
         'maxLength' => 255,
         'validators' => [
           new MaxLengthValidator('Le chapo spécifié est trop long (255 caractères maximum)', 255),
           new NotNullValidator('Merci de spécifier le chapo du post'),
         ],
+        ]))
        ->add(new TextField([
-        'label' => 'contents',
-        'name' => 'contents',
+        'divClassName'=>'form-group',
+        'label' => 'contenu',
+        'name' => 'contenu',
+        'labelClass' => 'labelMessage col-sm-3 col-form-label col-form-label-sm',
+        'widgetClass' => 'widgetMessage form-control form-control-sm',
         'rows' => 8,
         'cols' => 60,
         'validators' => [

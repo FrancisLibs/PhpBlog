@@ -5,19 +5,21 @@ use \OCFram\Entity;
 
 class Comment extends Entity
 {
-  protected $post,
-            $author,
-            $contents,
+  protected $id,
+            $contenu,
             $edition_date,
-            $status;
+            $modify_date,
+            $status,
+            $name,
+            $post;
 
-  const AUTEUR_INVALIDE = 1;
-  const CONTENU_INVALIDE = 2;
+  const CONTENU_INVALIDE = 1;
 
   public function isValid()
   {
-    return !(empty($this->auteur) || empty($this->contenu));
+    return !empty($this->contenu);
   }
+
    // SETTERS //
 
   public function setId($id)
@@ -25,49 +27,44 @@ class Comment extends Entity
     $this->id = $id;
   }
 
-  public function setPost($news)
-  {
-    $this->news = (int) $news;
-  }
-
-  public function setAuthor($author)
-  {
-    if (!is_string($author) || empty($author))
-    {
-      $this->erreurs[] = self::AUTEUR_INVALIDE;
-    }
-
-    $this->author = $author;
-  }
-
-  public function setContents($contenu)
+  public function setContenu($contenu)
   {
     if (!is_string($contenu) || empty($contenu))
     {
       $this->erreurs[] = self::CONTENU_INVALIDE;
     }
 
-    $this->contents = $contenu;
+    $this->contenu = $contenu;
   }
 
-  public function setEditionDate(\DateTime $date)
+  public function setEdition_date(\DateTime $edition_date)
   {
-    $this->edition_date = $date;
+    $this->edition_date = $edition_date;
   }
 
-  public function setModifyDate(\DateTime $date)
+  public function setModify_date(\DateTime $modify_date)
   {
-    $this->modify_date = $date;
+    $this->modify_date = $modify_date;
   }
 
-  public function post()
+  public function setStatus($status)
   {
-    return $this->post;
+    $this->status = $status;
   }
 
-  public function auteur()
+  public function setName($name)
   {
-    return $this->auteur;
+    $this->name = $name;
+  }
+
+  public function setPost($post)
+  {
+    $this->post = $post;
+  }
+
+  public function id()
+  {
+    return $this->id;
   }
 
   public function contenu()
@@ -83,5 +80,20 @@ class Comment extends Entity
   public function modify_date()
   {
     return $this->modify_date;
+  }
+
+  public function satus()
+  {
+    return $this->status;
+  }
+
+  public function name()
+  {
+    return $this->name;
+  }
+
+  public function post()
+  {
+    return $this->post;
   }
 }

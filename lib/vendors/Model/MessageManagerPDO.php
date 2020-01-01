@@ -3,16 +3,16 @@ namespace Model;
 
 use \Entity\Message;
 
-class ContactManagerPDO extends MessageManager
+class MessageManagerPDO extends MessageManager
 {
   protected function add(Message $message)
   {
     $q = $this->dao->prepare('INSERT INTO messages SET name = :name, email = :email, message = :message, edition_date = NOW()');
 
-    $q->bindValue(':name',   $message->name());
-    $q->bindValue(':email',  $message->email());
-    $q->bindValue(':contents', $message->contents());
-    $q->bindValue(':edition_date',   $message->edition_date());
+    $q->bindValue(':name',          $message->name());
+    $q->bindValue(':email',         $message->email());
+    $q->bindValue(':message',       $message->message());
+    $q->bindValue(':edition_date',  $message->edition_date());
 
     $q->execute();
 
@@ -26,7 +26,6 @@ class ContactManagerPDO extends MessageManager
 
   public function getList()
   {
-
     $sql = 'SELECT id, name, email, message, edition_date FROM messages ORDER BY id DESC';
 
     $requete = $this->dao->query($sql);

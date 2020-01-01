@@ -1,8 +1,9 @@
-<p>Par <em><?= $post['author'] ?></em>, le <?= $post['edition_date']->format('d/m/Y à H\hi') ?></p>
-<h2><?= $post['title'] ?></h2>
-<p><?= nl2br($post['contents']) ?></p>
+<p>Par <em><?= $post['name'] ?></em>, le <?= $post['edition_date']->format('d/m/Y à H\hi') ?></p>
+<h2>Titre : <?= $post['title'] ?></h2>
+<h3>Chapo : <?= $post['chapo'] ?></h3>
+<p>Contenu : <?= nl2br($post['contenu']) ?></p>
 
-<?php if ($post['edition_date'] != $post['Modify_date']) { ?>
+<?php if ($post['edition_date'] != $post['modify_date']) { ?>
   <p style="text-align: right;"><small><em>Modifiée le <?= $post['modify_date']->format('d/m/Y à H\hi') ?></em></small></p>
 <?php } ?>
 
@@ -21,7 +22,7 @@ foreach ($comments as $comment)
 ?>
 <fieldset>
   <legend>
-    Posté par <strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['date']->format('d/m/Y à H\hi') ?>
+    Posté par <strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['edition_date']->format('d/m/Y à H\hi') ?>
     <?php if ($user->isAuthenticated()) { ?> -
       <a href="admin/comment-update-<?= $comment['id'] ?>.html">Modifier</a> |
       <a href="admin/comment-delete-<?= $comment['id'] ?>.html">Supprimer</a>
