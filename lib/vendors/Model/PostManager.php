@@ -24,7 +24,7 @@ abstract class PostManager extends Manager
   {
     if ($post->isValid())
     {
-      $post->isNew() ? $this->add($post) : $this->modify($post);
+      $post->isNew() ? $this->add($post) : $this->update($post);
     }
     else
     {

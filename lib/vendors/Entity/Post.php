@@ -5,12 +5,13 @@ use \OCFram\Entity;
 
 class Post extends Entity
 {
-  protected $name,
+  protected $id,
             $title,
             $chapo,
             $contenu,
             $edition_date,
-            $modify_date;
+            $update_date,
+            $name;
 
   const AUTEUR_INVALIDE = 1;
   const TITRE_INVALIDE = 2;
@@ -19,7 +20,7 @@ class Post extends Entity
 
   public function isValid()
   {
-    return !(empty($this->author) || empty($this->title) || empty($this->chapo) || empty($this->contenu));
+    return !(empty($this->title) || empty($this->chapo) || empty($this->contenu));
   }
 
 
@@ -28,16 +29,6 @@ class Post extends Entity
   public function setId($id)
   {
     $this->id = $id;
-  }
-
-  public function setName($name)
-  {
-    if (!is_string($name) || empty($name))
-    {
-      $this->erreurs[] = self::AUTEUR_INVALIDE;
-    }
-
-    $this->name = $name;
   }
 
   public function setTitle($title)
@@ -75,16 +66,26 @@ class Post extends Entity
     $this->edition_date = $edition_date;
   }
 
-  public function setModify_date(\DateTime $modify_date)
+  public function setUpdate_date(\DateTime $update_date)
   {
-    $this->modify_date = $modify_date;
+    $this->update_date = $update_date;
+  }
+
+   public function setName($name)
+  {
+    if (!is_string($name) || empty($name))
+    {
+      $this->erreurs[] = self::AUTEUR_INVALIDE;
+    }
+
+    $this->name = $name;
   }
 
   // GETTERS //
 
-  public function name()
+  public function id()
   {
-    return $this->name;
+    return $this->id;
   }
 
   public function title()
@@ -107,8 +108,13 @@ class Post extends Entity
     return $this->edition_date;
   }
 
-  public function modify_date()
+  public function update_date()
   {
-    return $this->modify_date;
+    return $this->update_date;
+  }
+
+  public function name()
+  {
+    return $this->name;
   }
 }

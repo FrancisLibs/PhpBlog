@@ -4,7 +4,7 @@ namespace Model;
 use \OCFram\Manager;
 use \Entity\Comment;
 
-abstract class CommentsManager extends Manager
+abstract class CommentManager extends Manager
 {
   /**
    * Méthode permettant d'ajouter un commentaire.

@@ -11,7 +11,7 @@
 
   <!-- Css files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link href="../css/style.css" rel="stylesheet">
+  <link href="../css/Envision.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -58,6 +58,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="contact.html">Connexion</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/post-insert.html">Ajouter Post</a>
               </li>
             </ul>
           </div>

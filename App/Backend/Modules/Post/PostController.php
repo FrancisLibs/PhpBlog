@@ -15,7 +15,7 @@ class PostController extends BackController
   {
     $postId = $request->getData('id');
 
-    $this->managers->getManagerOf('Comments')->deleteFromPost($postId);
+    $this->managers->getManagerOf('Comment')->deleteFromPost($postId);
     $this->managers->getManagerOf('Post')->delete($postId);
 
     $this->app->user()->setFlash('Le post a bien été supprimé !');
@@ -25,7 +25,7 @@ class PostController extends BackController
 
   public function executeDeleteComment(HTTPRequest $request)
   {
-    $this->managers->getManagerOf('Comments')->delete($request->getData('id'));
+    $this->managers->getManagerOf('Comment')->delete($request->getData('id'));
 
     $this->app->user()->setFlash('Le commentaire a bien été supprimé !');
 
@@ -70,7 +70,7 @@ class PostController extends BackController
     }
     else
     {
-      $comment = $this->managers->getManagerOf('Comments')->get($request->getData('id'));
+      $comment = $this->managers->getManagerOf('Comment')->get($request->getData('id'));
     }
 
     $formBuilder = new CommentFormBuilder($comment);
@@ -78,7 +78,7 @@ class PostController extends BackController
 
     $form = $formBuilder->form();
 
-    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
+    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comment'), $request);
 
     if ($formHandler->process())
     {
@@ -94,11 +94,14 @@ class PostController extends BackController
   {
     if ($request->method() == 'POST')
     {
+      var_dump($request->postData('edition_date'));
       $post = new Post([
+        'id'  =>  $request->postData('id'),
         'name' => $request->postData('name'),
         'title' => $request->postData('title'),
         'chapo' => $request->postData('chapo'),
-        'contenu' => $request->postData('contenu')
+        'contenu' => $request->postData('contenu'),
+
       ]);
 
       if ($request->getExists('id'))
@@ -128,7 +131,7 @@ class PostController extends BackController
 
     if ($formHandler->process())
     {
-      $this->app->user()->setFlash($post->isNew() ? 'Le post a bien été ajoutée !' : 'Le post a bien été modifiée !');
+      $this->app->user()->setFlash($post->isNew() ? 'Le post a bien été ajouté !' : 'Le Post a bien été modifié !');
 
       $this->app->httpResponse()->redirect('/admin/');
     }

@@ -3,8 +3,8 @@
 <h3>Chapo : <?= $post['chapo'] ?></h3>
 <p>Contenu : <?= nl2br($post['contenu']) ?></p>
 
-<?php if ($post['edition_date'] != $post['modify_date']) { ?>
-  <p style="text-align: right;"><small><em>Modifiée le <?= $post['modify_date']->format('d/m/Y à H\hi') ?></em></small></p>
+<?php if ($post['edition_date'] != $post['updatedate']) { ?>
+  <p style="text-align: right;"><small><em>Modifiée le <?= $post['update_date']->format('d/m/Y à H\hi') ?></em></small></p>
 <?php } ?>
 
 <p><a href="commenter-<?= $post['id'] ?>.html">Ajouter un commentaire</a></p>

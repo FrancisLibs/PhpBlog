@@ -17,8 +17,7 @@ class Form
     $field->setValue($this->entity->$attr()); // On assigne la valeur correspondante au champ.
 
     $this->fields[] = $field; // On ajoute le champ passé en argument à la liste des champs.
-
-   return $this;
+    return $this;
   }
 
   public function createView()

@@ -4,6 +4,7 @@ namespace FormBuilder;
 use \OCFram\FormBuilder;
 use \OCFram\StringField;
 use \OCFram\TextField;
+use \OCFram\HiddenField;
 use \OCFram\MaxLengthValidator;
 use \OCFram\NotNullValidator;
 
@@ -11,7 +12,8 @@ class PostFormBuilder extends FormBuilder
 {
   public function build()
   {
-    $this->form->add(new StringField([
+    $this->form
+      ->add(new StringField([
         'divClassName'=>'form-group',
         'label' => 'auteur',
         'name' => 'name',
@@ -23,7 +25,7 @@ class PostFormBuilder extends FormBuilder
           new NotNullValidator('Merci de spécifier l\'auteur du post'),
         ],
        ]))
-       ->add(new StringField([
+      ->add(new StringField([
         'divClassName'=>'form-group',
         'label' => 'titre',
         'name' => 'title',
@@ -35,7 +37,7 @@ class PostFormBuilder extends FormBuilder
           new NotNullValidator('Merci de spécifier le titre du post'),
         ],
        ]))
-       ->add(new StringField([
+      ->add(new StringField([
         'divClassName'=>'form-group',
         'label' => 'chapo',
         'name' => 'chapo',
@@ -47,7 +49,7 @@ class PostFormBuilder extends FormBuilder
           new NotNullValidator('Merci de spécifier le chapo du post'),
         ],
         ]))
-       ->add(new TextField([
+      ->add(new TextField([
         'divClassName'=>'form-group',
         'label' => 'contenu',
         'name' => 'contenu',
@@ -58,6 +60,13 @@ class PostFormBuilder extends FormBuilder
         'validators' => [
           new NotNullValidator('Merci de spécifier le contenu du post'),
         ],
-       ]));
+       ]))
+      ->add(new HiddenField([
+        'divClassName'=>'form-group',
+        'name' => 'id',
+        'labelClass' => 'labelTitre col-lg-2 col-form-label col-form-label-sm',
+        'widgetClass' => 'widgetTitre form-control form-control-sm',
+        ],
+       ));
   }
 }

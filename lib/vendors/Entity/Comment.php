@@ -8,10 +8,10 @@ class Comment extends Entity
   protected $id,
             $contenu,
             $edition_date,
-            $modify_date,
-            $status,
-            $name,
-            $post;
+            $state,
+            $user_id,
+            $post_id;
+
 
   const CONTENU_INVALIDE = 1;
 
@@ -42,24 +42,19 @@ class Comment extends Entity
     $this->edition_date = $edition_date;
   }
 
-  public function setModify_date(\DateTime $modify_date)
+  public function setState($state)
   {
-    $this->modify_date = $modify_date;
+    $this->state = $state;
   }
 
-  public function setStatus($status)
+  public function setUser_id($user_id)
   {
-    $this->status = $status;
+    $this->user_id = $user_id;
   }
 
-  public function setName($name)
+  public function setPost_id($post_id)
   {
-    $this->name = $name;
-  }
-
-  public function setPost($post)
-  {
-    $this->post = $post;
+    $this->post_id = $post_id;
   }
 
   public function id()
@@ -77,23 +72,18 @@ class Comment extends Entity
     return $this->edition_date;
   }
 
-  public function modify_date()
+  public function state()
   {
-    return $this->modify_date;
+    return $this->state;
   }
 
-  public function satus()
+  public function user_id()
   {
-    return $this->status;
+    return $this->user_id;
   }
 
-  public function name()
+  public function post_id()
   {
-    return $this->name;
-  }
-
-  public function post()
-  {
-    return $this->post;
+    return $this->post_id;
   }
 }

@@ -3,11 +3,12 @@ namespace App\Frontend\Modules\Post;
 
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
-use \Entity\Comments;
-use \FormBuilder\CommentsFormBuilder;
+use \Entity\Comment;
+use \FormBuilder\CommentFormBuilder;
 use \FormBuilder\MessageFormBuilder;
 use \OCFram\FormHandler;
 use \Entity\Message;
+use DateTime;
 
 
 
@@ -117,7 +118,7 @@ class PostController extends BackController
 
     $this->page->addVar('post', $post);
 
-    $comments = $this->managers->getManagerOf('Comments')->getListOf($post->id());
+    $comments = $this->managers->getManagerOf('Comment')->getListOf($post->id());
 
     $this->page->addVar('comments', $comments);
   }
@@ -127,9 +128,12 @@ class PostController extends BackController
     // Si le formulaire a été envoyé.
     if ($request->method() == 'POST')
     {
+      $date = new DateTime();
       $comment = new Comment([
-        'contenu' =>  $request->postData('contenu')
-//'status'  =>
+        'contenu' =>  $request->postData('contenu'),
+        'edition_date' => $date,
+        'modify_date' =>  $date,
+        'status'  =>  '1',
       ]);
     }
     else
@@ -142,7 +146,7 @@ class PostController extends BackController
 
     $form = $formBuilder->form();
 
-    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
+    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comment'), $request);
 
     if ($formHandler->process())
     {

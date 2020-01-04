@@ -12,7 +12,7 @@ foreach ($listePosts as $post)
     <p>Auteur : <?= nl2br($post['name']) ?></p>
   </div>
    <div class="post-chapo">
-    <p>DateModif. :<?= $post['modify_date']->format('d/m/Y à H\hi') ?></p>
+    <p>DateModif. :<?= $post['update_date']->format('d/m/Y à H\hi') ?></p>
   </div>
 <?php
 } ?>

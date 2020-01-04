@@ -55,6 +55,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="contact.html">Connexion</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/commenter-([0-9]+)\.html">ajouter commentaire</a>
+              </li>
             </ul>
           </div>
         </div>
