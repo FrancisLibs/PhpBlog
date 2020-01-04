@@ -10,7 +10,7 @@ class CommentManagerPDO extends CommentManager
     $q = $this->dao->prepare('INSERT INTO comments SET contenu = :contenu, edition_date = NOW(), state = :state, userId = :userId, postId = :postId');
 
     $q->bindValue(':contenu',   $comment->contenu());
-    $q->bindValue(':state',     '0';
+    $q->bindValue(':state',     '0');
     $q->bindValue(':userId',    $comment->userId());
     $q->bindValue(':postId',    $comment->postId());
 
