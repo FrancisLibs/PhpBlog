@@ -1,4 +1,5 @@
 # phpBlog
-Projet de blog Pro OClassroom. 
+Blog project. 
 
-Projet 5 d'une série de 9, faisant partie du curcus d'apprentissage de developpeur d'application.
+It is a project of a serie of 9 projects.
+It's purpose is object-oriented programming a website.
