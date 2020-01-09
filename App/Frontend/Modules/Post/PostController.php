@@ -1,49 +1,60 @@
 <?php
 namespace App\Frontend\Modules\Post;
 
+require_once '../vendor/autoload.php';
+
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \Entity\Comment;
-use \FormBuilder\CommentFormBuilder;
-use \FormBuilder\MessageFormBuilder;
-use \OCFram\FormHandler;
 use \Entity\Message;
-use DateTime;
-
+use \FormBuilder\ContactFormBuilder;
+use \FormBuilder\CommentFormBuilder;
+use \OCFram\FormHandler;
 
 
 class PostController extends BackController
 {
   public function executeIndex(HTTPRequest $request)
   {
-    // Traitement du formulaire de message si le formulaire a été envoyé.
+    // Traitement du formulaire de contact si le formulaire a été envoyé.
     if ($request->method() == 'POST')
     {
-      $comment = new Message([
+      $message = new Message([
         'firstName' =>  $request->postData('firstName'),
         'lastName' =>   $request->postData('lastName'),
         'email' =>      $request->postData('email'),
         'message' =>    $request->postData('message')
       ]);
+
+      /* Create the Transport
+        $transport = (new Swift_SmtpTransport('smtp.gmail.com', 25))
+          ->setUsername('fr.libs@gmail.com')
+          ->setPassword('Cathy2601@1962')
+        ;
+
+        // Create the Mailer using your created Transport
+        $mailer = new Swift_Mailer($transport);
+
+        // Create a message
+        $message = (new Swift_Message('Wonderful Subject'))
+          ->setFrom(['john@doe.com' => 'John Doe'])
+          ->setTo(['fr.libs@gmail.com' => 'Francis'])
+          ->setBody($request->postData('message'))
+          ;
+
+        // Send the message
+        $result = $mailer->send($message);*/
+
     }
     else
     {
       $message = new Message;
     }
 
-    $formBuilder = new MessageFormBuilder($message);
+    $formBuilder = new ContactFormBuilder($message);
     $formBuilder->build();
 
     $form = $formBuilder->form();
-
-    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Message'), $request);
-
-    if ($formHandler->process())
-    {
-      $this->app->user()->setFlash('Le message a bien été envoyé, merci !');
-
-      $this->app->httpResponse()->redirect('post-'.$request->getData('post').'.html');
-    }
 
     $this->page->addVar('message', $message);
     $this->page->addVar('form', $form->createView());
@@ -88,7 +99,6 @@ class PostController extends BackController
 
     $listePosts = $manager->getList(0, $nombrePosts);
 
-
     foreach ($listePosts as $post)
     {
       if (strlen($post->contenu()) > $nombreCaracteres)
@@ -106,7 +116,6 @@ class PostController extends BackController
 
   public function executeShow(HTTPRequest $request)
   {
-
     $post = $this->managers->getManagerOf('Post')->getUnique($request->getData('id'));
 
     if (empty($post))
@@ -118,7 +127,8 @@ class PostController extends BackController
 
     $this->page->addVar('post', $post);
 
-    $comments = $this->managers->getManagerOf('Comment')->getListOf($post->id());
+    $state = 1;
+    $comments = $this->managers->getManagerOf('Comment')->getListOf($post->id(), $state);
 
     $this->page->addVar('comments', $comments);
   }
@@ -128,12 +138,10 @@ class PostController extends BackController
     // Si le formulaire a été envoyé.
     if ($request->method() == 'POST')
     {
-      $date = new DateTime();
       $comment = new Comment([
         'contenu' =>  $request->postData('contenu'),
-        'edition_date' => $date,
-        'modify_date' =>  $date,
-        'status'  =>  '1',
+        'post_id' =>  $request->getData('post'),
+        'state'   =>  0,
       ]);
     }
     else

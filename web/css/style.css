@@ -2,7 +2,8 @@ body {
   min-height: 100%;
   margin:0;
   padding:0;
-  background: url(../images/plageGuadeloupe2.jpg) no-repeat center fixed;
+  background-color: pink;
+  /*background: url(../images/plageGuadeloupe2.jpg) no-repeat center fixed; */
   -webkit-background-size: cover; /* pour anciens Chrome et Safari */
   background-size: cover; /* version standardisée */
 }
@@ -13,16 +14,6 @@ body {
      font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-.navbar .navbar-brand{
-  color : white;
-  font-size : 25px;
-  font-weight: 800;
-}
-
-.navbar .navbar-toggler-icon{
-  color : white;
-}
-
 .navbar .nav-link{
   color : white!important;
   padding-right: 3em!important;
@@ -31,7 +22,7 @@ body {
 /* ---- Titre page d'accueil ------*/
 .page-accueil .titre-page h1{
   text-align: center;
-  padding-top: 10px;
+  padding-top: 100px;
   font-size: 3rem;
   color: white;
   font-family: 'Bree Serif', serif;
@@ -45,22 +36,13 @@ body {
   font-family: 'Bree Serif', serif;
 }
 
-/* ---- Boite posts page d'accueil ------*/
-.page-accueil .posts-box{
-  border: 1px solid black;
-  margin-top: 50px;
-  margin-bottom: 70px;
-  background: linear-gradient(#507ba8, transparent);
-}
-
-.posts-box .post-title{
-  color: white;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
 /* ---- Formulaire page d'accueil ------*/
 
-.page-accueil .formulaireMessageBox{
+.contact{
+  min-height: 200px;
+}
+
+.formulaireMessageBox{
   margin-top: 20px;
   border: 1px solid white;
   border-radius: 10px;

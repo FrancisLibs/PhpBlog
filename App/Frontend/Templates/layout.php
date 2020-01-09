@@ -53,11 +53,11 @@
                 <a class="nav-link" href="posts.html">Posts</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Connexion</a>
+                <a class="nav-link" href="/admin/connect.html">Connexion</a>
               </li>
-              <li class="nav-item">
+              <!--<li class="nav-item">
                 <a class="nav-link" href="/commenter-([0-9]+)\.html">ajouter commentaire</a>
-              </li>
+              </li>-->
             </ul>
           </div>
         </div>
@@ -80,7 +80,7 @@
 
           <div class="col-lg-2 offset-lg-1 liens">
             <a class="btn btn-link liens" href="/admin/" role="button">Admin</a>
-            <a class="btn btn-link liens" href="/admin/" role="button">Mon parcours</a>
+            <a class="btn btn-link liens" href="/" role="button">Mon parcours</a>
           </div>
         </div>
       </div>

@@ -10,10 +10,12 @@ class Comment extends Entity
             $edition_date,
             $state,
             $user_id,
-            $post_id;
+            $post_id,
+            $author_name;
 
 
   const CONTENU_INVALIDE = 1;
+  const AUTEUR_INVALIDE = 1;
 
   public function isValid()
   {
@@ -57,6 +59,16 @@ class Comment extends Entity
     $this->post_id = $post_id;
   }
 
+  public function setAuthor_name($author_name)
+  {
+    if (!is_string($author_name) || empty($author_name))
+    {
+      $this->erreurs[] = self::AUTEUR_INVALIDE;
+    }
+
+    $this->author_name = $author_name;
+  }
+
   public function id()
   {
     return $this->id;
@@ -82,8 +94,13 @@ class Comment extends Entity
     return $this->user_id;
   }
 
-  public function post_id()
+   public function post_id()
   {
     return $this->post_id;
+  }
+
+  public function author_name()
+  {
+    return $this->author_name;
   }
 }

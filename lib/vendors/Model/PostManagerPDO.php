@@ -24,6 +24,11 @@ class PostManagerPDO extends PostManager
     return $this->dao->query('SELECT COUNT(*) FROM posts')->fetchColumn();
   }
 
+  public function countUnvalidateComments()
+  {
+    return $this->dao->query('SELECT COUNT(c.id) FROM posts p INNER JOIN comments c ON p.id = c.post_id WHERE c.state = 0')->fetchColumn();
+  }
+
   public function delete($id)
   {
     $this->dao->exec('DELETE FROM posts WHERE id = '.(int) $id);
@@ -32,7 +37,7 @@ class PostManagerPDO extends PostManager
   public function getList($debut = -1, $limite = -1)
   {
 
-    $sql = 'SELECT posts.id, users.name, title, chapo, contenu, edition_date, update_date FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC';
+    $sql = 'SELECT posts.id, title, chapo, contenu, edition_date, update_date, user_id, users.name AS autor_name FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY posts.id DESC';
 
     if ($debut != -1 || $limite != -1)
     {
@@ -59,7 +64,7 @@ class PostManagerPDO extends PostManager
 
   public function getUnique($id)
   {
-    $requete = $this->dao->prepare('SELECT posts.id, users.name, users.id, title, chapo, contenu, edition_date, update_date FROM posts INNER JOIN users ON posts.user_id = users.id WHERE posts.id = :id');
+    $requete = $this->dao->prepare('SELECT posts.id, title, chapo, contenu, edition_date, update_date, user_id, users.name AS autor_name FROM posts INNER JOIN users ON posts.user_id = users.id WHERE posts.id = :id');
 
     $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
     $requete->execute();
