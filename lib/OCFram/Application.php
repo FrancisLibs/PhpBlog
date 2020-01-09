@@ -8,9 +8,6 @@ abstract class Application
   protected $name;
   protected $user;
   protected $config;
-  protected $cache;
-  protected $fileName;
-
 
   public function __construct()
   {
@@ -18,9 +15,7 @@ abstract class Application
     $this->httpResponse = new HTTPResponse($this);
     $this->user = new User($this);
     $this->config = new Config($this);
-    $this->cache = new Cache($this);
 
-    $this->fileName = '';
     $this->name = '';
   }
 
@@ -95,20 +90,5 @@ abstract class Application
   public function user()
   {
     return $this->user;
-  }
-
-  public function cache()
-  {
-    return $this->cache;
-  }
-
-  public function fileName()
-  {
-    return $this->fileName;
-  }
-
-  public function setFileName()
-  {
-    return $this->fileName;
   }
 }
