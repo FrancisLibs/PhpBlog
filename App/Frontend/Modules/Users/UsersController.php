@@ -27,22 +27,32 @@ class UsersController extends BackController
       }
       else
       {
-        echo 'passage2';
-        exit();
         // On récupère le manager des users.
-        $manager = $this->managers->getManagerOf('Users');
+        $manager = $this->managers->getManagerOf('User');
         // et le user correspondnat au login
         $userBdd = $manager->getUser($user->login());
 
-        if($userBdd)
+        if(!isset($userBdd))
         {
-          if($userBdd->$password() == $user->password())
+          $this->app->user()->setFlash('L\'identifiant ou le mot de passe sont erronés');
+          $this->app->httpResponse()->redirect('/connect.html');
+        }
+        else
+        {
+          $compareResult = $user->comparePasswords($userBdd->password(), $user->password());
+
+          if(!$compareResult){
+            $this->app->user()->setFlash('L\'identifiant ou le mot de passe sont erronés');
+            $this->app->httpResponse()->redirect('/connect.html');
+          }
+          else
           {
+            $this->app->user()->setAuthenticated(true);
+            $this->app->httpResponse()->redirect('.');
           }
         }
       }
     }
-
     else
     {
       $user = new User;

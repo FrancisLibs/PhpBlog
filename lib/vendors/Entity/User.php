@@ -20,6 +20,8 @@ class User extends Entity
   const PASSWORD_INVALIDE = 4;
   const VERIFY_PASSWORD_INVALIDE = 5;
 
+  /* ---- Functions ---*/
+
   public function isValid()
   {
    return !empty($this->login) && !empty($this->password);
@@ -36,6 +38,11 @@ class User extends Entity
     {
       return true;
     }
+  }
+
+  public function comparePasswords($userBddPassword, $userPassword)
+  {
+    return $userBddPassword == $userPassword;
   }
 
   // SETTERS //
