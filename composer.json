@@ -1,12 +1,8 @@
 {
     "name": "francis/blog-pro",
     "require": {
-        "twig/twig": "^3.0"
-    },
-    "authors": [
-        {
-            "name": "Francis Libs",
-            "email": "fr.libs@gmail.com"
-        }
-    ]
+        "twig/twig": "^3.0",
+        "swiftmailer/swiftmailer": "6.0"
+    }
+
 }

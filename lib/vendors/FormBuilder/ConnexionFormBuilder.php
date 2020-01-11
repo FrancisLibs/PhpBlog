@@ -3,30 +3,37 @@ namespace FormBuilder;
 
 use \OCFram\FormBuilder;
 use \OCFram\StringField;
+use \OCFram\PasswordField;
 use \OCFram\MaxLengthValidator;
 use \OCFram\NotNullValidator;
 
-class ContactFormBuilder extends FormBuilder
+class ConnexionFormBuilder extends FormBuilder
 {
   public function build()
   {
     $this->form->add(new StringField([
-        'label' => 'identifiant',
+        'divClassName'=>'form-group',
+        'label' => 'pseudo : ',
         'name' => 'login',
+        'labelClass' => 'labelTitre col-lg-2 col-form-label col-form-label-sm',
+        'widgetClass' => 'widgetTitre form-control form-control-sm',
         'maxLength' => 50,
         'validators' => [
-          new MaxLengthValidator('L\'auteur spécifié est trop long (50 caractères maximum)', 50),
-          new NotNullValidator('Merci de spécifier votre identifiant),
+          new MaxLengthValidator('Le titre spécifié est trop long (50 caractères maximum)', 50),
+          new NotNullValidator('Merci de spécifier le titre du post'),
         ],
        ]))
-       ->add(new StringField([
-        'label' => 'mot de passe',
+      ->add(new PasswordField([
+        'divClassName'=>'form-group',
+        'label' => 'mdp : ',
         'name' => 'password',
-        'maxLength' => 100,
+        'labelClass' => 'labelChapo col-lg-2 col-form-label col-form-label-sm',
+        'widgetClass' => 'widgetChapo form-control form-control-sm',
+        'maxLength' => 50,
         'validators' => [
-          new MaxLengthValidator('Le mot de passe spécifié est trop long (255 caractères maximum)', 100),
-          new NotNullValidator('Merci de spécifier un mot de passe'),
+          new MaxLengthValidator('Le chapo spécifié est trop long (50 caractères maximum)', 50),
+          new NotNullValidator('Merci de spécifier le mot de passe'),
         ],
-       ]));
+        ]));
   }
 }

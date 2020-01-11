@@ -25,7 +25,7 @@ abstract class UserManager extends Manager
    * @param $id L'identifiant du user
    * @return User
    */
-  abstract public function get($id);
+  abstract public function getUser($login);
 
   /**
    * Méthode permettant de modifier un user.
