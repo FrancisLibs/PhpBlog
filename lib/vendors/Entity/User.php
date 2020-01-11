@@ -14,35 +14,26 @@ class User extends Entity
             $status,
             $level;
 
-  const USER_INVALIDE = 1;
-  const LOGIN_INVALIDE = 2;
-  const EMAIL_INVALIDE = 3;
-  const PASSWORD_INVALIDE = 4;
-  const VERIFY_PASSWORD_INVALIDE = 5;
+  const LOGIN_INVALIDE = 1;
+  const EMAIL_INVALIDE = 2;
+  const PASSWORD_INVALIDE = 3;
+  const VERIFY_PASSWORD_INVALIDE = 4;
 
   /* ---- Functions ---*/
 
-  public function isValid()
+  public function registrationFormIsValid()
   {
-   return !empty($this->login) && !empty($this->password);
+   return (!empty($this->login()) && !empty($this->email()) && !empty($this->password()) && !empty($this->verifyPassword()));
   }
 
-  public function passwordHash($password)
+  public function passwordHash()
   {
-    $this->password = password_hash($password, PASSWORD_DEFAULT);
+    return password_hash($this->password, PASSWORD_DEFAULT);
   }
 
-  public function password_verify($login1, $login2)
+  public function comparePasswords($userBddPassword)
   {
-    if($login1 == $login2)
-    {
-      return true;
-    }
-  }
-
-  public function comparePasswords($userBddPassword, $userPassword)
-  {
-    return $userBddPassword == $userPassword;
+    return $userBddPassword == $this->password;
   }
 
   // SETTERS //
@@ -89,6 +80,7 @@ class User extends Entity
       $this->erreurs[] = self::VERIFY_PASSWORD_INVALIDE;
     }
 
+    $this->verifyPassword = $verifyPassword;
   }
 
   public function setCreate_Date(\DateTime $create_Date)

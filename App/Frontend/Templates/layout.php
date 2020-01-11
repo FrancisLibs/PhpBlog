@@ -55,6 +55,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="connect.html">Bonjour, identifiez-vous</a>
               </li>
+              <li class="nav-item">
+                <a href="register.html" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Nouveau client ? Commencer ici.</a>
+              </li>
             </ul>
           </div>
         </div>

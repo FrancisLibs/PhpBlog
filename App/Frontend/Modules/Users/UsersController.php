@@ -5,6 +5,7 @@ use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \Entity\User;
 use \FormBuilder\ConnexionFormBuilder;
+use \FormBuilder\RegistrationFormBuilder;
 use \OCFram\FormHandler;
 
 class UsersController extends BackController
@@ -19,7 +20,7 @@ class UsersController extends BackController
         'password' =>       $request->postData('password'),
       ]);
 
-      if (!$user->isValid())
+      if (empty($this->login) || empty($this->password))
       {
         $this->app->user()->setFlash('Merci de remplir les deux champs de saisie');
 
@@ -29,7 +30,6 @@ class UsersController extends BackController
       {
         // On récupère le manager des users.
         $manager = $this->managers->getManagerOf('User');
-        // et le user correspondnat au login
         $userBdd = $manager->getUser($user->login());
 
         if(!isset($userBdd))
@@ -42,7 +42,7 @@ class UsersController extends BackController
           $compareResult = $user->comparePasswords($userBdd->password(), $user->password());
 
           if(!$compareResult){
-            $this->app->user()->setFlash('L\'identifiant ou le mot de passe sont erronés');
+            $this->app->user()->setFlash('L\'identifiant et/ou le mot de passe sont erronés');
             $this->app->httpResponse()->redirect('/connect.html');
           }
           else
@@ -57,7 +57,6 @@ class UsersController extends BackController
     {
       $user = new User;
     }
-
     $formBuilder = new ConnexionFormBuilder($user);
     $formBuilder->build();
 
@@ -77,24 +76,54 @@ class UsersController extends BackController
     {
       $user = new User([
         'login' =>          $request->postData('login'),
+        'email' =>          $request->postData('email'),
         'password' =>       $request->postData('password'),
-        'verifyPassword' => $request->postData('vefifyPassword'),
+        'verifyPassword' => $request->postData('verifyPassword'),
       ]);
 
-      if (!($user->password() == $user->verifyPassword())){
+      // Vérification de la validité du formulaire (tous champs remplis)
+      if (!$user->registrationFormIsValid())
+      {
+        $this->app->user()->setFlash('Merci de compléter tous les champs');
 
-        $this->app->user()->setFlash('Les deux mots de passe sont différents');
-
-        $this->app->httpResponse()->redirect('/./');
+        $this->app->httpResponse()->redirect('/register.html');
       }
+      else
+      {
+        // Vérification de l'absence du pseudo en bdd
+        $manager = $this->managers->getManagerOf('User');
+        $resultat = $manager->count($user->login());
 
-      $resultat = $this->managers->getManagerOf('User')->getUser($user->login());
+        if ($resultat <> 0)
+        {
+          $this->app->user()->setFlash('L\'identifiant que vous avez choisi est déjà pris');
 
-      $verification = $user->password_verify($user->login(), $resultat['login']);
+          $this->app->httpResponse()->redirect('/register.html');
+        }
+        else
+        {
+          // Comparaison des 2 mots de passe du formulaire
+          if(!($user->password() == $user->verifyPassword()))
+          {
+            $this->app->user()->setFlash('Les mots de passe ne sont pas identiques');
 
-      if($verification){
-        $this->app->user()->setAuthenticated(true);
-        $this->app->httpResponse()->redirect('.');
+            $this->app->httpResponse()->redirect('/register.html');
+          }
+          else
+          {
+            // Ecriture de $user dans la bdd avec status à 0 et le mot de passe haché
+            // On récupère le manager des users.
+            $user->setStatus(0);
+            $user->setPassword($user->passwordHash());
+
+            $manager->add($user);
+
+            // envoi du mail
+
+            $this->app->user()->setFlash('Un mail d\'authentification vient de vous être envoyé');
+            $this->app->httpResponse()->redirect('/./');
+          }
+        }
       }
 
     }
@@ -103,7 +132,7 @@ class UsersController extends BackController
       $user = new User;
     }
 
-    $formBuilder = new LoginFormBuilder($user);
+    $formBuilder = new RegistrationFormBuilder($user);
     $formBuilder->build();
 
     $form = $formBuilder->form();
@@ -111,6 +140,6 @@ class UsersController extends BackController
     $this->page->addVar('form', $form->createView());
 
     // On ajoute une définition pour le titre.
-    $this->page->addVar('title', 'Connexion');
+    $this->page->addVar('title', 'Enregistrement');
   }
 }

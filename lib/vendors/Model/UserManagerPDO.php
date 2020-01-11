@@ -5,14 +5,14 @@ use \Entity\User;
 
 class UserManagerPDO extends UserManager
 {
-  protected function add(User $user)
+  public function add(User $user)
   {
     $requete = $this->dao->prepare('INSERT INTO users SET login = :login, email = :email, password = :password, create_date = NOW(), status = :status, level = :level');
 
     $requete->bindValue(':login',     $user->login());
-    $requete->bindValue(':email',     $user->emailr());
+    $requete->bindValue(':email',     $user->email());
     $requete->bindValue(':password',  $user->password());
-    $requete->bindValue(':satus',     $user->status());
+    $requete->bindValue(':status',    $user->status());
     $requete->bindValue(':level',     $user->level());
 
     $requete->execute();
@@ -51,5 +51,10 @@ class UserManagerPDO extends UserManager
     $requete->bindValue(':level',     $user->level());
 
     $requete->execute();
+  }
+
+  public function count($login)
+  {
+    return $this->dao->query('SELECT COUNT(*) FROM users WHERE login = '. '"'.$login.'"')->fetchColumn();
   }
 }
