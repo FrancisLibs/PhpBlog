@@ -36,7 +36,11 @@ class CommentManagerPDO extends CommentManager
       throw new \InvalidArgumentException('L\'identifiant du post passé doit être un nombre entier valide');
     }
 
+<<<<<<< HEAD
     $q = $this->dao->prepare('SELECT c.id, contenu, edition_date, state, user_id, post_id, u.login AS author_name FROM comments c INNER JOIN users u ON u.id = c.user_id WHERE post_id = :postId AND (state = 1 OR state = :state)');
+=======
+    $q = $this->dao->prepare('SELECT c.id, contenu, edition_date, state, user_id, post_id, u.name AS author_name FROM comments c INNER JOIN users u ON u.id = c.user_id WHERE post_id = :postId AND (state = 1 OR state = :state)');
+>>>>>>> b0dc17c6d35e97827f8f90458d25094c73454f04
 
     $q->bindValue(':postId', $postId, \PDO::PARAM_INT);
     $q->bindValue(':state', $state, \PDO::PARAM_INT);

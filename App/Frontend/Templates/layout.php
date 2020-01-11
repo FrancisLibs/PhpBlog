@@ -53,7 +53,11 @@
                 <a class="nav-link" href="posts.html">Posts</a>
               </li>
               <li class="nav-item">
+<<<<<<< HEAD
                 <a class="nav-link" href="connect.html">Bonjour, identifiez-vous</a>
+=======
+                <a class="nav-link" href="/admin/connect.html">Connexion</a>
+>>>>>>> b0dc17c6d35e97827f8f90458d25094c73454f04
               </li>
               <!--<li class="nav-item">
                 <a class="nav-link" href="/commenter-([0-9]+)\.html">ajouter commentaire</a>

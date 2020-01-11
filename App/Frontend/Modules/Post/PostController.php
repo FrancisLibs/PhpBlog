@@ -1,6 +1,8 @@
 <?php
 namespace App\Frontend\Modules\Post;
 
+require_once '../vendor/autoload.php';
+
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \Entity\Comment;
@@ -25,7 +27,11 @@ class PostController extends BackController
       ]);
 
       /* Create the Transport
+<<<<<<< HEAD
         $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587))
+=======
+        $transport = (new Swift_SmtpTransport('smtp.gmail.com', 25))
+>>>>>>> b0dc17c6d35e97827f8f90458d25094c73454f04
           ->setUsername('fr.libs@gmail.com')
           ->setPassword('Cathy2601@1962')
         ;
