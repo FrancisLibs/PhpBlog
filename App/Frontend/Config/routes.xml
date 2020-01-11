@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes>
-  <route url="/" module="Post" action="index" />
-  <route url="/posts.html" module="Post" action="ShowPosts" />
-  <route url="/post-([0-9]+)\.html" module="Post" action="Show" vars="id"/>
-  <route url="/commenter-([0-9]+)\.html" module="Post" action="insertComment" vars="post" />
+  <route url="/"                          module="Post" action="index" />
+  <route url="/posts.html"                module="Post" action="ShowPosts" />
+  <route url="/post-([0-9]+)\.html"       module="Post" action="Show" vars="id"/>
+  <route url="/commenter-([0-9]+)\.html"  module="Post" action="insertComment" vars="post" />
+  <route url="/connect\.html"             module="Users" action="connexion" />
+  <route url="/register\.html"            module="Users" action="registration" />
 </routes>

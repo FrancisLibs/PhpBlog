@@ -11,7 +11,9 @@ class Post extends Entity
             $contenu,
             $edition_date,
             $update_date,
-            $name;
+            $autor_name,
+            $user_id;
+
 
   const AUTEUR_INVALIDE = 1;
   const TITRE_INVALIDE = 2;
@@ -71,15 +73,21 @@ class Post extends Entity
     $this->update_date = $update_date;
   }
 
-   public function setName($name)
+  public function setAutor_Name($autor_name)
   {
-    if (!is_string($name) || empty($name))
+    if (!is_string($autor_name) || empty($autor_name))
     {
       $this->erreurs[] = self::AUTEUR_INVALIDE;
     }
 
-    $this->name = $name;
+    $this->autor_name = $autor_name;
   }
+
+   public function setUser_id($user_id)
+  {
+    $this->user_id = $user_id;
+  }
+
 
   // GETTERS //
 
@@ -113,8 +121,13 @@ class Post extends Entity
     return $this->update_date;
   }
 
-  public function name()
+  public function autor_name()
   {
-    return $this->name;
+    return $this->autor_name;
+  }
+
+   public function user_id()
+  {
+    return $this->user_id;
   }
 }

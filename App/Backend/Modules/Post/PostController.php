@@ -11,6 +11,17 @@ use \OCFram\FormHandler;
 
 class PostController extends BackController
 {
+  public function executeIndex(HTTPRequest $request)
+  {
+    $this->page->addVar('title', 'Gestion des posts');
+
+    $manager = $this->managers->getManagerOf('Post');
+
+    $this->page->addVar('listePosts', $manager->getList());
+    $this->page->addVar('nombrePosts', $manager->count());
+    $this->page->addVar('nombreCommentairesInvalides', $manager->countUnvalidateComments());
+  }
+
   public function executeDelete(HTTPRequest $request)
   {
     $postId = $request->getData('id');
@@ -32,14 +43,23 @@ class PostController extends BackController
     $this->app->httpResponse()->redirect('.');
   }
 
-  public function executeIndex(HTTPRequest $request)
+  public function executeShow(HTTPRequest $request)
   {
-    $this->page->addVar('title', 'Gestion des posts');
+    $post = $this->managers->getManagerOf('Post')->getUnique($request->getData('id'));
 
-    $manager = $this->managers->getManagerOf('Post');
+    if (empty($post))
+    {
+      $this->app->httpResponse()->redirect404();
+    }
 
-    $this->page->addVar('listePosts', $manager->getList());
-    $this->page->addVar('nombrePosts', $manager->count());
+    $this->page->addVar('title', $post->title());
+
+    $this->page->addVar('post', $post);
+
+    $state = 0;
+    $comments = $this->managers->getManagerOf('Comment')->getListOf($post->id(), $state);
+
+    $this->page->addVar('comments', $comments);
   }
 
   public function executeInsert(HTTPRequest $request)
@@ -56,6 +76,41 @@ class PostController extends BackController
     $this->page->addVar('title', 'Modification d\'un post');
   }
 
+  public function executeModerateComment(HTTPRequest $request)
+  {
+    $this->page->addVar('title', 'Modification d\'un commentaire');
+
+    if ($request->method() == 'POST')
+    {
+      $comment = new Comment([
+        'contenu' => $request->postData('contenu'),
+        'post_id' => $request->postData('post_id'),
+      ]);
+    }
+    else
+    {
+      $comment = $this->managers->getManagerOf('Comment')->get($request->getData('id'));
+      $comment->setState(1);
+    }
+
+    $formBuilder = new CommentFormBuilder($comment);
+    $formBuilder->build();
+
+    $form = $formBuilder->form();
+
+    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comment'), $request);
+
+    if ($formHandler->process())
+    {
+      $this->app->user()->setFlash('Le commentaire a bien été modifié');
+
+      $this->app->httpResponse()->redirect("post-show-". $comment->post_id().'.html');
+    }
+
+    $this->page->addVar('form', $form->createView());
+    $this->app->httpResponse()->redirect("post-show-". $comment->post_id().'.html');
+  }
+
   public function executeUpdateComment(HTTPRequest $request)
   {
     $this->page->addVar('title', 'Modification d\'un commentaire');
@@ -63,9 +118,8 @@ class PostController extends BackController
     if ($request->method() == 'POST')
     {
       $comment = new Comment([
-        'id' => $request->getData('id'),
-        'author' => $request->postData('author'),
-        'contents' => $request->postData('contents')
+        'contenu' => $request->postData('contenu'),
+        'post_id' => $request->postData('post_id'),
       ]);
     }
     else
@@ -94,14 +148,13 @@ class PostController extends BackController
   {
     if ($request->method() == 'POST')
     {
-      var_dump($request->postData('edition_date'));
       $post = new Post([
-        'id'  =>  $request->postData('id'),
-        'name' => $request->postData('name'),
-        'title' => $request->postData('title'),
-        'chapo' => $request->postData('chapo'),
-        'contenu' => $request->postData('contenu'),
-
+        'id'            => $request->postData('id'),
+        'name'          => $request->postData('name'),
+        'title'         => $request->postData('title'),
+        'chapo'         => $request->postData('chapo'),
+        'contenu'       => $request->postData('contenu'),
+        'user_id'       => $request->postData('1'),
       ]);
 
       if ($request->getExists('id'))
@@ -139,3 +192,6 @@ class PostController extends BackController
     $this->page->addVar('form', $form->createView());
   }
 }
+
+
+

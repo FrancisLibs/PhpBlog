@@ -5,12 +5,10 @@ use \OCFram\Entity;
 
 class Message extends Entity
 {
-  protected $id,
-            $lastName,
+  protected $lastName,
             $firstName,
             $email,
-            $message,
-            $edition_date;
+            $message;
 
   const USER_INVALIDE = 1;
   const NOM_INVALIDE = 2;
@@ -72,17 +70,7 @@ class Message extends Entity
     $this->message = $message;
   }
 
-  public function setEdition_Date(\DateTime $edition_Date)
-  {
-    $this->edition_date = $edition_date;
-  }
-
   // GETTERS //
-
-  public function id()
-  {
-    return $this->id;
-  }
 
   public function lastName()
   {
@@ -102,10 +90,5 @@ class Message extends Entity
   public function message()
   {
     return $this->message;
-  }
-
-  public function edition_date()
-  {
-    return $this->edition_date;
   }
 }
