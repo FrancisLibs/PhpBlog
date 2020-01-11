@@ -12,7 +12,7 @@ body {
 
 p {
   line-height: 1.5;
-  margin: 30px 0;
+  margin: 0px 0;
 }
 
 p a {
@@ -30,7 +30,7 @@ h6 {
 }
 
 a {
-  color: #212529;
+  /*color: #212529;*/
   transition: all 0.2s;
 }
 
@@ -168,14 +168,7 @@ img::-moz-selection {
   }
 }
 
-header.masthead {
-  margin-bottom: 50px;
-  background: no-repeat center center;
-  background-color: #868e96;
-  background-attachment: scroll;
-  position: relative;
-  background-size: cover;
-}
+
 
 header.masthead .overlay {
   position: absolute;
@@ -202,10 +195,10 @@ header.masthead .site-heading {
   }
 }
 
-header.masthead .page-heading,
+/*header.masthead .page-heading,
 header.masthead .site-heading {
   text-align: center;
-}
+}*/
 
 header.masthead .page-heading h1,
 header.masthead .site-heading h1 {
@@ -215,7 +208,7 @@ header.masthead .site-heading h1 {
 
 header.masthead .page-heading .subheading,
 header.masthead .site-heading .subheading {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 300;
   line-height: 1.1;
   display: block;
@@ -369,9 +362,9 @@ form .form-group:first-child .floating-label-form-group {
   border-top: 1px solid #dee2e6;
 }
 
-footer {
-  padding: 50px 0 65px;
-}
+/*footer {
+  padding: 0px 0 px;
+}*/
 
 footer .list-inline {
   margin: 0;

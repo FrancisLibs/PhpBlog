@@ -1,0 +1,151 @@
+body {
+  min-height: 100%;
+  margin:0;
+  padding:0;
+  background: url(../images/plageGuadeloupe2.jpg) no-repeat center fixed;
+  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  background-size: cover; /* version standardisée */
+}
+
+/* ---- Barre de navigation ------*/
+.navbar .navbar-default{
+     background-color: transparent;
+     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.navbar .navbar-brand{
+  color : white;
+  font-size : 25px;
+  font-weight: 800;
+}
+
+.navbar .navbar-toggler-icon{
+  color : white;
+}
+
+.navbar .nav-link{
+  color : white!important;
+  padding-right: 3em!important;
+}
+
+/* ---- Titre page d'accueil ------*/
+.page-accueil .titre-page h1{
+  text-align: center;
+  padding-top: 10px;
+  font-size: 3rem;
+  color: white;
+  font-family: 'Bree Serif', serif;
+}
+
+/* ---- Sous-titre page d'accueil ------*/
+.page-accueil .sous-titre{
+  text-align: center;
+  font-size: 1.3em;
+  color: white;
+  font-family: 'Bree Serif', serif;
+}
+
+/* ---- Boite posts page d'accueil ------*/
+.page-accueil .posts-box{
+  border: 1px solid black;
+  margin-top: 50px;
+  margin-bottom: 70px;
+  background: linear-gradient(#507ba8, transparent);
+}
+
+.posts-box .post-title{
+  color: white;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* ---- Formulaire page d'accueil ------*/
+
+.page-accueil .formulaireMessageBox{
+  margin-top: 20px;
+  border: 1px solid white;
+  border-radius: 10px;
+  background: linear-gradient(#507ba8, transparent);
+}
+
+.page-accueil .formulaireMessageBox #titreFormulaire{
+   color: white;
+   font-size: 1.2em;
+   margin: 0;
+}
+
+.formulaireMessage .labelNom,
+.formulaireMessage .labelEmail,
+.formulaireMessage .labelMessage,
+.formulaireMessage .widgetNom,
+.formulaireMessage .widgetEmail,
+.formulaireMessage .widgetMessage{
+  font-size: 0.8em;
+  background: transparent;
+  color: white;
+}
+
+.formulaireMessage .labelNom,
+.formulaireMessage .labelEmail,
+.formulaireMessage .widgetNom,
+.formulaireMessage .widgetEmail{
+  margin: 5px;
+}
+
+.formulaireMessage .widgetNom,
+.formulaireMessage .widgetEmail{
+  /*margin-right: 100px;*/
+}
+
+.formulaireMessage .btnValid{
+  text-align: center;
+  margin-left: 72%;
+  margin-bottom: 10px;
+  padding: 0px 7px 0px 7px;
+}
+
+
+/* ---- Footer ------*/
+
+hr {
+  height: 2px;
+  margin: -0.5em 0;
+  padding: 0;
+  color: white;
+  background-color: white;
+  border: 0;
+}
+.liens{
+  color: white;
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+/* No media query for `xs` since this is the default in Bootstrap */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .page-accueil .titre-page h1{
+  padding-top: 20px;
+  font-size: 4rem;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .page-accueil .titre-page h1{
+  padding-top: 30px;
+  font-size: 5rem;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .page-accueil .titre-page h1{
+  padding-top: 35px;
+  font-size: 6rem;
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .page-accueil .titre-page h1{
+  text-align: center;
+  padding-top: 40px;
+  font-size: 7rem;
+}
