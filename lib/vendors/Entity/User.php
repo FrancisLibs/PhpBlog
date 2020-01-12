@@ -33,7 +33,7 @@ class User extends Entity
 
   public function comparePasswords($userBddPassword)
   {
-    return $userBddPassword == $this->password;
+    return $userBddPassword == $this->password();
   }
 
   // SETTERS //

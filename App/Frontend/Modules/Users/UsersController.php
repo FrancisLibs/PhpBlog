@@ -20,7 +20,7 @@ class UsersController extends BackController
         'password' =>       $request->postData('password'),
       ]);
 
-      if (empty($this->login) || empty($this->password))
+      if (empty($user->login()) || empty($user->password())) // Tous les champs sont remplis ?
       {
         $this->app->user()->setFlash('Merci de remplir les deux champs de saisie');
 
@@ -28,18 +28,19 @@ class UsersController extends BackController
       }
       else
       {
-        // On récupère le manager des users.
         $manager = $this->managers->getManagerOf('User');
         $userBdd = $manager->getUser($user->login());
 
-        if(!isset($userBdd))
+        if(is_null($userBdd)) // Si l'utilisateur n'existe pas dans la bdd
         {
+
           $this->app->user()->setFlash('L\'identifiant ou le mot de passe sont erronés');
           $this->app->httpResponse()->redirect('/connect.html');
         }
-        else
+        else // Check du mot de passe
         {
-          $compareResult = $user->comparePasswords($userBdd->password(), $user->password());
+          $mdpUser = $user->passwordHash($user->password());
+          $compareResult = $user->comparePasswords($userBdd->password(), $mdpUser);
 
           if(!$compareResult){
             $this->app->user()->setFlash('L\'identifiant et/ou le mot de passe sont erronés');
