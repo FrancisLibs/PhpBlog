@@ -7,7 +7,7 @@ class UserManagerPDO extends UserManager
 {
   protected function add(User $user)
   {
-    $requete = $this->dao->prepare('INSERT INTO users SET login = :login, email = :email, password = :password, edition_date = NOW(), status = :status, level = :level');
+    $requete = $this->dao->prepare('INSERT INTO users SET login = :login, email = :email, password = :password, create_date = NOW(), status = :status, level = :level');
 
     $requete->bindValue(':login',     $user->login());
     $requete->bindValue(':email',     $user->emailr());
@@ -23,27 +23,25 @@ class UserManagerPDO extends UserManager
     $this->dao->exec('DELETE FROM users WHERE id = '.(int) $id);
   }
 
-  public function getUser($id)
+  public function getUser($login)
   {
-    $requete = $this->dao->prepare('SELECT id, login, email, password, edition_date, status, level FROM users WHERE id = :id');
-    $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
+    $requete = $this->dao->prepare('SELECT id, login, email, password, create_date, status, level FROM users WHERE login = :login');
+    $requete->bindValue(':login', $login, \PDO::PARAM_STR);
     $requete->execute();
 
     $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\User');
 
     if ($user = $requete->fetch())
     {
-      $user->setEdition_date(new \DateTime($user->edition_date()));
-
       return $user;
     }
 
     return null;
   }
 
-  protected function update(User $user)
+  public function update(User $user)
   {
-    $requete = $this->dao->prepare('UPDATE users SET login = :login, email = :email, password = :password, modify_date = NOW(), status = :status, level = :level WHERE id = :id');
+    $requete = $this->dao->prepare('UPDATE users SET login = :login, email = :email, password = :password, create_date = NOW(), status = :status, level = :level WHERE id = :id');
 
     $requete->bindValue(':login',     $user->login());
     $requete->bindValue(':email',     $user->email());

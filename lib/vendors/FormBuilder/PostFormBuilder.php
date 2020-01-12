@@ -12,20 +12,7 @@ class PostFormBuilder extends FormBuilder
 {
   public function build()
   {
-    $this->form
-      ->add(new StringField([
-        'divClassName'=>'form-group',
-        'label' => 'auteur',
-        'name' => 'name',
-        'labelClass' => 'labelnom col-lg-2 col-form-label col-form-label-sm',
-        'widgetClass' => 'widgetNom form-control form-control-sm',
-        'maxLength' => 20,
-        'validators' => [
-          new MaxLengthValidator('L\'auteur spécifié est trop long (20 caractères maximum)', 20),
-          new NotNullValidator('Merci de spécifier l\'auteur du post'),
-        ],
-       ]))
-      ->add(new StringField([
+    $this->form->add(new StringField([
         'divClassName'=>'form-group',
         'label' => 'titre',
         'name' => 'title',
@@ -62,11 +49,11 @@ class PostFormBuilder extends FormBuilder
         ],
        ]))
       ->add(new HiddenField([
-        'divClassName'=>'form-group',
-        'name' => 'id',
-        'labelClass' => 'labelTitre col-lg-2 col-form-label col-form-label-sm',
-        'widgetClass' => 'widgetTitre form-control form-control-sm',
-        ],
-       ));
+        'name' => 'autor_name'
+       ]))
+      ->add(new HiddenField([
+        'name' => 'user_id'
+       ]));
+
   }
 }

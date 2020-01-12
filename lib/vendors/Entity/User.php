@@ -9,6 +9,7 @@ class User extends Entity
             $login,
             $email,
             $password,
+            $verifyPassword,
             $create_date,
             $status,
             $level;
@@ -17,12 +18,25 @@ class User extends Entity
   const LOGIN_INVALIDE = 2;
   const EMAIL_INVALIDE = 3;
   const PASSWORD_INVALIDE = 4;
+  const VERIFY_PASSWORD_INVALIDE = 5;
 
   public function isValid()
   {
-    return !empty($this->login) || (empty($this->email) || empty($this->password));
+   return !empty($this->login) && !empty($this->password);
   }
 
+  public function passwordHash($password)
+  {
+    $this->password = password_hash($password, PASSWORD_DEFAULT);
+  }
+
+  public function password_verify($login1, $login2)
+  {
+    if($login1 == $login2)
+    {
+      return true;
+    }
+  }
 
   // SETTERS //
 
@@ -32,8 +46,7 @@ class User extends Entity
     {
       $this->erreurs[] = self::LOGIN_INVALIDE;
     }
-
-    $this->auteur = $author;
+    $this->login = $login;
   }
 
   public function setEmail($email)
@@ -60,6 +73,15 @@ class User extends Entity
     }
 
     $this->password = $password;
+  }
+
+  public function setVerifyPassword($verifyPassword)
+  {
+    if (!is_string($verifyPassword) || empty($verifyPassword))
+    {
+      $this->erreurs[] = self::VERIFY_PASSWORD_INVALIDE;
+    }
+
   }
 
   public function setCreate_Date(\DateTime $create_Date)
@@ -97,6 +119,11 @@ class User extends Entity
   public function password()
   {
     return $this->password;
+  }
+
+  public function verifyPassword()
+  {
+    return $this->verifyPassword;
   }
 
   public function create_date()
