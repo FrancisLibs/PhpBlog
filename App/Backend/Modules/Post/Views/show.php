@@ -1,4 +1,4 @@
-<h4>Auteur : <?= $post['autor_name'] ?></h4>
+<h4>Auteur : <?= $post['author_name'] ?></h4>
 <h4>Titre : <?= $post['title'] ?></h4>
 <h4>Chapô : <?= $post['chapo'] ?></h4>
 <h4>Créé le : <?= $post['edition_date']->format('d/m/Y à H\hi') ?></h4>

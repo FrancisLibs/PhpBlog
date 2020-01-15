@@ -12,7 +12,8 @@ class Users extends Entity
             $verifyPassword,
             $create_date,
             $status,
-            $role_id;
+            $role_id,
+            $role;
 
   const LOGIN_INVALIDE = 1;
   const EMAIL_INVALIDE = 2;
@@ -93,9 +94,14 @@ class Users extends Entity
     $this->status = $status;
   }
 
-  public function setLevel($role_id)
+  public function setRole_id($role_id)
   {
     $this->role_id = $role_id;
+  }
+
+  public function setRole($role)
+  {
+    $this->role = $role;
   }
 
   // GETTERS //
@@ -138,5 +144,10 @@ class Users extends Entity
   public function role_id()
   {
     return $this->role_id;
+  }
+
+  public function role()
+  {
+    return $this->role;
   }
 }

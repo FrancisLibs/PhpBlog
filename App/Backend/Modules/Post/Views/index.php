@@ -15,7 +15,7 @@
     echo '
     <tr>
       <td>
-        ', $post['autor_name'], '
+        ', $post['author_name'], '
       </td>
       <td>
         ', $post['title'], '
@@ -27,9 +27,9 @@
         ', ($post['edition_date'] == $post['update_date'] ? '-' : 'le '.$post['update_date']->format('d/m/Y à H\hi')), '
       </td>
       <td>
-        <a href="post-update-', $post['id'], '.html"><img src="/images/update.png" alt="Modifier" /></a>
-        <a href="post-delete-', $post['id'], '.html"><img src="/images/delete.png" alt="Supprimer" /></a>
-        <a href="post-show-', $post['id'], '.html"><img src="/images/select.png" alt="Supprimer"</a>
+        <a href="users-update-', $post['id'], '.html"><img src="/images/update.png" alt="Modifier" /></a>
+        <a href="users-delete-', $post['id'], '.html"><img src="/images/delete.png" alt="Supprimer" /></a>
+        <a href="users-show-', $post['id'], '.html"><img src="/images/select.png" alt="Supprimer"</a>
       </td>
     </tr>
     ', "\n";

@@ -7,6 +7,7 @@
     <th>Date d'ajout</th>
     <th>Status</th>
     <th>Rôle</th>
+    <th>Actions</th>
   </tr>
 
   <?php
@@ -26,7 +27,7 @@
       <td>
         ', $users['status'],'
       </td>
-       </td> <td>
+      <td>
         ', $users['role'],'
       </td>
 

@@ -1,4 +1,4 @@
-<p>Par <em><?= $post['autor_name'] ?></em>, le <?= $post['edition_date']->format('d/m/Y à H\hi') ?></p>
+<p>Par <em><?= $post['author_name'] ?></em>, le <?= $post['edition_date']->format('d/m/Y à H\hi') ?></p>
 <h2>Titre : <?= $post['title'] ?></h2>
 <h3>Chapo : <?= $post['chapo'] ?></h3>
 <p>Contenu : <?= nl2br($post['contenu']) ?></p>

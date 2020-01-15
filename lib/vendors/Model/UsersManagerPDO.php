@@ -25,7 +25,7 @@ class UsersManagerPDO extends UsersManager
 
   public function getUsers($login)
   {
-    $requete = $this->dao->prepare('SELECT id, login, email, password, create_date, status, role_id FROM users WHERE login = :login');
+    $requete = $this->dao->prepare('SELECT id, login, email, password, create_date, status, role_id AS role FROM users WHERE login = :login');
     $requete->bindValue(':login', $login, \PDO::PARAM_STR);
     $requete->execute();
 
@@ -41,7 +41,7 @@ class UsersManagerPDO extends UsersManager
 
   public function getUsersId($id)
   {
-    $requete = $this->dao->prepare('SELECT id, login, email, password, create_date, status, role_id FROM users WHERE id = :id');
+    $requete = $this->dao->prepare('SELECT id, login, email, password, create_date, status, role_id AS role FROM users WHERE id = :id');
     $requete->bindValue(':id', $id, \PDO::PARAM_INT);
     $requete->execute();
 
@@ -83,7 +83,7 @@ class UsersManagerPDO extends UsersManager
 
   public function getList()
   {
-    $sql = 'SELECT u.id, login, email, password, create_date, status, role_id FROM users u INNER JOIN roles r ON u.role_id = r.id ORDER BY u.id ASC';
+    $sql = 'SELECT u.id, login, email, password, create_date, status, role_id, role FROM users u INNER JOIN roles r ON u.role_id = r.id ORDER BY u.id ASC';
 
     $requete = $this->dao->query($sql);
 
