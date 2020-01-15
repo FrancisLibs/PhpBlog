@@ -8,4 +8,5 @@
   <route url="/admin/comment-update-([0-9]+)\.html"   module="Post" action="updateComment" vars="id" />
   <route url="/admin/comment-delete-([0-9]+)\.html"   module="Post" action="deleteComment" vars="id" />
   <route url="/admin/comment-moderate-([0-9]+)\.html" module="Post" action="moderateComment" vars="id" />
+  <route url="/admin/users\.html"                     module="Users" action="show" />
 </routes>

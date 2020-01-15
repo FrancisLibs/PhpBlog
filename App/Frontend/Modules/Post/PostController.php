@@ -5,6 +5,7 @@ use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \Entity\Comment;
 use \Entity\Message;
+use \Entity\Users;
 use \FormBuilder\ContactFormBuilder;
 use \FormBuilder\CommentFormBuilder;
 use \OCFram\FormHandler;
@@ -23,26 +24,6 @@ class PostController extends BackController
         'email' =>      $request->postData('email'),
         'message' =>    $request->postData('message')
       ]);
-
-      /* Create the Transport
-        $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587))
-          ->setUsername('fr.libs@gmail.com')
-          ->setPassword('Cathy2601@1962')
-        ;
-
-        // Create the Mailer using your created Transport
-        $mailer = new Swift_Mailer($transport);
-
-        // Create a message
-        $message = (new Swift_Message('Wonderful Subject'))
-          ->setFrom(['john@doe.com' => 'John Doe'])
-          ->setTo(['fr.libs@gmail.com' => 'Francis'])
-          ->setBody($request->postData('message'))
-          ;
-
-        // Send the message
-        $result = $mailer->send($message);*/
-
     }
     else
     {
@@ -164,5 +145,13 @@ class PostController extends BackController
     $this->page->addVar('comment', $comment);
     $this->page->addVar('form', $form->createView());
     $this->page->addVar('title', 'Ajout d\'un commentaire');
+  }
+
+  public function executeCv(HTTPRequest $request)
+  {
+    if ($request->method() == 'GET')
+    {
+
+    }
   }
 }

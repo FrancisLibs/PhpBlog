@@ -12,7 +12,7 @@ class PostManagerPDO extends PostManager
     $q->bindValue(':title',   $post->title());
     $q->bindValue(':chapo',   $post->chapo());
     $q->bindValue(':contenu', $post->contenu());
-    $q->bindValue(':user_id', '1');
+    $q->bindValue(':user_id', $post->user_id());
 
     $q->execute();
 
@@ -90,7 +90,7 @@ class PostManagerPDO extends PostManager
     $requete->bindValue(':chapo',   $post->chapo());
     $requete->bindValue(':contenu', $post->contenu());
     $requete->bindValue(':id', $post->id());
-    $requete->bindValue(':user_id', '1');
+    $requete->bindValue(':user_id', $post->user_id());
 
     $requete->execute();
   }

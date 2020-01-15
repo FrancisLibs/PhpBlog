@@ -30,3 +30,6 @@
     </tr>
   <?php } ?>
 </table>
+
+<p><a href="commenter-<?= $post['id'] ?>.html">Ajouter un commentaire</a></p>
+

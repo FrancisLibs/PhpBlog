@@ -1,0 +1,13 @@
+{
+    "name": "francis/web",
+    "description": "phpBlog",
+    "authors": [
+        {
+            "name": "francisL",
+            "email": "fr.libs@gmail.com"
+        }
+    ],
+    "require": {
+        "swiftmailer/swiftmailer": "^6.2"
+    }
+}

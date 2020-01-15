@@ -25,7 +25,7 @@ class User
 
   public function isAuthenticated()
   {
-    return isset($_SESSION['auth']) && $_SESSION['auth'] === true;
+    return isset($_SESSION['user']) && $_SESSION['user'] === true;
   }
 
   public function setAttribute($attr, $value)
@@ -39,8 +39,7 @@ class User
     {
       throw new \InvalidArgumentException('La valeur spécifiée à la méthode User::setAuthenticated() doit être un boolean');
     }
-
-    $_SESSION['auth'] = $authenticated;
+    $_SESSION['user'] = $authenticated;
   }
 
   public function setFlash($value)

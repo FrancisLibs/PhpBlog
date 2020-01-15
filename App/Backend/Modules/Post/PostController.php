@@ -13,6 +13,7 @@ class PostController extends BackController
 {
   public function executeIndex(HTTPRequest $request)
   {
+
     $this->page->addVar('title', 'Gestion des posts');
 
     $manager = $this->managers->getManagerOf('Post');
@@ -78,36 +79,12 @@ class PostController extends BackController
 
   public function executeModerateComment(HTTPRequest $request)
   {
-    $this->page->addVar('title', 'Modification d\'un commentaire');
+    $manager = $this->managers->getManagerOf('Comment');
+    $comment = $manager->get($request->getData('id'));
+    $comment->setState(1);
 
-    if ($request->method() == 'POST')
-    {
-      $comment = new Comment([
-        'contenu' => $request->postData('contenu'),
-        'post_id' => $request->postData('post_id'),
-      ]);
-    }
-    else
-    {
-      $comment = $this->managers->getManagerOf('Comment')->get($request->getData('id'));
-      $comment->setState(1);
-    }
+    $manager->update($comment);
 
-    $formBuilder = new CommentFormBuilder($comment);
-    $formBuilder->build();
-
-    $form = $formBuilder->form();
-
-    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comment'), $request);
-
-    if ($formHandler->process())
-    {
-      $this->app->user()->setFlash('Le commentaire a bien été modifié');
-
-      $this->app->httpResponse()->redirect("post-show-". $comment->post_id().'.html');
-    }
-
-    $this->page->addVar('form', $form->createView());
     $this->app->httpResponse()->redirect("post-show-". $comment->post_id().'.html');
   }
 
@@ -120,6 +97,7 @@ class PostController extends BackController
       $comment = new Comment([
         'contenu' => $request->postData('contenu'),
         'post_id' => $request->postData('post_id'),
+        'state'   => 0,
       ]);
     }
     else
@@ -148,13 +126,15 @@ class PostController extends BackController
   {
     if ($request->method() == 'POST')
     {
+      $auteur = $_SESSION['users'];
+
       $post = new Post([
         'id'            => $request->postData('id'),
         'name'          => $request->postData('name'),
         'title'         => $request->postData('title'),
         'chapo'         => $request->postData('chapo'),
         'contenu'       => $request->postData('contenu'),
-        'user_id'       => $request->postData('1'),
+        'user_id'       => $auteur->id(),
       ]);
 
       if ($request->getExists('id'))

@@ -3,10 +3,11 @@ namespace App\Frontend\Modules\Users;
 
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
-use \Entity\User;
+use \Entity\Users;
 use \FormBuilder\ConnexionFormBuilder;
 use \FormBuilder\RegistrationFormBuilder;
 use \OCFram\FormHandler;
+
 
 class UsersController extends BackController
 {
@@ -15,12 +16,12 @@ class UsersController extends BackController
     // Traitement du formulaire s'il a été envoyé
     if ($request->method() == 'POST')
     {
-      $user = new User([
+      $users = new Users([
         'login' =>          $request->postData('login'),
         'password' =>       $request->postData('password'),
       ]);
 
-      if (empty($user->login()) || empty($user->password())) // Tous les champs sont remplis ?
+      if (empty($users->login()) || empty($users->password())) // Tous les champs sont remplis ?
       {
         $this->app->user()->setFlash('Merci de remplir les deux champs de saisie');
 
@@ -28,37 +29,37 @@ class UsersController extends BackController
       }
       else
       {
-        $manager = $this->managers->getManagerOf('User');
-        $userBdd = $manager->getUser($user->login());
+        $manager = $this->managers->getManagerOf('Users');
+        $usersBdd = $manager->getUsers($users->login());
 
-        if(is_null($userBdd)) // Si l'utilisateur n'existe pas dans la bdd
+        if(empty($usersBdd)) // Si l'utilisateur n'existe pas dans la bdd
         {
-
           $this->app->user()->setFlash('L\'identifiant ou le mot de passe sont erronés');
           $this->app->httpResponse()->redirect('/connect.html');
         }
         else // Check du mot de passe
         {
-          $mdpUser = $user->passwordHash($user->password());
-          $compareResult = $user->comparePasswords($userBdd->password(), $mdpUser);
-
-          if(!$compareResult){
+          if(!password_verify($users->Password(), $usersBdd->password()))
+          {
             $this->app->user()->setFlash('L\'identifiant et/ou le mot de passe sont erronés');
             $this->app->httpResponse()->redirect('/connect.html');
           }
           else
           {
             $this->app->user()->setAuthenticated(true);
-            $this->app->httpResponse()->redirect('.');
+
+            $this->app->user()->setAttribute('users', $usersBdd);
+
+            $this->app->httpResponse()->redirect('/');
           }
         }
       }
     }
     else
     {
-      $user = new User;
+      $users = new Users;
     }
-    $formBuilder = new ConnexionFormBuilder($user);
+    $formBuilder = new ConnexionFormBuilder($users);
     $formBuilder->build();
 
     $form = $formBuilder->form();
@@ -75,7 +76,7 @@ class UsersController extends BackController
     // Traitement du formulaire s'il a été envoyé
     if ($request->method() == 'POST')
     {
-      $user = new User([
+      $users = new Users([
         'login' =>          $request->postData('login'),
         'email' =>          $request->postData('email'),
         'password' =>       $request->postData('password'),
@@ -83,7 +84,7 @@ class UsersController extends BackController
       ]);
 
       // Vérification de la validité du formulaire (tous champs remplis)
-      if (!$user->registrationFormIsValid())
+      if (!$users->registrationFormIsValid())
       {
         $this->app->user()->setFlash('Merci de compléter tous les champs');
 
@@ -92,8 +93,8 @@ class UsersController extends BackController
       else
       {
         // Vérification de l'absence du pseudo en bdd
-        $manager = $this->managers->getManagerOf('User');
-        $resultat = $manager->count($user->login());
+        $manager = $this->managers->getManagerOf('Users');
+        $resultat = $manager->count($users->login());
 
         if ($resultat <> 0)
         {
@@ -104,7 +105,7 @@ class UsersController extends BackController
         else
         {
           // Comparaison des 2 mots de passe du formulaire
-          if(!($user->password() == $user->verifyPassword()))
+          if(!($users->password() == $users->verifyPassword()))
           {
             $this->app->user()->setFlash('Les mots de passe ne sont pas identiques');
 
@@ -112,14 +113,30 @@ class UsersController extends BackController
           }
           else
           {
-            // Ecriture de $user dans la bdd avec status à 0 et le mot de passe haché
+            // Ecriture de $users dans la bdd avec status à 0 et le mot de passe haché
             // On récupère le manager des users.
-            $user->setStatus(0);
-            $user->setPassword($user->passwordHash());
+            $users->setStatus(0);
+            $users->setPassword($users->passwordHash());
 
-            $manager->add($user);
+            $manager->add($users);
 
-            // envoi du mail
+           /* // Create the Transport
+            $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587))
+              ->setUsername('fr.libs@gmail.com')
+              ->setPassword('Cathy2601@1962');
+
+            // Create the Mailer using your created Transport
+            $mailer = new Swift_Mailer($transport);
+
+            // Create a message
+            $message = (new Swift_Message('Wonderful Subject'))
+              ->setFrom(['john@doe.com' => 'John Doe'])
+              ->setTo(['fr.libs@gmail.com' => 'Francis'])
+              ->setBody($request->postData('message'))
+              ;
+
+            // Send the message
+            $result = $mailer->send($message); */
 
             $this->app->user()->setFlash('Un mail d\'authentification vient de vous être envoyé');
             $this->app->httpResponse()->redirect('/./');
@@ -130,10 +147,10 @@ class UsersController extends BackController
     }
     else
     {
-      $user = new User;
+      $users = new Users;
     }
 
-    $formBuilder = new RegistrationFormBuilder($user);
+    $formBuilder = new RegistrationFormBuilder($users);
     $formBuilder->build();
 
     $form = $formBuilder->form();
@@ -142,5 +159,14 @@ class UsersController extends BackController
 
     // On ajoute une définition pour le titre.
     $this->page->addVar('title', 'Enregistrement');
+  }
+
+  public function executeDeconnect(HTTPRequest $request)
+  {
+    // Supression des variables de session et de la session
+    $_SESSION = array();
+    session_destroy();
+
+    $this->app->httpResponse()->redirect('/');
   }
 }

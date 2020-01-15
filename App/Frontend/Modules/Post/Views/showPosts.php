@@ -8,9 +8,6 @@ foreach ($listePosts as $post)
   <div class="post-chapo">
     <p>Chapo : <?= nl2br($post['chapo']) ?></p>
   </div>
-   <div class="post-autheur">
-    <p>Auteur : <?= nl2br($post['autor_name']) ?></p>
-  </div>
    <div class="post-chapo">
     <p>DateModif. :<?= $post['update_date']->format('d/m/Y à H\hi') ?></p>
   </div>

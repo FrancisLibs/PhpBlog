@@ -7,12 +7,12 @@ class CommentManagerPDO extends CommentManager
 {
   protected function add(Comment $comment)
   {
-    $q = $this->dao->prepare('INSERT INTO comments SET contenu = :contenu, edition_date = NOW(), state = :state, user_id = :user_id, post_id = :post_id');
+    $q = $this->dao->prepare('INSERT INTO comments SET contenu = :contenu, edition_date = NOW(), state = :state, users_id = :users_id, post_id = :post_id');
 
-    $q->bindValue(':contenu',   $comment->contenu());
-    $q->bindValue(':state',     0);
-    $q->bindValue(':user_id',   1);
-    $q->bindValue(':post_id',   $comment->post_id());
+    $q->bindValue(':contenu',     $comment->contenu());
+    $q->bindValue(':state',       0);
+    $q->bindValue(':users_id',    1);
+    $q->bindValue(':post_id',     $comment->post_id());
 
     $q->execute();
 
@@ -36,9 +36,9 @@ class CommentManagerPDO extends CommentManager
       throw new \InvalidArgumentException('L\'identifiant du post passé doit être un nombre entier valide');
     }
 
-    $q = $this->dao->prepare('SELECT c.id, contenu, edition_date, state, user_id, post_id, u.login AS author_name FROM comments c INNER JOIN users u ON u.id = c.user_id WHERE post_id = :postId AND (state = 1 OR state = :state)');
+    $q = $this->dao->prepare('SELECT c.id, contenu, edition_date, state, users_id, post_id, u.login AS author_name FROM comments c INNER JOIN users u ON u.id = c.users_id WHERE post_id = :postid AND (state = 1 OR state = :state)');
 
-    $q->bindValue(':postId', $postId, \PDO::PARAM_INT);
+    $q->bindValue(':postid', $postId, \PDO::PARAM_INT);
     $q->bindValue(':state', $state, \PDO::PARAM_INT);
     $q->execute();
 
@@ -54,20 +54,20 @@ class CommentManagerPDO extends CommentManager
     return $comments;
   }
 
-  protected function update(Comment $comment)
+  public function update(Comment $comment)
   {
     $q = $this->dao->prepare('UPDATE comments SET contenu = :contenu, state = :state WHERE comments.id = :id');
 
     $q->bindValue(':contenu', $comment->contenu());
     $q->bindValue(':state',   $comment->state());
-    $q->bindValue(':id',      $_GET['id']);
+    $q->bindValue(':id',      $comment->id());
 
     $q->execute();
   }
 
   public function get($id)
   {
-    $q = $this->dao->prepare('SELECT c.id, contenu, edition_date, state, user_id, post_id, u.name AS author_name FROM comments c INNER JOIN users u ON c.user_id = u.id WHERE c.id = :id');
+    $q = $this->dao->prepare('SELECT c.id, contenu, edition_date, state, users_id, post_id, u.login AS author_name FROM comments c INNER JOIN users u ON c.users_id = u.id WHERE c.id = :id');
     $q->bindValue(':id', (int) $id, \PDO::PARAM_INT);
     $q->execute();
 
