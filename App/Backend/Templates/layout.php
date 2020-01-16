@@ -59,6 +59,11 @@
               <li class="nav-item">
                 <a class="nav-link" href="/admin/users.html">Gestion utilisateurs</a>
               </li>
+              <?php $users = $_SESSION['users'] ?>
+              <div class="col-lg-3 navbar-header">
+                <p class="navbar-brand">Bonjour <?= $users->login() ?></p>
+                <a href="deconnect.html" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Déconnexion</a>
+              </div>
             </ul>
           </div>
         </div>

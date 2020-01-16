@@ -5,6 +5,7 @@
   <route url="/admin/post-update-([0-9]+)\.html"      module="Post" action="update" vars="id" />
   <route url="/admin/post-delete-([0-9]+)\.html"      module="Post" action="delete" vars="id" />
   <route url="/admin/post-show-([0-9]+)\.html"        module="Post" action="show" vars="id" />
+  <route url="/admin/commenter-([0-9]+)\.html"        module="Post" action="insertComment" vars="post" />
   <route url="/admin/comment-update-([0-9]+)\.html"   module="Post" action="updateComment" vars="id" />
   <route url="/admin/comment-delete-([0-9]+)\.html"   module="Post" action="deleteComment" vars="id" />
   <route url="/admin/comment-moderate-([0-9]+)\.html" module="Post" action="moderateComment" vars="id" />

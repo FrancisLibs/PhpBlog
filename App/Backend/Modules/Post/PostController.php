@@ -171,6 +171,11 @@ class PostController extends BackController
 
     $this->page->addVar('form', $form->createView());
   }
+
+  public function executeInsertComment(HTTPRequest $request)
+  {
+    $this->app->httpResponse()->redirect('/commenter-'. $_GET['post'].'.html');
+  }
 }
 
 
