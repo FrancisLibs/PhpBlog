@@ -7,7 +7,7 @@ use \Entity\Users;
 use \FormBuilder\ConnexionFormBuilder;
 use \FormBuilder\RegistrationFormBuilder;
 use \OCFram\FormHandler;
-
+use \Swift_SmtpTransport;
 
 class UsersController extends BackController
 {
@@ -94,9 +94,9 @@ class UsersController extends BackController
       {
         // Vérification de l'absence du pseudo en bdd
         $manager = $this->managers->getManagerOf('Users');
-        $resultat = $manager->count($users->login());
+        $resultat = $manager->countUsers($users->login());
 
-        if ($resultat <> 0)
+        if (!empty($resultat))
         {
           $this->app->user()->setFlash('L\'identifiant que vous avez choisi est déjà pris');
 
@@ -118,12 +118,12 @@ class UsersController extends BackController
             $users->setStatus(0);
             $users->setPassword($users->passwordHash());
 
-            $manager->add($users);
-
-           /* // Create the Transport
-            $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587))
+            //$manager->add($users);
+            /*
+            // Create the Transport
+            $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
               ->setUsername('fr.libs@gmail.com')
-              ->setPassword('Cathy2601@1962');
+              ->setPassword('ueacgqmfezqrgznm');
 
             // Create the Mailer using your created Transport
             $mailer = new Swift_Mailer($transport);
@@ -131,8 +131,8 @@ class UsersController extends BackController
             // Create a message
             $message = (new Swift_Message('Wonderful Subject'))
               ->setFrom(['john@doe.com' => 'John Doe'])
-              ->setTo(['fr.libs@gmail.com' => 'Francis'])
-              ->setBody($request->postData('message'))
+              ->setTo(['fr.libs@gmail.com'])
+              ->setBody('Here is the message itself')
               ;
 
             // Send the message
@@ -161,7 +161,7 @@ class UsersController extends BackController
     $this->page->addVar('title', 'Enregistrement');
   }
 
-  public function executeDeconnect(HTTPRequest $request)
+  public function executeDeconnect()
   {
     // Supression des variables de session et de la session
     $_SESSION = array();

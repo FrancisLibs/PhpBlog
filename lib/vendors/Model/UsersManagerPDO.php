@@ -69,16 +69,14 @@ class UsersManagerPDO extends UsersManager
     $requete->execute();
   }
 
-  public function count($login)
+  public function countUsers($login)
   {
-    if($login <> 0)
-    {
-      return $this->dao->query('SELECT COUNT(*) FROM users WHERE login = '. '"'.$login.'"')->fetchColumn();
-    }
-    else
-    {
-      return $this->dao->query('SELECT COUNT(*) FROM users')->fetchColumn();
-    }
+    return $this->dao->query('SELECT COUNT(*) FROM users WHERE login = '. '"'.$login.'"')->fetchColumn();
+  }
+
+  public function count()
+  {
+    return $this->dao->query('SELECT COUNT(*) FROM users')->fetchColumn();
   }
 
   public function getList()

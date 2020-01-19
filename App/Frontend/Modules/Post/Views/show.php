@@ -19,12 +19,14 @@ if (empty($comments))
 
 foreach ($comments as $comment)
 {
+  echo $comment['users_id'], '<br >';
+  echo $users->id();
 ?>
 <fieldset>
   <legend>
     Posté par <strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['edition_date']->format('d/m/Y à H\hi') ?>
-    <?php if ($user->isAuthenticated()) { ?> -
-      <a href="admin/comment-update-<?= $comment['id'] ?>.html">Modifier</a> |
+    <?php if ($user->isAuthenticated() && $comment['users_id'] == $users->id()) { ?>
+      <a href="admin/comment-update-<?= $comment['id'] ?>.html">Modifier</a>
       <a href="admin/comment-delete-<?= $comment['id'] ?>.html">Supprimer</a>
     <?php } ?>
   </legend>

@@ -20,4 +20,13 @@ class UsersController extends BackController
     $this->page->addVar('listeUsers', $manager->getList());
     $this->page->addVar('nbUsers', $manager->count(0));
   }
+
+  public function executeDeconnect()
+  {
+    // Supression des variables de session et de la session
+    $_SESSION = array();
+    session_destroy();
+
+    $this->app->httpResponse()->redirect('/');
+  }
 }

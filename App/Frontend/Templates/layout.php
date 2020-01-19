@@ -57,13 +57,13 @@
                   <a class="nav-link" href="connect.html">Bonjour, identifiez-vous</a>
               </li>
               <li class="nav-item">
-                <a href="register.html" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Nouveau client ? Commencer ici.</a>
+                <a href="register.html" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Nouveau ? Commencez ici.</a>
               </li>
               <?php }
                 else
                 {
                   $users = $_SESSION['users'] ?>
-                  <div class="col-lg-3 navbar-header">
+                  <div class="col-lg-2 navbar-header">
                     <p class="navbar-brand">Bonjour <?= $users->login() ?></p>
                     <a href="deconnect.html" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Déconnexion</a>
                   </div>

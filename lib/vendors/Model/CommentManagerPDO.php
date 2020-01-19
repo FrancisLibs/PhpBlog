@@ -11,7 +11,7 @@ class CommentManagerPDO extends CommentManager
 
     $q->bindValue(':contenu',     $comment->contenu());
     $q->bindValue(':state',       0);
-    $q->bindValue(':users_id',    1);
+    $q->bindValue(':users_id',    $comment->users_id());
     $q->bindValue(':post_id',     $comment->post_id());
 
     $q->execute();

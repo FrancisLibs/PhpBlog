@@ -110,6 +110,7 @@ class PostController extends BackController
     $comments = $this->managers->getManagerOf('Comment')->getListOf($post->id(), $state);
 
     $this->page->addVar('comments', $comments);
+    $this->page->addVar('users', $_SESSION['users']);
   }
 
   public function executeInsertComment(HTTPRequest $request)
@@ -118,9 +119,10 @@ class PostController extends BackController
     if ($request->method() == 'POST')
     {
       $comment = new Comment([
-        'contenu' =>  $request->postData('contenu'),
-        'post_id' =>  $request->getData('post'),
-        'state'   =>  0,
+        'contenu'   =>  $request->postData('contenu'),
+        'post_id'   =>  $request->getData('post'),
+        'state'     =>  0,
+        'users_id'  =>  $_SESSION['users']->id(),
       ]);
     }
     else

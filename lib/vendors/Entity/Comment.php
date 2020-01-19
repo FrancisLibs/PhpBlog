@@ -9,7 +9,7 @@ class Comment extends Entity
             $contenu,
             $edition_date,
             $state,
-            $user_id,
+            $users_id,
             $post_id,
             $author_name;
 
@@ -49,9 +49,9 @@ class Comment extends Entity
     $this->state = $state;
   }
 
-  public function setUser_id($user_id)
+  public function setUsers_id($users_id)
   {
-    $this->user_id = $user_id;
+    $this->users_id = $users_id;
   }
 
   public function setPost_id($post_id)
@@ -89,9 +89,9 @@ class Comment extends Entity
     return $this->state;
   }
 
-  public function user_id()
+  public function users_id()
   {
-    return $this->user_id;
+    return $this->users_id;
   }
 
    public function post_id()
