@@ -29,6 +29,9 @@ class CommentFormBuilder extends FormBuilder
       ->add(new HiddenField([
         'name' => 'state',
        ]))
+      ->add(new HiddenField([
+        'name' => 'id',
+       ]))
       ;
   }
 }

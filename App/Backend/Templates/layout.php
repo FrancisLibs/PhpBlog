@@ -54,7 +54,7 @@
                 <a class="nav-link" href="/">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/admin/post-insert.html">Ajouter Post</a>
+                <a class="nav-link" href="/admin/posts.html">Gestion Post</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/admin/users.html">Gestion utilisateurs</a>

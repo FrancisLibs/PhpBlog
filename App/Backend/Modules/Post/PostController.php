@@ -11,9 +11,14 @@ use \OCFram\FormHandler;
 
 class PostController extends BackController
 {
-  public function executeIndex(HTTPRequest $request)
+  public function executeIndex()
   {
+    $this->page->addVar('title', 'Administration blog');
+  }
 
+
+  public function executeShowPosts(HTTPRequest $request)
+  {
     $this->page->addVar('title', 'Gestion des posts');
 
     $manager = $this->managers->getManagerOf('Post');
@@ -32,7 +37,7 @@ class PostController extends BackController
 
     $this->app->user()->setFlash('Le post a bien été supprimé !');
 
-    $this->app->httpResponse()->redirect('.');
+    $this->app->httpResponse()->redirect('posts.html');
   }
 
   public function executeDeleteComment(HTTPRequest $request)
@@ -88,45 +93,11 @@ class PostController extends BackController
     $this->app->httpResponse()->redirect("post-show-". $comment->post_id().'.html');
   }
 
-  public function executeUpdateComment(HTTPRequest $request)
-  {
-    $this->page->addVar('title', 'Modification d\'un commentaire');
-
-    if ($request->method() == 'POST')
-    {
-      $comment = new Comment([
-        'contenu' => $request->postData('contenu'),
-        'post_id' => $request->postData('post_id'),
-        'state'   => 0,
-      ]);
-    }
-    else
-    {
-      $comment = $this->managers->getManagerOf('Comment')->get($request->getData('id'));
-    }
-
-    $formBuilder = new CommentFormBuilder($comment);
-    $formBuilder->build();
-
-    $form = $formBuilder->form();
-
-    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comment'), $request);
-
-    if ($formHandler->process())
-    {
-      $this->app->user()->setFlash('Le commentaire a bien été modifié');
-
-      $this->app->httpResponse()->redirect('/admin/');
-    }
-
-    $this->page->addVar('form', $form->createView());
-  }
-
   public function processForm(HTTPRequest $request)
   {
     if ($request->method() == 'POST')
     {
-      $auteur = $_SESSION['users'];
+      $users = $_SESSION['users'];
 
       $post = new Post([
         'id'            => $request->postData('id'),
@@ -134,7 +105,7 @@ class PostController extends BackController
         'title'         => $request->postData('title'),
         'chapo'         => $request->postData('chapo'),
         'contenu'       => $request->postData('contenu'),
-        'user_id'       => $auteur->id(),
+        'user_id'       => $users->id(),
       ]);
 
       if ($request->getExists('id'))
@@ -166,7 +137,7 @@ class PostController extends BackController
     {
       $this->app->user()->setFlash($post->isNew() ? 'Le post a bien été ajouté !' : 'Le Post a bien été modifié !');
 
-      $this->app->httpResponse()->redirect('/admin/');
+      $this->app->httpResponse()->redirect('/admin/posts.html');
     }
 
     $this->page->addVar('form', $form->createView());

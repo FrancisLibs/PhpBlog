@@ -110,7 +110,11 @@ class PostController extends BackController
     $comments = $this->managers->getManagerOf('Comment')->getListOf($post->id(), $state);
 
     $this->page->addVar('comments', $comments);
-    $this->page->addVar('users', $_SESSION['users']);
+
+    if(isset($_SESSION['users']))
+    {
+      $this->page->addVar('users', $_SESSION['users']);
+    }
   }
 
   public function executeInsertComment(HTTPRequest $request)
@@ -147,6 +151,41 @@ class PostController extends BackController
     $this->page->addVar('comment', $comment);
     $this->page->addVar('form', $form->createView());
     $this->page->addVar('title', 'Ajout d\'un commentaire');
+  }
+
+  public function executeUpdateComment(HTTPRequest $request)
+  {
+    $this->page->addVar('title', 'Modification d\'un commentaire');
+
+    if ($request->method() == 'POST')
+    {
+      $comment = new Comment([
+        'id'      =>  $request->postData('id'),
+        'contenu' =>  $request->postData('contenu'),
+        'post_id' =>  $request->postData('post_id'),
+        'state'   =>  0,
+      ]);
+    }
+    else
+    {
+      $comment = $this->managers->getManagerOf('Comment')->get($request->getData('id'));
+    }
+
+    $formBuilder = new CommentFormBuilder($comment);
+    $formBuilder->build();
+
+    $form = $formBuilder->form();
+
+    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comment'), $request);
+
+    if ($formHandler->process())
+    {
+      $this->app->user()->setFlash('Le commentaire a bien été modifié');
+
+      $this->app->httpResponse()->redirect('/admin/');
+    }
+
+    $this->page->addVar('form', $form->createView());
   }
 
   public function executeCv(HTTPRequest $request)
