@@ -12,4 +12,5 @@
   <route url="/admin/users\.html"                     module="Users"  action="show" />
   <route url="/admin/admin\.html"                     module="Users"  action="upgrade" />
   <route url="/admin/deconnect\.html"                 module="Users"  action="deconnect" />
+  <route url="/admin/users-delete-([0-9]+)\.html"     module="Users"  action="delete" vars="id" />
 </routes>

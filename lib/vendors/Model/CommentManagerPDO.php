@@ -28,6 +28,11 @@ class CommentManagerPDO extends CommentManager
   {
     $this->dao->exec('DELETE FROM comments WHERE post_id = '.(int) $postId);
   }
+  
+  public function deleteFromUsers($userId)
+  {
+    $this->dao->exec('DELETE FROM comments WHERE users_id = '.(int) $userId);
+  }
 
   public function getListOf($postId, $state)
   {

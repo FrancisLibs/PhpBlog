@@ -24,33 +24,40 @@ class UsersController extends BackController
       if (empty($users->login()) || empty($users->password())) // Tous les champs sont remplis ?
       {
         $this->app->user()->setFlash('Merci de remplir les deux champs de saisie');
-
         $this->app->httpResponse()->redirect('/connect.html');
       }
-      else
+      else // Verification de la présence de l'identifiant en bdd
       {
-        $manager = $this->managers->getManagerOf('Users');
-        $usersBdd = $manager->getUsers($users->login());
-
+        $usersBdd = $this->managers->getManagerOf('Users')->getUsers($users->login());
+       
         if(empty($usersBdd)) // Si l'utilisateur n'existe pas dans la bdd
         {
           $this->app->user()->setFlash('L\'identifiant ou le mot de passe sont erronés');
           $this->app->httpResponse()->redirect('/connect.html');
         }
-        else // Check du mot de passe
-        {
-          if(!password_verify($users->Password(), $usersBdd->password()))
+        else 
+        {            
+          if(!$users->comparePasswords($usersBdd->password()))  // Check du mot de passe
           {
             $this->app->user()->setFlash('L\'identifiant et/ou le mot de passe sont erronés');
             $this->app->httpResponse()->redirect('/connect.html');
           }
           else
           {
-            $this->app->user()->setAuthenticated(true);
+              if($usersBdd->status() == 0)
+              {
+                $this->app->user()->setFlash('Désolé, mais vous n\'êtes pas encore validé');
+                
+                $this->app->httpResponse()->redirect('/connect.html');
+              }
+              else
+              {
+                $this->app->user()->setAuthenticated(true);
 
-            $this->app->user()->setAttribute('users', $usersBdd);
+                $this->app->user()->setAttribute('users', $usersBdd);
 
-            $this->app->httpResponse()->redirect('/');
+                $this->app->httpResponse()->redirect('/');
+              }
           }
         }
       }
@@ -116,9 +123,10 @@ class UsersController extends BackController
             // Ecriture de $users dans la bdd avec status à 0 et le mot de passe haché
             // On récupère le manager des users.
             $users->setStatus(0);
+            $users->setRole_id(1);
             $users->setPassword($users->passwordHash());
 
-            //$manager->add($users);
+            $manager->add($users);
             /*
             // Create the Transport
             $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
@@ -164,9 +172,8 @@ class UsersController extends BackController
   public function executeDeconnect()
   {
     // Supression des variables de session et de la session
-    $_SESSION = array();
-    session_destroy();
-
+    $this->app->user()->endSession();
+    
     $this->app->httpResponse()->redirect('/');
   }
 }

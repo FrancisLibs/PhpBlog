@@ -11,7 +11,7 @@ use \OCFram\FormHandler;
 
 class UsersController extends BackController
 {
-  public function executeshow(HTTPRequest $request)
+  public function executeshow()
   {
     $this->page->addVar('title', 'Gestion des utilisateurs');
 
@@ -24,9 +24,8 @@ class UsersController extends BackController
   public function executeDeconnect()
   {
     // Supression des variables de session et de la session
-    $_SESSION = array();
-    session_destroy();
-
+    $this->app->user()->endSession();
+    
     $this->app->httpResponse()->redirect('/');
   }
 
@@ -39,5 +38,28 @@ class UsersController extends BackController
     $this->page->addVar('listeUsers', $manager->getList());
     $this->page->addVar('nbUsers', $manager->count(0));
 
+  }
+  
+  public function executeDelete(HTTPRequest $request)
+  {
+    $this->page->addVar('title', 'Suppresssion utilisateur');
+    
+    $usersId = $request->getData('id');
+    
+    $userConnecte=$this->app->user()->getAttribute('users');
+    if ($usersId == $userConnecte->id())
+    {
+        $this->app->user()->endSession();
+    }
+            
+    $commentManager = $this->managers->getManagerOf('Comment');
+    $postManager = $this->managers->getManagerOf('Post');
+    $usersManager = $this->managers->getManagerOf('Users');
+    
+    $commentManager->deleteFromUsers($usersId);
+    $postManager->deleteFromUsers($usersId);
+    $usersManager->delete($usersId);
+    
+    $this->app->httpResponse()->redirect('/admin/users.html');
   }
 }

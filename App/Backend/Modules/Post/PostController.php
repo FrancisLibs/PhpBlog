@@ -4,8 +4,6 @@ namespace App\Backend\Modules\Post;
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \Entity\Post;
-use \Entity\Comment;
-use \FormBuilder\CommentFormBuilder;
 use \FormBuilder\PostFormBuilder;
 use \OCFram\FormHandler;
 
@@ -15,7 +13,6 @@ class PostController extends BackController
   {
     $this->page->addVar('title', 'Administration blog');
   }
-
 
   public function executeShowPosts(HTTPRequest $request)
   {
@@ -97,7 +94,7 @@ class PostController extends BackController
   {
     if ($request->method() == 'POST')
     {
-      $users = $_SESSION['users'];
+      $users = $this->app->user()->getAttribute('users');
 
       $post = new Post([
         'id'            => $request->postData('id'),
@@ -105,7 +102,7 @@ class PostController extends BackController
         'title'         => $request->postData('title'),
         'chapo'         => $request->postData('chapo'),
         'contenu'       => $request->postData('contenu'),
-        'user_id'       => $users->id(),
+        'users_id'       => $users->id(),
       ]);
 
       if ($request->getExists('id'))
@@ -139,7 +136,7 @@ class PostController extends BackController
 
       $this->app->httpResponse()->redirect('/admin/posts.html');
     }
-
+    
     $this->page->addVar('form', $form->createView());
   }
 

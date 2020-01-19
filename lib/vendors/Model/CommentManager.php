@@ -22,7 +22,7 @@ abstract class CommentManager extends Manager
 
   /**
    * Méthode permettant de supprimer tous les commentaires liés à une news
-   * @param $news L'identifiant de la news dont les commentaires doivent être supprimés
+   * @param $post L'identifiant de la news dont les commentaires doivent être supprimés
    * @return void
    */
   abstract public function deleteFromPost($post);

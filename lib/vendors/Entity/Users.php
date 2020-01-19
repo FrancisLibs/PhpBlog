@@ -34,7 +34,7 @@ class Users extends Entity
 
   public function comparePasswords($usersBddPassword)
   {
-    return password_verify('$users->password()', $usersBddPassword);
+    return password_verify($this->password(), $usersBddPassword);
   }
 
   // SETTERS //

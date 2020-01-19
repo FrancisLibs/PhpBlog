@@ -12,7 +12,7 @@ class Post extends Entity
             $edition_date,
             $update_date,
             $author_name,
-            $user_id;
+            $users_id;
 
 
   const AUTEUR_INVALIDE = 1;
@@ -83,9 +83,9 @@ class Post extends Entity
     $this->author_name = $author_name;
   }
 
-   public function setUser_id($user_id)
+   public function setUsers_id($users_id)
   {
-    $this->user_id = $user_id;
+    $this->users_id = $users_id;
   }
 
 
@@ -126,8 +126,8 @@ class Post extends Entity
     return $this->author_name;
   }
 
-   public function user_id()
+   public function users_id()
   {
-    return $this->user_id;
+    return $this->users_id;
   }
 }

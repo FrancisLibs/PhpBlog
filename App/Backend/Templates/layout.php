@@ -59,6 +59,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="/admin/users.html">Gestion utilisateurs</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/users.html">Gestion administrateurs</a>
+              </li>
               <?php $users = $_SESSION['users'] ?>
               <div class="col-lg-3 navbar-header">
                 <p class="navbar-brand">Bonjour <?= $users->login() ?></p>

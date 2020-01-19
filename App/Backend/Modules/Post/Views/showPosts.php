@@ -1,6 +1,7 @@
 <p style="text-align: center">Il y a actuellement <?= $nombrePosts ?> posts. En voici la liste :</p>
 <p style="text-align: center">Il y a actuellement <?= $nombreCommentairesInvalides ?> commentaires à valider</p>
 <h4> Liste des posts</h4>
+<a class="btn btn-primary" href="/admin/post-insert.html" role="button">Ajouter post</a>
 <table>
   <tr>
     <th>Auteur</th>

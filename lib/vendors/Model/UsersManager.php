@@ -22,7 +22,7 @@ abstract class UsersManager extends Manager
 
   /**
    * Méthode permettant d'obtenir un users.
-   * @param $id L'identifiant du users
+   * @param $login L'identifiant du users
    * @return User
    */
   abstract public function getUsers($login);

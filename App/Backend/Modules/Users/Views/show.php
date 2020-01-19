@@ -22,7 +22,7 @@
         ', $users['email'], '
       </td>
       <td>
-        le ', $users['create_date']->format('d/m/Y à H\hi'), '
+        ', $users['create_date']->format('d/m/Y à H\hi'), '
       </td>
       <td>
         ', $users['status'],'
