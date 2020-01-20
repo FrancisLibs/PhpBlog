@@ -27,6 +27,14 @@ class PostController extends BackController
 
   public function executeDelete(HTTPRequest $request)
   {
+    // Gestion des droits
+    $userSession=$this->app->user()->getAttribute('users');
+    if($userSession->role()< 3)
+    {
+        $this->app->user()->setFlash('Pour effacer des posts, il faut être superAdministrateur.');
+        $this->app->httpResponse()->redirect('/.html');
+    }
+    
     $postId = $request->getData('id');
 
     $this->managers->getManagerOf('Comment')->deleteFromPost($postId);
@@ -39,6 +47,14 @@ class PostController extends BackController
 
   public function executeDeleteComment(HTTPRequest $request)
   {
+    // Gestion des droits
+    $userSession=$this->app->user()->getAttribute('users');
+    if($userSession->role()< 2)
+    {
+        $this->app->user()->setFlash('Pour effacer un commentaire, il faut être administrateur.');
+        $this->app->httpResponse()->redirect('/.html');
+    }
+    
     $this->managers->getManagerOf('Comment')->delete($request->getData('id'));
 
     $this->app->user()->setFlash('Le commentaire a bien été supprimé !');
@@ -67,6 +83,14 @@ class PostController extends BackController
 
   public function executeInsert(HTTPRequest $request)
   {
+    // Gestion des droits
+    $userSession=$this->app->user()->getAttribute('users');
+    if($userSession->role()< 2)
+    {
+        $this->app->user()->setFlash('Pour ajouter un post, il faut être administrateur.');
+        $this->app->httpResponse()->redirect('/.html');
+    }
+      
     $this->processForm($request);
 
     $this->page->addVar('title', 'Ajout d\'un post');
@@ -74,6 +98,14 @@ class PostController extends BackController
 
   public function executeUpdate(HTTPRequest $request)
   {
+    // Gestion des droits
+    $userSession=$this->app->user()->getAttribute('users');
+    if($userSession->role()< 2)
+    {
+        $this->app->user()->setFlash('Pour modifier un post, il faut être administrateur.');
+        $this->app->httpResponse()->redirect('/.html');
+    }
+    
     $this->processForm($request);
 
     $this->page->addVar('title', 'Modification d\'un post');
@@ -81,6 +113,14 @@ class PostController extends BackController
 
   public function executeModerateComment(HTTPRequest $request)
   {
+    // Gestion des droits
+    $userSession=$this->app->user()->getAttribute('users');
+    if($userSession->role()< 2)
+    {
+        $this->app->user()->setFlash('Pour valider un commentaire, il faut être administrateur.');
+        $this->app->httpResponse()->redirect('/.html');
+    }
+    
     $manager = $this->managers->getManagerOf('Comment');
     $comment = $manager->get($request->getData('id'));
     $comment->setState(1);

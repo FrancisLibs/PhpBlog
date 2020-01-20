@@ -111,14 +111,24 @@ class PostController extends BackController
 
     $this->page->addVar('comments', $comments);
 
-    if(isset($_SESSION['users']))
+    $userSession=$this->app->user()->getAttribute('users');
+    
+    if(isset($userSession))
     {
-      $this->page->addVar('users', $_SESSION['users']);
+      $this->page->addVar('users', $userSession);
     }
   }
 
   public function executeInsertComment(HTTPRequest $request)
   {
+    // Gestion des droits
+     $userSession=$this->app->user()->getAttribute('users');
+    if($userSession->role()< 1)
+    {
+        $this->app->user()->setFlash('Pour commenter, marci de vous enregistrer.');
+        $this->app->httpResponse()->redirect('/.html');
+    }
+  
     // Si le formulaire a été envoyé.
     if ($request->method() == 'POST')
     {
@@ -155,6 +165,15 @@ class PostController extends BackController
 
   public function executeUpdateComment(HTTPRequest $request)
   {
+      
+    // Gestion des droits
+    $userSession=$this->app->user()->getAttribute('users');
+    if($userSession->role()< 1)
+    {
+        $this->app->user()->setFlash('Pour modifier vos commentaires, marci de vous enregistrer.');
+        $this->app->httpResponse()->redirect('/.html');
+    }
+    
     $this->page->addVar('title', 'Modification d\'un commentaire');
 
     if ($request->method() == 'POST')

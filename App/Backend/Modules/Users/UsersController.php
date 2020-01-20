@@ -13,6 +13,14 @@ class UsersController extends BackController
 {
   public function executeshow()
   {
+    // Gestion des droits
+     $userSession=$this->app->user()->getAttribute('users');
+    if($userSession->role()< 3)
+    {
+        $this->app->user()->setFlash('pour gérer les utilisateurs, il faut être super-administrateur');
+        $this->app->httpResponse()->redirect('/.html');
+    }
+      
     $this->page->addVar('title', 'Gestion des utilisateurs');
 
     $manager = $this->managers->getManagerOf('Users');
@@ -31,6 +39,14 @@ class UsersController extends BackController
 
   public function executeUpgrade()
   {
+     // Gestion des droits
+    $userSession=$this->getAttribute('users');
+    if($userSession->role()< 3)
+    {
+        $this->app->user()->setFlash('pour gérer les utilisateurs, il faut être super-administrateur');
+        $this->app->httpResponse()->redirect('/.html');
+    }
+    
     $this->page->addVar('title', 'Gestion des administrateurs');
 
     $manager = $this->managers->getManagerOf('Users');
@@ -42,6 +58,14 @@ class UsersController extends BackController
   
   public function executeDelete(HTTPRequest $request)
   {
+    // Gestion des droits
+    $userSession=$this->getAttribute('users');
+    if($userSession->role()< 3)
+    {
+        $this->app->user()->setFlash('pour gérer les utilisateurs, il faut être super-administrateur');
+        $this->app->httpResponse()->redirect('/.html');
+    }
+      
     $this->page->addVar('title', 'Suppresssion utilisateur');
     
     $usersId = $request->getData('id');
