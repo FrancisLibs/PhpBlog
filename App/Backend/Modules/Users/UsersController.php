@@ -11,22 +11,27 @@ use \OCFram\FormHandler;
 
 class UsersController extends BackController
 {
-  public function executeshow()
+  public function executeShow()
   {
     // Gestion des droits
-     $userSession=$this->app->user()->getAttribute('users');
-    if($userSession->role()< 3)
+    $userSessionRole=$this->app->user()->getAttribute('users')->role();
+   
+    if($userSessionRole < 2)
     {
-        $this->app->user()->setFlash('pour gérer les utilisateurs, il faut être super-administrateur');
-        $this->app->httpResponse()->redirect('/.html');
+        
+        $this->app->user()->setFlash('La gestion des membres, est réservbée aux administrateur');
+        $this->app->httpResponse()->redirect('/admin/');
     }
+    else
+    {
       
-    $this->page->addVar('title', 'Gestion des utilisateurs');
+        $this->page->addVar('title', 'Gestion des utilisateurs');
 
-    $manager = $this->managers->getManagerOf('Users');
+        $manager = $this->managers->getManagerOf('Users');
 
-    $this->page->addVar('listeUsers', $manager->getList());
-    $this->page->addVar('nbUsers', $manager->count(0));
+        $this->page->addVar('listeUsers', $manager->getList());
+        $this->page->addVar('nbUsers', $manager->count(0));
+    }
   }
 
   public function executeDeconnect()

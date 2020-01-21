@@ -75,7 +75,7 @@
     </header>
     <!-- Fin de navigation -->
     <main class="section-principale">
-
+        <?php if ($user->hasFlash()) echo '<p style="text-align: center;">', $user->getFlash(), '</p>'; ?>
         <?= $content ?>
 
     </main>

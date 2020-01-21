@@ -27,7 +27,6 @@ foreach ($comments as $comment)
     Posté par <strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['edition_date']->format('d/m/Y à H\hi') ?>
     <?php if ($user->isAuthenticated() && $comment['users_id'] == $users->id()) { ?>
       <a href="comment-update-<?= $comment['id'] ?>.html">Modifier</a>
-      <a href="comment-delete-<?= $comment['id'] ?>.html">Supprimer</a>
     <?php } ?>
   </legend>
   <p><?= nl2br(htmlspecialchars($comment['contenu'])) ?></p>

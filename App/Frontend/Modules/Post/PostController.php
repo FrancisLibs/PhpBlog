@@ -88,7 +88,6 @@ class PostController extends BackController
         $post->setContenu($debut);
       }
     }
-
     // On ajoute la variable $liste à la vue.
     $this->page->addVar('listePosts', $listePosts);
   }
@@ -164,8 +163,7 @@ class PostController extends BackController
   }
 
   public function executeUpdateComment(HTTPRequest $request)
-  {
-      
+  {   
     // Gestion des droits
     $userSession=$this->app->user()->getAttribute('users');
     if($userSession->role()< 1)
@@ -200,8 +198,8 @@ class PostController extends BackController
     if ($formHandler->process())
     {
       $this->app->user()->setFlash('Le commentaire a bien été modifié');
-
-      $this->app->httpResponse()->redirect('/admin/');
+      
+      $this->app->httpResponse()->redirect('/post-'.$request->postData('post_id').'.html');
     }
 
     $this->page->addVar('form', $form->createView());

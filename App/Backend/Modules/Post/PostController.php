@@ -11,12 +11,20 @@ class PostController extends BackController
 {
   public function executeIndex()
   {
+    // Gestion des droits
+    $userSession=$this->app->user()->getAttribute('users');
+    if($userSession->role()< 2)
+    {
+        $this->app->user()->setFlash('Pour accèder, il faut être administrateur.');
+        $this->app->httpResponse()->redirect('/');
+    }
+    
     $this->page->addVar('title', 'Administration blog');
   }
 
   public function executeShowPosts(HTTPRequest $request)
   {
-    $this->page->addVar('title', 'Gestion des posts');
+    $this->page->addVar('title', 'Gestion des Articles');
 
     $manager = $this->managers->getManagerOf('Post');
 
@@ -31,8 +39,8 @@ class PostController extends BackController
     $userSession=$this->app->user()->getAttribute('users');
     if($userSession->role()< 3)
     {
-        $this->app->user()->setFlash('Pour effacer des posts, il faut être superAdministrateur.');
-        $this->app->httpResponse()->redirect('/.html');
+        $this->app->user()->setFlash('Pour effacer des articles, il faut être superAdministrateur.');
+        $this->app->httpResponse()->redirect('.');
     }
     
     $postId = $request->getData('id');
@@ -45,21 +53,26 @@ class PostController extends BackController
     $this->app->httpResponse()->redirect('posts.html');
   }
 
-  public function executeDeleteComment(HTTPRequest $request)
+  public function executeRefuseComment(HTTPRequest $request)
   {
+    $manager = $this->managers->getManagerOf('Comment');
+    $comment = $manager->get($request->getData('id'));
+    
     // Gestion des droits
     $userSession=$this->app->user()->getAttribute('users');
     if($userSession->role()< 2)
     {
         $this->app->user()->setFlash('Pour effacer un commentaire, il faut être administrateur.');
-        $this->app->httpResponse()->redirect('/.html');
+        $this->app->httpResponse()->redirect("/admin/post-show-".$comment->post_id().'.html');
     }
     
-    $this->managers->getManagerOf('Comment')->delete($request->getData('id'));
+    $comment->setState(2);
 
-    $this->app->user()->setFlash('Le commentaire a bien été supprimé !');
+    $manager->update($comment);
 
-    $this->app->httpResponse()->redirect('.');
+    $this->app->user()->setFlash('Le commentaire a bien été refusé !');
+   
+    $this->app->httpResponse()->redirect("/admin/post-show-". $comment->post_id().'.html');
   }
 
   public function executeShow(HTTPRequest $request)
@@ -108,7 +121,7 @@ class PostController extends BackController
     
     $this->processForm($request);
 
-    $this->page->addVar('title', 'Modification d\'un post');
+    $this->page->addVar('title', 'Modification d\'un article');
   }
 
   public function executeModerateComment(HTTPRequest $request)

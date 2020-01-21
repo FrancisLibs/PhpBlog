@@ -33,4 +33,4 @@
 </table>
 
 <p><a href="commenter-<?= $post['id'] ?>.html">Ajouter un commentaire</a></p>
-
+<p><a href="posts.html">Retour à la liste des posts</a></p>
