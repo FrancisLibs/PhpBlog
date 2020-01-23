@@ -8,6 +8,8 @@ use \FormBuilder\ConnexionFormBuilder;
 use \FormBuilder\RegistrationFormBuilder;
 use \OCFram\FormHandler;
 use \Swift_SmtpTransport;
+use \Swift_Mailer;
+use \Swift_Message;
 
 class UsersController extends BackController
 {
@@ -120,18 +122,17 @@ class UsersController extends BackController
           }
           else
           {
-            // Ecriture de $users dans la bdd avec status à 0 et le mot de passe haché
             // On récupère le manager des users.
             $users->setStatus(0);
             $users->setRole_id(1);
             $users->setPassword($users->passwordHash());
 
-            $manager->add($users);
-            /*
+            //$manager->add($users);
+            
             // Create the Transport
-            $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
-              ->setUsername('fr.libs@gmail.com')
-              ->setPassword('ueacgqmfezqrgznm');
+            $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
+              ->setUserName('fr.libs@gmail.com')
+              ->setPassword('uaehjeerxotzfpqt');
 
             // Create the Mailer using your created Transport
             $mailer = new Swift_Mailer($transport);
@@ -144,7 +145,7 @@ class UsersController extends BackController
               ;
 
             // Send the message
-            $result = $mailer->send($message); */
+            $result = $mailer->send($message);
 
             $this->app->user()->setFlash('Un mail d\'authentification vient de vous être envoyé');
             $this->app->httpResponse()->redirect('/./');

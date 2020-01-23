@@ -18,7 +18,6 @@ class UsersController extends BackController
    
     if($userSessionRole < 2)
     {
-        
         $this->app->user()->setFlash('La gestion des membres, est réservbée aux administrateur');
         $this->app->httpResponse()->redirect('/admin/');
     }
@@ -44,12 +43,12 @@ class UsersController extends BackController
 
   public function executeUpgrade()
   {
-     // Gestion des droits
-    $userSession=$this->getAttribute('users');
-    if($userSession->role()< 3)
+    // Gestion des droits
+    $userSessionRole=$this->app->user()->getAttribute('users')->role();
+    if($userSessionRole < 3)
     {
         $this->app->user()->setFlash('pour gérer les utilisateurs, il faut être super-administrateur');
-        $this->app->httpResponse()->redirect('/.html');
+        $this->app->httpResponse()->redirect('/admin/users.html');
     }
     
     $this->page->addVar('title', 'Gestion des administrateurs');
@@ -59,16 +58,17 @@ class UsersController extends BackController
     $this->page->addVar('listeUsers', $manager->getList());
     $this->page->addVar('nbUsers', $manager->count(0));
 
+    $this->app->httpResponse()->redirect('/admin/users.html');
   }
   
   public function executeDelete(HTTPRequest $request)
   {
     // Gestion des droits
-    $userSession=$this->getAttribute('users');
-    if($userSession->role()< 3)
+    $userSessionRole=$this->app->user()->getAttribute('users')->role();
+    if($userSessionRole < 3)
     {
         $this->app->user()->setFlash('pour gérer les utilisateurs, il faut être super-administrateur');
-        $this->app->httpResponse()->redirect('/.html');
+        $this->app->httpResponse()->redirect('/admin/users.html');
     }
       
     $this->page->addVar('title', 'Suppresssion utilisateur');
@@ -80,13 +80,16 @@ class UsersController extends BackController
     {
         $this->app->user()->endSession();
     }
-            
+    // Suppression des commentaires
     $commentManager = $this->managers->getManagerOf('Comment');
-    $postManager = $this->managers->getManagerOf('Post');
-    $usersManager = $this->managers->getManagerOf('Users');
-    
     $commentManager->deleteFromUsers($usersId);
+    
+    // Suppression des posts
+    $postManager = $this->managers->getManagerOf('Post');
     $postManager->deleteFromUsers($usersId);
+    
+    // Suppression de l'utilisateurs
+    $usersManager = $this->managers->getManagerOf('Users');
     $usersManager->delete($usersId);
     
     $this->app->httpResponse()->redirect('/admin/users.html');

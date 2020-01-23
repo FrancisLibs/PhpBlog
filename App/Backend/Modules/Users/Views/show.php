@@ -32,9 +32,8 @@
       </td>
 
       <td>
-        <a href="users-update-', $users['id'], '.html"><img src="/images/update.png" alt="Modifier" /></a>
-        <a href="users-delete-', $users['id'], '.html"><img src="/images/delete.png" alt="Supprimer" /></a>
-        <a href="users-show-', $users['id'], '.html"><img src="/images/select.png" alt="Supprimer"</a>
+        <a href="users-delete-',    $users['id'], '.html"><img src="/images/delete.png" alt="Supprimer" /></a>
+        <a href="upgrade-',         $users['id'], '.html"><img src="/images/fleche2verte.png" alt="Upgrade"</a>
       </td>
     </tr>
     ', "\n";

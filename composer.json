@@ -9,8 +9,5 @@
             "name": "francisL",
             "email": "fr.libs@gmail.com"
         }
-    ],
-    "autoload":{
-        "classmap": ["vendor/"]
-    }
+    ]
 }

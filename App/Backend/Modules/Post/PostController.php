@@ -1,16 +1,25 @@
 <?php
 namespace App\Backend\Modules\Post;
 
+use \Entity\Post;
+use \Entity\Comment;
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
-use \Entity\Post;
 use \FormBuilder\PostFormBuilder;
+use \FormBuilder\CommentFormBuilder;
 use \OCFram\FormHandler;
 
 class PostController extends BackController
 {
   public function executeIndex()
   {
+     
+      
+    if(!$this->app->user()->isAuthenticated())
+    {
+        $this->app->user()->setFlash('Merci de vous connecter');
+        $this->app->httpResponse()->redirect('/');
+    }
     // Gestion des droits
     $userSession=$this->app->user()->getAttribute('users');
     if($userSession->role()< 2)
@@ -53,28 +62,6 @@ class PostController extends BackController
     $this->app->httpResponse()->redirect('posts.html');
   }
 
-  public function executeRefuseComment(HTTPRequest $request)
-  {
-    $manager = $this->managers->getManagerOf('Comment');
-    $comment = $manager->get($request->getData('id'));
-    
-    // Gestion des droits
-    $userSession=$this->app->user()->getAttribute('users');
-    if($userSession->role()< 2)
-    {
-        $this->app->user()->setFlash('Pour effacer un commentaire, il faut être administrateur.');
-        $this->app->httpResponse()->redirect("/admin/post-show-".$comment->post_id().'.html');
-    }
-    
-    $comment->setState(2);
-
-    $manager->update($comment);
-
-    $this->app->user()->setFlash('Le commentaire a bien été refusé !');
-   
-    $this->app->httpResponse()->redirect("/admin/post-show-". $comment->post_id().'.html');
-  }
-
   public function executeShow(HTTPRequest $request)
   {
     $post = $this->managers->getManagerOf('Post')->getUnique($request->getData('id'));
@@ -88,8 +75,7 @@ class PostController extends BackController
 
     $this->page->addVar('post', $post);
 
-    $state = 0;
-    $comments = $this->managers->getManagerOf('Comment')->getListOf($post->id(), $state);
+    $comments = $this->managers->getManagerOf('Comment')->getListOf($post->id());
 
     $this->page->addVar('comments', $comments);
   }
@@ -195,7 +181,65 @@ class PostController extends BackController
 
   public function executeInsertComment(HTTPRequest $request)
   {
-    $this->app->httpResponse()->redirect('/commenter-'. $_GET['post'].'.html');
+    // Gestion des droits
+    $userSession=$this->app->user()->getAttribute('users');
+    if($userSession->role()< 1)
+    {
+        $this->app->user()->setFlash('Pour commenter, il faut être membre.');
+        $this->app->httpResponse()->redirect('/.html');
+    }
+  
+    // Si le formulaire a été envoyé.
+    if ($request->method() == 'POST')
+    {
+      $comment = new Comment([
+        'contenu'   =>  $request->postData('contenu'),
+        'post_id'   =>  $request->getData('post'),
+        'state'     =>  0,
+        'users_id'  =>  $_SESSION['users']->id(),
+      ]);
+    }
+    else
+    {
+      $comment = new Comment;
+    }
+
+    $formBuilder = new CommentFormBuilder($comment);
+    $formBuilder->build();
+
+    $form = $formBuilder->form();
+
+    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comment'), $request);
+
+    if ($formHandler->process())
+    {
+      $this->app->user()->setFlash('Le commentaire a bien été ajouté, merci !');
+
+      $this->app->httpResponse()->redirect('/admin/post-show-'.$request->getData('post').'.html');
+    }
+
+    $this->page->addVar('comment', $comment);
+    $this->page->addVar('form', $form->createView());
+    $this->page->addVar('title', 'Ajout d\'un commentaire');
+  }
+  
+  public function executeRefuseComment(HTTPRequest $request)
+  {
+    // Gestion des droits
+    $userSession=$this->app->user()->getAttribute('users');
+    if($userSession->role()< 2)
+    {
+        $this->app->user()->setFlash('Pour effacer un commentaire, il faut être administrateur.');
+        $this->app->httpResponse()->redirect('/.html');
+    }
+    
+    $manager = $this->managers->getManagerOf('Comment');
+    $comment = $manager->get($request->getData('id'));
+    $comment->setState(2);
+
+    $manager->update($comment);
+
+    $this->app->httpResponse()->redirect('/admin/post-show-'.$comment->post_id().'.html');
   }
 }
 
