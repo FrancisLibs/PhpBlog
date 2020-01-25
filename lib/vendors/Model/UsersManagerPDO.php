@@ -45,7 +45,7 @@ class UsersManagerPDO extends UsersManager
             . 'FROM users u '
             . 'INNER JOIN roles r '
             . 'ON r.id = u.role_id '
-            . 'WHERE u.id = :id');
+            . 'WHERE u.id = :id ');
     $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
     $requete->execute();
 
@@ -83,10 +83,31 @@ class UsersManagerPDO extends UsersManager
     return $this->dao->query('SELECT COUNT(*) FROM users')->fetchColumn();
   }
 
-  public function getList()
+  public function getList($data)
   {
-    $sql = 'SELECT u.id, login, email, password, create_date, status, role_id, role FROM users u INNER JOIN roles r ON u.role_id = r.id ORDER BY u.id ASC';
+    $sql = 'SELECT u.id, login, email, password, create_date, status, u.role_id, r.role '
+            . 'FROM users u '
+            . 'INNER JOIN roles r '
+            . 'ON u.role_id = r.id ';
+           
+           
 
+    if($data == 'users')
+    {
+        $sql .= 'WHERE u.role_id <= 2';
+    }
+    elseif($data = 'admin')
+    {
+        $sql .= 'WHERE u.role_id >= 2 AND u.role_id < 3';
+    }
+    
+    $sql .=  ' ORDER BY u.id ASC';
+    
+    
+   //var_dump($sql);
+    //exit();
+    
+    
     $requete = $this->dao->query($sql);
 
     $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Users');

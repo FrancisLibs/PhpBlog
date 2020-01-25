@@ -12,7 +12,7 @@ class UsersController extends BackController
 
     $manager = $this->managers->getManagerOf('Users');
 
-    $this->page->addVar('listeUsers', $manager->getList());
+    $this->page->addVar('listeUsers', $manager->getList('users'));
     
     $this->page->addVar('nbUsers', $manager->count(0));
   }
@@ -66,5 +66,11 @@ class UsersController extends BackController
     $usersManager->delete($usersId);
     
     $this->app->httpResponse()->redirect('/admin/users.html');
+  }
+  
+  public function executeShowAdmin()
+  {
+    $manager = $this->managers->getManagerOf('Users');
+    $this->page->addVar('listeUsers', $manager->getList('admin'));
   }
 }
