@@ -12,31 +12,29 @@
 
   <?php
   foreach ($listeUsers as $users)
-  {
-    echo '
+  { ?>
     <tr>
       <td>
-        ', $users['login'], '
+        <?= $users->login() ?>
       </td>
       <td>
-        ', $users['email'], '
+        <?= $users->email() ?>
       </td>
       <td>
-        ', $users['create_date']->format('d/m/Y à H\hi'), '
+        <?= $users->create_date()->format('d/m/Y à H\hi') ?>
       </td>
       <td>
-        ', $users['status'],'
+        <?= $users->status() ?>
       </td>
       <td>
-        ', $users['role'],'
+        <?= $users->role() ?>
       </td>
-
       <td>
-        <a href="users-delete-',    $users['id'], '.html"><img src="/images/delete.png" alt="Supprimer" /></a>
-        <a href="upgrade-',         $users['id'], '.html"><img src="/images/fleche2verte.png" alt="Upgrade"</a>
-      </td>
+        <a href="users-delete-<?= $users->id() ?>.html"><img src="/images/delete.png" alt="Supprimer"></a>
+        <?php if($users->role_id() < 2){ ?>
+            <a href="users-upgrade-<?= $users->id() ?>.html"><img src="/images/fleche2verte.png" alt="Upgrade"></a>
+        <?php } ?>
+      </td>     
     </tr>
-    ', "\n";
-  }
-?>
+    <?php }?>
 </table>

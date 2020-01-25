@@ -34,16 +34,21 @@ class CommentManagerPDO extends CommentManager
     $this->dao->exec('DELETE FROM comments WHERE users_id = '.(int) $userId);
   }
 
-  public function getListOf($postId)
+  public function getListOf($postId, $state=1)
   {
     if (!ctype_digit($postId))
     {
       throw new \InvalidArgumentException('L\'identifiant du post passé doit être un nombre entier valide');
     }
 
-    $q = $this->dao->prepare('SELECT c.id, contenu, edition_date, state, users_id, post_id, u.login AS author_name FROM comments c INNER JOIN users u ON u.id = c.users_id WHERE post_id = :postid');
+    $q = $this->dao->prepare('SELECT c.id, contenu, edition_date, state, users_id, post_id, u.login AS author_name '
+            . 'FROM comments c '
+            . 'INNER JOIN users u ON u.id = c.users_id '
+            . 'WHERE post_id = :postid '
+            . 'AND (state = 1 OR state = :state)');
 
     $q->bindValue(':postid', $postId, \PDO::PARAM_INT);
+    $q->bindValue(':state',  $state, \PDO::PARAM_INT);
     $q->execute();
 
     $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');

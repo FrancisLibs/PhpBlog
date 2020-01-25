@@ -13,7 +13,8 @@ class Users extends Entity
             $create_date,
             $status,
             $role_id,
-            $role;
+            $role,
+            $verify_key;
 
   const LOGIN_INVALIDE = 1;
   const EMAIL_INVALIDE = 2;
@@ -103,6 +104,12 @@ class Users extends Entity
   {
     $this->role = $role;
   }
+  
+  public function setVerify_key($verify_key)
+  {
+    $this->verify_key = $verify_key;
+  }
+  
 
   // GETTERS //
 
@@ -150,4 +157,10 @@ class Users extends Entity
   {
     return $this->role;
   }
+  
+  public function verify_key()
+  {
+    return $this->verify_key;
+  }
+  
 }

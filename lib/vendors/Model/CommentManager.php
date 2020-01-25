@@ -47,9 +47,10 @@ abstract class CommentManager extends Manager
   /**
    * Méthode permettant de récupérer une liste de commentaires d'un post.
    * @param $post Le post duquel on veut récupérer les commentaires
+   * @param $state L'état du commentaire, valide ou non
    * @return array
    */
-  abstract public function getListOf($post);
+  abstract public function getListOf($post, $state);
 
   /**
    * Méthode permettant de modifier un commentaire.

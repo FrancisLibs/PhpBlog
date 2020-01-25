@@ -75,7 +75,6 @@ class PostController extends BackController
 
     // On récupère le manager des posts.
     $manager = $this->managers->getManagerOf('Post');
-
     $listePosts = $manager->getList(0, $nombrePosts);
 
     foreach ($listePosts as $post)
@@ -105,8 +104,7 @@ class PostController extends BackController
 
     $this->page->addVar('post', $post);
 
-    $state = 1;
-    $comments = $this->managers->getManagerOf('Comment')->getListOf($post->id(), $state);
+    $comments = $this->managers->getManagerOf('Comment')->getListOf($post->id());
 
     $this->page->addVar('comments', $comments);
 
@@ -119,15 +117,7 @@ class PostController extends BackController
   }
 
   public function executeInsertComment(HTTPRequest $request)
-  {
-    // Gestion des droits
-     $userSession=$this->app->user()->getAttribute('users');
-    if($userSession->role()< 1)
-    {
-        $this->app->user()->setFlash('Pour commenter, marci de vous enregistrer.');
-        $this->app->httpResponse()->redirect('/.html');
-    }
-  
+  {  
     // Si le formulaire a été envoyé.
     if ($request->method() == 'POST')
     {
@@ -163,15 +153,7 @@ class PostController extends BackController
   }
 
   public function executeUpdateComment(HTTPRequest $request)
-  {   
-    // Gestion des droits
-    $userSession=$this->app->user()->getAttribute('users');
-    if($userSession->role()< 1)
-    {
-        $this->app->user()->setFlash('Pour modifier vos commentaires, marci de vous enregistrer.');
-        $this->app->httpResponse()->redirect('/.html');
-    }
-    
+  {       
     $this->page->addVar('title', 'Modification d\'un commentaire');
 
     if ($request->method() == 'POST')

@@ -42,7 +42,7 @@ class UsersManagerPDO extends UsersManager
   public function getUsersId($id)
   {
     $requete = $this->dao->prepare('SELECT id, login, email, password, create_date, status, role_id AS role FROM users WHERE id = :id');
-    $requete->bindValue(':id', $id, \PDO::PARAM_INT);
+    $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
     $requete->execute();
 
     $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Users');

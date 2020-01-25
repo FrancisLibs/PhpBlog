@@ -10,7 +10,7 @@
   <route url="/admin/comment-refuse-([0-9]+)\.html"   module="Post"   action="refuseComment" vars="id" />
   <route url="/admin/comment-moderate-([0-9]+)\.html" module="Post"   action="moderateComment" vars="id" />
   <route url="/admin/users\.html"                     module="Users"  action="show" />
-  <route url="/admin/upgrade-([0-9]+)\.html"          module="Users"  action="upgrade" vars="id" />
+  <route url="/admin/users-upgrade-([0-9]+)\.html"    module="Users"  action="upgrade" vars="id" />
   <route url="/admin/deconnect\.html"                 module="Users"  action="deconnect" />
   <route url="/admin/users-delete-([0-9]+)\.html"     module="Users"  action="delete" vars="id" />
 </routes>

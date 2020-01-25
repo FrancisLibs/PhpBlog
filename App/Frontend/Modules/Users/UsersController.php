@@ -127,10 +127,11 @@ class UsersController extends BackController
             $users->setRole_id(1);
             $users->setPassword($users->passwordHash());
 
-            //$manager->add($users);
+            $manager->add($users);
             
+            // Envoi du mail de confirmation
             // Create the Transport
-            $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
+            $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
               ->setUserName('fr.libs@gmail.com')
               ->setPassword('uaehjeerxotzfpqt');
 

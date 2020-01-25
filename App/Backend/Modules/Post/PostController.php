@@ -13,8 +13,6 @@ class PostController extends BackController
 {
   public function executeIndex()
   {
-     
-      
     if(!$this->app->user()->isAuthenticated())
     {
         $this->app->user()->setFlash('Merci de vous connecter');
@@ -41,27 +39,7 @@ class PostController extends BackController
     $this->page->addVar('nombrePosts', $manager->count());
     $this->page->addVar('nombreCommentairesInvalides', $manager->countUnvalidateComments());
   }
-
-  public function executeDelete(HTTPRequest $request)
-  {
-    // Gestion des droits
-    $userSession=$this->app->user()->getAttribute('users');
-    if($userSession->role()< 3)
-    {
-        $this->app->user()->setFlash('Pour effacer des articles, il faut être superAdministrateur.');
-        $this->app->httpResponse()->redirect('.');
-    }
-    
-    $postId = $request->getData('id');
-
-    $this->managers->getManagerOf('Comment')->deleteFromPost($postId);
-    $this->managers->getManagerOf('Post')->delete($postId);
-
-    $this->app->user()->setFlash('Le post a bien été supprimé !');
-
-    $this->app->httpResponse()->redirect('posts.html');
-  }
-
+  
   public function executeShow(HTTPRequest $request)
   {
     $post = $this->managers->getManagerOf('Post')->getUnique($request->getData('id'));
@@ -75,51 +53,39 @@ class PostController extends BackController
 
     $this->page->addVar('post', $post);
 
-    $comments = $this->managers->getManagerOf('Comment')->getListOf($post->id());
+    $comments = $this->managers->getManagerOf('Comment')->getListOf($post->id(), 0);
 
     $this->page->addVar('comments', $comments);
   }
 
+  public function executeDelete(HTTPRequest $request)
+  { 
+    $postId = $request->getData('id');
+
+    $this->managers->getManagerOf('Comment')->deleteFromPost($postId);
+    $this->managers->getManagerOf('Post')->delete($postId);
+
+    $this->app->user()->setFlash('Le post a bien été supprimé !');
+
+    $this->app->httpResponse()->redirect('posts.html');
+  }
+
   public function executeInsert(HTTPRequest $request)
-  {
-    // Gestion des droits
-    $userSession=$this->app->user()->getAttribute('users');
-    if($userSession->role()< 2)
-    {
-        $this->app->user()->setFlash('Pour ajouter un post, il faut être administrateur.');
-        $this->app->httpResponse()->redirect('/.html');
-    }
-      
+  {    
     $this->processForm($request);
 
     $this->page->addVar('title', 'Ajout d\'un post');
   }
 
   public function executeUpdate(HTTPRequest $request)
-  {
-    // Gestion des droits
-    $userSession=$this->app->user()->getAttribute('users');
-    if($userSession->role()< 2)
-    {
-        $this->app->user()->setFlash('Pour modifier un post, il faut être administrateur.');
-        $this->app->httpResponse()->redirect('/.html');
-    }
-    
+  {  
     $this->processForm($request);
 
     $this->page->addVar('title', 'Modification d\'un article');
   }
 
   public function executeModerateComment(HTTPRequest $request)
-  {
-    // Gestion des droits
-    $userSession=$this->app->user()->getAttribute('users');
-    if($userSession->role()< 2)
-    {
-        $this->app->user()->setFlash('Pour valider un commentaire, il faut être administrateur.');
-        $this->app->httpResponse()->redirect('/.html');
-    }
-    
+  {    
     $manager = $this->managers->getManagerOf('Comment');
     $comment = $manager->get($request->getData('id'));
     $comment->setState(1);
@@ -180,15 +146,7 @@ class PostController extends BackController
   }
 
   public function executeInsertComment(HTTPRequest $request)
-  {
-    // Gestion des droits
-    $userSession=$this->app->user()->getAttribute('users');
-    if($userSession->role()< 1)
-    {
-        $this->app->user()->setFlash('Pour commenter, il faut être membre.');
-        $this->app->httpResponse()->redirect('/.html');
-    }
-  
+  {  
     // Si le formulaire a été envoyé.
     if ($request->method() == 'POST')
     {
@@ -224,15 +182,7 @@ class PostController extends BackController
   }
   
   public function executeRefuseComment(HTTPRequest $request)
-  {
-    // Gestion des droits
-    $userSession=$this->app->user()->getAttribute('users');
-    if($userSession->role()< 2)
-    {
-        $this->app->user()->setFlash('Pour effacer un commentaire, il faut être administrateur.');
-        $this->app->httpResponse()->redirect('/.html');
-    }
-    
+  {   
     $manager = $this->managers->getManagerOf('Comment');
     $comment = $manager->get($request->getData('id'));
     $comment->setState(2);

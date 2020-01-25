@@ -41,8 +41,11 @@ class PostManagerPDO extends PostManager
   
   public function getList($debut = -1, $limite = -1)
   {
-
-    $sql = 'SELECT posts.id, title, chapo, contenu, edition_date, update_date, users_id, users.login AS author_name FROM posts INNER JOIN users ON posts.users_id = users.id ORDER BY posts.id DESC';
+    $sql = 'SELECT posts.id, title, chapo, contenu, edition_date, update_date, users_id, users.login AS author_name '
+            . 'FROM posts '
+            . 'INNER JOIN users '
+            . 'ON posts.users_id = users.id '
+            . 'ORDER BY posts.id DESC';
 
     if ($debut != -1 || $limite != -1)
     {

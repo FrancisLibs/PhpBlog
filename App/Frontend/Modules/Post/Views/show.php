@@ -4,7 +4,7 @@
 <p>Contenu : <?= nl2br($post['contenu']) ?></p>
 
 <?php if ($post['edition_date'] != $post['updatedate']) { ?>
-  <p>Modifiée le <?= $post['update_date']->format('d/m/Y à H\hi') ?></p>
+  <p>Modifié le <?= $post['update_date']->format('d/m/Y à H\hi') ?></p>
 <?php }
 
 if ($user->isAuthenticated())
