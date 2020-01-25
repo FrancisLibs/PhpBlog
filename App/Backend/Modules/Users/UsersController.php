@@ -34,8 +34,9 @@ class UsersController extends BackController
     $manager = $this->managers->getManagerOf('Users');
     $users=$manager->getUsersId($usersId);
     
-    $newRole = $users->role_id()++;
-    $users->setRole($newRole);
+    $usersRole = $users->role_id();
+    $newRole = $usersRole+1;
+    $users->setRole_id($newRole);
     $manager->update($users);
 
     $this->app->httpResponse()->redirect('/admin/users.html');
