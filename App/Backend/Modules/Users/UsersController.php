@@ -73,4 +73,21 @@ class UsersController extends BackController
     $manager = $this->managers->getManagerOf('Users');
     $this->page->addVar('listeUsers', $manager->getList('admin'));
   }
+  
+  public function executeAdminUpgrade(HTTPRequest $request)
+  {       
+    $usersId = $request->getData('id');
+      
+    $this->page->addVar('title', 'Gestion des utilisateurs');
+
+    $manager = $this->managers->getManagerOf('Users');
+    $users=$manager->getUsersId($usersId);
+    
+    $usersRole = $users->role_id();
+    $newRole = $usersRole+1;
+    $users->setRole_id($newRole);
+    $manager->update($users);
+
+    $this->app->httpResponse()->redirect('/admin/admin.html');
+  }
 }

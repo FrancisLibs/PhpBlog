@@ -31,9 +31,7 @@
       </td>
       <td>
         <a href="users-delete-<?= $users->id() ?>.html"><img src="/images/delete.png" alt="Supprimer"></a>
-        <?php if($users->role_id() < 2){ ?>
-            <a href="users-upgrade-<?= $users->id() ?>.html"><img src="/images/fleche2verte.png" alt="Upgrade"></a>
-        <?php } ?>
+        <a href="users-upgrade-<?= $users->id() ?>.html"><img src="/images/fleche2verte.png" alt="Upgrade"></a>
       </td>     
     </tr>
     <?php }?>
