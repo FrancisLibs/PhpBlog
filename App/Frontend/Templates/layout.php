@@ -52,16 +52,25 @@
               <li class="nav-item">
                 <a class="nav-link" href="posts.html">Posts</a>
               </li>
+              <?php if(!isset($_SESSION['users'])){ ?>
               <li class="nav-item">
-<<<<<<< HEAD
-                <a class="nav-link" href="connect.html">Bonjour, identifiez-vous</a>
-=======
-                <a class="nav-link" href="/admin/connect.html">Connexion</a>
->>>>>>> b0dc17c6d35e97827f8f90458d25094c73454f04
               </li>
-              <!--<li class="nav-item">
-                <a class="nav-link" href="/commenter-([0-9]+)\.html">ajouter commentaire</a>
-              </li>-->
+             
+       <a class="nav-link" href="connect.html">Bonjour, identifiez-vous</a>
+              </li>
+              <li class="nav-item">
+                <a href="register.html" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Nouveau ? Commencez ici.</a>
+              </li>
+              <?php }
+                else
+                {
+                  $users = $_SESSION['users'] ?>
+                  <div class="col-lg-2 navbar-header">
+                    <p class="navbar-brand">Bonjour <?= $users->login() ?></p>
+                    <a href="deconnect.html" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Déconnexion</a>
+                  </div>
+                <?php } ?>
+
             </ul>
           </div>
         </div>
@@ -81,9 +90,10 @@
       <hr/>
       <div class="container-fluid">
         <div class="row">
-
           <div class="col-lg-2 offset-lg-1 liens">
-            <a class="btn btn-link liens" href="/admin/" role="button">Admin</a>
+            <a class="btn btn-link liens" href="/admin/" role="button">Administration</a>
+          </div>
+          <div class="col-lg-2 offset-lg-1 liens">
             <a class="btn btn-link liens" href="/" role="button">Mon parcours</a>
           </div>
         </div>

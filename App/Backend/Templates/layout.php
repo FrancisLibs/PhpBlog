@@ -54,8 +54,19 @@
                 <a class="nav-link" href="/">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/admin/post-insert.html">Ajouter Post</a>
+                <a class="nav-link" href="/admin/posts.html">Gestion Post</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/users.html">Gestion utilisateurs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/users.html">Gestion administrateurs</a>
+              </li>
+              <?php $users = $_SESSION['users'] ?>
+              <div class="col-lg-3 navbar-header">
+                <p class="navbar-brand">Bonjour <?= $users->login() ?></p>
+                <a href="deconnect.html" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Déconnexion</a>
+              </div>
             </ul>
           </div>
         </div>
@@ -64,7 +75,7 @@
     </header>
     <!-- Fin de navigation -->
     <main class="section-principale">
-
+        <?php if ($user->hasFlash()) echo '<p style="text-align: center;">', $user->getFlash(), '</p>'; ?>
         <?= $content ?>
 
     </main>
@@ -75,8 +86,10 @@
         <div class="row">
 
           <div class="col-lg-2 offset-lg-1 liens">
-            <a class="btn btn-link liens" href="/admin/" role="button">Admin</a>
-            <a class="btn btn-link liens" href="/admin/" role="button">Mon parcours</a>
+            <a class="btn btn-link liens" href="/admin/" role="button">Administration</a>
+          </div>
+          <div class="col-lg-2 offset-lg-1 liens">
+            <a class="btn btn-link liens" href="/" role="button">Mon parcours</a>
           </div>
         </div>
       </div>

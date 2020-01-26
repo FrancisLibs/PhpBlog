@@ -6,4 +6,6 @@
 
   <input type="submit" value="Connexion" />
 </form>
-<a href="register.html" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Nouveau client ? Commencer ici.</a>
+
+<a href="register.html" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Nouveau ? Commencez ici.</a>
+

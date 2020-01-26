@@ -4,6 +4,8 @@ namespace FormBuilder;
 use \OCFram\FormBuilder;
 use \OCFram\StringField;
 use \OCFram\PasswordField;
+use \OCFram\MaxLengthValidator;
+use \OCFram\NotNullValidator;
 
 class RegistrationFormBuilder extends FormBuilder
 {
@@ -13,7 +15,7 @@ class RegistrationFormBuilder extends FormBuilder
       ->add(new StringField([
         'divClassName'=>'form-group',
         'label' => 'pseudo : ',
-        'name' => 'name',
+        'name' => 'login',
         'labelClass' => 'labelTitre col-lg-2 col-form-label col-form-label-sm',
         'widgetClass' => 'widgetTitre form-control form-control-sm',
         'maxLength' => 50,
@@ -49,7 +51,7 @@ class RegistrationFormBuilder extends FormBuilder
       ->add(new PasswordField([
         'divClassName'=>'form-group',
         'label' => 'confirmation : ',
-        'name' => 'passwordConfirm',
+        'name' => 'verifyPassword',
         'labelClass' => 'labelChapo col-lg-2 col-form-label col-form-label-sm',
         'widgetClass' => 'widgetChapo form-control form-control-sm',
         'maxLength' => 50,

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes>
-  <route url="/"                          module="Post" action="index" />
-  <route url="/posts.html"                module="Post" action="ShowPosts" />
-  <route url="/post-([0-9]+)\.html"       module="Post" action="Show" vars="id"/>
-  <route url="/commenter-([0-9]+)\.html"  module="Post" action="insertComment" vars="post" />
-<<<<<<< HEAD
-  <route url="/connect\.html"             module="Users" action="connexion" />
-  <route url="/register\.html"            module="Users" action="registration" />
-=======
->>>>>>> b0dc17c6d35e97827f8f90458d25094c73454f04
+  <route url="/"                                module="Post"   action="index" />
+  <route url="/posts.html"                      module="Post"   action="ShowPosts" />
+  <route url="/post-([0-9]+)\.html"             module="Post"   action="Show" vars="id"/>
+  <route url="/commenter-([0-9]+)\.html"        module="Post"   action="insertComment" vars="post" />
+  <route url="/cv\.html"                        module="Post"   action="cv" />
+  <route url="/comment-update-([0-9]+)\.html"   module="Post"   action="updateComment" vars="id" />
+  <route url="/comment-delete-([0-9]+)\.html"   module="Post"   action="deleteComment" vars="id" />
+  <route url="/connect\.html"                   module="Users"  action="connexion" />
+  <route url="/register\.html"                  module="Users"  action="registration" />
+  <route url="/deconnect\.html"                 module="Users"  action="deconnect" />
+
 </routes>

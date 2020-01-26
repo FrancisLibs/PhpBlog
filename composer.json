@@ -1,8 +1,13 @@
 {
-    "name": "francis/blog-pro",
+    "name": "francis/php-blog",
+    "description": "A pro blog to exercise php programming",
     "require": {
-        "twig/twig": "^3.0",
-        "swiftmailer/swiftmailer": "6.0"
-    }
-
+        "swiftmailer/swiftmailer": "^6.2"
+    },
+    "authors": [
+        {
+            "name": "francisL",
+            "email": "fr.libs@gmail.com"
+        }
+    ]
 }

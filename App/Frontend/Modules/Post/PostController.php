@@ -7,10 +7,6 @@ use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \Entity\Comment;
 use \Entity\Message;
-use \FormBuilder\ContactFormBuilder;
-use \FormBuilder\CommentFormBuilder;
-use \OCFram\FormHandler;
-
 
 class PostController extends BackController
 {
@@ -27,11 +23,7 @@ class PostController extends BackController
       ]);
 
       /* Create the Transport
-<<<<<<< HEAD
         $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587))
-=======
-        $transport = (new Swift_SmtpTransport('smtp.gmail.com', 25))
->>>>>>> b0dc17c6d35e97827f8f90458d25094c73454f04
           ->setUsername('fr.libs@gmail.com')
           ->setPassword('Cathy2601@1962')
         ;
@@ -100,7 +92,6 @@ class PostController extends BackController
 
     // On récupère le manager des posts.
     $manager = $this->managers->getManagerOf('Post');
-
     $listePosts = $manager->getList(0, $nombrePosts);
 
     foreach ($listePosts as $post)
@@ -113,7 +104,6 @@ class PostController extends BackController
         $post->setContenu($debut);
       }
     }
-
     // On ajoute la variable $liste à la vue.
     $this->page->addVar('listePosts', $listePosts);
   }
@@ -135,17 +125,25 @@ class PostController extends BackController
     $comments = $this->managers->getManagerOf('Comment')->getListOf($post->id(), $state);
 
     $this->page->addVar('comments', $comments);
+
+    $userSession=$this->app->user()->getAttribute('users');
+    
+    if(isset($userSession))
+    {
+      $this->page->addVar('users', $userSession);
+    }
   }
 
   public function executeInsertComment(HTTPRequest $request)
-  {
+  {  
     // Si le formulaire a été envoyé.
     if ($request->method() == 'POST')
     {
       $comment = new Comment([
-        'contenu' =>  $request->postData('contenu'),
-        'post_id' =>  $request->getData('post'),
-        'state'   =>  0,
+        'contenu'   =>  $request->postData('contenu'),
+        'post_id'   =>  $request->getData('post'),
+        'state'     =>  0,
+        'users_id'  =>  $_SESSION['users']->id(),
       ]);
     }
     else
@@ -170,5 +168,48 @@ class PostController extends BackController
     $this->page->addVar('comment', $comment);
     $this->page->addVar('form', $form->createView());
     $this->page->addVar('title', 'Ajout d\'un commentaire');
+  }
+
+  public function executeUpdateComment(HTTPRequest $request)
+  {       
+    $this->page->addVar('title', 'Modification d\'un commentaire');
+
+    if ($request->method() == 'POST')
+    {
+      $comment = new Comment([
+        'id'      =>  $request->postData('id'),
+        'contenu' =>  $request->postData('contenu'),
+        'post_id' =>  $request->postData('post_id'),
+        'state'   =>  0,
+      ]);
+    }
+    else
+    {
+      $comment = $this->managers->getManagerOf('Comment')->get($request->getData('id'));
+    }
+
+    $formBuilder = new CommentFormBuilder($comment);
+    $formBuilder->build();
+
+    $form = $formBuilder->form();
+
+    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comment'), $request);
+
+    if ($formHandler->process())
+    {
+      $this->app->user()->setFlash('Le commentaire a bien été modifié');
+      
+      $this->app->httpResponse()->redirect('/post-'.$request->postData('post_id').'.html');
+    }
+
+    $this->page->addVar('form', $form->createView());
+  }
+
+  public function executeCv(HTTPRequest $request)
+  {
+    if ($request->method() == 'GET')
+    {
+
+    }
   }
 }

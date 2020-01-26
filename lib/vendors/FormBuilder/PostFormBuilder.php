@@ -49,10 +49,10 @@ class PostFormBuilder extends FormBuilder
         ],
        ]))
       ->add(new HiddenField([
-        'name' => 'autor_name'
+        'name' => 'author_name'
        ]))
       ->add(new HiddenField([
-        'name' => 'user_id'
+        'name' => 'users_id'
        ]));
 
   }

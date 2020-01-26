@@ -14,7 +14,6 @@ class Post extends Entity
             $autor_name,
             $user_id;
 
-
   const AUTEUR_INVALIDE = 1;
   const TITRE_INVALIDE = 2;
   const CHAPO_INVALIDE = 3;
@@ -79,13 +78,19 @@ class Post extends Entity
     {
       $this->erreurs[] = self::AUTEUR_INVALIDE;
     }
-
     $this->autor_name = $autor_name;
   }
 
    public function setUser_id($user_id)
   {
     $this->user_id = $user_id;
+
+    $this->author_name = $author_name;
+  }
+
+   public function setUsers_id($users_id)
+  {
+    $this->users_id = $users_id;
   }
 
 
@@ -120,7 +125,7 @@ class Post extends Entity
   {
     return $this->update_date;
   }
-
+  
   public function autor_name()
   {
     return $this->autor_name;
@@ -129,5 +134,14 @@ class Post extends Entity
    public function user_id()
   {
     return $this->user_id;
+  }
+  public function author_name()
+  {
+    return $this->author_name;
+  }
+
+   public function users_id()
+  {
+    return $this->users_id;
   }
 }

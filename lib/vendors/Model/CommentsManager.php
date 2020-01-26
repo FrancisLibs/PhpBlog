@@ -4,7 +4,7 @@ namespace Model;
 use \OCFram\Manager;
 use \Entity\Comment;
 
-abstract class CommentManager extends Manager
+abstract class CommentsManager extends Manager
 {
   /**
    * Méthode permettant d'ajouter un commentaire.
@@ -22,7 +22,7 @@ abstract class CommentManager extends Manager
 
   /**
    * Méthode permettant de supprimer tous les commentaires liés à une news
-   * @param $post L'identifiant de la news dont les commentaires doivent être supprimés
+   * @param $news L'identifiant de la news dont les commentaires doivent être supprimés
    * @return void
    */
   abstract public function deleteFromPost($post);
@@ -47,17 +47,16 @@ abstract class CommentManager extends Manager
   /**
    * Méthode permettant de récupérer une liste de commentaires d'un post.
    * @param $post Le post duquel on veut récupérer les commentaires
-   * @param $state L'état du commentaire, valide ou non
    * @return array
    */
-  abstract public function getListOf($post, $state);
+  abstract public function getListOf($post);
 
   /**
    * Méthode permettant de modifier un commentaire.
    * @param $comment Le commentaire à modifier
    * @return void
-
-  abstract protected function update(Comment $comment); */
+   */
+  abstract protected function update(Comment $comment);
 
   /**
    * Méthode permettant d'obtenir un commentaire spécifique.
