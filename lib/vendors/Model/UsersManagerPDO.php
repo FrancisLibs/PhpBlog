@@ -30,12 +30,11 @@ class UsersManagerPDO extends UsersManager
     $requete->execute();
 
     $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Users');
-
+ 
     if ($users = $requete->fetch())
     {
       return $users;
     }
-
     return null;
   }
 

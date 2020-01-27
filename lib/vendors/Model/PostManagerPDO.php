@@ -46,7 +46,6 @@ class PostManagerPDO extends PostManager
             . 'INNER JOIN users '
             . 'ON posts.users_id = users.id '
             . 'ORDER BY posts.id DESC';
->>>>>>> users
 
     if ($debut != -1 || $limite != -1)
     {

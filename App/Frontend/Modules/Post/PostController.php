@@ -7,6 +7,7 @@ use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \Entity\Comment;
 use \Entity\Message;
+use \FormBuilder\ContactFormBuilder;
 
 class PostController extends BackController
 {

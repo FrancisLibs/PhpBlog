@@ -24,60 +24,46 @@ class UsersController extends BackController
         'password' =>       $request->postData('password'),
       ]);
 
-      if (!$user->isValid())
-      {
-        $this->app->user()->setFlash('Merci de remplir les deux champs de saisie');
-
-        $this->app->httpResponse()->redirect('/connect.html');
-      }
-      else
-      {
-        // On récupère le manager des users.
-        $manager = $this->managers->getManagerOf('Users');
-        // et le user correspondnat au login
-        $userBdd = $manager->getUser($user->login());
-
-        if($userBdd)
-        {
-          if($userBdd->$password() == $user->password())
-          {
       if (empty($users->login()) || empty($users->password())) // Tous les champs sont remplis ?
       {
         $this->app->user()->setFlash('Merci de remplir les deux champs de saisie');
         $this->app->httpResponse()->redirect('/connect.html');
+
       }
-      else // Verification de la présence de l'identifiant en bdd
+      else// Verification de la présence de l'identifiant en bdd
       {
-        $usersBdd = $this->managers->getManagerOf('Users')->getUsers($users->login());
-       
-        if(empty($usersBdd)) // Si l'utilisateur n'existe pas dans la bdd
+        // On récupère le manager des users.
+        $manager = $this->managers->getManagerOf('Users');
+        // et le user correspondnat au login
+        $usersBdd = $manager->getUsers($users->login());
+           
+        if(!isset($usersBdd))
         {
           $this->app->user()->setFlash('L\'identifiant ou le mot de passe sont erronés');
           $this->app->httpResponse()->redirect('/connect.html');
         }
-        else 
+        else // Vérification mot de passe
         {            
           if(!$users->comparePasswords($usersBdd->password()))  // Check du mot de passe
           {
             $this->app->user()->setFlash('L\'identifiant et/ou le mot de passe sont erronés');
             $this->app->httpResponse()->redirect('/connect.html');
           }
-          else
+          else // Vérification validité de l'utilisateur
           {
-              if($usersBdd->status() == 0)
-              {
-                $this->app->user()->setFlash('Désolé, mais vous n\'êtes pas encore validé');
-                
-                $this->app->httpResponse()->redirect('/connect.html');
-              }
-              else
-              {
-                $this->app->user()->setAuthenticated(true);
+            if($usersBdd->status() == 0)
+            {
+              $this->app->user()->setFlash('Désolé, mais vous n\'êtes pas encore validé');
+              $this->app->httpResponse()->redirect('/connect.html');
+            }
+            else
+            {
+              $this->app->user()->setAuthenticated(true);
 
-                $this->app->user()->setAttribute('users', $usersBdd);
+              $this->app->user()->setAttribute('users', $usersBdd);
 
-                $this->app->httpResponse()->redirect('/');
-              }
+              $this->app->httpResponse()->redirect('/');
+            }
           }
         }
       }
@@ -86,6 +72,7 @@ class UsersController extends BackController
     {
       $users = new Users;
     }
+
     $formBuilder = new ConnexionFormBuilder($users);
 
     $formBuilder->build();
@@ -97,7 +84,6 @@ class UsersController extends BackController
 
      // On ajoute une définition pour le titre.
     $this->page->addVar('title', 'Connexion');
-        
   }
 
   public function executeRegistration(HTTPRequest $request)
