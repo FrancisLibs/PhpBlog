@@ -5,9 +5,11 @@ use \Entity\Post;
 use \Entity\Comment;
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
+use \OCFram\FormHandler;
 use \FormBuilder\PostFormBuilder;
 use \FormBuilder\CommentFormBuilder;
-use \OCFram\FormHandler;
+use \Model\CommentManagerPDO;
+
 
 class PostController extends BackController
 {
@@ -18,7 +20,6 @@ class PostController extends BackController
         $this->app->user()->setFlash('Merci de vous connecter');
         $this->app->httpResponse()->redirect('/');
     }
-   
     
     $this->page->addVar('title', 'Administration blog');
   }
@@ -79,39 +80,16 @@ class PostController extends BackController
     $this->app->httpResponse()->redirect('/admin/posts.html');
   }
 
-  public function executeModerateComment(HTTPRequest $request)
+  public function executeValidateComment(HTTPRequest $request)
   {
-    $this->page->addVar('title', 'Modification d\'un commentaire');
+    $manager = $this->managers->getManagerOf('Comment');
+    $comment = $manager->get($request->getData('id'));
+    $comment->setState(1);
 
-    if ($request->method() == 'POST')
-    {
-      $comment = new Comment([
-        'contenu' => $request->postData('contenu'),
-        'post_id' => $request->postData('post_id'),
-      ]);
-    }
-    else
-    {
-      $comment = $this->managers->getManagerOf('Comment')->get($request->getData('id'));
-      $comment->setState(1);
-    }
+    $manager->update($comment);
 
-    $formBuilder = new CommentFormBuilder($comment);
-    $formBuilder->build();
-
-    $form = $formBuilder->form();
-
-    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comment'), $request);
-
-    if ($formHandler->process())
-    {
-      $this->app->user()->setFlash('Le commentaire a bien été modifié');
-
-      $this->app->httpResponse()->redirect("post-show-". $comment->post_id().'.html');
-    }
-
-    $this->page->addVar('form', $form->createView());
-    $this->app->httpResponse()->redirect("post-show-". $comment->post_id().'.html');
+    $this->app->httpResponse()->redirect('/admin/post-show-'.$comment->post_id().'.html');
+   
   }
 
   public function executeUpdateComment(HTTPRequest $request)
@@ -124,11 +102,14 @@ class PostController extends BackController
         'contenu' => $request->postData('contenu'),
         'post_id' => $request->postData('post_id'),
         'state'   =>  0,
+        'id'      => $request->postData('id'),
       ]);
     }
     else
     {
-      $comment = $this->managers->getManagerOf('Comment')->get($request->getData('id'));
+      $manager = $this->managers->getManagerOf('Comment');
+
+      $comment = $manager->get($request->getData('id'));
     }
 
     $formBuilder = new CommentFormBuilder($comment);
@@ -136,7 +117,7 @@ class PostController extends BackController
 
     $form = $formBuilder->form();
 
-    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
+    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comment'), $request);
     
     if ($formHandler->process())
     {

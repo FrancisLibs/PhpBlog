@@ -29,7 +29,7 @@
           <td>
             <a href="comment-update-<?= $comment->id() ?>.html"><img src="/images/update.png" alt="Modifier" /></a>
             <a href="comment-refuse-<?= $comment->id() ?>.html"><img src="/images/delete.png" alt="Supprimer" /></a>
-            <?php if($comment->state()==0) {?><a href="comment-moderate-<?= $comment->id() ?>.html"><img src="/images/select.png" alt="Valider" /></a> <?php } ?>
+            <?php if($comment->state()==0) {?><a href="comment-validate-<?= $comment->id() ?>.html"><img src="/images/select.png" alt="Valider" /></a> <?php } ?>
           </td>
         </tr>
     <?php }
