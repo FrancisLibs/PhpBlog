@@ -5,9 +5,11 @@ require_once '../vendor/autoload.php';
 
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
+use \OCFram\FormHandler;
 use \Entity\Comment;
 use \Entity\Message;
 use \FormBuilder\ContactFormBuilder;
+use \FormBuilder\CommentFormBuilder;
 
 class PostController extends BackController
 {

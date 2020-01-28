@@ -51,8 +51,8 @@ class PostController extends BackController
     $comments = $this->managers->getManagerOf('Comment')->getListOf($post->id(), $state);
 
     $this->page->addVar('comments', $comments);
+  }
         
-
   public function executeInsert(HTTPRequest $request)
   {    
     $this->processForm($request);
@@ -65,6 +65,18 @@ class PostController extends BackController
     $this->processForm($request);
 
     $this->page->addVar('title', 'Modification d\'un article');
+  }
+
+  public function executeDelete(HTTPRequest $request)
+  {
+    $postId = $request->getData('id');
+    
+    $this->managers->getManagerOf('Comment')->deleteFromPost($postId);
+    $this->managers->getManagerOf('Post')->delete($postId);
+    
+    $this->app->user()->setFlash('L\'article a bien été supprimé ! ');
+
+    $this->app->httpResponse()->redirect('/admin/posts.html');
   }
 
   public function executeModerateComment(HTTPRequest $request)
@@ -111,6 +123,7 @@ class PostController extends BackController
       $comment = new Comment([
         'contenu' => $request->postData('contenu'),
         'post_id' => $request->postData('post_id'),
+        'state'   =>  0,
       ]);
     }
     else
@@ -122,38 +135,33 @@ class PostController extends BackController
     $formBuilder->build();
 
     $form = $formBuilder->form();
-=======
-  {    
-    $manager = $this->managers->getManagerOf('Comment');
-    $comment = $manager->get($request->getData('id'));
-    $comment->setState(1);
 
-    $manager->update($comment);
->>>>>>> users
+    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
+    
+    if ($formHandler->process())
+    {
+      $this->app->user()->setFlash('Le commentaire a bien été modifié');
 
-    $this->app->httpResponse()->redirect("post-show-". $comment->post_id().'.html');
+      $this->app->httpResponse()->redirect("post-show-". $comment->post_id().'.html');
+    }
+
+    $this->page->addVar('form', $form->createView());
   }
 
   public function processForm(HTTPRequest $request)
   {
     if ($request->method() == 'POST')
     {
-<<<<<<< HEAD
-=======
       $users = $this->app->user()->getAttribute('users');
 
->>>>>>> users
       $post = new Post([
         'id'            => $request->postData('id'),
         'name'          => $request->postData('name'),
         'title'         => $request->postData('title'),
         'chapo'         => $request->postData('chapo'),
         'contenu'       => $request->postData('contenu'),
-<<<<<<< HEAD
-        'user_id'       => $request->postData('1'),
-=======
-        'users_id'       => $users->id(),
->>>>>>> users
+        'users_id'      => $users->id(),
+
       ]);
 
       if ($request->getExists('id'))
@@ -183,7 +191,7 @@ class PostController extends BackController
 
     if ($formHandler->process())
     {
-      $this->app->user()->setFlash($post->isNew() ? 'Le post a bien été ajouté !' : 'Le Post a bien été modifié !');
+      $this->app->user()->setFlash($post->isNew() ? 'L\'article a bien été ajouté !' : 'L\'article a bien été modifié !');
 
       $this->app->httpResponse()->redirect('/admin/posts.html');
     }

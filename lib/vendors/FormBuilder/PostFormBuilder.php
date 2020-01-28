@@ -7,6 +7,7 @@ use \OCFram\TextField;
 use \OCFram\HiddenField;
 use \OCFram\MaxLengthValidator;
 use \OCFram\NotNullValidator;
+use \Entity\Post;
 
 class PostFormBuilder extends FormBuilder
 {
@@ -49,11 +50,7 @@ class PostFormBuilder extends FormBuilder
         ],
        ]))
       ->add(new HiddenField([
-        'name' => 'author_name'
-       ]))
-      ->add(new HiddenField([
         'name' => 'users_id'
        ]));
-
   }
 }
