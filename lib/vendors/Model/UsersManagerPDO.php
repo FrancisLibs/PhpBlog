@@ -89,23 +89,16 @@ class UsersManagerPDO extends UsersManager
             . 'INNER JOIN roles r '
             . 'ON u.role_id = r.id ';
            
-           
-
-    if($data == 'users')
+    if($data == 'users')// Que les membres , pas les admin ou superAdmin
     {
-        $sql .= 'WHERE u.role_id <= 2';
+        $sql .= 'WHERE u.role_id = 1';
     }
-    elseif($data = 'admin')
+    elseif($data = 'admin') // Que les "admin", pas les membres ou les superAdmin
     {
-        $sql .= 'WHERE u.role_id >= 2 AND u.role_id < 3';
+        $sql .= 'WHERE u.role_id = 2';
     }
     
     $sql .=  ' ORDER BY u.id ASC';
-    
-    
-   //var_dump($sql);
-    //exit();
-    
     
     $requete = $this->dao->query($sql);
 
