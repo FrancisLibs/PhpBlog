@@ -10,5 +10,4 @@
   <route url="/connect\.html"                   module="Users"  action="connexion" />
   <route url="/register\.html"                  module="Users"  action="registration" />
   <route url="/deconnect\.html"                 module="Users"  action="deconnect" />
-
 </routes>
