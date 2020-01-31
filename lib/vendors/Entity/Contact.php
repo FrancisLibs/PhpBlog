@@ -3,7 +3,7 @@ namespace Entity;
 
 use \OCFram\Entity;
 
-class Message extends Entity
+class Contact extends Entity
 {
   protected $lastName,
             $firstName,
