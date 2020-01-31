@@ -39,7 +39,7 @@ class PostController extends BackController
 
       // Create a message
       $message = (new Swift_Message('Message site phpBlog'))
-        ->setFrom([$message->email()])
+        ->setFrom([$message->email() => $message->lastName()])
         ->setTo(['fr.libs@gmail.com'])
         ->setBody('Here is the message itself')
         ;
