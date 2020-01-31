@@ -28,7 +28,7 @@ class PostController extends BackController
         'message' =>    $request->postData('message')
       ]);
 
-      // Envoi du mail de confirmation
+      // Envoi du mail du formulaire
       // Create the Transport
       $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
         ->setUserName('fr.libs@gmail.com')
@@ -49,7 +49,6 @@ class PostController extends BackController
       $this->app->user()->setFlash('Le message a bien été envoyé !');
 
       $contact = new Contact;
-
     }
     else
     {

@@ -5,6 +5,7 @@ abstract class Application
 {
   protected $httpRequest;
   protected $httpResponse;
+  protected $managers;
   protected $name;
   protected $user;
   protected $config;
@@ -13,8 +14,10 @@ abstract class Application
   {
     $this->httpRequest = new HTTPRequest($this);
     $this->httpResponse = new HTTPResponse($this);
+    $this->managers = new Managers('PDO', PDOFactory::getMysqlConnexion());
     $this->user = new User($this);
     $this->config = new Config($this);
+
 
     $this->name = '';
   }
@@ -61,9 +64,39 @@ abstract class Application
     // On ajoute les variables de l'URL au tableau $_GET.
     $_GET = array_merge($_GET, $matchedRoute->vars());
 
-    // On instancie le contrôleur.
-    $controllerClass = 'App\\'.$this->name.'\\Modules\\'.$matchedRoute->module().'\\'.$matchedRoute->module().'Controller';
-    return new $controllerClass($this, $matchedRoute->module(), $matchedRoute->action());
+    // Controle des droits d'accès
+    if(empty($this->user()->getAttribute('users')))
+    {
+      $controllerClass = 'App\\'.$this->name.'\\Modules\\'.$matchedRoute->module().'\\'.$matchedRoute->module().'Controller';
+      return new $controllerClass($this, $matchedRoute->module(), $matchedRoute->action());
+    }
+    else
+    {
+      // Role de l'utilisateur
+      $roleUsers = $this->user()->getAttribute('users')->role();
+
+      // On récupère le manager du fichier des droits.
+      $manager = $this->managers->getManagerOf('Rights');
+
+      // et le rôle correspondant à la route
+      $rights = $manager->getRights($this->name(), $matchedRoute->module(), $matchedRoute->action());
+
+      $roleRoute = $rights->role();
+
+      // On contrôle si le visiteur à le droit d'accéder à la resource
+      if((int)$roleUsers >= (int)$roleRoute)
+      {
+        // Si oui, on instancie le contrôleur.
+        $controllerClass = 'App\\'.$this->name.'\\Modules\\'.$matchedRoute->module().'\\'.$matchedRoute->module().'Controller';
+
+        return new $controllerClass($this, $matchedRoute->module(), $matchedRoute->action());
+      }
+      else // Sinon, on affiche un message d'erreur et on le renvoie en page d'accueil
+      {
+        $this->user()->setFlash('Vous n\'avez pas les droits requis pour accéder à cette fonction');
+        $this->httpResponse()->redirect('/');
+      }
+    }
   }
 
   abstract public function run();
