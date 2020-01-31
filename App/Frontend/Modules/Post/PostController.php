@@ -10,6 +10,9 @@ use \Entity\Comment;
 use \Entity\Message;
 use \FormBuilder\ContactFormBuilder;
 use \FormBuilder\CommentFormBuilder;
+use \Swift_SmtpTransport;
+use \Swift_Mailer;
+use \Swift_Message;
 
 class PostController extends BackController
 {
@@ -25,24 +28,24 @@ class PostController extends BackController
         'message' =>    $request->postData('message')
       ]);
 
-      /* Create the Transport
-        $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587))
-          ->setUsername('fr.libs@gmail.com')
-          ->setPassword('Cathy2601@1962')
+      // Envoi du mail du formulaire
+      // Create the Transport
+      $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
+        ->setUserName('fr.libs@gmail.com')
+        ->setPassword('uaehjeerxotzfpqt');
+
+      // Create the Mailer using your created Transport
+      $mailer = new Swift_Mailer($transport);
+
+      // Create a message
+      $message = (new Swift_Message('Message site phpBlog'))
+        ->setFrom([$message->email()])
+        ->setTo(['fr.libs@gmail.com'])
+        ->setBody('Here is the message itself')
         ;
 
-        // Create the Mailer using your created Transport
-        $mailer = new Swift_Mailer($transport);
-
-        // Create a message
-        $message = (new Swift_Message('Wonderful Subject'))
-          ->setFrom(['john@doe.com' => 'John Doe'])
-          ->setTo(['fr.libs@gmail.com' => 'Francis'])
-          ->setBody($request->postData('message'))
-          ;
-
-        // Send the message
-        $result = $mailer->send($message);*/
+      // Send the message
+      $result = $mailer->send($message);
 
     }
     else
