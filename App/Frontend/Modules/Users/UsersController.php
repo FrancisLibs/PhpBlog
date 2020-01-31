@@ -119,8 +119,7 @@ class UsersController extends BackController
         }
         else
         {
-          // Comparaison des 2 mots de passe du formulaire
-          if(!($users->password() == $users->verifyPassword()))
+          if(!($users->password() == $users->verifyPassword())) // Comparaison des 2 mots de passe du formulaire
           {
             $this->app->user()->setFlash('Les mots de passe ne sont pas identiques');
 
@@ -128,10 +127,23 @@ class UsersController extends BackController
           }
           else
           {
-            // On récupère le manager des users.
+            $login = $users->login();
+            $vkey = md5(microtime(TRUE)*100000);
+            $message= 'Bienvenue sur VotreSite,
+ 
+              Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
+              ou copier/coller dans votre navigateur Internet.
+ 
+              http://phpblog//activation-'.urlencode($login).'-'.urlencode($vkey).'.html
+ 
+ 
+              ---------------
+              Ceci est un mail automatique, Merci de ne pas y répondre.';
+
             $users->setStatus(0);
             $users->setRole_id(1);
             $users->setPassword($users->passwordHash());
+            $users->setVkey($vkey);
 
             $manager->add($users);
             
@@ -145,11 +157,10 @@ class UsersController extends BackController
             $mailer = new Swift_Mailer($transport);
 
             // Create a message
-            $message = (new Swift_Message('Wonderful Subject'))
-              ->setFrom(['john@doe.com' => 'John Doe'])
-              ->setTo(['fr.libs@gmail.com'])
-              ->setBody('Here is the message itself')
-              ;
+            $message = (new Swift_Message('Activer votre compte'))
+              ->setFrom(['fr.libs@gmail.com' => 'Francis Libs'])
+              ->setTo([$users->email()])
+              ->setBody($message);
 
             // Send the message
             $result = $mailer->send($message);
@@ -183,5 +194,38 @@ class UsersController extends BackController
     $this->app->user()->endSession();
     
     $this->app->httpResponse()->redirect('/');
+  }
+
+  public function executeActivation(HTTPRequest $request)
+  {
+    $login = $request->getData('log');
+    $key = $request->getData('key');
+
+    // Verification de la présence de l'identifiant en bdd
+    $manager = $this->managers->getManagerOf('Users');
+    $users = $manager->getUsers($login);
+
+    if(!isset($users))
+    {
+      $this->app->user()->setFlash('La validation n\'est pas possible, vous n\'êtes pas connu du système');
+      $this->app->httpResponse()->redirect('/');
+    }
+    else // Vérification mot de passe
+    {            
+
+      if(!$users->vkey() == $key)  // Check de la clé
+      {
+        $this->app->user()->setFlash('La validation n\'est pas possible, vous n\'êtes pas connu du système');
+        $this->app->httpResponse()->redirect('/');
+      }
+      else
+      {
+        $users->setStatus(1);
+        $manager->update($users);
+
+        $this->app->user()->setFlash('Félicitation, vous faites maintenant partie de nos membres');
+        $this->app->httpResponse()->redirect('/connect.html');
+      }
+    }
   }
 }

@@ -14,7 +14,7 @@ class Users extends Entity
             $status,
             $role_id,
             $role,
-            $verify_key;
+            $vkey;
 
   const LOGIN_INVALIDE = 1;
   const EMAIL_INVALIDE = 2;
@@ -105,9 +105,9 @@ class Users extends Entity
     $this->role = $role;
   }
   
-  public function setVerify_key($verify_key)
+  public function setVkey($vkey)
   {
-    $this->verify_key = $verify_key;
+    $this->vkey = $vkey;
   }
   
 
@@ -158,9 +158,9 @@ class Users extends Entity
     return $this->role;
   }
   
-  public function verify_key()
+  public function vkey()
   {
-    return $this->verify_key;
+    return $this->vkey;
   }
   
 }

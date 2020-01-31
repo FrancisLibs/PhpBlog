@@ -7,7 +7,7 @@ use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \OCFram\FormHandler;
 use \Entity\Comment;
-use \Entity\Message;
+use \Entity\Contact;
 use \FormBuilder\ContactFormBuilder;
 use \FormBuilder\CommentFormBuilder;
 use \Swift_SmtpTransport;
@@ -21,7 +21,7 @@ class PostController extends BackController
     // Traitement du formulaire de contact si le formulaire a été envoyé.
     if ($request->method() == 'POST')
     {
-      $message = new Message([
+      $contact = new Contact([
         'firstName' =>  $request->postData('firstName'),
         'lastName' =>   $request->postData('lastName'),
         'email' =>      $request->postData('email'),
@@ -38,54 +38,32 @@ class PostController extends BackController
       $mailer = new Swift_Mailer($transport);
 
       // Create a message
-      $message = (new Swift_Message('Message site phpBlog'))
-        ->setFrom([$message->email() => $message->lastName()])
+      $message = (new Swift_Message('Activer votre compte'))
+        ->setFrom([$contact->email() => $contact->lastName()])
         ->setTo(['fr.libs@gmail.com'])
-        ->setBody('Here is the message itself')
-        ;
+        ->setBody($contact->message());
 
       // Send the message
       $result = $mailer->send($message);
 
+      $this->app->user()->setFlash('Le message a bien été envoyé !');
+
+      $contact = new Contact;
     }
     else
     {
-      $message = new Message;
+      $contact = new Contact;
     }
 
-    $formBuilder = new ContactFormBuilder($message);
+    $formBuilder = new ContactFormBuilder($contact);
     $formBuilder->build();
 
     $form = $formBuilder->form();
 
-    $this->page->addVar('message', $message);
     $this->page->addVar('form', $form->createView());
-
 
      // On ajoute une définition pour le titre.
     $this->page->addVar('title', 'Mon blog PHP');
-
-    $nombrePosts = $this->app->config()->get('nombre_posts');
-    $nombreCaracteres = $this->app->config()->get('nombre_caracteres');
-
-    // On récupère le manager des posts.
-    $manager = $this->managers->getManagerOf('Post');
-
-    $listePosts = $manager->getList(0, $nombrePosts);
-
-    foreach ($listePosts as $post)
-    {
-      if (strlen($post->contenu()) > $nombreCaracteres)
-      {
-        $debut = substr($post->contenu(), 0, $nombreCaracteres);
-        $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
-
-        $post->setContenu($debut);
-      }
-    }
-
-    // On ajoute la variable $liste à la vue.
-    $this->page->addVar('listePosts', $listePosts);
   }
 
   public function executeShowPosts(HTTPRequest $request)
