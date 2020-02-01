@@ -28,7 +28,6 @@ class PostController extends BackController
         'message' =>    $request->postData('message')
       ]);
 
-
       // Envoi du mail du formulaire
 
       // Create the Transport
@@ -50,6 +49,8 @@ class PostController extends BackController
 
       $this->app->user()->setFlash('Le message a bien été envoyé !');
     }
+    else
+    {
 
     $contact = new Contact;
 
