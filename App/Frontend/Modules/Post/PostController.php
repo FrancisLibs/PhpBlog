@@ -18,51 +18,52 @@ class PostController extends BackController
 {
   public function executeIndex(HTTPRequest $request)
   {
-    // Traitement du formulaire de contact si le formulaire a été envoyé.
-    if ($request->method() == 'POST')
-    {
-      $contact = new Contact([
-        'firstName' =>  $request->postData('firstName'),
-        'lastName' =>   $request->postData('lastName'),
-        'email' =>      $request->postData('email'),
-        'message' =>    $request->postData('message')
-      ]);
+  	// Traitement du formulaire de contact si le formulaire a été envoyé.
+  	if ($request->method() == 'POST')
+  	{
+  	  $contact = new Contact([
+  		'firstName' =>  $request->postData('firstName'),
+  		'lastName' =>   $request->postData('lastName'),
+  		'email' =>      $request->postData('email'),
+  		'message' =>    $request->postData('message')
+  	  ]);
 
-      // Envoi du mail du formulaire
+  	  // Envoi du mail du formulaire
 
-      // Create the Transport
-      $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
-        ->setUserName('fr.libs@gmail.com')
-        ->setPassword('uaehjeerxotzfpqt');
+  	  // Create the Transport
+  	  $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
+  		->setUserName('fr.libs@gmail.com')
+  		->setPassword('uaehjeerxotzfpqt');
 
-      // Create the Mailer using your created Transport
-      $mailer = new Swift_Mailer($transport);
+  	  // Create the Mailer using your created Transport
+  	  $mailer = new Swift_Mailer($transport);
 
-      // Create a message
-      $message = (new Swift_Message('Activer votre compte'))
-        ->setFrom([$contact->email() => $contact->lastName()])
-        ->setTo(['fr.libs@gmail.com'])
-        ->setBody($contact->message());
+  	  // Create a message
+  	  $message = (new Swift_Message('Activer votre compte'))
+  		->setFrom([$contact->email() => $contact->lastName()])
+  		->setTo(['fr.libs@gmail.com'])
+  		->setBody($contact->message());
 
-      // Send the message
-      $result = $mailer->send($message);
+  	  // Send the message
+  	  $result = $mailer->send($message);
 
-      $this->app->user()->setFlash('Le message a bien été envoyé !');
-    }
-    else
-    {
+  	  $this->app->user()->setFlash('Le message a bien été envoyé !');
+  	}
+  	else
+  	{
 
-    $contact = new Contact;
+  		$contact = new Contact;
 
-    $formBuilder = new ContactFormBuilder($contact);
-    $formBuilder->build();
+  		$formBuilder = new ContactFormBuilder($contact);
+  		$formBuilder->build();
 
-    $form = $formBuilder->form();
+  		$form = $formBuilder->form();
 
-    $this->page->addVar('form', $form->createView());
+  		$this->page->addVar('form', $form->createView());
 
-     // On ajoute une définition pour le titre.
-    $this->page->addVar('title', 'Mon blog PHP');
+  		 // On ajoute une définition pour le titre.
+  		$this->page->addVar('title', 'Mon blog PHP');
+  	}
   }
 
   public function executeShowPosts(HTTPRequest $request)
@@ -81,10 +82,10 @@ class PostController extends BackController
     {
       if (strlen($post->contenu()) > $nombreCaracteres)
       {
-        $debut = substr($post->contenu(), 0, $nombreCaracteres);
-        $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
+      	$debut = substr($post->contenu(), 0, $nombreCaracteres);
+      	$debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
 
-        $post->setContenu($debut);
+      	$post->setContenu($debut);
       }
     }
     // On ajoute la variable $liste à la vue.
@@ -110,7 +111,7 @@ class PostController extends BackController
     $this->page->addVar('comments', $comments);
 
     $userSession=$this->app->user()->getAttribute('users');
-    
+
     if(isset($userSession))
     {
       $this->page->addVar('users', $userSession);
@@ -123,10 +124,10 @@ class PostController extends BackController
     if ($request->method() == 'POST')
     {
       $comment = new Comment([
-        'contenu'   =>  $request->postData('contenu'),
-        'post_id'   =>  $request->getData('post'),
-        'state'     =>  0,
-        'users_id'  =>  $_SESSION['users']->id(),
+    	'contenu'   =>  $request->postData('contenu'),
+    	'post_id'   =>  $request->getData('post'),
+    	'state'     =>  0,
+    	'users_id'  =>  $_SESSION['users']->id(),
       ]);
     }
     else
@@ -160,10 +161,10 @@ class PostController extends BackController
     if ($request->method() == 'POST')
     {
       $comment = new Comment([
-        'id'      =>  $request->postData('id'),
-        'contenu' =>  $request->postData('contenu'),
-        'post_id' =>  $request->postData('post_id'),
-        'state'   =>  0,
+    	'id'      =>  $request->postData('id'),
+    	'contenu' =>  $request->postData('contenu'),
+    	'post_id' =>  $request->postData('post_id'),
+    	'state'   =>  0,
       ]);
     }
     else
@@ -192,7 +193,6 @@ class PostController extends BackController
   {
     if ($request->method() == 'GET')
     {
-
     }
   }
 }
