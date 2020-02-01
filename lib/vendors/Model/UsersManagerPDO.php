@@ -41,7 +41,7 @@ class UsersManagerPDO extends UsersManager
 
   public function getUsersId($id)
   {
-    $requete = $this->dao->prepare('SELECT u.id, login, email, password, create_date, status, u.role_id, r.role, vkey'
+    $requete = $this->dao->prepare('SELECT u.id, login, email, password, create_date, status, u.role_id, r.role, vkey '
             . 'FROM users u '
             . 'INNER JOIN roles r '
             . 'ON r.id = u.role_id '

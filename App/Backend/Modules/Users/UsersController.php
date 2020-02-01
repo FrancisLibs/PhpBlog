@@ -90,4 +90,31 @@ class UsersController extends BackController
 
     $this->app->httpResponse()->redirect('/admin/admin.html');
   }
+
+  public function executeAdminDelete(HTTPRequest $request)
+  {      
+    $this->page->addVar('title', 'Suppresssion administrateur');
+    
+    $usersId = $request->getData('id');
+    
+    // vérification si celui qui est effacé est lui-même. Si c'est le cas, il est déconnecté, puis effacé.
+    $userConnecte=$this->app->user()->getAttribute('users');
+    if ($usersId == $userConnecte->id())
+    {
+        $this->app->user()->endSession();
+    }
+    // Suppression des commentaires
+    $commentManager = $this->managers->getManagerOf('Comment');
+    $commentManager->deleteFromUsers($usersId);
+    
+    // Suppression des posts
+    $postManager = $this->managers->getManagerOf('Post');
+    $postManager->deleteFromUsers($usersId);
+    
+    // Suppression de l'utilisateurs
+    $usersManager = $this->managers->getManagerOf('Users');
+    $usersManager->delete($usersId);
+    
+    $this->app->httpResponse()->redirect('/admin/admin.html');
+  }
 }

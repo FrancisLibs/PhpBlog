@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes>
-  <route url="/admin/connect\.html"                   module="Connexion" action="index" />
-  <route url="/admin/"                                module="Post"   action="index" />
-  <route url="/admin/posts\.html"                     module="Post"   action="showPosts" />
-  <route url="/admin/post-insert\.html"               module="Post"   action="insert" />
-  <route url="/admin/post-update-([0-9]+)\.html"      module="Post"   action="update" vars="id" />
-  <route url="/admin/post-delete-([0-9]+)\.html"      module="Post"   action="delete" vars="id" />
-  <route url="/admin/post-show-([0-9]+)\.html"        module="Post"   action="show" vars="id" />
-  <route url="/admin/commenter-([0-9]+)\.html"        module="Post"   action="insertComment" vars="post" />
-  <route url="/admin/comment-refuse-([0-9]+)\.html"   module="Post"   action="refuseComment" vars="id" />
-  <route url="/admin/comment-validate-([0-9]+)\.html" module="Post"   action="validateComment" vars="id" />
-  <route url="/admin/comment-update-([0-9]+)\.html"   module="Post"   action="updateComment" vars="id" />
-  <route url="/admin/users\.html"                     module="Users"  action="show" />
-  <route url="/admin/users-upgrade-([0-9]+)\.html"    module="Users"  action="upgrade" vars="id" />
-  <route url="/admin/users-delete-([0-9]+)\.html"     module="Users"  action="delete" vars="id" />
-  <route url="/admin/admin\.html"                     module="Users"  action="showAdmin" />
-  <route url="/admin/admin-upgrade-([0-9]+)\.html"    module="Users"  action="adminUpgrade" vars="id" />
-  <route url="/admin/deconnect\.html"                 module="Users"  action="deconnect" />
+  <route url="/admin/connect\.html"                   module="Connexion"  action="index" />
+  <route url="/admin/"                                module="Post"       action="index" />
+  <route url="/admin/posts\.html"                     module="Post"       action="showPosts" />
+  <route url="/admin/post-insert\.html"               module="Post"       action="insert" />
+  <route url="/admin/post-update-([0-9]+)\.html"      module="Post"       action="update" vars="id" />
+  <route url="/admin/post-delete-([0-9]+)\.html"      module="Post"       action="delete" vars="id" />
+  <route url="/admin/post-show-([0-9]+)\.html"        module="Post"       action="show" vars="id" />
+  <route url="/admin/commenter-([0-9]+)\.html"        module="Post"       action="insertComment" vars="post" />
+  <route url="/admin/comment-refuse-([0-9]+)\.html"   module="Post"       action="refuseComment" vars="id" />
+  <route url="/admin/comment-validate-([0-9]+)\.html" module="Post"       action="validateComment" vars="id" />
+  <route url="/admin/comment-update-([0-9]+)\.html"   module="Post"       action="updateComment" vars="id" />
+  <route url="/admin/users\.html"                     module="Users"      action="show" />
+  <route url="/admin/users-upgrade-([0-9]+)\.html"    module="Users"      action="upgrade" vars="id" />
+  <route url="/admin/users-delete-([0-9]+)\.html"     module="Users"      action="delete" vars="id" />
+  <route url="/admin/admin\.html"                     module="Users"      action="showAdmin" />
+  <route url="/admin/admin-upgrade-([0-9]+)\.html"    module="Users"      action="adminUpgrade" vars="id" />
+  <route url="/admin/admin-delete-([0-9]+)\.html"     module="Users"      action="adminDelete" vars="id" />
+  <route url="/admin/deconnect\.html"                 module="Users"      action="deconnect" />
 </routes>
