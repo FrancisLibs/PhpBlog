@@ -32,15 +32,17 @@
   <body>
     <header>
       <!-- Navigation -->
-      <nav class="navbar navbar-expand-md navbar-default navbar-dark">
-        <div class="container-fluid">
-          <div class="col-lg-3 navbar-header">
-            <a class="navbar-brand" href="/">Francis Libs</a>
-          </div>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <a class="navbar-brand" href="/">Francis Libs</a>
+
           <!-- Collapse button -->
-          <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
-            aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="dark-blue-text"><i
-            class="fas fa-bars fa-1x"></i></span>
+          <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" 
+            data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" 
+            aria-label="Toggle navigation">
+            <span class="dark-blue-text">
+              <i class="fas fa-bars fa-1x"></i>
+            </span>
           </button>
 
           <!-- Collapsible content -->
@@ -56,7 +58,7 @@
               <li class="nav-item">
               </li>
              
-       <a class="nav-link" href="connect.html">Bonjour, identifiez-vous</a>
+              <a class="nav-link" href="connect.html">Bonjour, identifiez-vous</a>
               </li>
               <li class="nav-item">
                 <a href="register.html" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Nouveau ? Commencez ici.</a>
