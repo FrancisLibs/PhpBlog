@@ -1,8 +1,6 @@
 <?php
 namespace App\Frontend\Modules\Post;
 
-require_once '../vendor/autoload.php';
-
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \OCFram\FormHandler;
