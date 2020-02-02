@@ -16,7 +16,7 @@ class ContactFormBuilder extends FormBuilder
         'divClass'    => 'form-group',
         'label'       => 'Nom : ',
         'name'        => 'lastName',
-        'labelClass'  => 'labelNom col-lg-2 col-form-label col-form-label-sm',
+        'labelClass'  => 'labelNom col-lg-3 col-form-label col-form-label-sm',
         'widgetClass' => 'widgetNom form-control form-control-sm',
         'maxLength'   =>100,
         'validators'  => [

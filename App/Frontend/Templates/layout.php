@@ -10,7 +10,7 @@
   <meta name="description" content="Mon premier blog en PHP" />
 
   <!-- Css files -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
@@ -32,8 +32,9 @@
   <body>
     <header>
       <!-- Navigation -->
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+
           <a class="navbar-brand" href="/">Francis Libs</a>
 
           <!-- Collapse button -->
@@ -52,7 +53,7 @@
                 <a class="nav-link" href="/">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="posts.html">Posts</a>
+                <a class="nav-link" href="posts.html">Articles</a>
               </li>
               <?php if(!isset($_SESSION['users'])){ ?>
               <li class="nav-item">
@@ -67,7 +68,7 @@
                 else
                 {
                   $users = $_SESSION['users'] ?>
-                  <div class="col-lg-2 navbar-header">
+                  <div class="col-lg-3 navbar-header">
                     <p class="navbar-brand">Bonjour <?= $users->login() ?></p>
                     <a href="deconnect.html" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Déconnexion</a>
                   </div>
@@ -82,9 +83,8 @@
     <!-- Fin de navigation -->
 
     <main class="section-principale">
-       <?php if ($user->hasFlash()) echo '<p style="text-align: center;">', $user->getFlash(), '</p>'; ?>
+       <?php if ($user->hasFlash()) echo $user->getFlash(), '</p>'; ?>
         <?= $content ?>
-
     </main>
 
     <!-- Footer -->
@@ -102,10 +102,12 @@
       </div>
     </footer>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  </body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+ </body>
 
 
 
