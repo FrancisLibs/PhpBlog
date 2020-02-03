@@ -82,9 +82,9 @@
     </header>
     <!-- Fin de navigation -->
 
-    <main class="section-principale">
+    <main>
        <?php if ($user->hasFlash()) echo $user->getFlash(), '</p>'; ?>
-        <?= $content ?>
+        <?= $content ?> 
     </main>
 
     <!-- Footer -->

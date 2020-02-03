@@ -20,14 +20,14 @@ body {
 }
 
 /*------Zone centrale  -----*/
-.section-principale{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
+  
 .page-accueil{
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
+
 /* ---- Titre page d'accueil ------*/
 .titre-page h1{
   text-align: center;
@@ -67,8 +67,11 @@ body {
   margin-left: 10px;
 }
 
-.widgetNom{
-  width: 50%;
+.widgetNom,
+.widgetPrenom,
+.widgetEmail,
+.widgetMessage{
+  width: 60%;
 }
 
 

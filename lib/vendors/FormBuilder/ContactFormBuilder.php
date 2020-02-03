@@ -13,11 +13,11 @@ class ContactFormBuilder extends FormBuilder
   public function build()
   {
     $this->form->add(new StringField([
-        'divClass'    => 'form-group',
+        'divClass'    => '',
         'label'       => 'Nom : ',
         'name'        => 'lastName',
         'labelClass'  => 'labelNom col-lg-3 col-form-label col-form-label-sm',
-        'widgetClass' => 'widgetNom form-control form-control-sm',
+        'widgetClass' => 'widgetNom form-control-sm',
         'maxLength'   =>100,
         'validators'  => [
           new MaxLengthValidator('L\'auteur spécifié est trop long (100 caractères maximum)', 100),
@@ -25,11 +25,11 @@ class ContactFormBuilder extends FormBuilder
         ],
        ]))
       ->add(new StringField([
-        'divClass'=>  'form-group',
+        'divClass'=>  '',
         'label' =>        'Prénom : ',
         'name' =>         'firstName',
-        'labelClass' =>   'labelPrenom col-lg-2 col-form-label col-form-label-sm',
-        'widgetClass' =>  'widgetPrenom form-control form-control-sm',
+        'labelClass' =>   'labelPrenom col-lg-3 col-form-label col-form-label-sm',
+        'widgetClass' =>  'widgetPrenom form-control-sm',
         'maxLength' =>100,
         'validators' => [
           new MaxLengthValidator('L\'auteur spécifié est trop long (100 caractères maximum)', 100),
@@ -37,11 +37,11 @@ class ContactFormBuilder extends FormBuilder
         ],
        ]))
       ->add(new StringField([
-        'divClass'=>  'form-group',
+        'divClass'=>  '',
         'label' =>        'Email : ',
         'name' =>         'email',
-        'labelClass' =>   'labelEmail col-sm-2 col-form-label col-form-label-sm',
-        'widgetClass' =>  'widgetEmail form-control form-control-sm',
+        'labelClass' =>   'labelEmail col-sm-3 col-form-label col-form-label-sm',
+        'widgetClass' =>  'widgetEmail form-control-sm',
         'maxLength' => 100,
         'validators' => [
           new MaxLengthValidator('Le titre spécifié est trop long (100 caractères maximum)', 100),
@@ -49,11 +49,11 @@ class ContactFormBuilder extends FormBuilder
         ],
        ]))
        ->add(new TextField([
-        'divClass'=>  'form-group',
+        'divClass'=>  '',
         'label' =>        'Message : ',
         'name' =>         'message',
         'labelClass' =>   'labelMessage col-sm-3 col-form-label col-form-label-sm',
-        'widgetClass' =>  'widgetMessage form-control form-control-sm',
+        'widgetClass' =>  'widgetMessage form-control-sm',
         'rows' =>3,
         'cols' => 40,
         'validators' => [
