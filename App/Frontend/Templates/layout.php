@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title><?= $title ?></title>
   <meta name="description" content="Mon premier blog en PHP" />
@@ -32,22 +32,17 @@
   <body>
     <header>
       <!-- Navigation -->
-      <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark">
           <a class="navbar-brand" href="/">Francis Libs</a>
 
           <!-- Collapse button -->
-          <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" 
-            data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" 
-            aria-label="Toggle navigation">
-            <span class="dark-blue-text">
-              <i class="fas fa-bars fa-1x"></i>
-            </span>
-          </button>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
 
           <!-- Collapsible content -->
-          <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto navbar-default">
               <li class="nav-item">
                 <a class="nav-link" href="/">Accueil</a>
@@ -57,9 +52,7 @@
               </li>
               <?php if(!isset($_SESSION['users'])){ ?>
               <li class="nav-item">
-              </li>
-             
-              <a class="nav-link" href="connect.html">Bonjour, identifiez-vous</a>
+                <a class="btn btn-sm" id="bonjour" href="connect.html">Bonjour, identifiez-vous</a>
               </li>
               <li class="nav-item">
                 <a href="register.html" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Nouveau ? Commencez ici.</a>
@@ -68,12 +61,13 @@
                 else
                 {
                   $users = $_SESSION['users'] ?>
-                  <div class="col-lg-3 navbar-header">
-                    <p class="navbar-brand">Bonjour <?= $users->login() ?></p>
+                  <li class="nav-item">
+                    <span class="navbar-brand">Bonjour <?= $users->login() ?></span>
+                  </li>
+                  <li class="nav-item">
                     <a href="deconnect.html" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Déconnexion</a>
-                  </div>
+                  </li>
                 <?php } ?>
-
             </ul>
           </div>
         </div>
@@ -90,16 +84,14 @@
     <!-- Footer -->
     <footer>
       <hr/>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-2 offset-lg-1 liens">
-            <a class="btn btn-link liens" href="/admin/" role="button">Administration</a>
+      <div class="footer">
+          <div class="liens">
+            <a class="lienAdmin" href="/admin/" role="button">Administration</a>
           </div>
-          <div class="col-lg-2 offset-lg-1 liens">
-            <a class="btn btn-link liens" href="/" role="button">Mon parcours</a>
+          <div class="liens">
+            <a class="lienCV" href="/" role="button">Mon parcours</a>
           </div>
         </div>
-      </div>
     </footer>
 
     <!-- Optional JavaScript -->

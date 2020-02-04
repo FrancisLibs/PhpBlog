@@ -15,14 +15,7 @@ class TextField extends Field
       $widget .= $this->errorMessage.'<br />';
     }
 
-    $widget .= '<div';
-
-    if (!empty($this->divClass))
-    {
-      $widget .= ' class="'.$this->divClass.'"';
-    }
-
-    $widget .= '><label';
+    $widget .= '<div class="'.$this->divClass.'"><label for="'.$this->name.'"';
 
     if (!empty($this->labelClass))
     {
@@ -35,7 +28,8 @@ class TextField extends Field
     {
       $widget .= ' class="'.$this->widgetClass.'"';
     }
-     $widget .= ' name="'.$this->name.'"';
+    
+    $widget .= ' name="'.$this->name.'"';
 
     if (!empty($this->cols))
     {

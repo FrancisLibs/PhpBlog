@@ -13,10 +13,10 @@ class ContactFormBuilder extends FormBuilder
   public function build()
   {
     $this->form->add(new StringField([
-        'divClass'    => '',
+        'divClass'    => 'form-group',
         'label'       => 'Nom : ',
         'name'        => 'lastName',
-        'labelClass'  => 'labelNom col-lg-3 col-form-label col-form-label-sm',
+        'labelClass'  => 'labelNom col-3 col-form-label col-form-label-sm',
         'widgetClass' => 'widgetNom form-control-sm',
         'maxLength'   =>100,
         'validators'  => [
@@ -25,10 +25,10 @@ class ContactFormBuilder extends FormBuilder
         ],
        ]))
       ->add(new StringField([
-        'divClass'=>  '',
+        'divClass'=>  'form-group',
         'label' =>        'Prénom : ',
         'name' =>         'firstName',
-        'labelClass' =>   'labelPrenom col-lg-3 col-form-label col-form-label-sm',
+        'labelClass' =>   'labelPrenom col-3 col-form-label col-form-label-sm',
         'widgetClass' =>  'widgetPrenom form-control-sm',
         'maxLength' =>100,
         'validators' => [
@@ -37,10 +37,10 @@ class ContactFormBuilder extends FormBuilder
         ],
        ]))
       ->add(new StringField([
-        'divClass'=>  '',
+        'divClass'=>  'form-group',
         'label' =>        'Email : ',
         'name' =>         'email',
-        'labelClass' =>   'labelEmail col-sm-3 col-form-label col-form-label-sm',
+        'labelClass' =>   'labelEmail col-3 col-form-label col-form-label-sm',
         'widgetClass' =>  'widgetEmail form-control-sm',
         'maxLength' => 100,
         'validators' => [
@@ -49,10 +49,10 @@ class ContactFormBuilder extends FormBuilder
         ],
        ]))
        ->add(new TextField([
-        'divClass'=>  '',
+        'divClass'=>  'form-group',
         'label' =>        'Message : ',
         'name' =>         'message',
-        'labelClass' =>   'labelMessage col-sm-3 col-form-label col-form-label-sm',
+        'labelClass' =>   'labelMessage col-3 col-form-label col-form-label-sm',
         'widgetClass' =>  'widgetMessage form-control-sm',
         'rows' =>3,
         'cols' => 40,
