@@ -18,7 +18,7 @@ class Contact extends Entity
 
   public function isValid()
   {
-    return !empty($this->lastName) || (empty($this->firstName) || empty($this->email) || empty($this->message));
+    return !(empty($this->lastName) || empty($this->firstName) || empty($this->email) || empty($this->message));
   }
 
 

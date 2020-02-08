@@ -1,41 +1,46 @@
-<h4>Auteur : <?= $post['author_name'] ?></h4>
-<h4>Titre : <?= $post['title'] ?></h4>
-<h4>Chapô : <?= $post['chapo'] ?></h4>
-<h4>Contenu : <?= $post['contenu'] ?></h4>
-<h4>Créé le : <?= $post['edition_date']->format('d/m/Y à H\hi') ?></h4>
-
-<table>
-  <tr>
-    <th>Auteur</th>
-    <th>Commentaire</th>
-    <th>Date création</th>
-    <th>Action</th>
-  </tr>
-
-  <?php foreach ($comments as $comment) 
-  { 
-    if($comment->state() == 0 || $comment->state() == 1)
+<div class="back-show-contenu">
+  <div class="entete">
+    <h2><?= $post['title'] ?></h2>
+    <p class="show-autor">Par <em><?= $post['autor_name'] ?></em>, le <?= $post['edition_date']->format('d/m/Y à H\hi') ?></p>
+    <?php 
+    if($post['edition_date'] != $post['updatedate'] && isset($post['update_date'])) 
     { ?>
-        <tr>
-          <td>
-            <?= $comment->author_name() ?>
-          </td>
-          <td>
-            <?= $comment->contenu() ?>
-          </td>
-          <td>
-            <?= $comment->edition_date()->format('d/m/Y à H\hi') ?>
-          </td>
-          <td>
-            <a href="comment-update-<?= $comment->id() ?>.html"><img src="/images/update.png" alt="Modifier" /></a>
-            <a href="comment-refuse-<?= $comment->id() ?>.html"><img src="/images/delete.png" alt="Supprimer" /></a>
-            <?php if($comment->state()==0) {?><a href="comment-validate-<?= $comment->id() ?>.html"><img src="/images/select.png" alt="Valider" /></a> <?php } ?>
-          </td>
-        </tr>
-    <?php }
-   } ?>
-</table>
+      <p>, modifié le <?= $post['update_date']->format('d/m/Y à H\hi') ?></p>
+    <?php } ?>
+  </div>
 
-<p><a href="commenter-<?= $post['id'] ?>.html">Ajouter un commentaire</a></p>
-<p><a href="posts.html">Retour à la liste des posts</a></p>
+  <h3 class="show-chapo"><?= $post['chapo'] ?></h3>
+  <p class="show-contenu"><?= nl2br($post['contenu']) ?></p>
 
+  <?php
+  if (empty($comments))
+  { ?>
+    <p class="show-ajout-commentaire">Aucun commentaire n'a encore été posté. Soyez le premier à en laisser un !</p>
+  <?php }
+  else
+  { 
+    foreach ($comments as $comment) 
+    { ?>
+      <div class="back-show-entete">
+        <span>Commentaire laissé par <?= htmlspecialchars($comment->author_name()) ?></span>
+        <span>, le &nbsp;<?= htmlspecialchars($comment->edition_date()->format('d/m/Y à H\hi')) ?></span>
+        <div>
+          <a class="btn btn-info btn-xs" role="button" href="comment-update-<?= $comment->id() ?>.html">Modifier</a>
+          <a class="btn btn-info btn-xs" role="button" href="comment-refuse-<?= $comment->id() ?>.html">Refuser</a>
+          <?php 
+            if($comment->state()==0) 
+            { ?>
+              <a class="btn btn-info btn-xs" role="button" href="comment-validate-<?= $comment->id() ?>.html">Valider</a> 
+          <?php } ?>
+        </div>
+      </div>
+      <div>
+        <?= htmlspecialchars($comment->contenu()) ?>
+      </div>
+    <?php } 
+  }?> 
+
+  <a class="show-ajout-commentaire" href="commenter-<?= $post['id'] ?>.html">Ajouter un commentaire</a>
+  <br /><br />
+  <a class="show-ajout-commentaire"href="posts.html">Retour à la liste des posts</a>
+</div>

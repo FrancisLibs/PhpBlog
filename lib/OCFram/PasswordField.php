@@ -14,14 +14,33 @@ class PasswordField extends Field
       $widget .= $this->errorMessage.'<br />';
     }
 
-    $widget .= '<label for="'.$this->name.'">'.$this->label.'</label><input type="password" name="'.$this->name.'"';
+    $widget .= '<div class="'.$this->divClass.'"><label for="'.$this->name.'"';
+
+     if (!empty($this->labelClass))
+    {
+      $widget .= ' class="'.$this->labelClass.'"';
+    }
+
+    $widget .= '>'.$this->label.'</label><input type="password"';
+
+    if (!empty($this->widgetClass))
+    {
+      $widget .= ' class="'.$this->widgetClass.'"';
+    }
+
+    $widget.= ' name="'.$this->name.'"';
+
+    if (!empty($this->value))
+    {
+      $widget .= ' value="'.htmlspecialchars($this->value).'"';
+    }
 
     if (!empty($this->maxLength))
     {
       $widget .= ' maxlength="'.$this->maxLength.'"';
     }
 
-    return $widget .= ' >';
+    return $widget .= ' /></div>';
   }
 
   public function setMaxLength($maxLength)

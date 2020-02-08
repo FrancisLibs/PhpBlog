@@ -16,11 +16,11 @@ class ContactFormBuilder extends FormBuilder
         'divClass'    => 'form-group',
         'label'       => 'Nom : ',
         'name'        => 'lastName',
-        'labelClass'  => 'labelNom col-3 col-form-label col-form-label-sm',
-        'widgetClass' => 'widgetNom form-control-sm',
+        'labelClass'  => 'labelNom col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widgetNom form-control input-sm',
         'maxLength'   =>100,
         'validators'  => [
-          new MaxLengthValidator('L\'auteur spécifié est trop long (100 caractères maximum)', 100),
+          new MaxLengthValidator('Le nom spécifié est trop long (100 caractères maximum)', 100),
           new NotNullValidator('Merci de spécifier l\'auteur du message'),
         ],
        ]))
@@ -28,11 +28,11 @@ class ContactFormBuilder extends FormBuilder
         'divClass'=>  'form-group',
         'label' =>        'Prénom : ',
         'name' =>         'firstName',
-        'labelClass' =>   'labelPrenom col-3 col-form-label col-form-label-sm',
-        'widgetClass' =>  'widgetPrenom form-control-sm',
+        'labelClass' =>   'labelPrenom col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' =>  'widgetPrenom form-control input-sm',
         'maxLength' =>100,
         'validators' => [
-          new MaxLengthValidator('L\'auteur spécifié est trop long (100 caractères maximum)', 100),
+          new MaxLengthValidator('Le prénom spécifié est trop long (100 caractères maximum)', 100),
           new NotNullValidator('Merci de spécifier l\'auteur du message'),
         ],
        ]))
@@ -40,11 +40,11 @@ class ContactFormBuilder extends FormBuilder
         'divClass'=>  'form-group',
         'label' =>        'Email : ',
         'name' =>         'email',
-        'labelClass' =>   'labelEmail col-3 col-form-label col-form-label-sm',
-        'widgetClass' =>  'widgetEmail form-control-sm',
+        'labelClass' =>   'labelEmail col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' =>  'widgetEmail form-control input-sm',
         'maxLength' => 100,
         'validators' => [
-          new MaxLengthValidator('Le titre spécifié est trop long (100 caractères maximum)', 100),
+          new MaxLengthValidator('L\'email spécifié est trop long (100 caractères maximum)', 100),
           new NotNullValidator('Merci de spécifier votre adresse email'),
         ],
        ]))
@@ -52,8 +52,8 @@ class ContactFormBuilder extends FormBuilder
         'divClass'=>  'form-group',
         'label' =>        'Message : ',
         'name' =>         'message',
-        'labelClass' =>   'labelMessage col-3 col-form-label col-form-label-sm',
-        'widgetClass' =>  'widgetMessage form-control-sm',
+        'labelClass' =>   'labelMessage col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' =>  'widgetMessage form-control input-sm',
         'rows' =>3,
         'cols' => 40,
         'validators' => [

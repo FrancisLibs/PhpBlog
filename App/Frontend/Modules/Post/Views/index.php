@@ -1,22 +1,30 @@
 
-<div class="page-accueil">
-  <div class="titre-page">
-    <h1>Francis Libs</h1>
-  </div>
-  <div class ="sous-titre">            
-    <h2>Trait d'union entre votre immagination et votre communication Web</h2>
-  </div>
-
-  <!-- Zone formulaire  -->
-  <div class="zone-formulaire">
-    <div class="formulaire">
-      <p id="titreFormulaire">Contact</p>
-      <form action ="" method="post" class="formulaireMessage">
-        <?= $form ?>
-        <div id="btnValid">
-          <input type="submit" value="Valider" class="btnValid" />
-        </div>
-      </form>
+<div class="bloc-texte">
+  <div class="bloc-perso">
+    <div class="nom">
+      <h1>Francis Libs</h1>
     </div>
+    <div class="titre">
+      <h2>Developpeur WEB</h2>
+    </div>
+  </div>
+  <div class="sous-titre">            
+    <h2>Le trait d'union entre votre immagination et votre communication Web</h2>
+  </div>
+</div>
+
+<!-- Zone formulaire  -->
+<div class="zone-formulaire-accueil">
+  <div>
+    <?php if ($user->hasFlash()) echo $user->getFlash(), '</p>'; ?>
+  </div>
+  <div class="formulaire">
+    <p id="titreFormulaire">Contact</p>
+    <form action ="" method="post" class="formulaireMessage">
+      <?= $form ?>
+      <div id="btnValid">
+        <input type="submit" value="Valider" class="btnValid" />
+      </div>
+    </form>
   </div>
 </div>

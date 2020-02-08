@@ -13,11 +13,12 @@ class RegistrationFormBuilder extends FormBuilder
   {
     $this->form
       ->add(new StringField([
-        'divClassName'=>'form-group',
+        'divClass'=>'form-group',
         'label' => 'pseudo : ',
         'name' => 'login',
-        'labelClass' => 'labelTitre col-lg-2 col-form-label col-form-label-sm',
-        'widgetClass' => 'widgetTitre form-control form-control-sm',
+        'labelClass' => 'labelLogin col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widgetLogin form-control input-sm',
+        'maxLength' => 50,
         'maxLength' => 50,
         'validators' => [
           new MaxLengthValidator('Le nom spécifié est trop long (50 caractères maximum)', 50),
@@ -25,11 +26,12 @@ class RegistrationFormBuilder extends FormBuilder
         ],
        ]))
       ->add(new StringField([
-        'divClassName'=>'form-group',
+        'divClass'=>'form-group',
         'label' => 'email : ',
         'name' => 'email',
-        'labelClass' => 'labelChapo col-lg-2 col-form-label col-form-label-sm',
-        'widgetClass' => 'widgetChapo form-control form-control-sm',
+        'labelClass' => 'labelEmail col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widgetEmail form-control input-sm',
+        'maxLength' => 50,
         'maxLength' => 50,
         'validators' => [
           new MaxLengthValidator('L\'email spécifié est trop long (100 caractères maximum)', 100),
@@ -37,11 +39,12 @@ class RegistrationFormBuilder extends FormBuilder
         ],
         ]))
       ->add(new PasswordField([
-        'divClassName'=>'form-group',
+        'divClass'=>'form-group',
         'label' => 'mdp : ',
         'name' => 'password',
-        'labelClass' => 'labelChapo col-lg-2 col-form-label col-form-label-sm',
-        'widgetClass' => 'widgetChapo form-control form-control-sm',
+        'labelClass' => 'labelMdp col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widgetMdp form-control input-sm',
+        'maxLength' => 50,
         'maxLength' => 50,
         'validators' => [
           new MaxLengthValidator('Le mot de passe spécifié est trop long (50 caractères maximum)', 50),
@@ -49,11 +52,12 @@ class RegistrationFormBuilder extends FormBuilder
         ],
         ]))
       ->add(new PasswordField([
-        'divClassName'=>'form-group',
+        'divClass'=>'form-group',
         'label' => 'confirmation : ',
         'name' => 'verifyPassword',
-        'labelClass' => 'labelChapo col-lg-2 col-form-label col-form-label-sm',
-        'widgetClass' => 'widgetChapo form-control form-control-sm',
+        'labelClass' => 'labelConfirm col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widgetConfirm form-control input-sm',
+        'maxLength' => 50,
         'maxLength' => 50,
         'validators' => [
           new MaxLengthValidator('Le mot de passe spécifié est trop long (50 caractères maximum)', 50),
