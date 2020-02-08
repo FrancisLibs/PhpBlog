@@ -137,7 +137,11 @@ hr{
 .widgetMessage,
 .widgetLogin,
 .widgetMdp,
-.widgetConfirm{
+.widgetConfirm,
+.widgetTitre,
+.widgetChapo,
+.widgetContenu
+{
   width: 50%;
   height: 2em;
   display: inline;
@@ -217,6 +221,9 @@ hr{
 }
 
 /* ---- Page show ------*/
+.front-show-contenu{
+  color: white;
+}
 
 .article{
   margin-left: 10px;
@@ -234,14 +241,6 @@ hr{
 
 .show-autor{
   margin-left: 10px;
-}
-
-.show-chapo{
-  color: white;
-}
-
-.show-contenu{
-  color:white;
 }
 
 .show-ajout-commentaire{
@@ -325,6 +324,16 @@ hr{
 }
 
 .back-show-contenu{
+  color: white;
+}
+
+/*---------------Page admin - post-insert -----------------*/
+.back-postInsert-contenu{
+  color: white;
+}
+
+/*---------------Page admin - post-insert -----------------*/
+.back-commentInsert-contenu{
   color: white;
 }
 

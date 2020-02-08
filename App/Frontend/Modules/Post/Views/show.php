@@ -1,5 +1,5 @@
 
-<div class="article">
+<div class="front-show-contenu">
   <div class="entete">
     <h2><?= $post['title'] ?></h2>
     <p class="show-autor">Par <em><?= $post['autor_name'] ?></em>, le <?= $post['edition_date']->format('d/m/Y à H\hi') ?></p>
@@ -28,15 +28,13 @@
 
   foreach ($comments as $comment)
   { ?>
-  <fieldset>
-    <legend>
-      Posté par <strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['edition_date']->format('d/m/Y à H\hi') ?>
-      <?php if ($user->isAuthenticated() && $comment['users_id'] == $users->id()) { ?>
-        <a href="comment-update-<?= $comment['id'] ?>.html">Modifier</a>
-      <?php } ?>
-    </legend>
-    <p><?= nl2br(htmlspecialchars($comment['contenu'])) ?></p>
-  </fieldset>
+  <legend>
+    Posté par <strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['edition_date']->format('d/m/Y à H\hi') ?>
+    <?php if ($user->isAuthenticated() && $comment['users_id'] == $users->id()) { ?>
+      <a class="btn btn-info btn-xs" role="button" href="comment-update-<?= $comment['id'] ?>.html">Modifier</a>
+    <?php } ?>
+  </legend>
+  <p><?= nl2br(htmlspecialchars($comment['contenu'])) ?></p>
   <?php
   } ?>
 </div>
