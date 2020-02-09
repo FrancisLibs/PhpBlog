@@ -28,7 +28,11 @@ class PostController extends BackController
 
       if($contact->isValid())
       {
-        echo 'passage';
+        $message= $contact->firstName().
+        '<br />'. $contact->firstName().
+        '<br />'. $contact->lastName().
+        '<br />'. $contact->email().
+        '<br />'. $contact->message();
     	  // Envoi du mail du formulaire
     	  // Create the Transport
     	  $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
@@ -39,10 +43,10 @@ class PostController extends BackController
     	  $mailer = new Swift_Mailer($transport);
 
     	  // Create a message
-    	  $message = (new Swift_Message('Activer votre compte'))
+    	  $message = (new Swift_Message('Message du blog php'))
     		->setFrom([$contact->email() => $contact->lastName()])
     		->setTo(['fr.libs@gmail.com'])
-    		->setBody($contact->message());
+    		->setBody($message);
 
     	  // Send the message
     	  $result = $mailer->send($message);
@@ -54,9 +58,7 @@ class PostController extends BackController
         $this->app->user()->setFlash('Merci de remplir tous les champs du formulaire !');
         $this->app->httpResponse()->redirect('/');
       }
-  	}
-  	else
-  	{
+    }
 
   		$contact = new Contact;
 
@@ -69,7 +71,6 @@ class PostController extends BackController
 
   		 // On ajoute une définition pour le titre.
   		$this->page->addVar('title', 'Mon blog PHP');
-  	}
   }
 
   public function executeShowPosts(HTTPRequest $request)
