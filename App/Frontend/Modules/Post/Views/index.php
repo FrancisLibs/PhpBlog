@@ -22,8 +22,8 @@
     <p id="titreFormulaire">Contact</p>
     <form action ="" method="post" class="formulaireMessage">
       <?= $form ?>
-      <div id="btnValid">
-        <input type="submit" value="Valider" class="btnValid" />
+      <div class="index-btn-valid">
+        <input type="submit" value="Valider" class="btnValid font-weight-bold" />
       </div>
     </form>
   </div>

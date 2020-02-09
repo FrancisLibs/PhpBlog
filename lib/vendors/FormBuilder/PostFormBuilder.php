@@ -7,7 +7,6 @@ use \OCFram\TextField;
 use \OCFram\HiddenField;
 use \OCFram\MaxLengthValidator;
 use \OCFram\NotNullValidator;
-use \Entity\Post;
 
 class PostFormBuilder extends FormBuilder
 {
@@ -17,8 +16,8 @@ class PostFormBuilder extends FormBuilder
         'divClass'=>'form-group',
         'label' => 'titre',
         'name' => 'title',
-        'labelClass' => 'labelTitre col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widgetTitre form-control input-sm w-50',
+        'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widget form-control input-sm w-50',
         'maxLength' => 100,
         'validators' => [
           new MaxLengthValidator('Le titre spécifié est trop long (100 caractères maximum)', 100),
@@ -29,8 +28,8 @@ class PostFormBuilder extends FormBuilder
         'divClass'=>'form-group',
         'label' => 'chapo',
         'name' => 'chapo',
-        'labelClass' => 'labelChapo col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widgetChapo form-control input-sm w-50',
+        'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widget form-control input-sm w-50',
         'maxLength' => 255,
         'validators' => [
           new MaxLengthValidator('Le chapo spécifié est trop long (255 caractères maximum)', 255),
@@ -41,8 +40,8 @@ class PostFormBuilder extends FormBuilder
         'divClass'=>'form-group',
         'label' => 'contenu',
         'name' => 'contenu',
-        'labelClass' => 'labelContenu col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widgetContenu form-control input-sm w-50',
+        'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widget form-control input-sm w-50',
         'rows' => 8,
         'cols' => 60,
         'validators' => [

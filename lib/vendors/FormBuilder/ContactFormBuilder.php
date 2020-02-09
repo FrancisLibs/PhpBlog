@@ -16,8 +16,8 @@ class ContactFormBuilder extends FormBuilder
         'divClass'    => 'form-group',
         'label'       => 'Nom : ',
         'name'        => 'lastName',
-        'labelClass'  => 'labelNom col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widgetNom form-control input-sm',
+        'labelClass'  => 'label col-4 col-form-label col-form-label-sm inputsm font-weight-bold',
+        'widgetClass' => 'widget form-control input-sm col-7',
         'maxLength'   =>100,
         'validators'  => [
           new MaxLengthValidator('Le nom spécifié est trop long (100 caractères maximum)', 100),
@@ -28,8 +28,8 @@ class ContactFormBuilder extends FormBuilder
         'divClass'=>  'form-group',
         'label' =>        'Prénom : ',
         'name' =>         'firstName',
-        'labelClass' =>   'labelPrenom col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' =>  'widgetPrenom form-control input-sm',
+        'labelClass' =>   'label col-4 col-form-label col-form-label-sm inputsm font-weight-bold',
+        'widgetClass' =>  'widget form-control input-sm col-7',
         'maxLength' =>100,
         'validators' => [
           new MaxLengthValidator('Le prénom spécifié est trop long (100 caractères maximum)', 100),
@@ -40,8 +40,8 @@ class ContactFormBuilder extends FormBuilder
         'divClass'=>  'form-group',
         'label' =>        'Email : ',
         'name' =>         'email',
-        'labelClass' =>   'labelEmail col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' =>  'widgetEmail form-control input-sm',
+        'labelClass' =>   'label col-4 col-form-label col-form-label-sm inputsm font-weight-bold',
+        'widgetClass' =>  'widget form-control input-sm col-7',
         'maxLength' => 100,
         'validators' => [
           new MaxLengthValidator('L\'email spécifié est trop long (100 caractères maximum)', 100),
@@ -52,8 +52,8 @@ class ContactFormBuilder extends FormBuilder
         'divClass'=>  'form-group',
         'label' =>        'Message : ',
         'name' =>         'message',
-        'labelClass' =>   'labelMessage col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' =>  'widgetMessage form-control input-sm',
+        'labelClass' =>   'label col-4 col-form-label col-form-label-sm inputsm font-weight-bold',
+        'widgetClass' =>  'widget form-control input-sm col-7',
         'rows' =>3,
         'cols' => 40,
         'validators' => [

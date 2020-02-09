@@ -5,7 +5,6 @@ use \OCFram\FormBuilder;
 use \OCFram\StringField;
 use \OCFram\TextField;
 use \OCFram\HiddenField;
-use \OCFram\Checkbox;
 use \OCFram\MaxLengthValidator;
 use \OCFram\NotNullValidator;
 
@@ -18,8 +17,8 @@ class CommentFormBuilder extends FormBuilder
         'divClass'=>'form-group',
         'label' => 'Commentaire',
         'name' => 'contenu',
-        'labelClass' => 'labelContenu col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widgetContenu form-control input-sm w-50',
+        'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widget form-control input-sm w-50',
         'rows' => 7,
         'cols' => 50,
         'validators' => [

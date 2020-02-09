@@ -28,7 +28,11 @@ h3{
   color: white;
 }
 
-/* ---- Barre de navigation ------*/
+.table{
+  color:white;
+}
+/*---------Layout-----------------*/
+
 .navbar .navbar-default{
      background-color: transparent;
      font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -66,9 +70,11 @@ hr{
 /*------Zone centrale  -----*/
 .contenu-principal{
   min-height: 450px;
+  color: white;
+  margin-left: 10px;
 }
 
-/* ---- Titre page d'accueil ------*/
+/* ----  Page d'accueil / index------*/
 
 .bloc-texte{
   display: flex;
@@ -86,22 +92,16 @@ hr{
   margin: 20px;
 }
 
-.nom, .titre, .sous-titre{
-  color: white;
-}
-
 .sous-titre{
   text-align: center;
 }
-
-
-/* ---- Page d'accueil ------*/
 
 .zone-formulaire-accueil{
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
 .formulaire{
@@ -118,82 +118,60 @@ hr{
 #titreFormulaire{
   margin-top: 2px;
   margin-left: 10px;
-  color : white;
+  font-size: 1.5em;
 }
 
-.labelNom,
-.labelPrenom,
-.labelEmail,
-.labelMessage,
-.labelLogin,
-.labelMdp,
-.labelConfirm{
-  color: white;
-}
-
-.widgetNom,
-.widgetPrenom,
-.widgetEmail,
-.widgetMessage,
-.widgetLogin,
-.widgetMdp,
-.widgetConfirm,
-.widgetTitre,
-.widgetChapo,
-.widgetContenu
-{
-  width: 50%;
-  height: 2em;
+.widget{
   display: inline;
 }
 
 .btnValid{
   color : white;
   padding: 0 10 0 10;
-  margin-bottom: 5px;
   background-color: transparent;
   border: solid 2px white;
   border-radius: 3px;
-  width: 100px;
+  width: 30%;
+  margin-bottom: 10px;
 }
 
-#btnValid{
+.index-btn-valid{
+  width: 100%;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 /* ---- Page Articles  / showPosts------*/
 .contenu-principal .showposts{
-  margin-left:  10px;
-}
-.showposts .entete{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
   color: white;
 }
 
-.showposts .post-title{
+.showposts .entete{
+  margin: 0 auto;
+}
+
+.front-showPosts-title{
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: baseline;
 }
 
-.showposts .post-title .btnLire{
+.front-showPosts-title .btn-lire{
   border: solid 1px white;
   background: #447fb9;
-  color: white;
   height: 30px;
   border-radius: 5px;
   margin-right: 15px;
   margin-top: 7px;
   padding: 1px 5px 5px 5px;
-
-}
-
-.showposts .post-title, 
-.showposts .post-chapo{
-  color: white!important;
+  color: white;
+  margin-right: 10px;
 }
 
 .showposts .attributsPost{
@@ -202,34 +180,26 @@ hr{
   padding-left: 10px;
 }
 
-.chapo{
+.front-showPosts-chapo{
   font-size: 1.5em;
   margin-bottom: 30px;
 }
 
-/* ---- Page Connexion ------*/
-.pageConnexion .titreConnexion{
-  color: white;
-}
-
-.zone-formulaire{
-  margin-top: 100px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-}
-
 /* ---- Page show ------*/
+
 .front-show-contenu{
   color: white;
 }
 
-.article{
-  margin-left: 10px;
+.front-show-contenu .entete{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: baseline;
 }
 
-.entete{
+.front-connect-entete{
   width: 80%;
   display: flex;
   flex-direction: row;
@@ -243,8 +213,27 @@ hr{
   margin-left: 10px;
 }
 
-.show-ajout-commentaire{
+.front-show-contenu .titreCommentaires{
+  font-size: 1.7em;
   color: yellow;
+}
+
+.front-show-contenu .ajout-commentaire{
+  color: white;
+  font-size: 0.5em;
+}
+
+/* ---- Page Connexion ------*/
+.pageConnexion .titreConnexion{
+  color: white;
+}
+
+.zone-formulaire{
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
 }
 
 /*---------------Page admin - backend -----------------*/
@@ -314,7 +303,7 @@ hr{
   font-size: 1em!important;
 }
 
-/*---------------Page admin - show -----------------*/
+/*---------------Page admin - Post - show -----------------*/
 .back-show-entete{
   display: flex;
   flex-direction: row;
@@ -335,6 +324,20 @@ hr{
 /*---------------Page admin - post-insert -----------------*/
 .back-commentInsert-contenu{
   color: white;
+}
+
+/*---------------Page admin - users-show -----------------*/
+.back-usersShow-contenu{
+  color: white;
+}
+
+.titre-admin-show{
+  margin: 0 auto;
+}
+
+.table-admin-show{
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* ---- Footer ------*/

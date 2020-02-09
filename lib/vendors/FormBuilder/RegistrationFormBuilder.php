@@ -16,8 +16,8 @@ class RegistrationFormBuilder extends FormBuilder
         'divClass'=>'form-group',
         'label' => 'pseudo : ',
         'name' => 'login',
-        'labelClass' => 'labelLogin col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widgetLogin form-control input-sm',
+        'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widget form-control input-sm',
         'maxLength' => 50,
         'maxLength' => 50,
         'validators' => [
@@ -29,8 +29,8 @@ class RegistrationFormBuilder extends FormBuilder
         'divClass'=>'form-group',
         'label' => 'email : ',
         'name' => 'email',
-        'labelClass' => 'labelEmail col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widgetEmail form-control input-sm',
+        'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widget form-control input-sm',
         'maxLength' => 50,
         'maxLength' => 50,
         'validators' => [
@@ -42,8 +42,8 @@ class RegistrationFormBuilder extends FormBuilder
         'divClass'=>'form-group',
         'label' => 'mdp : ',
         'name' => 'password',
-        'labelClass' => 'labelMdp col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widgetMdp form-control input-sm',
+        'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widget form-control input-sm',
         'maxLength' => 50,
         'maxLength' => 50,
         'validators' => [
@@ -55,8 +55,8 @@ class RegistrationFormBuilder extends FormBuilder
         'divClass'=>'form-group',
         'label' => 'confirmation : ',
         'name' => 'verifyPassword',
-        'labelClass' => 'labelConfirm col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widgetConfirm form-control input-sm',
+        'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widget form-control input-sm',
         'maxLength' => 50,
         'maxLength' => 50,
         'validators' => [
