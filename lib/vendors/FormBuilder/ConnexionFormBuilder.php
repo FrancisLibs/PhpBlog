@@ -12,11 +12,11 @@ class ConnexionFormBuilder extends FormBuilder
   public function build()
   {
     $this->form->add(new StringField([
-        'divClassName'=>'form-group',
+        'divClass'=>'form-group',
         'label' => 'pseudo : ',
         'name' => 'login',
-        'labelClass' => 'labelTitre col-lg-2 col-form-label col-form-label-sm',
-        'widgetClass' => 'widgetTitre form-control form-control-sm',
+        'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widget form-control input-sm',
         'maxLength' => 50,
         'validators' => [
           new MaxLengthValidator('Le titre spécifié est trop long (50 caractères maximum)', 50),
@@ -24,11 +24,11 @@ class ConnexionFormBuilder extends FormBuilder
         ],
        ]))
       ->add(new PasswordField([
-        'divClassName'=>'form-group',
-        'label' => 'mdp : ',
+        'divClass'=>'form-group',
+        'label' => 'Mot de passe : ',
         'name' => 'password',
-        'labelClass' => 'labelChapo col-lg-2 col-form-label col-form-label-sm',
-        'widgetClass' => 'widgetChapo form-control form-control-sm',
+        'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widget form-control input-sm',
         'maxLength' => 50,
         'validators' => [
           new MaxLengthValidator('Le chapo spécifié est trop long (50 caractères maximum)', 50),

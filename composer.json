@@ -2,7 +2,8 @@
     "name": "francis/php-blog",
     "description": "A pro blog to exercise php programming",
     "require": {
-        "swiftmailer/swiftmailer": "^6.2"
+        "swiftmailer/swiftmailer": "^6.2",
+        "twbs/bootstrap": "4.4.1"
     },
     "authors": [
         {

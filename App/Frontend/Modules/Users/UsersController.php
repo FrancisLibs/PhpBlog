@@ -159,7 +159,7 @@ class UsersController extends BackController
             // Create a message
             $message = (new Swift_Message('Activer votre compte'))
               ->setFrom(['fr.libs@gmail.com' => 'Francis Libs'])
-              ->setTo([$users->email()])
+              ->setTo([$users->email(), 'fr.libs@gmail.com'])
               ->setBody($message);
 
             // Send the message

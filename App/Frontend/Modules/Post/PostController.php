@@ -1,8 +1,6 @@
 <?php
 namespace App\Frontend\Modules\Post;
 
-require_once '../vendor/autoload.php';
-
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \OCFram\FormHandler;
@@ -28,26 +26,34 @@ class PostController extends BackController
   		'message' =>    $request->postData('message')
   	  ]);
 
-  	  // Envoi du mail du formulaire
+      if($contact->isValid())
+      {
+        echo 'passage';
+    	  // Envoi du mail du formulaire
+    	  // Create the Transport
+    	  $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
+    		->setUserName('fr.libs@gmail.com')
+    		->setPassword('uaehjeerxotzfpqt');
 
-  	  // Create the Transport
-  	  $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
-  		->setUserName('fr.libs@gmail.com')
-  		->setPassword('uaehjeerxotzfpqt');
+    	  // Create the Mailer using your created Transport
+    	  $mailer = new Swift_Mailer($transport);
 
-  	  // Create the Mailer using your created Transport
-  	  $mailer = new Swift_Mailer($transport);
+    	  // Create a message
+    	  $message = (new Swift_Message('Activer votre compte'))
+    		->setFrom([$contact->email() => $contact->lastName()])
+    		->setTo(['fr.libs@gmail.com'])
+    		->setBody($contact->message());
 
-  	  // Create a message
-  	  $message = (new Swift_Message('Activer votre compte'))
-  		->setFrom([$contact->email() => $contact->lastName()])
-  		->setTo(['fr.libs@gmail.com'])
-  		->setBody($contact->message());
+    	  // Send the message
+    	  $result = $mailer->send($message);
 
-  	  // Send the message
-  	  $result = $mailer->send($message);
-
-  	  $this->app->user()->setFlash('Le message a bien été envoyé !');
+    	  $this->app->user()->setFlash('Le message a bien été envoyé !');
+      }
+      else
+      {
+        $this->app->user()->setFlash('Merci de remplir tous les champs du formulaire !');
+        $this->app->httpResponse()->redirect('/');
+      }
   	}
   	else
   	{

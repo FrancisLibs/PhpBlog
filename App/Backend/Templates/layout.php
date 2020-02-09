@@ -36,36 +36,47 @@
   <body>
     <header>
       <!-- Navigation -->
-      <nav class="navbar navbar-expand-md navbar-default navbar-dark">
-        <div class="container-fluid">
-          <div class="col-lg-3 navbar-header">
-            <a class="navbar-brand" href="/">Francis Libs</a>
-          </div>
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/">Francis Libs</a>
           <!-- Collapse button -->
-          <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
-            aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="dark-blue-text"><i
-            class="fas fa-bars fa-1x"></i></span>
-          </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
           <!-- Collapsible content -->
-          <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto navbar-default">
               <li class="nav-item">
                 <a class="nav-link" href="/">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/admin/posts.html">Gestion Post</a>
+                <a class="nav-link" href="/admin/posts.html">Articles</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/admin/users.html">Gestion utilisateurs</a>
+                <a class="nav-link" href="/admin/users.html">Utilisateurs</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/admin/admin.html">Gestion administrateurs</a>
+                <a class="nav-link" href="/admin/admin.html">Administrateurs</a>
               </li>
-              <?php $users = $_SESSION['users'] ?>
-              <div class="col-lg-3 navbar-header">
-                <p class="navbar-brand">Bonjour <?= $users->login() ?></p>
-                <a href="deconnect.html" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Déconnexion</a>
+              <?php if(!isset($_SESSION['users'])){ ?>
+            <li class="nav-item">
+              <a class="btn btn-sm" id="bonjour" href="connect.html">Bonjour, identifiez-vous</a>
+            </li>
+            <li class="nav-item">
+              <a href="register.html" id="nouveau" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Nouveau ? Commencez ici.</a>
+            </li>
+            <?php }
+              else
+              {
+                $users = $_SESSION['users'] ?>
+                <li class="nav-item">
+                  <span class="navbar-brand">Bonjour <?= $users->login() ?></span>
+                </li>
+                <li class="nav-item">
+                  <a href="deconnect.html" id="deconnect" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Déconnexion</a>
+                </li>
+              <?php } ?>
               </div>
             </ul>
           </div>
@@ -74,30 +85,30 @@
       <hr/>
     </header>
     <!-- Fin de navigation -->
-    <main class="section-principale">
-        <?php if ($user->hasFlash()) echo '<p style="text-align: center;">', $user->getFlash(), '</p>'; ?>
+    <main class="contenu-principal">
         <?= $content ?>
-
     </main>
     <!-- Footer -->
     <footer>
-      <hr/>
-      <div class="container-fluid">
-        <div class="row">
-
-          <div class="col-lg-2 offset-lg-1 liens">
-            <a class="btn btn-link liens" href="/admin/" role="button">Administration</a>
-          </div>
-          <div class="col-lg-2 offset-lg-1 liens">
-            <a class="btn btn-link liens" href="/" role="button">Mon parcours</a>
-          </div>
+    <hr/>
+    <div class="footer">
+        <?php 
+          if(!empty($_SESSION['users']) && ($users->role() >= 2)) { ?>
+            <div class="liens">
+              <a class="lienAdmin" href="/admin/" role="button">Administration</a>
+            </div>
+        <?php } ?>
+        <div class="liens">
+          <a class="lienCV" href="/" role="button">Mon parcours</a>
         </div>
       </div>
-    </footer>
+  </footer>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
 
 

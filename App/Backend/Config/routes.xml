@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes>
-  <route url="/admin/connect\.html"                   module="Connexion"  action="index" />
   <route url="/admin/"                                module="Post"       action="index" />
+  <route url="/admin/connect\.html"                   module="Connexion"  action="index" />
   <route url="/admin/posts\.html"                     module="Post"       action="showPosts" />
   <route url="/admin/post-insert\.html"               module="Post"       action="insert" />
   <route url="/admin/post-update-([0-9]+)\.html"      module="Post"       action="update" vars="id" />

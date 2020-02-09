@@ -41,7 +41,7 @@ class PostManagerPDO extends PostManager
   
   public function getList($debut = -1, $limite = -1)
   {
-    $sql = 'SELECT posts.id, title, chapo, contenu, edition_date, update_date, users_id, users.login AS author_name '
+    $sql = 'SELECT posts.id, title, chapo, contenu, edition_date, update_date, users_id, login AS autor_name '
             . 'FROM posts '
             . 'INNER JOIN users '
             . 'ON posts.users_id = users.id '
@@ -72,7 +72,7 @@ class PostManagerPDO extends PostManager
 
   public function getUnique($id)
   {
-    $requete = $this->dao->prepare('SELECT posts.id, title, chapo, contenu, edition_date, update_date, users_id, users.login AS author_name FROM posts INNER JOIN users ON posts.users_id = users.id WHERE posts.id = :id');
+    $requete = $this->dao->prepare('SELECT posts.id, title, chapo, contenu, edition_date, update_date, users_id, login AS autor_name FROM posts INNER JOIN users ON posts.users_id = users.id WHERE posts.id = :id');
 
 
     $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);

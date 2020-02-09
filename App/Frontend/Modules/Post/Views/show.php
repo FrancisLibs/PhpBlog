@@ -1,38 +1,48 @@
 
-<p>Par <em><?= $post['author_name'] ?></em>, le <?= $post['edition_date']->format('d/m/Y à H\hi') ?></p>
-<h2>Titre : <?= $post['title'] ?></h2>
-<h3>Chapo : <?= $post['chapo'] ?></h3>
-<p>Contenu : <?= nl2br($post['contenu']) ?></p>
+<div class="front-show-contenu">
+  <div class="entete">
+    <h2><?= $post['title'] ?></h2>
+    <p class="show-autor">Par <em><?= $post['autor_name'] ?></em>, le <?= $post['edition_date']->format('d/m/Y à H\hi') ?></p>
+    <?php 
+      if($post['edition_date'] != $post['update_date'] && isset($post['update_date'])) 
+        { ?>
+        <p>, modifié le <?= $post['update_date']->format('d/m/Y à H\hi') ?></p>
+        <?php 
+        } ?>
+  </div>
 
-<?php if ($post['edition_date'] != $post['updatedate']) { ?>
-  <p>Modifié le <?= $post['update_date']->format('d/m/Y à H\hi') ?></p>
-<?php }
+  <h3 class="show-chapo"><?= $post['chapo'] ?></h3>
+  
+  <p class="show-contenu"><?= nl2br($post['contenu']) ?></p>
 
-if ($user->isAuthenticated())
-{ ?>
-  <p><a href="commenter-<?= $post['id'] ?>.html">Ajouter un commentaire</a></p>
-<?php
-}
-
-if (empty($comments))
-{
-?>
-<p>Aucun commentaire n'a encore été posté. Soyez le premier à en laisser un !</p>
-<?php
-}
-
-foreach ($comments as $comment)
-{ ?>
-<fieldset>
-  <legend>
-    Posté par <strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['edition_date']->format('d/m/Y à H\hi') ?>
-    <?php if ($user->isAuthenticated() && $comment['users_id'] == $users->id()) { ?>
-      <a href="comment-update-<?= $comment['id'] ?>.html">Modifier</a>
-    <?php } ?>
-  </legend>
-  <p><?= nl2br(htmlspecialchars($comment['contenu'])) ?></p>
-</fieldset>
-<?php
-}
-
+  <div class="commenatires">
+    <div class="titreCommentaires">
+      <p>Commentaires</p>
+      <?php
+      if (empty($comments) && $user->isAuthenticated())
+      { ?>
+        <p class="ajout-commentaire">Aucun commentaire n'a encore été posté. Soyez le premier à en laisser un !</p>
+      <?php
+      }
+      if ($user->isAuthenticated())
+      { ?>
+        <a class="btn btn-info btn-xs ajout-commentaire" role="button" href="commenter-<?= $post['id'] ?>.html">Ajouter un commentaire</a>
+      <?php
+      } ?>
+    </div>
+    <div class="commentaires">
+      <?php
+      foreach ($comments as $comment)
+      { ?>
+        Posté par <strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['edition_date']->format('d/m/Y à H\hi') ?>
+        <?php if ($user->isAuthenticated() && $comment['users_id'] == $users->id()) { ?>
+          <a class="btn btn-info btn-xs" role="button" href="comment-update-<?= $comment['id'] ?>.html">Modifier</a>
+        <?php } ?>
+      </legend>
+      <p><?= nl2br(htmlspecialchars($comment['contenu'])) ?></p>
+      <?php
+      } ?>
+    </div>
+  </div>
+</div>
 
