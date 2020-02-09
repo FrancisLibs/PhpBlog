@@ -16,7 +16,7 @@ class ConnexionFormBuilder extends FormBuilder
         'label' => 'pseudo : ',
         'name' => 'login',
         'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widget form-control input-sm',
+        'widgetClass' => 'widget form-control input-sm w-50',
         'maxLength' => 50,
         'validators' => [
           new MaxLengthValidator('Le titre spécifié est trop long (50 caractères maximum)', 50),
@@ -28,7 +28,7 @@ class ConnexionFormBuilder extends FormBuilder
         'label' => 'Mot de passe : ',
         'name' => 'password',
         'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widget form-control input-sm',
+        'widgetClass' => 'widget form-control input-sm w-50',
         'maxLength' => 50,
         'validators' => [
           new MaxLengthValidator('Le chapo spécifié est trop long (50 caractères maximum)', 50),

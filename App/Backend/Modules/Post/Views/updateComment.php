@@ -1,8 +1,13 @@
-<h2>Modifier un commentaire</h2>
-<form action="" method="post">
-  <p>
+<div class="zone-formulaire">
+  <div>
+    <?php if ($user->hasFlash()) echo '<p>', $user->getFlash(), '</p>'; ?>
+  </div>
+ <div class="formulaire">
+  <p id="titreFormulaire">Modifier un commentaire</p>
+  <form action ="" method="post" class="formulaireMessage">
     <?= $form ?>
-    
-    <input type="submit" value="Modifier" />
-  </p>
-</form>
+    <div class="index-btn-valid">
+      <input type="submit" value="Modifier" class="btnValid font-weight-bold" />
+    </div>
+  </form>
+</div>

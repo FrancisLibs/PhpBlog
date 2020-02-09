@@ -28,11 +28,11 @@ class PostController extends BackController
 
       if($contact->isValid())
       {
-        $message= $contact->firstName().
-        '<br />'. $contact->firstName().
-        '<br />'. $contact->lastName().
-        '<br />'. $contact->email().
-        '<br />'. $contact->message();
+        $message=
+          $contact->lastName()."\n".
+          $contact->firstName()."\n".
+          $contact->email()."\n".
+          $contact->message();
     	  // Envoi du mail du formulaire
     	  // Create the Transport
     	  $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))

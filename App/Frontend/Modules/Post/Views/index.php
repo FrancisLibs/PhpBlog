@@ -14,9 +14,9 @@
 </div>
 
 <!-- Zone formulaire  -->
-<div class="zone-formulaire-accueil">
+<div class="zone-formulaire">
   <div>
-    <?php if ($user->hasFlash()) echo $user->getFlash(), '</p>'; ?>
+    <?php if ($user->hasFlash()) echo '<p class="ligne-erreur">', $user->getFlash(), '</p>'; ?>
   </div>
   <div class="formulaire">
     <p id="titreFormulaire">Contact</p>
