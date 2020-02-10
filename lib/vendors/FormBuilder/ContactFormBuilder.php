@@ -4,8 +4,10 @@ namespace FormBuilder;
 use \OCFram\FormBuilder;
 use \OCFram\StringField;
 use \OCFram\TextField;
+use \OCFram\EmailField;
 use \OCFram\MaxLengthValidator;
 use \OCFram\NotNullValidator;
+use \OCFram\EmailValidator;
 
 
 class ContactFormBuilder extends FormBuilder
@@ -36,7 +38,7 @@ class ContactFormBuilder extends FormBuilder
           new NotNullValidator('Merci de spécifier l\'auteur du message'),
         ],
        ]))
-      ->add(new StringField([
+      ->add(new EmailField([
         'divClass'=>  'form-group',
         'label' =>        'Email : ',
         'name' =>         'email',
@@ -46,6 +48,8 @@ class ContactFormBuilder extends FormBuilder
         'validators' => [
           new MaxLengthValidator('L\'email spécifié est trop long (100 caractères maximum)', 100),
           new NotNullValidator('Merci de spécifier votre adresse email'),
+          new EmailValidator('Le format de l\'adresse mail n\'est pas correct'),
+          
         ],
        ]))
        ->add(new TextField([

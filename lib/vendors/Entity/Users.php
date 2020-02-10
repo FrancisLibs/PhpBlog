@@ -55,12 +55,6 @@ class Users extends Entity
     {
       $this->erreurs[] = self::EMAIL_INVALIDE;
     }
-    else{
-      if (!preg_match ( " /^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/ " , $email ) )
-      {
-        $this->erreurs[] = self::EMAIL_INVALIDE;
-      }
-    }
 
     $this->email = $email;
   }

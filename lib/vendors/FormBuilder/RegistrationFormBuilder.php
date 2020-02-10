@@ -4,8 +4,10 @@ namespace FormBuilder;
 use \OCFram\FormBuilder;
 use \OCFram\StringField;
 use \OCFram\PasswordField;
+use \OCFram\EmailField;
 use \OCFram\MaxLengthValidator;
 use \OCFram\NotNullValidator;
+use \OCFram\EmailValidator;
 
 class RegistrationFormBuilder extends FormBuilder
 {
@@ -17,7 +19,7 @@ class RegistrationFormBuilder extends FormBuilder
         'label' => 'pseudo : ',
         'name' => 'login',
         'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widget form-control input-sm',
+        'widgetClass' => 'widget form-control input-sm w-50',
         'maxLength' => 50,
         'maxLength' => 50,
         'validators' => [
@@ -25,17 +27,18 @@ class RegistrationFormBuilder extends FormBuilder
           new NotNullValidator('Merci de spécifier votre nom'),
         ],
        ]))
-      ->add(new StringField([
+      ->add(new EmailField([
         'divClass'=>'form-group',
         'label' => 'email : ',
         'name' => 'email',
         'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widget form-control input-sm',
+        'widgetClass' => 'widget form-control input-sm w-50',
         'maxLength' => 50,
         'maxLength' => 50,
         'validators' => [
           new MaxLengthValidator('L\'email spécifié est trop long (100 caractères maximum)', 100),
           new NotNullValidator('Merci de spécifier l\'email'),
+          new EmailValidator('L\'adresse mail n\'a pas le bon format'),
         ],
         ]))
       ->add(new PasswordField([
@@ -43,7 +46,7 @@ class RegistrationFormBuilder extends FormBuilder
         'label' => 'mdp : ',
         'name' => 'password',
         'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widget form-control input-sm',
+        'widgetClass' => 'widget form-control input-sm w-50',
         'maxLength' => 50,
         'maxLength' => 50,
         'validators' => [
@@ -56,7 +59,7 @@ class RegistrationFormBuilder extends FormBuilder
         'label' => 'confirmation : ',
         'name' => 'verifyPassword',
         'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widget form-control input-sm',
+        'widgetClass' => 'widget form-control input-sm w-50',
         'maxLength' => 50,
         'maxLength' => 50,
         'validators' => [

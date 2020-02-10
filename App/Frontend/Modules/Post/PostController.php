@@ -25,52 +25,53 @@ class PostController extends BackController
   		'email' =>      $request->postData('email'),
   		'message' =>    $request->postData('message')
   	  ]);
-
-      if($contact->isValid())
-      {
-        $message=
-          $contact->lastName()."\n".
-          $contact->firstName()."\n".
-          $contact->email()."\n".
-          $contact->message();
-    	  // Envoi du mail du formulaire
-    	  // Create the Transport
-    	  $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
-    		->setUserName('fr.libs@gmail.com')
-    		->setPassword('uaehjeerxotzfpqt');
-
-    	  // Create the Mailer using your created Transport
-    	  $mailer = new Swift_Mailer($transport);
-
-    	  // Create a message
-    	  $message = (new Swift_Message('Message du blog php'))
-    		->setFrom([$contact->email() => $contact->lastName()])
-    		->setTo(['fr.libs@gmail.com'])
-    		->setBody($message);
-
-    	  // Send the message
-    	  $result = $mailer->send($message);
-
-    	  $this->app->user()->setFlash('Le message a bien été envoyé !');
-      }
-      else
-      {
-        $this->app->user()->setFlash('Merci de remplir tous les champs du formulaire !');
-        $this->app->httpResponse()->redirect('/');
-      }
+    }
+    else
+    {
+  		$contact = new Contact;
     }
 
-  		$contact = new Contact;
+		$formBuilder = new ContactFormBuilder($contact);
+		$formBuilder->build();
 
-  		$formBuilder = new ContactFormBuilder($contact);
-  		$formBuilder->build();
+		$form = $formBuilder->form();
 
-  		$form = $formBuilder->form();
+    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Message'), $request);
 
-  		$this->page->addVar('form', $form->createView());
+    if ($formHandler->process())
+    {
+      $message=
+        $contact->lastName()."\n".
+        $contact->firstName()."\n".
+        $contact->email()."\n".
+        $contact->message();
+      // Envoi du mail du formulaire
+      // Create the Transport
+      $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
+      ->setUserName('fr.libs@gmail.com')
+      ->setPassword('uaehjeerxotzfpqt');
 
-  		 // On ajoute une définition pour le titre.
-  		$this->page->addVar('title', 'Mon blog PHP');
+      // Create the Mailer using your created Transport
+      $mailer = new Swift_Mailer($transport);
+
+      // Create a message
+      $message = (new Swift_Message('Message du blog php'))
+      ->setFrom([$contact->email() => $contact->lastName()])
+      ->setTo(['fr.libs@gmail.com'])
+      ->setBody($message);
+
+      // Send the message
+      $result = $mailer->send($message);
+
+      $this->app->user()->setFlash('Le message a bien été envoyé, merci !');
+
+      $this->app->httpResponse()->redirect('post-'.$request->getData('post').'.html');
+    }
+
+		$this->page->addVar('form', $form->createView());
+
+		 // On ajoute une définition pour le titre.
+		$this->page->addVar('title', 'Mon blog PHP');
   }
 
   public function executeShowPosts(HTTPRequest $request)

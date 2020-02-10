@@ -1,5 +1,3 @@
-
-
 <!-- Zone formulaire  -->
 <div class="zone-formulaire">
   <div>

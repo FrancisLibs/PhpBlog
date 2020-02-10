@@ -67,7 +67,8 @@ hr{
   background-color: white;
 }
 
-/*------Zone centrale  -----*/
+/*------Zone centrale  -----  Règles générales---------*/
+
 .contenu-principal{
   min-height: 450px;
   color: white;
@@ -79,33 +80,6 @@ hr{
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
-}
-
-
-/* ----  Page d'accueil / index------*/
-
-.bloc-texte{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-  align-items: center
-}
-
-.bloc-perso{
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: flex-center;
-  margin: 20px;
-}
-
-.sous-titre{
-  text-align: center;
-}
-
-.zone-formulaire{
-  margin-bottom: 10px;
 }
 
 .formulaire{
@@ -144,6 +118,33 @@ hr{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+
+/* ----  Page d'accueil / index------*/
+
+.bloc-texte{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center
+}
+
+.bloc-perso{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-center;
+  margin: 20px;
+}
+
+.sous-titre{
+  text-align: center;
+}
+
+.zone-formulaire{
+  margin-bottom: 10px;
 }
 
 /* ---- Page Articles  / showPosts------*/

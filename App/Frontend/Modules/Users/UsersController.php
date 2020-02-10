@@ -127,14 +127,12 @@ class UsersController extends BackController
           }
           else
           {
-            $login = $users->login();
-            $vkey = md5(microtime(TRUE)*100000);
             $message= 'Bienvenue sur VotreSite,
  
               Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
               ou copier/coller dans votre navigateur Internet.
  
-              http://phpblog//activation-'.urlencode($login).'-'.urlencode($vkey).'.html
+              http://phpblog//activation-'.urlencode($users->login()).'-'.urlencode($users->vkey()).'.html
  
  
               ---------------
@@ -143,7 +141,7 @@ class UsersController extends BackController
             $users->setStatus(0);
             $users->setRole_id(1);
             $users->setPassword($users->passwordHash());
-            $users->setVkey($vkey);
+            $users->setVkey(md5(microtime(TRUE)*100000));
 
             $manager->add($users);
             
@@ -177,10 +175,16 @@ class UsersController extends BackController
     }
 
     $formBuilder = new RegistrationFormBuilder($users);
-
     $formBuilder->build();
 
     $form = $formBuilder->form();
+
+    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Users'), $request);
+
+    if ($formHandler->process())
+    {
+      $this->app->httpResponse()->redirect('/.html');
+    }
 
     $this->page->addVar('form', $form->createView());
 
