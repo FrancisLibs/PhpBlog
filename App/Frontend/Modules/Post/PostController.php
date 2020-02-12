@@ -5,8 +5,8 @@ use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \OCFram\FormHandler;
 use \Entity\Comment;
-use \Entity\Contact;
-use \FormBuilder\ContactFormBuilder;
+use \Entity\Message;
+use \FormBuilder\MessageFormBuilder;
 use \FormBuilder\CommentFormBuilder;
 use \Swift_SmtpTransport;
 use \Swift_Mailer;
@@ -19,7 +19,7 @@ class PostController extends BackController
   	// Traitement du formulaire de contact si le formulaire a été envoyé.
   	if ($request->method() == 'POST')
   	{
-  	  $contact = new Contact([
+  	  $message = new Message([
   		'firstName' =>  $request->postData('firstName'),
   		'lastName' =>   $request->postData('lastName'),
   		'email' =>      $request->postData('email'),
@@ -28,10 +28,10 @@ class PostController extends BackController
     }
     else
     {
-  		$contact = new Contact;
+  		$message = new Message;
     }
 
-		$formBuilder = new ContactFormBuilder($contact);
+		$formBuilder = new MessageFormBuilder($message);
 		$formBuilder->build();
 
 		$form = $formBuilder->form();
@@ -40,32 +40,28 @@ class PostController extends BackController
 
     if ($formHandler->process())
     {
-      $message=
-        $contact->lastName()."\n".
-        $contact->firstName()."\n".
-        $contact->email()."\n".
-        $contact->message();
+      $textMessage=
+        $message->lastName()."\n".
+        $message->firstName()."\n".
+        $message->email()."\n".
+        $message->message();
       // Envoi du mail du formulaire
-      // Create the Transport
       $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
       ->setUserName('fr.libs@gmail.com')
       ->setPassword('uaehjeerxotzfpqt');
 
-      // Create the Mailer using your created Transport
       $mailer = new Swift_Mailer($transport);
 
-      // Create a message
       $message = (new Swift_Message('Message du blog php'))
-      ->setFrom([$contact->email() => $contact->lastName()])
+      ->setFrom([$message->email() => $message->lastName()])
       ->setTo(['fr.libs@gmail.com'])
-      ->setBody($message);
+      ->setBody($textMessage);
 
-      // Send the message
       $result = $mailer->send($message);
 
       $this->app->user()->setFlash('Le message a bien été envoyé, merci !');
 
-      $this->app->httpResponse()->redirect('post-'.$request->getData('post').'.html');
+      $this->app->httpResponse()->redirect('/');
     }
 
 		$this->page->addVar('form', $form->createView());

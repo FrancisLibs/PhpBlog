@@ -26,7 +26,7 @@ class UsersManagerPDO extends UsersManager
 
   public function getUsers($login)
   {
-    $requete = $this->dao->prepare('SELECT id, login, email, password, create_date, status, role_id AS role, vkey FROM users WHERE login = :login');
+    $requete = $this->dao->prepare('SELECT id, login, email, password, create_date, status, role_id , vkey FROM users WHERE login = :login');
     $requete->bindValue(':login', $login, \PDO::PARAM_STR);
     $requete->execute();
 
@@ -61,12 +61,12 @@ class UsersManagerPDO extends UsersManager
 
   public function update(Users $users)
   {
-    $requete = $this->dao->prepare('UPDATE users SET login = :login, email = :email, password = :password, create_date = NOW(), status = :status, role_id = :role_id WHERE id = :id');
-
+    $requete = $this->dao->prepare('UPDATE users SET login = :login, email = :email, password = :password, status = :status, role_id = :role_id WHERE id = :id');
+ 
+    $requete->bindValue(':id',        $users->id(), \PDO::PARAM_INT);
     $requete->bindValue(':login',     $users->login());
     $requete->bindValue(':email',     $users->email());
     $requete->bindValue(':password',  $users->password());
-    $requete->bindValue(':id',        $users->id(), \PDO::PARAM_INT);
     $requete->bindValue(':status',    $users->status());
     $requete->bindValue(':role_id',   $users->role_id());
 
@@ -75,7 +75,9 @@ class UsersManagerPDO extends UsersManager
 
   public function countUsers($login)
   {
-    return $this->dao->query('SELECT COUNT(*) FROM users WHERE login = '. '"'.$login.'"')->fetchColumn();
+    $query = 'SELECT COUNT(*) FROM users WHERE login = '.'"'.$login.'"';
+   
+    return $this->dao->query($query)->fetchColumn();
   }
 
   public function count()

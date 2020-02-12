@@ -8,6 +8,7 @@ use \OCFram\EmailField;
 use \OCFram\MaxLengthValidator;
 use \OCFram\NotNullValidator;
 use \OCFram\EmailValidator;
+use \OCFram\PasswordValidator;
 
 class RegistrationFormBuilder extends FormBuilder
 {
@@ -51,7 +52,8 @@ class RegistrationFormBuilder extends FormBuilder
         'maxLength' => 50,
         'validators' => [
           new MaxLengthValidator('Le mot de passe spécifié est trop long (50 caractères maximum)', 50),
-          new NotNullValidator('Merci de spécifier le mot de passe'),
+          new NotNullValidator('Merci de spécifier le mot de passe.'),
+          new PasswordValidator('Le mot de passe doit être composé d\'au moins 6 caractères, avec une minuscule, une majuscule, un chiffre, un caractère spécial'),
         ],
         ]))
       ->add(new PasswordField([
@@ -65,6 +67,7 @@ class RegistrationFormBuilder extends FormBuilder
         'validators' => [
           new MaxLengthValidator('Le mot de passe spécifié est trop long (50 caractères maximum)', 50),
           new NotNullValidator('Merci de spécifier le mot de passe'),
+          new PasswordValidator('Le mot de passe doit être composé d\'au moins 6 caractères, avec une minuscule, une majuscule, un chiffre, un caractère spécial'),
         ],
         ]));
   }

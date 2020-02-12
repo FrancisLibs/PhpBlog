@@ -73,7 +73,7 @@ abstract class Application
     else
     {
       // Role de l'utilisateur
-      $roleUsers = $this->user()->getAttribute('users')->role();
+      $roleUsers = $this->user()->getAttribute('users')->role_id();
 
       // On récupère le manager du fichier des droits.
       $manager = $this->managers->getManagerOf('Rights');

@@ -7,6 +7,8 @@ use \OCFram\PasswordField;
 use \OCFram\MaxLengthValidator;
 use \OCFram\NotNullValidator;
 use \OCFram\EmailValidator;
+use \OCFram\PasswordValidator;
+
 
 class ConnexionFormBuilder extends FormBuilder
 {
@@ -34,7 +36,7 @@ class ConnexionFormBuilder extends FormBuilder
         'validators' => [
           new MaxLengthValidator('Le chapo spécifié est trop long (50 caractères maximum)', 50),
           new NotNullValidator('Merci de spécifier le mot de passe'),
-          new EmailValidator('Le format de l\'email n\'est pas correct'),
+          new PasswordValidator('Le mot de passe doit être composé d\'au moins 6 caractères, avec une minuscule, une majuscule, un chiffre, un caractère spécial'),
         ],
         ]));
   }

@@ -23,6 +23,11 @@ class Users extends Entity
 
   /* ---- Functions ---*/
 
+  public function isValid()
+  {
+    return !(empty($this->login) || empty($this->email) || empty($this->password));
+  }
+
   public function registrationFormIsValid()
   {
    return (!empty($this->login()) && !empty($this->email()) && !empty($this->password()) && !empty($this->verifyPassword()));

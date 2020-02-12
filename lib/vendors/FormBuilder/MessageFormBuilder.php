@@ -10,7 +10,7 @@ use \OCFram\NotNullValidator;
 use \OCFram\EmailValidator;
 
 
-class ContactFormBuilder extends FormBuilder
+class MessageFormBuilder extends FormBuilder
 {
   public function build()
   {

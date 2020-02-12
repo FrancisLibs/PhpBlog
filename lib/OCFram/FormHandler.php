@@ -16,6 +16,7 @@ class FormHandler
 
   public function process()
   {
+
     if($this->request->method() == 'POST' && $this->form->isValid())
     {
       $this->manager->save($this->form->entity());
@@ -25,6 +26,28 @@ class FormHandler
 
     return false;
   }
+
+  public function processValid()
+  {
+    if($this->request->method() == 'POST' && $this->form->isValid())
+    {
+      return true;
+    }
+
+    return false;
+  }
+
+  public function processSave()
+  {
+    if($this->request->method() == 'POST')
+    {
+      $this->manager->save($this->form->entity());
+
+      return true;
+    }
+    return false;
+  }
+
 
   public function setForm(Form $form)
   {

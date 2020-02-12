@@ -1,5 +1,5 @@
 <?php
-  $usersRole=$user->getAttribute('users')->role();
+  $usersRole=$user->getAttribute('users')->role_id();
 ?>
 
 <div class="entete-index">

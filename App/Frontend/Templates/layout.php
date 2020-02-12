@@ -84,7 +84,7 @@
     <hr/>
     <div class="footer">
         <?php 
-          if(!empty($_SESSION['users']) && ($users->role() >= 2)) { ?>
+          if(!empty($_SESSION['users']) && ($users->role_id() >= 2)) { ?>
             <div class="liens">
               <a class="lienAdmin" href="/admin/" role="button">Administration</a>
             </div>

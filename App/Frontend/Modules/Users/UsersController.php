@@ -102,7 +102,7 @@ class UsersController extends BackController
       if (!$users->registrationFormIsValid())
       {
         $this->app->user()->setFlash('Merci de compléter tous les champs');
-
+        
         $this->app->httpResponse()->redirect('/register.html');
       }
       else
@@ -110,10 +110,10 @@ class UsersController extends BackController
         // Vérification de l'absence du pseudo en bdd
         $manager = $this->managers->getManagerOf('Users');
         $resultat = $manager->countUsers($users->login());
-
+      
         if (!empty($resultat))
         {
-          $this->app->user()->setFlash('L\'identifiant que vous avez choisi est déjà pris');
+          $this->app->user()->setFlash('L\'identifiant que vous avez choisi n\'est pas disponible');
 
           $this->app->httpResponse()->redirect('/register.html');
         }
@@ -125,47 +125,6 @@ class UsersController extends BackController
 
             $this->app->httpResponse()->redirect('/register.html');
           }
-          else
-          {
-            $message= 'Bienvenue sur VotreSite,
- 
-              Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
-              ou copier/coller dans votre navigateur Internet.
- 
-              http://phpblog//activation-'.urlencode($users->login()).'-'.urlencode($users->vkey()).'.html
- 
- 
-              ---------------
-              Ceci est un mail automatique, Merci de ne pas y répondre.';
-
-            $users->setStatus(0);
-            $users->setRole_id(1);
-            $users->setPassword($users->passwordHash());
-            $users->setVkey(md5(microtime(TRUE)*100000));
-
-            $manager->add($users);
-            
-            // Envoi du mail de confirmation
-            // Create the Transport
-            $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
-              ->setUserName('fr.libs@gmail.com')
-              ->setPassword('uaehjeerxotzfpqt');
-
-            // Create the Mailer using your created Transport
-            $mailer = new Swift_Mailer($transport);
-
-            // Create a message
-            $message = (new Swift_Message('Activer votre compte'))
-              ->setFrom(['fr.libs@gmail.com' => 'Francis Libs'])
-              ->setTo([$users->email(), 'fr.libs@gmail.com'])
-              ->setBody($message);
-
-            // Send the message
-            $result = $mailer->send($message);
-
-            $this->app->user()->setFlash('Un mail d\'authentification vient de vous être envoyé');
-            $this->app->httpResponse()->redirect('/./');
-          }
         }
       }
     }
@@ -175,21 +134,61 @@ class UsersController extends BackController
     }
 
     $formBuilder = new RegistrationFormBuilder($users);
+
     $formBuilder->build();
 
     $form = $formBuilder->form();
 
     $formHandler = new FormHandler($form, $this->managers->getManagerOf('Users'), $request);
-
-    if ($formHandler->process())
+      
+    if ($formHandler->processValid())
     {
-      $this->app->httpResponse()->redirect('/.html');
+      $users->setStatus(0);
+      $users->setRole_id(1);
+      $users->setPassword($users->passwordHash());
+      $users->setVkey(md5(microtime(TRUE)*100000));
+
+      $formHandler->processSave();
+
+      $txtMessage= 'Bienvenue sur VotreSite,
+
+        Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
+        ou copier/coller dans votre navigateur Internet.
+
+        http://phpblog//activation-'.urlencode($users->login()).'-'.urlencode($users->vkey()).'.html
+
+
+        ---------------
+        Ceci est un mail automatique, Merci de ne pas y répondre.';
+      
+      // Envoi du mail de confirmation
+      // Create the Transport
+      $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
+        ->setUserName('fr.libs@gmail.com')
+        ->setPassword('uaehjeerxotzfpqt');
+
+      // Create the Mailer using your created Transport
+      $mailer = new Swift_Mailer($transport);
+
+      // Create a message
+      $message = (new Swift_Message('Activer votre compte'))
+        ->setFrom(['fr.libs@gmail.com' => 'Francis Libs'])
+        ->setTo([$users->email(), 'fr.libs@gmail.com'])
+        ->setBody($txtMessage);
+
+      // Send the message
+      $result = $mailer->send($message);
+
+      $this->app->user()->setFlash('Un mail d\'authentification vient de vous être envoyé');
+
+      $this->app->httpResponse()->redirect('/');
     }
 
     $this->page->addVar('form', $form->createView());
 
     // On ajoute une définition pour le titre.
     $this->page->addVar('title', 'Enregistrement');
+    
   }
 
   public function executeDeconnect()
@@ -225,6 +224,7 @@ class UsersController extends BackController
       else
       {
         $users->setStatus(1);
+       
         $manager->update($users);
 
         $this->app->user()->setFlash('Félicitation, vous faites maintenant partie de nos membres');
