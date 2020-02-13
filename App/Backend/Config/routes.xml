@@ -14,6 +14,7 @@
   <route url="/admin/users\.html"                     module="Users"      action="show" />
   <route url="/admin/users-upgrade-([0-9]+)\.html"    module="Users"      action="upgrade" vars="id" />
   <route url="/admin/users-delete-([0-9]+)\.html"     module="Users"      action="delete" vars="id" />
+  <route url="/admin/admin-delete-([0-9]+)\.html"     module="Users"      action="adminDelete" vars="id" />
   <route url="/admin/admin\.html"                     module="Users"      action="showAdmin" />
   <route url="/admin/admin-upgrade-([0-9]+)\.html"    module="Users"      action="adminUpgrade" vars="id" />
   <route url="/admin/admin-delete-([0-9]+)\.html"     module="Users"      action="adminDelete" vars="id" />

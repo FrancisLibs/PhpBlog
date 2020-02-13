@@ -99,7 +99,8 @@
     <hr/>
     <div class="footer">
       <div class="icones">
-        <a href="https://www.linkedin.com/in/francis-libs-480a68150"><img src="/images/linkedin.jpg" alt="linkedin"></a>
+        <a btn-linkedin #007BB6 href="https://www.linkedin.com/in/francis-libs-480a68150"><img src="/images/linkedin.jpg" alt="linkedin"></a>
+        <a btn-github #444444 href="https://github.com/FrancisLibs/phpBlog"><img src="/images/github.png" alt="github"></a>
       </div>
       <div class="liens">
         <a class="lienCV" href="/" role="button">Mon parcours</a>

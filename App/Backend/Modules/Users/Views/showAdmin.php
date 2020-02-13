@@ -34,7 +34,7 @@
               <?= $users->role() ?>
             </td>
             <td>
-              <a href="users-delete-<?= $users->id() ?>.html"><img src="/images/delete.png" alt="Supprimer"></a>
+              <a href="users-adminDelete-<?= $users->id() ?>.html"><img src="/images/delete.png" alt="Supprimer"></a>
               <a href="users-upgrade-<?= $users->id() ?>.html"><img src="/images/fleche2verte.png" alt="Upgrade"></a>
             </td>     
           </tr>
