@@ -7,7 +7,6 @@
       <tr>
         <td>
           <div class="front-showPosts-title">
-            <a class="btn-lire btn btn-info btn-xs" role="button" href="post-<?= $post['id'] ?>.html">Lire cet article</a>
             <h3><?= $post['title'] ?></h3>
 
             <?php
@@ -20,6 +19,7 @@
             { ?>
               <p class="attributsPost">Modifié le : <?= $post['update_date']->format('d/m/Y à H\hi') ?></p>
             <?php } ?>
+            <a class="btn-lire btn btn-info btn-xs" role="button" href="post-<?= $post['id'] ?>.html">Lire cet article</a>
           </div>
           <div class="front-showPosts-chapo">
             <p class="chapo"><?= nl2br($post['chapo']) ?></p>

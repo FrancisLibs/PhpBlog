@@ -47,6 +47,12 @@
           <!-- Collapsible content -->
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto navbar-default">
+              <?php 
+              if(isset($_SESSION['users']) && ($_SESSION['users']->role_id() >= 2)) { ?>
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin/">Administration</a>
+                </li>
+              <?php } ?>
               <li class="nav-item">
                 <a class="nav-link" href="/">Accueil</a>
               </li>
@@ -92,16 +98,13 @@
     <footer>
     <hr/>
     <div class="footer">
-        <?php 
-          if(!empty($_SESSION['users']) && ($users->role_id() >= 2)) { ?>
-            <div class="liens">
-              <a class="lienAdmin" href="/admin/" role="button">Administration</a>
-            </div>
-        <?php } ?>
-        <div class="liens">
-          <a class="lienCV" href="/" role="button">Mon parcours</a>
-        </div>
+      <div class="icones">
+        <a href="https://www.linkedin.com/in/francis-libs-480a68150"><img src="/images/linkedin.jpg" alt="linkedin"></a>
       </div>
+      <div class="liens">
+        <a class="lienCV" href="/" role="button">Mon parcours</a>
+      </div>
+    </div>
   </footer>
 
     <!-- Optional JavaScript -->
