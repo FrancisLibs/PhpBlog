@@ -70,7 +70,10 @@ class UsersController extends BackController
   
   public function executeShowAdmin()
   {
+    $this->page->addVar('title', 'Gestion des administrateurs');
+
     $manager = $this->managers->getManagerOf('Users');
+    
     $this->page->addVar('listeUsers', $manager->getList('admin'));
   }
   
