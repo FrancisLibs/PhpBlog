@@ -96,7 +96,7 @@
           <a btn-github #444444 href="https://github.com/FrancisLibs/phpBlog"><img src="/images/github.png" alt="github"></a>
         </div>
         <div class="liens col-xs-12 col-sm-4 col-md-3 col-lg-2 offset-md-2 offset-sm-1">
-          <a class="lienCV" href="/" role="button">Mon parcours</a>
+          <a class="lienCV" href="../images/CvLibs.pdf" role="button" target="_blank">Mon parcours</a>
         </div>
       </div>
     </div>
