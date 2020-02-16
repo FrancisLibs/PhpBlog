@@ -57,7 +57,7 @@ class PostController extends BackController
       ->setTo(['fr.libs@gmail.com'])
       ->setBody($textMessage);
 
-      $result = $mailer->send($message);
+      $mailer->send($message);
 
       $this->app->user()->setFlash('Le message a bien été envoyé, merci !');
 
