@@ -1,11 +1,11 @@
 body {
-  min-height: 100%;
+  
   margin:0;
   padding:0;
   background-color: white;
-  background: url(../images/GuadeloupeOpti.jpg)center center no-repeat fixed;
+  background: url(../images/plageGuadeloupe.jpg)center top no-repeat fixed;
   background-size: cover;
-  height: auto;
+  background-position: top;
   -webkit-background-size: cover; /* pour anciens Chrome et Safari */
 }
 
@@ -334,19 +334,26 @@ hr{
 }
 
 /* ---- Footer ------*/
-  
-.footer{
+
+.footer .ligneLiens{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  align-items: baseline;
+}
+  
+.footer .row, .footer .liens{
+  text-align: center;
+}
+
+footer .liens{
+  margin-top: 10px;
 }
 
 .lienAdmin, .lienCV{
-  color: blue;
-  border: solid 1px black;
+  color: white;
+  border: solid 1px white;
   border-radius: 5px;
-  background: white;
   padding: 5px;
   margin: 5px;
 }
@@ -357,7 +364,7 @@ hr{
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   body { 
-    background: url(../images/Guadeloupe.jpg)center center no-repeat fixed;
+    background: url(../images/Guadeloupe576.jpg)center top no-repeat fixed;
   }
 
   h1{
@@ -375,12 +382,17 @@ hr{
   .formulaire{
     width: 60%;
   }
+
+  footer .liens{
+    margin-top: 0;
+  }
+
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   body { 
-    background: url(../images/Guadeloupe768.jpg)center center no-repeat fixed;
+    background: url(../images/Guadeloupe768.jpg)center top no-repeat fixed;
   }
 
   h1{
@@ -400,7 +412,8 @@ hr{
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   body { 
-    background: url(../images/Guadeloupe992.jpg)center center no-repeat fixed;
+    background: url(../images/Guadeloupe992.jpg)center top no-repeat fixed;
+    
   }
 
   h1{
@@ -423,7 +436,8 @@ hr{
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px){
   body { 
-    background: url(../images/Guadeloupe1200.jpg)center center no-repeat fixed;
+    background: url(../images/Guadeloupe1200.jpg)center top no-repeat fixed;
+    
   }
 
   h1{

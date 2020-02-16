@@ -89,13 +89,15 @@
   <!-- Footer -->
   <footer>
     <hr/>
-    <div class="footer">
-      <div class="icones">
-        <a btn-linkedin #007BB6 href="https://www.linkedin.com/in/francis-libs-480a68150"><img src="/images/linkedin.jpg" alt="linkedin"></a>
-        <a btn-github #444444 href="https://github.com/FrancisLibs/phpBlog"><img src="/images/github.png" alt="github"></a>
-      </div>
-      <div class="liens">
-        <a class="lienCV" href="/" role="button">Mon parcours</a>
+    <div class="footer container-fluid">
+      <div class="row ligneLiens">
+        <div class="icones col-xs-12 col-sm-3 col-md-2 col-lg-2 offset-sm-4 offset-md-5">
+          <a btn-linkedin #007BB6 href="https://www.linkedin.com/in/francis-libs-480a68150"><img src="/images/linkedin.jpg" alt="linkedin"></a>
+          <a btn-github #444444 href="https://github.com/FrancisLibs/phpBlog"><img src="/images/github.png" alt="github"></a>
+        </div>
+        <div class="liens col-xs-12 col-sm-4 col-md-3 col-lg-2 offset-md-2 offset-sm-1">
+          <a class="lienCV" href="/" role="button">Mon parcours</a>
+        </div>
       </div>
     </div>
   </footer>

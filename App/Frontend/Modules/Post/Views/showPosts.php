@@ -7,7 +7,7 @@
       <tr>
         <td>
           <div class="front-showPosts-title">
-            <h3><?= $post['title'] ?></h3>
+            <h3>{{ $post['title'] }}</h3>
 
             <?php
             if(isset($post['autor_name']))

@@ -3,7 +3,8 @@
     "description": "A pro blog to exercise php programming",
     "require": {
         "swiftmailer/swiftmailer": "^6.2",
-        "twbs/bootstrap": "4.4.1"
+        "twbs/bootstrap": "4.4.1",
+        "twig/twig": "^3.0"
     },
     "authors": [
         {

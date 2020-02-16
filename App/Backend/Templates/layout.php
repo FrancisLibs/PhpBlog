@@ -96,16 +96,16 @@
     </main>
     <!-- Footer -->
     <footer>
-    <hr/>
-    <div class="footer">
-      <div class="icones">
-        <a btn-linkedin #007BB6 href="https://www.linkedin.com/in/francis-libs-480a68150"><img src="/images/linkedin.jpg" alt="linkedin"></a>
-        <a btn-github #444444 href="https://github.com/FrancisLibs/phpBlog"><img src="/images/github.png" alt="github"></a>
+      <hr/>
+      <div class="footer container-fluid">
+        <div class="icones col-lg-3">
+          <a btn-linkedin #007BB6 href="https://www.linkedin.com/in/francis-libs-480a68150"><img src="/images/linkedin.jpg" alt="linkedin"></a>
+          <a btn-github #444444 href="https://github.com/FrancisLibs/phpBlog"><img src="/images/github.png" alt="github"></a>
+        </div>
+        <div class="liens ">
+          <a class="lienCV" href="/" role="button">Mon parcour</a>
+        </div>
       </div>
-      <div class="liens">
-        <a class="lienCV" href="/" role="button">Mon parcours</a>
-      </div>
-    </div>
   </footer>
 
     <!-- Optional JavaScript -->
