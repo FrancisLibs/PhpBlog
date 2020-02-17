@@ -40,7 +40,7 @@
     <?php } 
   }?> 
 
-  <a class="show-ajout-commentaire" href="commenter-<?= $post['id'] ?>.html">Ajouter un commentaire</a>
+  <a class="btn btn-info btn-xs ajout-commentaire" role="button" href="commenter-<?= $post['id'] ?>.html">Ajouter un commentaire</a>
   <br /><br />
   <a class="show-ajout-commentaire"href="posts.html">Retour à la liste des posts</a>
 </div>

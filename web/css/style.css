@@ -8,6 +8,9 @@ body {
   background-position: top;
   -webkit-background-size: cover; /* pour anciens Chrome et Safari */
 }
+a{
+  color: white;
+}
 
 h1{
   font-family: 'Bree Serif', serif;
@@ -47,7 +50,6 @@ h3{
   color : white!important;
 }
 
-
 #bonjour{
   border: 1px solid white;
   border-radius: 3px;
@@ -66,6 +68,10 @@ hr{
   margin-top: 0;
   color: white;
   background-color: white;
+}
+
+#adminVide{
+  width : 200px;
 }
 
 /*------Zone centrale  -----  Règles générales---------*/
@@ -91,7 +97,7 @@ hr{
 }
 
 .form-group {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 #titreFormulaire{
@@ -129,7 +135,8 @@ hr{
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-around;
-  align-items: center
+  align-items: flex-start;
+  margin-top: 40px;
 }
 
 .bloc-perso{
@@ -137,7 +144,6 @@ hr{
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: flex-center;
-  margin: 20px;
 }
 
 .sous-titre{
@@ -145,7 +151,18 @@ hr{
 }
 
 .zone-formulaire{
+  margin-top: 20px;
   margin-bottom: 10px;
+}
+
+.logo{
+  width: 70%;
+  align-self: center;
+  margin-top: 20px;
+}
+
+.col-titre{
+  margin-top: 20px;
 }
 
 /* ---- Page Articles  / showPosts------*/
@@ -225,6 +242,7 @@ hr{
 }
 
 /* ---- Page Connexion ------*/
+
 .pageConnexion .titreConnexion{
   color: white;
 }
@@ -256,6 +274,7 @@ hr{
 }
 
 /*---------------Page admin - showPosts -----------------*/
+
 .centragePage{
   display: flex;
   flex-direction: column;
@@ -310,16 +329,19 @@ hr{
 }
 
 /*---------------Page admin - post-insert -----------------*/
+
 .back-postInsert-contenu{
   color: white;
 }
 
 /*---------------Page admin - post-insert -----------------*/
+
 .back-commentInsert-contenu{
   color: white;
 }
 
 /*---------------Page admin - users-show -----------------*/
+
 .back-usersShow-contenu{
   color: white;
 }
@@ -362,7 +384,9 @@ footer .liens{
 /* No media query for `xs` since this is the default in Bootstrap */
 
 /* Small devices (landscape phones, 576px and up) */
+
 @media (min-width: 576px) {
+
   body { 
     background: url(../images/Guadeloupe576.jpg)center top no-repeat fixed;
   }
@@ -390,7 +414,9 @@ footer .liens{
 }
 
 /* Medium devices (tablets, 768px and up) */
+
 @media (min-width: 768px) {
+
   body { 
     background: url(../images/Guadeloupe768.jpg)center top no-repeat fixed;
   }
@@ -410,10 +436,11 @@ footer .liens{
 }
 
 /* Large devices (desktops, 992px and up) */
+
 @media (min-width: 992px) {
+
   body { 
     background: url(../images/Guadeloupe992.jpg)center top no-repeat fixed;
-    
   }
 
   h1{
@@ -434,10 +461,11 @@ footer .liens{
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
+
 @media (min-width: 1200px){
+
   body { 
     background: url(../images/Guadeloupe1200.jpg)center top no-repeat fixed;
-    
   }
 
   h1{

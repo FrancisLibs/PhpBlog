@@ -10,7 +10,7 @@
   <meta name="description" content="Mon premier blog en PHP" />
 
   <!-- Css files -->
-  <link href="css/bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link href="css/style.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
@@ -43,13 +43,6 @@
         <!-- Collapsible content -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto navbar-default">
-            <?php 
-              if(isset($_SESSION['users']) && ($_SESSION['users']->role_id() >= 2)) { ?>
-                <li class="nav-item">
-                  <a class="nav-link" href="/admin/">Administration</a>
-                </li>
-            <?php } ?>
-
             <li class="nav-item">
               <a class="nav-link" href="/">Accueil</a>
             </li>
@@ -91,11 +84,22 @@
     <hr/>
     <div class="footer container-fluid">
       <div class="row ligneLiens">
-        <div class="icones col-xs-12 col-sm-3 col-md-2 col-lg-2 offset-sm-4 offset-md-5">
+        <?php 
+          if(isset($_SESSION['users']) && ($_SESSION['users']->role_id() >= 2)) { ?>
+            <div class="liens col-sm">
+              <a class="lienAdmin" href="/admin/" role="button">Administration</a>
+            </div>
+        <?php }
+        else 
+        { ?>
+          <div id="adminVide" class="col-sm">
+          </div>
+        <?php } ?>
+        <div class="icones col-sm">
           <a btn-linkedin #007BB6 href="https://www.linkedin.com/in/francis-libs-480a68150"><img src="/images/linkedin.jpg" alt="linkedin"></a>
           <a btn-github #444444 href="https://github.com/FrancisLibs/phpBlog"><img src="/images/github.png" alt="github"></a>
         </div>
-        <div class="liens col-xs-12 col-sm-4 col-md-3 col-lg-2 offset-md-2 offset-sm-1">
+        <div class="liens col-sm">
           <a class="lienCV" href="../images/CvLibs.pdf" role="button" target="_blank">Mon parcours</a>
         </div>
       </div>
