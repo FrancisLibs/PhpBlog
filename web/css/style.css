@@ -231,7 +231,15 @@ hr{
   margin-left: 10px;
 }
 
+.front-show-contenu .show-contenu{
+  max-width: 90%;
+}
+
 .front-show-contenu .titreCommentaires{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   font-size: 1.7em;
   color: yellow;
 }

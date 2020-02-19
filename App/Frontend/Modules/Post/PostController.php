@@ -70,7 +70,7 @@ class PostController extends BackController
 		$this->page->addVar('title', 'Mon blog PHP');
   }
 
-  public function executeShowPosts(HTTPRequest $request)
+  public function executeShowPosts()
   {
     $nombrePosts = $this->app->config()->get('nombre_posts');
     $nombreCaracteres = $this->app->config()->get('nombre_caracteres');

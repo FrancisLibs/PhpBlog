@@ -14,24 +14,22 @@
           <th>Actions</th>
         </tr>
 
-        <?php
-        foreach ($listeUsers as $users)
-        { ?>
+        <?php foreach ($listeUsers as $users) { ?>
           <tr>
             <td>
-              <?= $users->login() ?>
+              <?= htmlspecialchars($users->login()) ?>
             </td>
             <td>
-              <?= $users->email() ?>
+              <?= htmlspecialchars($users->email()) ?>
             </td>
             <td>
-              <?= $users->create_date()->format('d/m/Y à H\hi') ?>
+              <?= htmlspecialchars($users->create_date()->format('d/m/Y à H\hi')) ?>
             </td>
             <td>
-              <?= $users->status() ?>
+              <?= htmlspecialchars($users->status()) ?>
             </td>
             <td>
-              <?= $users->role() ?>
+              <?= htmlspecialchars($users->role()) ?>
             </td>
             <td>
               <a href="users-adminDelete-<?= $users->id() ?>.html"><img src="/images/delete.png" alt="Supprimer"></a>
