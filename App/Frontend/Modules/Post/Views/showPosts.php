@@ -8,11 +8,9 @@
           <td>
             <div class="front-showPosts-title">
               <h3><?= htmlspecialchars($post['title']) ?></h3>
-<<<<<<< HEAD
-              <p class="attributsPost"> de : <?= nl2br(htmlspecialchars($post['autor_name'])) ?></p>
-=======
+
               <p class="attributsPost"> de <?= nl2br(htmlspecialchars($post['autor_name'])) ?></p>
->>>>>>> security
+
               <?php if(isset($post['update_date']))
               { ?>
                 <p class="attributsPost">Modifié le : <?= htmlspecialchars($post['update_date']->format('d/m/Y à H\hi')) ?></p>
