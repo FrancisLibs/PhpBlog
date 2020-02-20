@@ -1,8 +1,5 @@
 <div class="zone-formulaire">
-  <div>
-    <?php if ($user->hasFlash()) echo $user->getFlash(), '</p>'; ?>
-  </div>
-   <div class="formulaire">
+  <div class="formulaire">
     <p id="titreFormulaire">Modifier un commentaire</p>
     <form action ="" method="post" class="formulaireMessage">
       <?= $form ?>

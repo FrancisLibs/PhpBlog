@@ -7,14 +7,14 @@ class PostManagerPDO extends PostManager
 {
   protected function add(Post $post)
   {
-    $q = $this->dao->prepare('INSERT INTO posts SET title = :title, chapo = :chapo, contenu = :contenu, edition_date = NOW(), update_date = NOW(), users_id = :users_id');
+    $requete = $this->dao->prepare('INSERT INTO posts SET title = :title, chapo = :chapo, contenu = :contenu, edition_date = NOW(), update_date = NOW(), users_id = :users_id');
 
-    $q->bindValue(':title',   $post->title());
-    $q->bindValue(':chapo',   $post->chapo());
-    $q->bindValue(':contenu', $post->contenu());
-    $q->bindValue(':users_id', $post->users_id());
+    $requete->bindValue(':title',   $post->title());
+    $requete->bindValue(':chapo',   $post->chapo());
+    $requete->bindValue(':contenu', $post->contenu());
+    $requete->bindValue(':users_id', $post->users_id());
 
-    $q->execute();
+    $requete->execute();
 
     $post->setId($this->dao->lastInsertId());
   }
@@ -95,10 +95,10 @@ class PostManagerPDO extends PostManager
   {
     $requete = $this->dao->prepare('UPDATE posts SET title = :title, chapo = :chapo, contenu = :contenu, update_date = NOW(), users_id = :users_id WHERE id = :id');
 
+    $requete->bindValue(':id',      $post->id(), \PDO::PARAM_INT);
     $requete->bindValue(':title',   $post->title());
     $requete->bindValue(':chapo',   $post->chapo());
     $requete->bindValue(':contenu', $post->contenu());
-    $requete->bindValue(':id',      $post->id());
     $requete->bindValue(':users_id',$post->users_id());
 
     $requete->execute();

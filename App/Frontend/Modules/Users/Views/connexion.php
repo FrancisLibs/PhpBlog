@@ -1,8 +1,5 @@
 <!-- Zone formulaire  -->
 <div class="zone-formulaire">
-  <div>
-    <?php if ($user->hasFlash()) echo '<p class="ligne-erreur">', $user->getFlash(), '</p>'; ?>
-  </div>
   <div class="formulaire">
     <p id="titreFormulaire">Connexion</p>
     <form action ="" method="post" class="formulaireMessage">

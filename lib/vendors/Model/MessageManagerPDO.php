@@ -7,14 +7,14 @@ class MessageManagerPDO extends MessageManager
 {
   protected function add(Message $message)
   {
-    $q = $this->dao->prepare('INSERT INTO messages SET firstName = :firstName, lastName = :lastName, email = :email,  edition_date = NOW(), message= :message');
+    $requete = $this->dao->prepare('INSERT INTO messages SET firstName = :firstName, lastName = :lastName, email = :email,  edition_date = NOW(), message= :message');
 
-    $q->bindValue(':firstName', $message->firstName());
-    $q->bindValue(':lastName',  $message->lastName());
-    $q->bindValue(':email',     $message->email());
-    $q->bindValue(':message',   $message->message());
+    $requete->bindValue(':firstName', $message->firstName());
+    $requete->bindValue(':lastName',  $message->lastName());
+    $requete->bindValue(':email',     $message->email());
+    $requete->bindValue(':message',   $message->message());
 
-    $q->execute();
+    $requete->execute();
 
     $message->setId($this->dao->lastInsertId());
   }

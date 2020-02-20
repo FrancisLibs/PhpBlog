@@ -27,6 +27,7 @@ class UsersManagerPDO extends UsersManager
   public function getUsers($login)
   {
     $requete = $this->dao->prepare('SELECT id, login, email, password, create_date, status, role_id , vkey FROM users WHERE login = :login');
+
     $requete->bindValue(':login', $login, \PDO::PARAM_STR);
     $requete->execute();
 
@@ -46,6 +47,7 @@ class UsersManagerPDO extends UsersManager
             . 'INNER JOIN roles r '
             . 'ON r.id = u.role_id '
             . 'WHERE u.id = :id ');
+    
     $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
     $requete->execute();
 
