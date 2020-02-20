@@ -1,16 +1,16 @@
 <div class="back-show-contenu">
   <div class="entete">
-    <h2><?= $post['title'] ?></h2>
-    <p class="show-autor">Par <em><?= $post['autor_name'] ?></em> le <?= $post['edition_date']->format('d/m/Y à H\hi') ?>
+    <h2><?= htmlspecialchars($post['title']) ?></h2>
+    <p class="show-autor">Par <em><?= htmlspecialchars($post['autor_name']) ?></em> le <?= htmlspecialchars($post['edition_date']->format('d/m/Y à H\hi')) ?>
     <?php 
     if($post['edition_date'] != $post['updatedate'] && isset($post['update_date'])) 
     { ?>
-       , modifié le <?= $post['update_date']->format('d/m/Y à H\hi') ?></p>
+       , modifié le <?= htmlspecialchars($post['update_date']->format('d/m/Y à H\hi')) ?></p>
     <?php } ?>
   </div>
 
-  <h3 class="show-chapo"><?= $post['chapo'] ?></h3>
-  <p class="show-contenu"><?= nl2br($post['contenu']) ?></p>
+  <h3 class="show-chapo"><?= htmlspecialchars($post['chapo']) ?></h3>
+  <p class="show-contenu"><?= htmlspecialchars(nl2br($post['contenu'])) ?></p>
 
   <?php
   if (empty($comments))

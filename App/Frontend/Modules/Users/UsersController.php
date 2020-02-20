@@ -144,7 +144,6 @@ class UsersController extends BackController
 
         http://phpblog//activation-'.urlencode($users->login()).'-'.urlencode($users->vkey()).'.html
 
-
         ---------------
         Ceci est un mail automatique, Merci de ne pas y répondre.';
       
@@ -164,10 +163,11 @@ class UsersController extends BackController
         ->setBody($txtMessage);
 
       // Send the message
-      $result = $mailer->send($message);
+      $mailer->send($message);
 
       $this->app->user()->setFlash('Un mail d\'authentification vient de vous être envoyé');
       $this->app->httpResponse()->redirect('/');
+
     }
 
     $this->page->addVar('form', $form->createView());

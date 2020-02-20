@@ -55,7 +55,7 @@ class CommentManagerPDO extends CommentManager
 
     $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
 
-    $comments = $q->fetchAll();
+    $comments = $requete->fetchAll();
 
     foreach ($comments as $comment)
     {
