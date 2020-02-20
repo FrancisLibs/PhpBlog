@@ -1,10 +1,4 @@
 <div class="zone-formulaire">
-<<<<<<< HEAD
-=======
-  <div>
-    <?php if ($user->hasFlash()) echo '<p class="ligne-message">', htmlspecialchars($user->getFlash()), '</p>'; ?>
-  </div>
->>>>>>> security
   <div class="formulaire">
     <p id="titreFormulaire">Ajouter un commentaire</p>
     <form action ="" method="post" class="formulaireMessage">

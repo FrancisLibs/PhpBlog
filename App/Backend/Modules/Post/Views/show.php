@@ -10,7 +10,7 @@
   </div>
 
   <h3 class="show-chapo"><?= htmlspecialchars($post['chapo']) ?></h3>
-  <p class="show-contenu"><?= htmlspecialchars(nl2br($post['contenu'])) ?></p>
+  <p class="show-contenu"><?= nl2br(htmlspecialchars($post['contenu'])) ?></p>
 
   <?php
   if (empty($comments))
