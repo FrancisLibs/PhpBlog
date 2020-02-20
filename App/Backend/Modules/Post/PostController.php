@@ -24,7 +24,7 @@ class PostController extends BackController
     $this->page->addVar('title', 'Administration blog');
   }
 
-  public function executeShowPosts(HTTPRequest $request)
+  public function executeShowPosts()
   {
     $this->page->addVar('title', 'Gestion des Articles');
 
