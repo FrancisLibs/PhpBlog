@@ -36,34 +36,27 @@ class UsersController extends BackController
         $manager = $this->managers->getManagerOf('Users');
         // et le user correspondnat au login
         $usersBdd = $manager->getUsers($users->login());
-           
-        if(!isset($usersBdd))
+        
+        // test si présence en badd et test si bn mdp
+        if(!isset($usersBdd) || (!$users->comparePasswords($usersBdd->password())))
         {
           $this->app->user()->setFlash('L\'identifiant ou le mot de passe sont erronés');
           $this->app->httpResponse()->redirect('/connect.html');
         }
-        else // Vérification mot de passe
-        {            
-          if(!$users->comparePasswords($usersBdd->password()))  // Check du mot de passe
+        else // Vérification validité de l'utilisateur
+        {
+          if($usersBdd->status() == 0)
           {
-            $this->app->user()->setFlash('L\'identifiant et/ou le mot de passe sont erronés');
+            $this->app->user()->setFlash('Désolé, mais vous n\'êtes pas encore validé');
             $this->app->httpResponse()->redirect('/connect.html');
           }
-          else // Vérification validité de l'utilisateur
+          else
           {
-            if($usersBdd->status() == 0)
-            {
-              $this->app->user()->setFlash('Désolé, mais vous n\'êtes pas encore validé');
-              $this->app->httpResponse()->redirect('/connect.html');
-            }
-            else
-            {
-              $this->app->user()->setAuthenticated(true);
+            $this->app->user()->setAuthenticated(true);
 
-              $this->app->user()->setAttribute('users', $usersBdd);
+            $this->app->user()->setAttribute('users', $usersBdd);
 
-              $this->app->httpResponse()->redirect('/');
-            }
+            $this->app->httpResponse()->redirect('/');
           }
         }
       }
@@ -102,7 +95,6 @@ class UsersController extends BackController
       if (!$users->registrationFormIsValid())
       {
         $this->app->user()->setFlash('Merci de compléter tous les champs');
-        
         $this->app->httpResponse()->redirect('/register.html');
       }
       else
@@ -114,7 +106,6 @@ class UsersController extends BackController
         if (!empty($resultat))
         {
           $this->app->user()->setFlash('L\'identifiant que vous avez choisi n\'est pas disponible');
-
           $this->app->httpResponse()->redirect('/register.html');
         }
         else
@@ -122,7 +113,6 @@ class UsersController extends BackController
           if(!($users->password() == $users->verifyPassword())) // Comparaison des 2 mots de passe du formulaire
           {
             $this->app->user()->setFlash('Les mots de passe ne sont pas identiques');
-
             $this->app->httpResponse()->redirect('/register.html');
           }
         }
@@ -134,11 +124,8 @@ class UsersController extends BackController
     }
 
     $formBuilder = new RegistrationFormBuilder($users);
-
     $formBuilder->build();
-
     $form = $formBuilder->form();
-
     $formHandler = new FormHandler($form, $this->managers->getManagerOf('Users'), $request);
       
     if ($formHandler->processValid())
@@ -180,15 +167,12 @@ class UsersController extends BackController
       $result = $mailer->send($message);
 
       $this->app->user()->setFlash('Un mail d\'authentification vient de vous être envoyé');
-
       $this->app->httpResponse()->redirect('/');
     }
 
     $this->page->addVar('form', $form->createView());
-
     // On ajoute une définition pour le titre.
     $this->page->addVar('title', 'Enregistrement');
-    
   }
 
   public function executeDeconnect()
