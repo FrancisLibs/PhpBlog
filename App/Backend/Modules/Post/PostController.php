@@ -76,7 +76,6 @@ class PostController extends BackController
     $this->managers->getManagerOf('Post')->delete($postId);
     
     $this->app->user()->setFlash('L\'article a bien été supprimé ! ');
-
     $this->app->httpResponse()->redirect('/admin/posts.html');
   }
 
@@ -98,6 +97,13 @@ class PostController extends BackController
 
     if ($request->method() == 'POST')
     {
+      // Le formulaire a t-il été détourné ? (CSRF)
+      if($request->postData('formToken') != $_SESSION["formToken"])
+      {
+        $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
+        $this->app->httpResponse()->redirect('/connect.html');
+      }
+
       $comment = new Comment([
         'contenu' => $request->postData('contenu'),
         'post_id' => $request->postData('post_id'),
@@ -111,6 +117,10 @@ class PostController extends BackController
 
       $comment = $manager->get($request->getData('id'));
     }
+
+    // CSRF...
+    $formToken = bin2hex(random_bytes(20));
+    $_SESSION['formToken'] = $formToken;
 
     $formBuilder = new CommentFormBuilder($comment);
     $formBuilder->build();
@@ -133,6 +143,13 @@ class PostController extends BackController
   {
     if ($request->method() == 'POST')
     {
+      // Le formulaire a t-il été détourné ? (CSRF)
+      if($request->postData('formToken') != $_SESSION["formToken"])
+      {
+        $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
+        $this->app->httpResponse()->redirect('/connect.html');
+      }
+
       $users = $this->app->user()->getAttribute('users');
 
       $post = new Post([
@@ -163,6 +180,10 @@ class PostController extends BackController
       }
     }
 
+    // CSRF...
+    $formToken = bin2hex(random_bytes(20));
+    $_SESSION['formToken'] = $formToken;
+
     $formBuilder = new PostFormBuilder($post);
     $formBuilder->build();
 
@@ -173,7 +194,6 @@ class PostController extends BackController
     if ($formHandler->process())
     {
       $this->app->user()->setFlash($post->isNew() ? 'L\'article a bien été ajouté !' : 'L\'article a bien été modifié !');
-
       $this->app->httpResponse()->redirect('/admin/posts.html');
     }
     
@@ -185,6 +205,13 @@ class PostController extends BackController
     // Si le formulaire a été envoyé.
     if ($request->method() == 'POST')
     {
+      // Le formulaire a t-il été détourné ? (CSRF)
+      if($request->postData('formToken') != $_SESSION["formToken"])
+      {
+        $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
+        $this->app->httpResponse()->redirect('/connect.html');
+      }
+
       $comment = new Comment([
         'contenu'   =>  $request->postData('contenu'),
         'post_id'   =>  $request->getData('post'),
@@ -197,6 +224,10 @@ class PostController extends BackController
       $comment = new Comment;
     }
 
+    // CSRF...
+    $formToken = bin2hex(random_bytes(20));
+    $_SESSION['formToken'] = $formToken;
+    
     $formBuilder = new CommentFormBuilder($comment);
     $formBuilder->build();
 
@@ -207,7 +238,6 @@ class PostController extends BackController
     if ($formHandler->process())
     {
       $this->app->user()->setFlash('Le commentaire a bien été ajouté, merci !');
-
       $this->app->httpResponse()->redirect('/admin/post-show-'.$request->getData('post').'.html');
     }
 

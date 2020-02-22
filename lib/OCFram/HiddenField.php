@@ -16,7 +16,7 @@ class HiddenField extends Field
 
     if (!empty($this->value))
     {
-      $widget .= ' value="'.htmlspecialchars($this->value).'"';
+      $widget .= ' value="'. $this->value.'"';
     }
 
     return $widget .= ' />';

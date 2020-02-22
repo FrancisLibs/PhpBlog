@@ -4,6 +4,7 @@ namespace FormBuilder;
 use \OCFram\FormBuilder;
 use \OCFram\StringField;
 use \OCFram\PasswordField;
+use \OCFram\HiddenField;
 use \OCFram\MaxLengthValidator;
 use \OCFram\NotNullValidator;
 use \OCFram\EmailValidator;
@@ -38,6 +39,9 @@ class ConnexionFormBuilder extends FormBuilder
           new NotNullValidator('Merci de spécifier le mot de passe'),
           new PasswordValidator('Le mot de passe doit être composé d\'au moins 6 caractères, avec une minuscule, une majuscule, un chiffre, un caractère spécial'),
         ],
-        ]));
+        ]))
+       ->add(new HiddenField([
+        'name' => 'formToken'
+       ]));
   }
 }

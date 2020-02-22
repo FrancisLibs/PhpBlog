@@ -19,7 +19,14 @@ class PostController extends BackController
   	// Traitement du formulaire de contact si le formulaire a été envoyé.
   	if ($request->method() == 'POST')
   	{
-  	  $message = new Message([
+      // Le formulaire a t-il été détourné ? (CSRF)
+      if($request->postData('formToken') != $_SESSION["formToken"])
+      {
+        $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
+        $this->app->httpResponse()->redirect('/connect.html');
+      }
+
+      $message = new Message([
   		'firstName' =>  $request->postData('firstName'),
   		'lastName' =>   $request->postData('lastName'),
   		'email' =>      $request->postData('email'),
@@ -30,6 +37,9 @@ class PostController extends BackController
     {
   		$message = new Message;
     }
+
+    $formToken = bin2hex(random_bytes(20));
+    $_SESSION['formToken'] = $formToken;
 
 		$formBuilder = new MessageFormBuilder($message);
 		$formBuilder->build();
@@ -45,6 +55,7 @@ class PostController extends BackController
         $message->firstName()."\n".
         $message->email()."\n".
         $message->message();
+
       // Envoi du mail du formulaire
       $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
       ->setUserName('fr.libs@gmail.com')
@@ -109,7 +120,7 @@ class PostController extends BackController
 
     $this->page->addVar('post', $post);
 
-    $state = 1;
+    $state = 1; // State = 1, sont les commentaires validés
     $comments = $this->managers->getManagerOf('Comment')->getListOf($post->id(), $state);
 
     $this->page->addVar('comments', $comments);
@@ -127,6 +138,13 @@ class PostController extends BackController
     // Si le formulaire a été envoyé.
     if ($request->method() == 'POST')
     {
+      // Le formulaire a t-il été détourné ? (CSRF)
+      if($request->postData('formToken') != $_SESSION["formToken"])
+      {
+        $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
+        $this->app->httpResponse()->redirect('/connect.html');
+      }
+
       $comment = new Comment([
     	'contenu'   =>  $request->postData('contenu'),
     	'post_id'   =>  $request->getData('post'),
@@ -138,6 +156,9 @@ class PostController extends BackController
     {
       $comment = new Comment;
     }
+
+    $formToken = bin2hex(random_bytes(20));
+    $_SESSION['formToken'] = $formToken;
 
     $formBuilder = new CommentFormBuilder($comment);
     $formBuilder->build();
@@ -164,6 +185,13 @@ class PostController extends BackController
 
     if ($request->method() == 'POST')
     {
+      // Le formulaire a t-il été détourné ? (CSRF)
+      if($request->postData('formToken') != $_SESSION["formToken"])
+      {
+        $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
+        $this->app->httpResponse()->redirect('/connect.html');
+      }
+      
       $comment = new Comment([
     	'id'      =>  $request->postData('id'),
     	'contenu' =>  $request->postData('contenu'),
@@ -175,6 +203,9 @@ class PostController extends BackController
     {
       $comment = $this->managers->getManagerOf('Comment')->get($request->getData('id'));
     }
+
+    $formToken = bin2hex(random_bytes(20));
+    $_SESSION['formToken'] = $formToken;
 
     $formBuilder = new CommentFormBuilder($comment);
     $formBuilder->build();

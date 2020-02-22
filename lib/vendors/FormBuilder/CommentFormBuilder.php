@@ -33,6 +33,8 @@ class CommentFormBuilder extends FormBuilder
       ->add(new HiddenField([
         'name' => 'id',
        ]))
-      ;
+      ->add(new HiddenField([
+        'name' => 'formToken'
+       ]));
   }
 }

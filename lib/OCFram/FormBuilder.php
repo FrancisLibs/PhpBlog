@@ -4,6 +4,7 @@ namespace OCFram;
 abstract class FormBuilder
 {
   protected $form;
+  protected $formToken;
 
   public function __construct(Entity $entity)
   {

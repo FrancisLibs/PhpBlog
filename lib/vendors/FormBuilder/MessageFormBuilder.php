@@ -5,6 +5,7 @@ use \OCFram\FormBuilder;
 use \OCFram\StringField;
 use \OCFram\TextField;
 use \OCFram\EmailField;
+use \OCFram\HiddenField;
 use \OCFram\MaxLengthValidator;
 use \OCFram\NotNullValidator;
 use \OCFram\EmailValidator;
@@ -63,6 +64,9 @@ class MessageFormBuilder extends FormBuilder
         'validators' => [
           new NotNullValidator('Merci de spécifier le contenu du message'),
         ],
+       ]))
+       ->add(new HiddenField([
+        'name' => 'formToken'
        ]));
   }
 }
