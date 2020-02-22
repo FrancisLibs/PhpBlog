@@ -2,6 +2,9 @@
 <p style="text-align: center">Il y a actuellement <?= $nombreCommentairesInvalides ?> commentaires à valider</p>
 -->
 <div class="centragePage">
+   <div>
+    <?php if ($user->hasFlash()) echo $user->getFlash(), '</p>'; ?>
+  </div>
   <div class="entete-admin-showPosts">
     <h2 class="entete-admin-posts"> Liste des posts</h2>
     <a class="btn btn-primary btn-admin-showPosts" href="/admin/post-insert.html" role="button">Ajouter post</a>

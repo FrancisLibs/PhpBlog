@@ -93,10 +93,21 @@ class UsersController extends BackController
     // Traitement du formulaire s'il a été envoyé
     if ($request->method() == 'POST')
     {
-      if($request->postData('formToken') != $_SESSION["formToken"])
+
+       //On vérifie la présence des  tokens (CSRF)
+      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken'))) 
+      {
+        // Le formulaire a t-il été détourné ?
+        if($request->postData('formToken') != $_SESSION["formToken"])
+        {
+          $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
+          $this->app->httpResponse()->redirect('register.html');
+        }
+      }
+      else
       {
         $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
-        $this->app->httpResponse()->redirect('/connect.html');
+        $this->app->httpResponse()->redirect('register.html');
       }
 
       $users = new Users([

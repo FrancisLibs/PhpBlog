@@ -10,7 +10,6 @@ use \FormBuilder\PostFormBuilder;
 use \FormBuilder\CommentFormBuilder;
 use \Model\CommentManagerPDO;
 
-
 class PostController extends BackController
 {
   public function executeIndex()
@@ -58,7 +57,7 @@ class PostController extends BackController
   {    
     $this->processForm($request);
 
-    $this->page->addVar('title', 'Ajout d\'un post');
+    $this->page->addVar('title', 'Ajout d\'un article');
   }
 
   public function executeUpdate(HTTPRequest $request)
@@ -97,11 +96,20 @@ class PostController extends BackController
 
     if ($request->method() == 'POST')
     {
-      // Le formulaire a t-il été détourné ? (CSRF)
-      if($request->postData('formToken') != $_SESSION["formToken"])
+      //On vérifie la présence des  tokens (CSRF)
+      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken'))) 
+      {
+        // Le formulaire a t-il été détourné ?
+        if($request->postData('formToken') != $_SESSION["formToken"])
+        {
+          $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
+          $this->app->httpResponse()->redirect('/admin/post-show-'.$comment->post_id().'.html');
+        }
+      }
+      else
       {
         $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
-        $this->app->httpResponse()->redirect('/connect.html');
+        $this->app->httpResponse()->redirect('/admin/post-show-'.$comment->post_id().'.html');
       }
 
       $comment = new Comment([
@@ -144,13 +152,22 @@ class PostController extends BackController
     if ($request->method() == 'POST')
     {
       // Le formulaire a t-il été détourné ? (CSRF)
-      if($request->postData('formToken') != $_SESSION["formToken"])
+      //On vérifie que la présence des  tokens
+      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken'))) 
+      {
+        if($request->postData('formToken') != $_SESSION["formToken"])
+        {
+          $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
+          $this->app->httpResponse()->redirect('/admin/posts.html');
+        }
+      }
+      else 
       {
         $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
         $this->app->httpResponse()->redirect('/connect.html');
       }
 
-      $users = $this->app->user()->getAttribute('users');
+      $users = $this->app->user()->getAttribute('/admin/posts.html');
 
       $post = new Post([
         'id'            => $request->postData('id'),
@@ -206,10 +223,19 @@ class PostController extends BackController
     if ($request->method() == 'POST')
     {
       // Le formulaire a t-il été détourné ? (CSRF)
-      if($request->postData('formToken') != $_SESSION["formToken"])
+      //On vérifie que la présence des  tokens
+      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken'))) 
+      {
+        if($request->postData('formToken') != $_SESSION["formToken"])
+        {
+          $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
+          $this->app->httpResponse()->redirect('/admin/post-show-'.$request->getData('post').'.html');
+        }
+      }
+      else
       {
         $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
-        $this->app->httpResponse()->redirect('/connect.html');
+        $this->app->httpResponse()->redirect('/admin/post-show-'.$request->getData('post').'.html');
       }
 
       $comment = new Comment([
