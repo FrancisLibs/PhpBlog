@@ -29,7 +29,7 @@ class Post extends Entity
 
   public function setId($id)
   {
-    $this->id = $id;
+    $this->id = htmlentities($id);
   }
 
   public function setTitle($title)
@@ -39,7 +39,7 @@ class Post extends Entity
       $this->erreurs[] = self::TITRE_INVALIDE;
     }
 
-    $this->title = $title;
+    $this->title = htmlentities($title);
   }
 
   public function setChapo($chapo)
@@ -49,7 +49,7 @@ class Post extends Entity
       $this->erreurs[] = self::CHAPO_INVALIDE;
     }
 
-    $this->chapo = $chapo;
+    $this->chapo = htmlentities($chapo);
   }
 
   public function setContenu($contenu)
@@ -59,7 +59,7 @@ class Post extends Entity
       $this->erreurs[] = self::CONTENU_INVALIDE;
     }
 
-    $this->contenu = $contenu;
+    $this->contenu = htmlentities($contenu);
   }
 
   public function setEdition_date(\DateTime $edition_date)
@@ -78,12 +78,12 @@ class Post extends Entity
     {
       $this->erreurs[] = self::AUTEUR_INVALIDE;
     }
-    $this->autor_name = $autor_name;
+    $this->autor_name = htmlentities($autor_name);
   }
 
    public function setUsers_id($users_id)
   {
-    $this->users_id = $users_id;
+    $this->users_id = htmlentities($users_id);
   }
 
   // GETTERS //

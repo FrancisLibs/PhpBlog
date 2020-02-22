@@ -36,7 +36,7 @@ class Comment extends Entity
       $this->erreurs[] = self::CONTENU_INVALIDE;
     }
 
-    $this->contenu = $contenu;
+    $this->contenu = htmlentities($contenu);
   }
 
   public function setEdition_date(\DateTime $edition_date)
@@ -46,17 +46,17 @@ class Comment extends Entity
 
   public function setState($state)
   {
-    $this->state = $state;
+    $this->state = htmlentities($state);
   }
 
   public function setUsers_id($users_id)
   {
-    $this->users_id = $users_id;
+    $this->users_id = htmlentities($users_id);
   }
 
   public function setPost_id($post_id)
   {
-    $this->post_id = $post_id;
+    $this->post_id = htmlentities($post_id);
   }
 
   public function setAuthor_name($author_name)
@@ -66,7 +66,7 @@ class Comment extends Entity
       $this->erreurs[] = self::AUTEUR_INVALIDE;
     }
 
-    $this->author_name = $author_name;
+    $this->author_name = htmlentities($author_name);
   }
 
   public function id()

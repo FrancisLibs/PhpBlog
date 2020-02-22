@@ -51,7 +51,7 @@ class Users extends Entity
     {
       $this->erreurs[] = self::LOGIN_INVALIDE;
     }
-    $this->login = $login;
+    $this->login = htmlentities($login);
   }
 
   public function setEmail($email)
@@ -61,7 +61,7 @@ class Users extends Entity
       $this->erreurs[] = self::EMAIL_INVALIDE;
     }
 
-    $this->email = $email;
+    $this->email = htmlentities($email);
   }
 
   public function setPassword($password)
@@ -71,7 +71,7 @@ class Users extends Entity
       $this->erreurs[] = self::PASSWORD_INVALIDE;
     }
 
-    $this->password = $password;
+    $this->password = htmlentities($password);
   }
 
   public function setVerifyPassword($verifyPassword)
@@ -81,7 +81,7 @@ class Users extends Entity
       $this->erreurs[] = self::VERIFY_PASSWORD_INVALIDE;
     }
 
-    $this->verifyPassword = $verifyPassword;
+    $this->verifyPassword = htmlentities($verifyPassword);
   }
 
   public function setCreate_date(\DateTime $create_date)
@@ -91,22 +91,22 @@ class Users extends Entity
 
   public function setStatus($status)
   {
-    $this->status = $status;
+    $this->status = htmlentities($status);
   }
 
   public function setRole_id($role_id)
   {
-    $this->role_id = $role_id;
+    $this->role_id = htmlentities($role_id);
   }
 
   public function setRole($role)
   {
-    $this->role = $role;
+    $this->role = htmlentities($role);
   }
   
   public function setVkey($vkey)
   {
-    $this->vkey = $vkey;
+    $this->vkey = htmlentities($vkey);
   }
   
 
