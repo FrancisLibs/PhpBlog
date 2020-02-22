@@ -192,11 +192,4 @@ class PostController extends BackController
 
     $this->page->addVar('form', $form->createView());
   }
-
-  public function executeCv(HTTPRequest $request)
-  {
-    if ($request->method() == 'GET')
-    {
-    }
-  }
 }
