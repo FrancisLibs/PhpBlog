@@ -43,17 +43,12 @@ class UsersController extends BackController
       // et le user correspondnat au login
       $usersBdd = $manager->getUsers($users->login());
            
-      if(!isset($usersBdd))
+      // test si présence en badd et test si bn mdp
+      if(!isset($usersBdd) || (!$users->comparePasswords($usersBdd->password())))
       {
         $this->app->user()->setFlash('L\'identifiant ou le mot de passe sont erronés');
         $this->app->httpResponse()->redirect('/connect.html');
-      }    
-
-      if(!$users->comparePasswords($usersBdd->password()))  // Check du mot de passe
-      {
-        $this->app->user()->setFlash('L\'identifiant et/ou le mot de passe sont erronés');
-        $this->app->httpResponse()->redirect('/connect.html');
-      }
+      }   
 
       if($usersBdd->status() == 0)// Vérification validité de l'utilisateur
       {
@@ -93,7 +88,6 @@ class UsersController extends BackController
     // Traitement du formulaire s'il a été envoyé
     if ($request->method() == 'POST')
     {
-
        //On vérifie la présence des  tokens (CSRF)
       if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken'))) 
       {
@@ -134,7 +128,7 @@ class UsersController extends BackController
         $this->app->httpResponse()->redirect('/register.html');
       }
         
-      if(!($users->password() == $users->verifyPassword())) // Comparaison des 2 mots de passe du formulaire
+      if (!($users->password() == $users->verifyPassword())) // Comparaison des 2 mots de passe du formulaire
       {
         $this->app->user()->setFlash('Les mots de passe ne sont pas identiques');
         $this->app->httpResponse()->redirect('/register.html');
@@ -150,11 +144,8 @@ class UsersController extends BackController
     $_SESSION['formToken'] = $formToken;
 
     $formBuilder = new RegistrationFormBuilder($users);
-
     $formBuilder->build();
-
     $form = $formBuilder->form();
-
     $formHandler = new FormHandler($form, $this->managers->getManagerOf('Users'), $request);
       
     if ($formHandler->processValid())
@@ -200,10 +191,8 @@ class UsersController extends BackController
     }
 
     $this->page->addVar('form', $form->createView());
-
     // On ajoute une définition pour le titre.
     $this->page->addVar('title', 'Enregistrement');
-
   }
 
   public function executeDeconnect()
