@@ -18,7 +18,6 @@ abstract class Application
     $this->user = new User($this);
     $this->config = new Config($this);
 
-
     $this->name = '';
   }
 
@@ -45,7 +44,6 @@ abstract class Application
       // On ajoute la route au routeur.
       $router->addRoute(new Route($route->getAttribute('url'), $route->getAttribute('module'), $route->getAttribute('action'), $vars));
     }
-
 
     try
     {

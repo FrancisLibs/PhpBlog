@@ -22,7 +22,6 @@ class RightsManagerPDO extends RightsManager
     
     if ($rights = $requete->fetch())
     {
-     
       return $rights;
     }
     return null;

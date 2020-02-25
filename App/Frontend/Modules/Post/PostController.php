@@ -19,8 +19,7 @@ class PostController extends BackController
   	// Traitement du formulaire de contact si le formulaire a été envoyé.
   	if ($request->method() == 'POST')
   	{
-      // Le formulaire a t-il été détourné ? (CSRF)
-      //On vérifie que la présence des  tokens
+      // Le formulaire a t-il été détourné ? (CSRF) On vérifie la présence des  tokens
       if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken'))) 
       {
         if($request->postData('formToken') != $_SESSION["formToken"])
@@ -47,6 +46,35 @@ class PostController extends BackController
   		$message = new Message;
     }
 
+    // Sécurité Hijack -> écriture du cookie et de la session
+    if(!isset($_COOKIE['versio']) || !isset($_SESSION['versio']))
+    {
+      $cookie_name = "versio";
+      $ticket = bin2hex(random_bytes(30));
+
+      setcookie($cookie_name, $ticket, time() + (60 * 20)); // Expiration après 20 min
+      $_SESSION['versio'] =  $ticket;
+    }
+    else
+    {
+      // Vérification lors du retour sur la page
+      if(isset($_COOKIE['versio']) && isset($_SESSION['versio']))
+      {
+        if ($_COOKIE['versio'] != $_SESSION['versio'])
+        {
+          $this->app->user()->endSession();
+        }
+
+        // Sécurité Hijack -> écriture du cookie et de la session
+        $cookie_name = "versio";
+        $ticket = bin2hex(random_bytes(30));
+
+        setcookie($cookie_name, $ticket, time() + (60 * 20)); // Epiration après 20 min
+        $_SESSION['versio'] =  $ticket;
+      }
+    }
+
+    // Sécurité CSRF
     $formToken = bin2hex(random_bytes(20));
     $_SESSION['formToken'] = $formToken;
 
