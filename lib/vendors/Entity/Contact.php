@@ -8,7 +8,8 @@ class Contact extends Entity
   protected $lastName,
             $firstName,
             $email,
-            $message;
+            $message,
+            $formToken;
 
   const USER_INVALIDE = 1;
   const NOM_INVALIDE = 2;
@@ -70,6 +71,11 @@ class Contact extends Entity
     $this->message = htmlentities($message);
   }
 
+  public function setFormToken($formToken)
+  {
+    $this->formToken = $formToken;
+  }
+
   // GETTERS //
 
   public function lastName()
@@ -90,5 +96,10 @@ class Contact extends Entity
   public function message()
   {
     return $this->message;
+  }
+
+  public function formToken()
+  {
+    return $this->formToken;
   }
 }

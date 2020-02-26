@@ -15,17 +15,20 @@ use \Swift_Message;
 class UsersController extends BackController
 {
   public function executeConnexion(HTTPRequest $request)
-  {
+  {    
     // Traitement du formulaire s'il a été envoyé
     if ($request->method() == 'POST')
     {
-      // Le formulaire a t-il été détourné ? (CSRF)
-      if($request->postData('formToken') != $_SESSION["formToken"])
+      // Le formulaire a t-il été détourné ? (CSRF)   
+      if($this->app->user()->sessionExist('formToken') && $request->postExists('formToken'))
       {
-        $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
-        $this->app->httpResponse()->redirect('/connect.html');
+        if($request->postData('formToken') != $this->app->user()->sessionExist('formToken'))
+        {
+          $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
+          $this->app->httpResponse()->redirect('/connect.html');
+        }
       }
-     
+
       $users = new Users([
         'login' =>          $request->postData('login'),
         'password' =>       $request->postData('password'),
@@ -69,9 +72,11 @@ class UsersController extends BackController
     }
     // CSRF...
     $formToken = bin2hex(random_bytes(20));
-    $_SESSION['formToken'] = $formToken;
+    $this->app->user()->setSession('formToken', $formToken);
 
-    $formBuilder = new ConnexionFormBuilder($users, $formToken);
+    $users->setFormToken($formToken);
+
+    $formBuilder = new ConnexionFormBuilder($users);
 
     $formBuilder->build();
 
@@ -140,7 +145,6 @@ class UsersController extends BackController
     }
 
     $formToken = bin2hex(random_bytes(20));
-
     $_SESSION['formToken'] = $formToken;
 
     $formBuilder = new RegistrationFormBuilder($users);

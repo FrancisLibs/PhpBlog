@@ -9,7 +9,8 @@ class Rights extends Entity
             $app,
             $module,
             $action,
-            $role;
+            $role,
+            $formToken;
 
   const APP_INVALIDE = 1;
   const MODULE_INVALIDE = 2;
@@ -68,6 +69,11 @@ class Rights extends Entity
     $this->role = htmlentities($role);
   }
 
+  public function setFormToken($formToken)
+  {
+    $this->formToken = $formToken;
+  }
+
   // GETTERS //
 
   public function id()
@@ -93,5 +99,10 @@ class Rights extends Entity
   public function role()
   {
     return $this->role;
+  }
+
+  public function formToken()
+  {
+    return $this->formToken;
   }
 }

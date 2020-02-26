@@ -4,6 +4,7 @@ namespace App\Frontend\Modules\Post;
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \OCFram\FormHandler;
+use \OCFram\HijackSecurity;
 use \Entity\Comment;
 use \Entity\Message;
 use \FormBuilder\MessageFormBuilder;
@@ -44,34 +45,6 @@ class PostController extends BackController
     else
     {
   		$message = new Message;
-    }
-
-    // Sécurité Hijack -> écriture du cookie et de la session
-    if(!isset($_COOKIE['versio']) || !isset($_SESSION['versio']))
-    {
-      $cookie_name = "versio";
-      $ticket = bin2hex(random_bytes(30));
-
-      setcookie($cookie_name, $ticket, time() + (60 * 20)); // Expiration après 20 min
-      $_SESSION['versio'] =  $ticket;
-    }
-    else
-    {
-      // Vérification lors du retour sur la page
-      if(isset($_COOKIE['versio']) && isset($_SESSION['versio']))
-      {
-        if ($_COOKIE['versio'] != $_SESSION['versio'])
-        {
-          $this->app->user()->endSession();
-        }
-
-        // Sécurité Hijack -> écriture du cookie et de la session
-        $cookie_name = "versio";
-        $ticket = bin2hex(random_bytes(30));
-
-        setcookie($cookie_name, $ticket, time() + (60 * 20)); // Epiration après 20 min
-        $_SESSION['versio'] =  $ticket;
-      }
     }
 
     // Sécurité CSRF

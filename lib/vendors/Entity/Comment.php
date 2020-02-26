@@ -11,7 +11,8 @@ class Comment extends Entity
             $state,
             $users_id,
             $post_id,
-            $author_name;
+            $author_name,
+            $formToken;
 
 
   const CONTENU_INVALIDE = 1;
@@ -69,6 +70,11 @@ class Comment extends Entity
     $this->author_name = htmlentities($author_name);
   }
 
+  public function setFormToken($formToken)
+  {
+    $this->formToken = $formToken;
+  }
+
   public function id()
   {
     return $this->id;
@@ -102,5 +108,10 @@ class Comment extends Entity
   public function author_name()
   {
     return $this->author_name;
+  }
+
+  public function formToken()
+  {
+    return $this->formToken;
   }
 }

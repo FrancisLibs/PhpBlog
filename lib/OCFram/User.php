@@ -5,6 +5,16 @@ session_start();
 
 class User
 {
+  public function setSession($session, $attr)
+  {
+    $_SESSION[$session] = $attr;
+  }
+
+  public function sessionExist($attr)
+  {
+    return isset($_SESSION[$attr]);
+  }
+
   public function getAttribute($attr)
   {
     return isset($_SESSION[$attr]) ? $_SESSION[$attr] : null;

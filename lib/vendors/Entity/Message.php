@@ -9,7 +9,8 @@ class Message extends Entity
             $firstName,
             $lastName,
             $email,
-            $message;
+            $message,
+            $formToken;
 
   const MESSAGE_INVALIDE = 1;
   const FIRSTNAME_INVALIDE = 2;
@@ -73,6 +74,11 @@ class Message extends Entity
     $this->edition_date = $edition_date;
   }
 
+  public function setFormToken($formToken)
+  {
+    $this->formToken = $formToken;
+  }
+
 
   // GETTERS //
 
@@ -104,5 +110,10 @@ class Message extends Entity
   public function edition_date()
   {
     return $this->edition_date;
+  }
+
+  public function formToken()
+  {
+    return $this->formToken;
   }
 }

@@ -15,15 +15,8 @@ class Form
   {
     $attr = $field->name(); // On récupère le nom du champ.
 
-    if($attr == 'formToken')
-    {
-      $field->setValue($_SESSION['formToken']);
-    }
-    else
-    {
-      $field->setValue($this->entity->$attr()); // On assigne la valeur correspondante au champ.
-    }
-    
+    $field->setValue($this->entity->$attr()); // On assigne la valeur correspondante au champ.
+
     $this->fields[] = $field; // On ajoute le champ passé en argument à la liste des champs.
    
     return $this;
@@ -54,7 +47,7 @@ class Form
         $valid = false;
       }
     }
-
+    
     return $valid;
   }
 

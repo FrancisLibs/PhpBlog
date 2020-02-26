@@ -14,7 +14,8 @@ class Users extends Entity
             $status,
             $role_id,
             $role,
-            $vkey;
+            $vkey,
+            $formToken;
 
   const LOGIN_INVALIDE = 1;
   const EMAIL_INVALIDE = 2;
@@ -109,6 +110,10 @@ class Users extends Entity
     $this->vkey = htmlentities($vkey);
   }
   
+  public function setFormToken($formToken)
+  {
+    $this->formToken = $formToken;
+  }
 
   // GETTERS //
 
@@ -160,6 +165,11 @@ class Users extends Entity
   public function vkey()
   {
     return $this->vkey;
+  }
+
+  public function formToken()
+  {
+    return $this->formToken;
   }
   
 }

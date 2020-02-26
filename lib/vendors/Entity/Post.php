@@ -12,7 +12,8 @@ class Post extends Entity
             $edition_date,
             $update_date,
             $autor_name,
-            $users_id;
+            $users_id,
+            $formToken;
 
   const AUTEUR_INVALIDE = 1;
   const TITRE_INVALIDE = 2;
@@ -86,6 +87,11 @@ class Post extends Entity
     $this->users_id = htmlentities($users_id);
   }
 
+  public function setFormToken($formToken)
+  {
+    $this->formToken = $formToken;
+  }
+
   // GETTERS //
 
   public function id()
@@ -126,5 +132,10 @@ class Post extends Entity
    public function users_id()
   {
     return $this->users_id;
+  }
+
+  public function formToken()
+  {
+    return $this->formToken;
   }
 }
