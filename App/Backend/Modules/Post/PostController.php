@@ -152,7 +152,7 @@ class PostController extends BackController
     if ($request->method() == 'POST')
     {
       // Le formulaire a t-il été détourné ? (CSRF)
-      //On vérifie que la présence des  tokens
+      //On vérifie la présence des  tokens
       if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken'))) 
       {
         if($request->postData('formToken') != $_SESSION["formToken"])
@@ -166,7 +166,8 @@ class PostController extends BackController
         $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
         $this->app->httpResponse()->redirect('/connect.html');
       }
-
+      //---------------------Fin CSFR-----------------------
+      
       $users = $this->app->user()->getAttribute('/admin/posts.html');
 
       $post = new Post([
@@ -223,7 +224,7 @@ class PostController extends BackController
     if ($request->method() == 'POST')
     {
       // Le formulaire a t-il été détourné ? (CSRF)
-      //On vérifie que la présence des  tokens
+      //On vérifie la présence des  tokens
       if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken'))) 
       {
         if($request->postData('formToken') != $_SESSION["formToken"])
