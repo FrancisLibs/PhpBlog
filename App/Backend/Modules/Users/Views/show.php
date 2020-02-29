@@ -1,7 +1,7 @@
 <div class="back-usersShow-contenu">
   <div class="centragePage">
     <div class="entete-admin-showPosts">
-    <h2 class="entete-admin-posts">Liste visiteurs et membres</h2>
+    <h2 class="entete-admin-posts">Liste des membres</h2>
   </div>
       <div class="table-admin-show table-responsive-sm">
         <table class="table">
@@ -9,7 +9,6 @@
             <th>Login</th>
             <th>email</th>
             <th>Date d'ajout</th>
-            <th>Status</th>
             <th>Rôle</th>
             <th>Actions</th>
           </tr>
@@ -26,9 +25,6 @@
               </td>
               <td>
                 <?= htmlspecialchars($users->create_date()->format('d/m/Y à H\hi')) ?>
-              </td>
-              <td>
-                <?= htmlspecialchars($users->status()) ?>
               </td>
               <td>
                 <?= htmlspecialchars($users->role()) ?>

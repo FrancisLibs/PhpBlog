@@ -47,12 +47,12 @@ class Comment extends Entity
 
   public function setState($state)
   {
-    $this->state = htmlentities($state);
+    $this->state = $state;
   }
 
   public function setUsers_id($users_id)
   {
-    $this->users_id = htmlentities($users_id);
+    $this->users_id = $users_id;
   }
 
   public function setPost_id($post_id)
@@ -67,7 +67,7 @@ class Comment extends Entity
       $this->erreurs[] = self::AUTEUR_INVALIDE;
     }
 
-    $this->author_name = htmlentities($author_name);
+    $this->author_name = $author_name;
   }
 
   public function setFormToken($formToken)

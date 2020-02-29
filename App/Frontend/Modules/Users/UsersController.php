@@ -43,7 +43,7 @@ class UsersController extends BackController
       // Verification de la présence de l'identifiant en bdd
       // On récupère le manager des users.
       $manager = $this->managers->getManagerOf('Users');
-      // et le user correspondnat au login
+      // et le user correspondant au login
       $usersBdd = $manager->getUsers($users->login());
            
       // test si présence en badd et test si bn mdp

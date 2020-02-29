@@ -36,7 +36,7 @@ class Message extends Entity
       $this->erreurs[] = self::FIRSTNAME_INVALIDE;
     }
 
-    $this->firstName = htmlentities($firstName);
+    $this->firstName = $firstName;
   }
 
   public function setLastName($lastName)
@@ -46,7 +46,7 @@ class Message extends Entity
       $this->erreurs[] = self::LASTNAME_INVALIDE;
     }
 
-    $this->lastName = htmlentities($lastName);
+    $this->lastName = $lastName;
   }
 
   public function setEmail($email)
@@ -56,7 +56,7 @@ class Message extends Entity
       $this->erreurs[] = self::EMAIL_INVALIDE;
     }
 
-    $this->email = htmlentities($email);
+    $this->email = $email;
   }
 
   public function setMessage($message)
@@ -66,7 +66,7 @@ class Message extends Entity
       $this->erreurs[] = self::MESSAGE_INVALIDE;
     }
 
-    $this->message = htmlentities($message);
+    $this->message = $message;
   }
 
   public function setEdition_date(\DateTime $edition_date)

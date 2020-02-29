@@ -32,7 +32,7 @@ class Contact extends Entity
       $this->erreurs[] = self::NOM_INVALIDE;
     }
 
-    $this->lastName = htmlentities($lastName);
+    $this->lastName = $lastName;
   }
 
    public function setFirstName($firstName)
@@ -42,7 +42,7 @@ class Contact extends Entity
       $this->erreurs[] = self::PRENOM_INVALIDE;
     }
 
-    $this->firstName = htmlentities($firstName);
+    $this->firstName = $firstName;
   }
 
   public function setEmail($email)
@@ -58,7 +58,7 @@ class Contact extends Entity
       }
     }
 
-    $this->email = htmlentities($email);
+    $this->email = $email;
   }
 
   public function setMessage($message)
@@ -68,7 +68,7 @@ class Contact extends Entity
       $this->erreurs[] = self::MESSAGE_INVALIDE;
     }
 
-    $this->message = htmlentities($message);
+    $this->message = $message;
   }
 
   public function setFormToken($formToken)

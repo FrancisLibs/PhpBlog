@@ -21,7 +21,7 @@ class Rights extends Entity
 
   public function setId($id)
   {
-    $this->id = htmlentities($id);
+    $this->id = $id;
   }
 
   public function setApp($app)
@@ -30,7 +30,7 @@ class Rights extends Entity
     {
       $this->erreurs[] = self::APP_INVALIDE;
     }
-    $this->app = htmlentities($app);
+    $this->app = $app;
   }
 
   public function setModule($module)
@@ -40,7 +40,7 @@ class Rights extends Entity
       $this->erreurs[] = self::MODULE_INVALIDE;
     }
 
-    $this->module = htmlentities($module);
+    $this->module = $module;
   }
 
   public function setAction($action)
@@ -50,7 +50,7 @@ class Rights extends Entity
       $this->erreurs[] = self::ACTION_INVALIDE;
     }
 
-    $this->action = htmlentities($action);
+    $this->action = $action;
   }
 
   public function setRole($role)
@@ -66,7 +66,7 @@ class Rights extends Entity
         $this->erreurs[] = self::ROLE_INVALIDE;
       }
     }
-    $this->role = htmlentities($role);
+    $this->role = $role;
   }
 
   public function setFormToken($formToken)

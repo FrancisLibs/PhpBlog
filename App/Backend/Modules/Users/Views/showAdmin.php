@@ -9,7 +9,6 @@
           <th>Login</th>
           <th>email</th>
           <th>Date d'ajout</th>
-          <th>Status</th>
           <th>Rôle</th>
           <th>Actions</th>
         </tr>
@@ -24,9 +23,6 @@
             </td>
             <td>
               <?= htmlspecialchars($users->create_date()->format('d/m/Y à H\hi')) ?>
-            </td>
-            <td>
-              <?= htmlspecialchars($users->status()) ?>
             </td>
             <td>
               <?= htmlspecialchars($users->role()) ?>

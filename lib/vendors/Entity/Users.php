@@ -52,7 +52,7 @@ class Users extends Entity
     {
       $this->erreurs[] = self::LOGIN_INVALIDE;
     }
-    $this->login = htmlentities($login);
+    $this->login = $login;
   }
 
   public function setEmail($email)
@@ -62,7 +62,7 @@ class Users extends Entity
       $this->erreurs[] = self::EMAIL_INVALIDE;
     }
 
-    $this->email = htmlentities($email);
+    $this->email = $email;
   }
 
   public function setPassword($password)
@@ -72,7 +72,7 @@ class Users extends Entity
       $this->erreurs[] = self::PASSWORD_INVALIDE;
     }
 
-    $this->password = htmlentities($password);
+    $this->password = $password;
   }
 
   public function setVerifyPassword($verifyPassword)
@@ -82,7 +82,7 @@ class Users extends Entity
       $this->erreurs[] = self::VERIFY_PASSWORD_INVALIDE;
     }
 
-    $this->verifyPassword = htmlentities($verifyPassword);
+    $this->verifyPassword = $verifyPassword;
   }
 
   public function setCreate_date(\DateTime $create_date)
@@ -92,22 +92,22 @@ class Users extends Entity
 
   public function setStatus($status)
   {
-    $this->status = htmlentities($status);
+    $this->status = $status;
   }
 
   public function setRole_id($role_id)
   {
-    $this->role_id = htmlentities($role_id);
+    $this->role_id = $role_id;
   }
 
   public function setRole($role)
   {
-    $this->role = htmlentities($role);
+    $this->role = $role;
   }
   
   public function setVkey($vkey)
   {
-    $this->vkey = htmlentities($vkey);
+    $this->vkey = $vkey;
   }
   
   public function setFormToken($formToken)
