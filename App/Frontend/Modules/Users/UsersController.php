@@ -15,11 +15,11 @@ use \Swift_Message;
 class UsersController extends BackController
 {
   public function executeConnexion(HTTPRequest $request)
-  {    
+  {
     // Traitement du formulaire s'il a été envoyé
     if ($request->method() == 'POST')
     {
-      // Le formulaire a t-il été détourné ? (CSRF)   
+      // Le formulaire a t-il été détourné ? (CSRF)
       if($this->app->user()->sessionExist('formToken') && $request->postExists('formToken'))
       {
         if($request->postData('formToken') != $this->app->user()->sessionExist('formToken'))
@@ -45,24 +45,24 @@ class UsersController extends BackController
       $manager = $this->managers->getManagerOf('Users');
       // et le user correspondant au login
       $usersBdd = $manager->getUsers($users->login());
-           
+
       // test si présence en badd et test si bn mdp
       if(!isset($usersBdd) || (!$users->comparePasswords($usersBdd->password())))
       {
         $this->app->user()->setFlash('L\'identifiant ou le mot de passe sont erronés');
         $this->app->httpResponse()->redirect('/connect.html');
-      }   
+      }
 
       if($usersBdd->status() == 0)// Vérification validité de l'utilisateur
       {
         $this->app->user()->setFlash('Désolé, mais vous n\'êtes pas encore validé');
         $this->app->httpResponse()->redirect('/connect.html');
       }
-           
+
       $this->app->user()->setAuthenticated(true);
 
       $this->app->user()->setAttribute('users', $usersBdd);
-      
+
       $this->app->httpResponse()->redirect('/');
 
     }
@@ -94,7 +94,7 @@ class UsersController extends BackController
     if ($request->method() == 'POST')
     {
        //On vérifie la présence des  tokens (CSRF)
-      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken'))) 
+      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken')))
       {
         // Le formulaire a t-il été détourné ?
         if($request->postData('formToken') != $_SESSION["formToken"])
@@ -122,17 +122,17 @@ class UsersController extends BackController
         $this->app->user()->setFlash('Merci de compléter tous les champs');
         $this->app->httpResponse()->redirect('/register.html');
       }
-      
+
       // Vérification de l'absence du pseudo en bdd
       $manager = $this->managers->getManagerOf('Users');
       $resultat = $manager->countUsers($users->login());
-    
+
       if (!empty($resultat))
       {
         $this->app->user()->setFlash('L\'identifiant que vous avez choisi n\'est pas disponible');
         $this->app->httpResponse()->redirect('/register.html');
       }
-        
+
       if (!($users->password() == $users->verifyPassword())) // Comparaison des 2 mots de passe du formulaire
       {
         $this->app->user()->setFlash('Les mots de passe ne sont pas identiques');
@@ -153,17 +153,17 @@ class UsersController extends BackController
     $formBuilder->build();
     $form = $formBuilder->form();
     $formHandler = new FormHandler($form, $this->managers->getManagerOf('Users'), $request);
-      
+
     if ($formHandler->processValid())
     {
       $users->setStatus(0);
       $users->setRole_id(1);
       $users->setPassword($users->passwordHash());
-      $users->setVkey(random_bytes(20));
+      $users->setVkey(bin2hex(random_bytes(10)));
 
       $formHandler->processSave();
 
-      $txtMessage= 'Bienvenue sur VotreSite,
+      $txtMessage= 'Bienvenue sur PhpBlog,
 
         Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
         ou copier/coller dans votre navigateur Internet.
@@ -172,7 +172,7 @@ class UsersController extends BackController
 
         ---------------
         Ceci est un mail automatique, Merci de ne pas y répondre.';
-      
+
       // Envoi du mail de confirmation
       // Create the Transport
       $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
@@ -217,23 +217,24 @@ class UsersController extends BackController
     $manager = $this->managers->getManagerOf('Users');
     $users = $manager->getUsers($login);
 
+
     if(!isset($users))
     {
       $this->app->user()->setFlash('La validation n\'est pas possible, vous n\'êtes pas connu du système');
       $this->app->httpResponse()->redirect('/');
     }
 
-    if(!$users->vkey() == $key)  // Check de la clé
+    if(!$users->vKey() == $key)  // Check de la clé
     {
       $this->app->user()->setFlash('La validation n\'est pas possible, vous n\'êtes pas connu du système');
       $this->app->httpResponse()->redirect('/');
     }
-    
+
     $users->setStatus(1);
-   
+
     $manager->update($users);
 
     $this->app->user()->setFlash('Félicitation, vous faites maintenant partie de nos membres');
-    $this->app->httpResponse()->redirect('/.html');
+    $this->app->httpResponse()->redirect('/');
   }
 }

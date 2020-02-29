@@ -8,7 +8,6 @@ use \OCFram\HTTPRequest;
 use \OCFram\FormHandler;
 use \FormBuilder\PostFormBuilder;
 use \FormBuilder\CommentFormBuilder;
-use \Model\CommentManagerPDO;
 
 class PostController extends BackController
 {

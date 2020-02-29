@@ -32,11 +32,12 @@ class UsersManagerPDO extends UsersManager
     $requete->execute();
 
     $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Users');
- 
+
     if ($users = $requete->fetch())
     {
       return $users;
     }
+
     return null;
   }
 
@@ -47,7 +48,7 @@ class UsersManagerPDO extends UsersManager
             . 'INNER JOIN roles r '
             . 'ON r.id = u.role_id '
             . 'WHERE u.id = :id ');
-    
+
     $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
     $requete->execute();
 
@@ -64,7 +65,7 @@ class UsersManagerPDO extends UsersManager
   public function update(Users $users)
   {
     $requete = $this->dao->prepare('UPDATE users SET login = :login, email = :email, password = :password, status = :status, role_id = :role_id WHERE id = :id');
- 
+
     $requete->bindValue(':id',        $users->id(), \PDO::PARAM_INT);
     $requete->bindValue(':login',     $users->login());
     $requete->bindValue(':email',     $users->email());
@@ -78,7 +79,7 @@ class UsersManagerPDO extends UsersManager
   public function countUsers($login)
   {
     $query = 'SELECT COUNT(*) FROM users WHERE login = '.'"'.$login.'"';
-   
+
     return $this->dao->query($query)->fetchColumn();
   }
 
@@ -93,7 +94,7 @@ class UsersManagerPDO extends UsersManager
             . 'FROM users u '
             . 'INNER JOIN roles r '
             . 'ON u.role_id = r.id ';
-           
+
     if($data == 'users')// Que les membres , pas les admin ou superAdmin
     {
         $sql .= 'WHERE u.role_id <= 1';
@@ -102,9 +103,9 @@ class UsersManagerPDO extends UsersManager
     {
         $sql .= 'WHERE u.role_id = 2';
     }
-    
+
     $sql .=  ' ORDER BY u.id ASC';
-    
+
     $requete = $this->dao->query($sql);
 
     $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Users');

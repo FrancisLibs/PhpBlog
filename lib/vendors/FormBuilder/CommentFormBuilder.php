@@ -2,7 +2,6 @@
 namespace FormBuilder;
 
 use \OCFram\FormBuilder;
-use \OCFram\StringField;
 use \OCFram\TextField;
 use \OCFram\HiddenField;
 use \OCFram\NotNullValidator;

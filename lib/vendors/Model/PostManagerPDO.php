@@ -24,11 +24,6 @@ class PostManagerPDO extends PostManager
     return $this->dao->query('SELECT COUNT(*) FROM posts')->fetchColumn();
   }
 
-  public function countUnvalidateComments()
-  {
-    return $this->dao->query('SELECT COUNT(c.id) FROM posts p INNER JOIN comments c ON p.id = c.post_id WHERE c.state = 0')->fetchColumn();
-  }
-
   public function delete($id)
   {
     $this->dao->exec('DELETE FROM posts WHERE id = '.(int) $id);

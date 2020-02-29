@@ -23,20 +23,8 @@ abstract class Application
 
   public function getController()
   {
-    //Sécurité Hijack 
-    if (!$this->user()->sessionExist('ip'))
-    {
-      $this->user()->setSession('ip',$_SERVER['REMOTE_ADDR']);
-    }
+    //Sécurité Hijack
 
-    if ($this->user()->sessionExist('ip'))
-    {
-      if($this->user()->getAttribute('ip') != $_SERVER['REMOTE_ADDR'])
-      {
-          $this->user()->endSession();
-      }
-    } 
-    
     $router = new Router;
 
     $xml = new \DOMDocument;
@@ -63,6 +51,7 @@ abstract class Application
     {
       // On récupère la route correspondante à l'URL.
       $matchedRoute = $router->getRoute($this->httpRequest->requestURI());
+
     }
     catch (\RuntimeException $e)
     {

@@ -4,7 +4,6 @@ namespace App\Frontend\Modules\Post;
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \OCFram\FormHandler;
-use \OCFram\HijackSecurity;
 use \Entity\Comment;
 use \Entity\Message;
 use \FormBuilder\MessageFormBuilder;

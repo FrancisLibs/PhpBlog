@@ -7,7 +7,6 @@ use \OCFram\PasswordField;
 use \OCFram\HiddenField;
 use \OCFram\MaxLengthValidator;
 use \OCFram\NotNullValidator;
-use \OCFram\EmailValidator;
 use \OCFram\PasswordValidator;
 
 
