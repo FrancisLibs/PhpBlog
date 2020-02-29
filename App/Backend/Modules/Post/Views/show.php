@@ -10,7 +10,7 @@
   </div>
 
   <h3 class="show-chapo"><?= htmlspecialchars($post['chapo']) ?></h3>
-  <p class="show-contenu"><?= nl2br(htmlspecialchars($post['contenu'])) ?></p>
+  <p class="show-contenu"><?= htmlspecialchars($post['contenu']) ?></p>
 
   <?php
   if (empty($comments))
@@ -23,7 +23,7 @@
     { ?>
       <div class="back-show-entete">
         <span>Commentaire laissé par <?= htmlspecialchars($comment->author_name()) ?></span>
-        <span>, le &nbsp;<?= htmlspecialchars($comment->edition_date()->format('d/m/Y à H\hi')) ?></span>
+        <span>, le &nbsp;<?= htmlspecialchars($comment->edition_date()->format('d/m/Y à H\hi')) ?> &nbsp;</span>
         <div>
           <a class="btn btn-info btn-xs" role="button" href="comment-update-<?= $comment->id() ?>.html">Modifier</a>
           <a class="btn btn-info btn-xs" role="button" href="comment-refuse-<?= $comment->id() ?>.html">Refuser</a>
@@ -42,5 +42,5 @@
 
   <a class="btn btn-info btn-xs ajout-commentaire" role="button" href="commenter-<?= $post['id'] ?>.html">Ajouter un commentaire</a>
   <br /><br />
-  <a class="show-ajout-commentaire"href="posts.html">Retour à la liste des posts</a>
+  <a class="btn btn-info btn-xs show-ajout-commentaire"href="posts.html">Retour à la liste des posts</a>
 </div>

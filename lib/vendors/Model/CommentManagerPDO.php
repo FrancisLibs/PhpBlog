@@ -7,6 +7,7 @@ class CommentManagerPDO extends CommentManager
 {
   protected function add(Comment $comment)
   {
+   
     $requete = $this->dao->prepare('INSERT INTO comments SET contenu = :contenu, edition_date = NOW(), state = :state, users_id = :users_id, post_id = :post_id');
 
     $requete->bindValue(':contenu',     $comment->contenu());

@@ -147,6 +147,8 @@ class UsersController extends BackController
     $formToken = bin2hex(random_bytes(20));
     $_SESSION['formToken'] = $formToken;
 
+    $users->setFormToken($formToken);
+
     $formBuilder = new RegistrationFormBuilder($users);
     $formBuilder->build();
     $form = $formBuilder->form();
@@ -232,6 +234,6 @@ class UsersController extends BackController
     $manager->update($users);
 
     $this->app->user()->setFlash('Félicitation, vous faites maintenant partie de nos membres');
-    $this->app->httpResponse()->redirect('/connect.html');
+    $this->app->httpResponse()->redirect('/.html');
   }
 }

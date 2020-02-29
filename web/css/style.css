@@ -240,13 +240,18 @@ hr{
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  font-size: 1.7em;
+  font-size: 1.5em;
   color: yellow;
 }
 
 .front-show-contenu .ajout-commentaire{
   color: white;
-  font-size: 0.5em;
+  font-size: 1em;
+}
+
+.front-show-contenu .btn-ajout-commentaire{
+  color: white;
+  font-size: 0.6em;
 }
 
 /* ---- Page Connexion ------*/

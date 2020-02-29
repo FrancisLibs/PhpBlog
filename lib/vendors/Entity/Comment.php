@@ -37,7 +37,7 @@ class Comment extends Entity
       $this->erreurs[] = self::CONTENU_INVALIDE;
     }
 
-    $this->contenu = htmlentities($contenu);
+    $this->contenu = $contenu;
   }
 
   public function setEdition_date(\DateTime $edition_date)
@@ -57,7 +57,7 @@ class Comment extends Entity
 
   public function setPost_id($post_id)
   {
-    $this->post_id = htmlentities($post_id);
+    $this->post_id = $post_id;
   }
 
   public function setAuthor_name($author_name)

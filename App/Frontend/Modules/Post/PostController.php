@@ -20,9 +20,10 @@ class PostController extends BackController
   	// Traitement du formulaire de contact si le formulaire a été envoyé.
   	if ($request->method() == 'POST')
   	{
-      // Le formulaire a t-il été détourné ? (CSRF) On vérifie la présence des  tokens
+      // Le formulaire a t-il été détourné ? (CSRF) On vérifie la présence des tokens
       if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken'))) 
       {
+
         if($request->postData('formToken') != $_SESSION["formToken"])
         {
           $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
@@ -50,6 +51,8 @@ class PostController extends BackController
     // Sécurité CSRF
     $formToken = bin2hex(random_bytes(20));
     $_SESSION['formToken'] = $formToken;
+
+    $message->setFormToken($formToken);
 
 		$formBuilder = new MessageFormBuilder($message);
 		$formBuilder->build();
@@ -166,11 +169,10 @@ class PostController extends BackController
 
       $comment = new Comment([
     	'contenu'   =>  $request->postData('contenu'),
-    	'post_id'   =>  $request->getData('post_id'),
+    	'post_id'   =>  $request->getData('post'),
     	'state'     =>  0,
     	'users_id'  =>  $_SESSION['users']->id(),
       ]);
-      
     }
     else
     {
@@ -179,6 +181,8 @@ class PostController extends BackController
 
     $formToken = bin2hex(random_bytes(20));
     $_SESSION['formToken'] = $formToken;
+
+    $comment->setFormToken($formToken);
 
     $formBuilder = new CommentFormBuilder($comment);
     $formBuilder->build();
@@ -236,6 +240,8 @@ class PostController extends BackController
 
     $formToken = bin2hex(random_bytes(20));
     $_SESSION['formToken'] = $formToken;
+
+    $comment->setFormToken($formToken);
 
     $formBuilder = new CommentFormBuilder($comment);
     $formBuilder->build();

@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <head>
-  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -56,17 +56,20 @@
               <li class="nav-item">
                 <a class="nav-link" href="/admin/users.html">Utilisateurs</a>
               </li>
+              <?php if(isset($_SESSION['users'])) {
+                      if($_SESSION['users']->role_id() == 3) { ?>
               <li class="nav-item">
                 <a class="nav-link" href="/admin/admin.html">Administrateurs</a>
               </li>
-              <?php if(!isset($_SESSION['users'])){ ?>
-            <li class="nav-item">
-              <a class="btn btn-sm" id="bonjour" href="connect.html">Bonjour, identifiez-vous</a>
-            </li>
-            <li class="nav-item">
-              <a href="register.html" id="nouveau" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Nouveau ? Commencez ici.</a>
-            </li>
-            <?php }
+              <?php } }
+              if(!isset($_SESSION['users'])){ ?>
+              <li class="nav-item">
+                <a class="btn btn-sm" id="bonjour" href="connect.html">Bonjour, identifiez-vous</a>
+              </li>
+              <li class="nav-item">
+                <a href="register.html" id="nouveau" class="btn btn-primary btn-sm" role="button" aria-disabled="true">Nouveau ? Commencez ici.</a>
+              </li>
+              <?php }
               else
               {
                 $users = $_SESSION['users'] ?>

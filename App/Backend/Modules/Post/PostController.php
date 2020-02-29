@@ -130,6 +130,8 @@ class PostController extends BackController
     $formToken = bin2hex(random_bytes(20));
     $_SESSION['formToken'] = $formToken;
 
+    $comment-> setFormToken($formToken);
+
     $formBuilder = new CommentFormBuilder($comment);
     $formBuilder->build();
 
@@ -167,8 +169,8 @@ class PostController extends BackController
         $this->app->httpResponse()->redirect('/connect.html');
       }
       //---------------------Fin CSFR-----------------------
-      
-      $users = $this->app->user()->getAttribute('/admin/posts.html');
+     
+      $users = $this->app->user()->getAttribute('users');
 
       $post = new Post([
         'id'            => $request->postData('id'),
@@ -179,11 +181,6 @@ class PostController extends BackController
         'users_id'      => $users->id(),
 
       ]);
-
-      if ($request->getExists('id'))
-      {
-        $post->setId($request->getData('id'));
-      }
     }
     else
     {
@@ -202,6 +199,8 @@ class PostController extends BackController
     $formToken = bin2hex(random_bytes(20));
     $_SESSION['formToken'] = $formToken;
 
+    $post->setFormToken($formToken);
+
     $formBuilder = new PostFormBuilder($post);
     $formBuilder->build();
 
@@ -211,7 +210,7 @@ class PostController extends BackController
 
     if ($formHandler->process())
     {
-      $this->app->user()->setFlash($post->isNew() ? 'L\'article a bien été ajouté !' : 'L\'article a bien été modifié !');
+      $this->app->user()->setFlash($_SESSION['newPost'] ? 'L\'article a bien été ajouté !' : 'L\'article a bien été modifié !');
       $this->app->httpResponse()->redirect('/admin/posts.html');
     }
     
@@ -254,6 +253,8 @@ class PostController extends BackController
     // CSRF...
     $formToken = bin2hex(random_bytes(20));
     $_SESSION['formToken'] = $formToken;
+
+    $comment->setFormToken($formToken);
     
     $formBuilder = new CommentFormBuilder($comment);
     $formBuilder->build();

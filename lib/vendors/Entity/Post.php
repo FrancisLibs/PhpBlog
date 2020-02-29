@@ -30,7 +30,7 @@ class Post extends Entity
 
   public function setId($id)
   {
-    $this->id = htmlentities($id);
+    $this->id = $id;
   }
 
   public function setTitle($title)

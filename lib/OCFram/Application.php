@@ -23,20 +23,20 @@ abstract class Application
 
   public function getController()
   {
-    // Sécurité Hijack 
+    //Sécurité Hijack 
     if (!$this->user()->sessionExist('ip'))
     {
       $this->user()->setSession('ip',$_SERVER['REMOTE_ADDR']);
     }
 
-    if (!$this->user()->sessionExist('ip'))
+    if ($this->user()->sessionExist('ip'))
     {
       if($this->user()->getAttribute('ip') != $_SERVER['REMOTE_ADDR'])
       {
           $this->user()->endSession();
       }
-    }
-
+    } 
+    
     $router = new Router;
 
     $xml = new \DOMDocument;

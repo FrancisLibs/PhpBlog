@@ -17,22 +17,22 @@
 
     <div class="titreCommentaires">
       <div>
-        <p>Commentaires</p>
+        <p>Commentaires &nbsp;</p>
       </div>
       <div>
         <?php if ($user->isAuthenticated()) {?>
-          <a class="btn btn-info btn-xs ajout-commentaire" role="button" href="commenter-<?= $post['id'] ?>.html">Ajouter un commentaire</a>
+          <a class="btn btn-info btn-xs btn-ajout-commentaire" role="button" href="commenter-<?= $post['id'] ?>.html">Ajouter un commentaire</a>
         <?php } ?>
       </div>
     </div>
     <div>
-      <?php if (empty($comments) && $user->isAuthenticated()) { ?>
-        <p class="ajout-commentaire">Aucun commentaire n'a encore été posté. Soyez le premier à en laisser un !</p>
+      <?php if (empty($comments)) { ?>
+        <p class="ajout-commentaire">Aucun commentaire n'a encore été posté.</p>
       <?php } ?>
     </div>
     <div class="commentaires">
       <?php foreach ($comments as $comment) { ?>
-        <p>Posté par <strong><?= htmlspecialchars($comment['author']) ?></strong> le 
+        <p>Posté par <strong><?= htmlspecialchars($comment['author_name']) ?></strong> le 
           <?= htmlspecialchars($comment['edition_date']->format('d/m/Y à H\hi')) ?></p>
 
         <?php if ($user->isAuthenticated() && $comment['users_id'] == $users->id()) { ?>
