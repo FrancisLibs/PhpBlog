@@ -24,18 +24,7 @@ abstract class PostManager extends Manager
   {
     if ($post->isValid())
     {
-      if($post->isNew())
-      {
-        $_SESSION['newPost'] = true;
-        $this->add($post);
-        echo 'passage1';
-      }
-      else
-      {
-        $_SESSION['newPost'] = false;
-        $this->update($post);
-        echo 'passage2';
-      }
+      $post->isNew() ?  $this->add($post) : $this->update($post);
     }
     else
     {

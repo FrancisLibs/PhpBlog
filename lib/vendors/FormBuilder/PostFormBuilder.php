@@ -53,6 +53,9 @@ class PostFormBuilder extends FormBuilder
        ]))
       ->add(new HiddenField([
         'name' => 'formToken'
+       ]))
+      ->add(new HiddenField([
+        'name' => 'id'
        ]));
   }
 }

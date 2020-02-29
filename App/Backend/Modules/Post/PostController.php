@@ -56,6 +56,7 @@ class PostController extends BackController
   public function executeInsert(HTTPRequest $request)
   {    
     $this->processForm($request);
+    $this->app->user()->setSession('postState', 'insert');
 
     $this->page->addVar('title', 'Ajout d\'un article');
   }
@@ -63,6 +64,7 @@ class PostController extends BackController
   public function executeUpdate(HTTPRequest $request)
   {  
     $this->processForm($request);
+    $this->app->user()->setSession('postState', 'update');
 
     $this->page->addVar('title', 'Modification d\'un article');
   }
@@ -184,12 +186,12 @@ class PostController extends BackController
     }
     else
     {
-      // L'identifiant du post est transmis si on veut le modifier
+      // L'identifiant du post est transmis en cas de modification
       if ($request->getExists('id'))
       {
         $post = $this->managers->getManagerOf('Post')->getUnique($request->getData('id'));
       }
-      else
+      else // Sinon c'est une création de post
       {
         $post = new Post;
       }
@@ -210,7 +212,15 @@ class PostController extends BackController
 
     if ($formHandler->process())
     {
-      $this->app->user()->setFlash($_SESSION['newPost'] ? 'L\'article a bien été ajouté !' : 'L\'article a bien été modifié !');
+      if($this->app->user()->getAttribute('postState') == 'insert')
+      {
+        $this->app->user()->setFlash('L\'article a bien été ajouté !');
+      }
+      elseif($this->app->user()->getAttribute('postState') == 'update')
+      {
+        $this->app->user()->setFlash('L\'article a bien été modifié !');
+      }
+
       $this->app->httpResponse()->redirect('/admin/posts.html');
     }
     
