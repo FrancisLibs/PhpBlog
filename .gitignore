@@ -4,7 +4,7 @@
 
 # Le dossier divers contient tous les éléments ne faisant pas partie du site
 
-Web/vendor
+#Web/vendor
 
-/vendor/
+#/vendor/
 /nbproject/private/
