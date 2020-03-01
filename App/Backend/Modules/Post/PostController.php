@@ -18,7 +18,7 @@ class PostController extends BackController
         $this->app->user()->setFlash('Merci de vous connecter');
         $this->app->httpResponse()->redirect('/');
     }
-    
+
     $this->page->addVar('title', 'Administration blog');
   }
 
@@ -30,9 +30,8 @@ class PostController extends BackController
 
     $this->page->addVar('listePosts', $manager->getList());
     $this->page->addVar('nombrePosts', $manager->count());
-    $this->page->addVar('nombreCommentairesInvalides', $manager->countUnvalidateComments());
   }
-  
+
    public function executeShow(HTTPRequest $request)
   {
     $post = $this->managers->getManagerOf('Post')->getUnique($request->getData('id'));
@@ -51,9 +50,9 @@ class PostController extends BackController
 
     $this->page->addVar('comments', $comments);
   }
-        
+
   public function executeInsert(HTTPRequest $request)
-  {    
+  {
     $this->processForm($request);
     $this->app->user()->setSession('postState', 'insert');
 
@@ -61,7 +60,7 @@ class PostController extends BackController
   }
 
   public function executeUpdate(HTTPRequest $request)
-  {  
+  {
     $this->processForm($request);
     $this->app->user()->setSession('postState', 'update');
 
@@ -71,10 +70,10 @@ class PostController extends BackController
   public function executeDelete(HTTPRequest $request)
   {
     $postId = $request->getData('id');
-    
+
     $this->managers->getManagerOf('Comment')->deleteFromPost($postId);
     $this->managers->getManagerOf('Post')->delete($postId);
-    
+
     $this->app->user()->setFlash('L\'article a bien été supprimé ! ');
     $this->app->httpResponse()->redirect('/admin/posts.html');
   }
@@ -88,7 +87,7 @@ class PostController extends BackController
     $manager->update($comment);
 
     $this->app->httpResponse()->redirect('/admin/post-show-'.$comment->post_id().'.html');
-   
+
   }
 
   public function executeUpdateComment(HTTPRequest $request)
@@ -98,7 +97,7 @@ class PostController extends BackController
     if ($request->method() == 'POST')
     {
       //On vérifie la présence des  tokens (CSRF)
-      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken'))) 
+      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken')))
       {
         // Le formulaire a t-il été détourné ?
         if($request->postData('formToken') != $_SESSION["formToken"])
@@ -139,7 +138,7 @@ class PostController extends BackController
     $form = $formBuilder->form();
 
     $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comment'), $request);
-    
+
     if ($formHandler->process())
     {
       $this->app->user()->setFlash('Le commentaire a bien été modifié');
@@ -156,7 +155,7 @@ class PostController extends BackController
     {
       // Le formulaire a t-il été détourné ? (CSRF)
       //On vérifie la présence des  tokens
-      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken'))) 
+      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken')))
       {
         if($request->postData('formToken') != $_SESSION["formToken"])
         {
@@ -164,13 +163,13 @@ class PostController extends BackController
           $this->app->httpResponse()->redirect('/admin/posts.html');
         }
       }
-      else 
+      else
       {
         $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
         $this->app->httpResponse()->redirect('/connect.html');
       }
       //---------------------Fin CSFR-----------------------
-     
+
       $users = $this->app->user()->getAttribute('users');
 
       $post = new Post([
@@ -222,18 +221,18 @@ class PostController extends BackController
 
       $this->app->httpResponse()->redirect('/admin/posts.html');
     }
-    
+
     $this->page->addVar('form', $form->createView());
   }
 
   public function executeInsertComment(HTTPRequest $request)
-  {  
+  {
     // Si le formulaire a été envoyé.
     if ($request->method() == 'POST')
     {
       // Le formulaire a t-il été détourné ? (CSRF)
       //On vérifie la présence des  tokens
-      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken'))) 
+      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken')))
       {
         if($request->postData('formToken') != $_SESSION["formToken"])
         {
@@ -264,7 +263,7 @@ class PostController extends BackController
     $_SESSION['formToken'] = $formToken;
 
     $comment->setFormToken($formToken);
-    
+
     $formBuilder = new CommentFormBuilder($comment);
     $formBuilder->build();
 
@@ -282,9 +281,9 @@ class PostController extends BackController
     $this->page->addVar('form', $form->createView());
     $this->page->addVar('title', 'Ajout d\'un commentaire');
   }
-  
+
   public function executeRefuseComment(HTTPRequest $request)
-  {   
+  {
     $manager = $this->managers->getManagerOf('Comment');
     $comment = $manager->get($request->getData('id'));
     $comment->setState(2);

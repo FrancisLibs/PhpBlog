@@ -2,8 +2,8 @@
 <routes>
 
   <route url="/"                                        module="Post"   action="index" />
-  <route url="/posts.html"                              module="Post"   action="ShowPosts" />
-  <route url="/post-([0-9]+)\.html"                     module="Post"   action="Show" vars="id"/>
+  <route url="/posts.html"                              module="Post"   action="showPosts" />
+  <route url="/post-([0-9]+)\.html"                     module="Post"   action="show" vars="id"/>
   <route url="/commenter-([0-9]+)\.html"                module="Post"   action="insertComment" vars="post" />
   <route url="/cv\.html"                                module="Post"   action="cv" />
   <route url="/comment-update-([0-9]+)\.html"           module="Post"   action="updateComment" vars="id" />

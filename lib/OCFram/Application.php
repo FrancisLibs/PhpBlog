@@ -87,7 +87,8 @@ abstract class Application
     // On ajoute les variables de l'URL au tableau $_GET.
     $_GET = array_merge($_GET, $matchedRoute->vars());
 
-    // Controle des droits d'accès
+    // --------------------------Controle des droits d'accès-----------------------
+
     if(empty($this->user()->getAttribute('users')))
     {
       $controllerClass = 'App\\'.$this->name.'\\Modules\\'.$matchedRoute->module().'\\'.$matchedRoute->module().'Controller';
@@ -99,10 +100,10 @@ abstract class Application
       $roleUsers = $this->user()->getAttribute('users')->role_id();
 
       // On récupère le manager du fichier des droits.
-      $manager = $this->managers->getManagerOf('Rights');
+      $rightsManager = $this->managers->getManagerOf('Rights');
 
       // et le rôle correspondant à la route
-      $rights = $manager->getRights($this->name(), $matchedRoute->module(), $matchedRoute->action());
+      $rights = $rightsManager->getRights($this->name(), $matchedRoute->module(), $matchedRoute->action());
 
       $roleRoute = $rights->role();
 
