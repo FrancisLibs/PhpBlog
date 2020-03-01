@@ -14,10 +14,17 @@
   </div>
 
   <div class="col-titre">
-    <div class="sous-titre">            
+    <div class="sous-titre">
       <h2>Le trait d'union entre votre immagination et votre communication Web</h2>
     </div>
-    <!-- Zone formulaire  -->
+    <!-- Zone message flash  -->
+    <div class="zone-message">
+      <?php if ($user->hasFlash())
+        {
+          echo '<p class="ligne-erreur">', $user->getFlash(), '</p>';
+        } ?>
+    </div>
+     <!-- Zone formulaire  -->
     <div class="zone-formulaire">
       <div class="formulaire">
         <p id="titreFormulaire">Contact</p>

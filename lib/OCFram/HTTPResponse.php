@@ -20,12 +20,12 @@ class HTTPResponse extends ApplicationComponent
   {
     $this->page = new Page($this->app);
     $this->page->setContentFile(__DIR__.'/../../Errors/404.html');
-    
+
     $this->addHeader('HTTP/1.0 404 Not Found');
-    
+
     $this->send();
   }
-  
+
   public function send()
   {
     exit($this->page->getGeneratedPage());
@@ -40,5 +40,10 @@ class HTTPResponse extends ApplicationComponent
   public function setCookie($name, $value = '', $expire = 0, $path = null, $domain = null, $secure = false, $httpOnly = true)
   {
     setcookie($name, $value, $expire, $path, $domain, $secure, $httpOnly);
+  }
+
+  public function unSetCookie($name)
+  {
+    setcookie($name);
   }
 }

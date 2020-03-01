@@ -1,5 +1,5 @@
 body {
-  
+
   margin:0;
   padding:0;
   background-color: white;
@@ -163,7 +163,16 @@ hr{
 
 .col-titre{
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
 }
+
+.col-titre .zone-message{
+  text-align: center;
+}
+
 
 /* ---- Page Articles  / showPosts------*/
 .contenu-principal .showposts{
@@ -376,7 +385,7 @@ hr{
   flex-wrap: wrap;
   align-items: baseline;
 }
-  
+
 .footer .row, .footer .liens{
   text-align: center;
 }
@@ -400,7 +409,7 @@ footer .liens{
 
 @media (min-width: 576px) {
 
-  body { 
+  body {
     background: url(../images/Guadeloupe576.jpg)center top no-repeat fixed;
   }
 
@@ -430,7 +439,7 @@ footer .liens{
 
 @media (min-width: 768px) {
 
-  body { 
+  body {
     background: url(../images/Guadeloupe768.jpg)center top no-repeat fixed;
   }
 
@@ -452,7 +461,7 @@ footer .liens{
 
 @media (min-width: 992px) {
 
-  body { 
+  body {
     background: url(../images/Guadeloupe992.jpg)center top no-repeat fixed;
   }
 
@@ -477,7 +486,7 @@ footer .liens{
 
 @media (min-width: 1200px){
 
-  body { 
+  body {
     background: url(../images/Guadeloupe1200.jpg)center top no-repeat fixed;
   }
 

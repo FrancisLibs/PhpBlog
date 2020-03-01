@@ -23,7 +23,29 @@ abstract class Application
 
   public function getController()
   {
-    //Sécurité Hijack
+
+    //------------Sécurité Hijack--------------------
+
+    if ($this->user()->isAuthenticated())
+    {
+      $cookieName='ver-sio';
+      $duration = time() + (60 * 20);
+      $value = bin2hex(random_bytes(2));
+
+      if($this->user()->sessionExist($cookieName) && $this->httpRequest()->cookieExists($cookieName))
+      {
+        if($this->user()->getAttribute($cookieName) != $this->httpRequest()->cookieData($cookieName))
+        {
+          $this->httpResponse()->unSetCookie($cookieName);
+          $this->user()->endSession();
+        }
+      }
+
+      $this->user()->setSession($cookieName, $value);
+      $this->httpResponse()->setCookie($cookieName, $value, $duration, '/');
+    }
+
+    //------------Fin sécurité Hijack--------------------
 
     $router = new Router;
 

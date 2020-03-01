@@ -4,8 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/wamp64/www/PHPBlog/PHPBlog/Web/bootstrap.php</file>
-            <file>file:/C:/wamp64/www/PHPBlog/PHPBlog/App/Frontend/Modules/Users/UsersController.php</file>
-            <file>file:/C:/wamp64/www/PHPBlog/PHPBlog/lib/OCFram/HTTPRequest.php</file>
+            <file>file:/C:/wamp64/www/PHPBlog/PHPBlog/lib/OCFram/HTTPResponse.php</file>
+            <file>file:/C:/wamp64/www/PHPBlog/PHPBlog/lib/OCFram/Application.php</file>
         </group>
     </open-files>
 </project-private>

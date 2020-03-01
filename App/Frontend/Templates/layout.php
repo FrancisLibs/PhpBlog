@@ -14,11 +14,8 @@
   <link href="css/style.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -76,7 +73,7 @@
   <!-- Fin de navigation -->
 
   <main class= "contenu-principal">
-    <?= $content ?> 
+    <?= $content ?>
   </main>
 
   <!-- Footer -->
@@ -84,13 +81,13 @@
     <hr/>
     <div class="footer container-fluid">
       <div class="row ligneLiens">
-        <?php 
+        <?php
           if(isset($_SESSION['users']) && ($_SESSION['users']->role_id() >= 2)) { ?>
             <div class="liens col-sm">
               <a class="lienAdmin" href="/admin/" role="button">Administration</a>
             </div>
         <?php }
-        else 
+        else
         { ?>
           <div id="adminVide" class="col-sm">
           </div>
