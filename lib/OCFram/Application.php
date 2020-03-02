@@ -36,13 +36,12 @@ abstract class Application
       {
         if($this->user()->getAttribute($cookieName) != $this->httpRequest()->cookieData($cookieName))
         {
-          $this->httpResponse()->unSetCookie($cookieName);
           $this->user()->endSession();
         }
       }
 
       $this->user()->setSession($cookieName, $value);
-      $this->httpResponse()->setCookie($cookieName, $value, $duration, '/');
+      $this->httpResponse()->setCookie($cookieName, $value, $duration, '/', 'projet4.francislibs.fr');
     }
 
     //------------Fin sécurité Hijack--------------------
