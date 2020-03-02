@@ -7,10 +7,10 @@ class RightsManagerPDO extends RightsManager
 {
   public function getRights($app, $module, $action)
   {
-    $requete = $this->dao->prepare('SELECT id, app, module, action, role 
-      FROM rights 
-      WHERE app = :app 
-      AND module = :module 
+    $requete = $this->dao->prepare('SELECT id, app, module, action, role
+      FROM rights
+      WHERE app = :app
+      AND module = :module
       AND action = :action');
 
     $requete->bindValue(':app',     $app,     \PDO::PARAM_STR);
@@ -19,7 +19,7 @@ class RightsManagerPDO extends RightsManager
     $requete->execute();
 
     $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Rights');
-    
+
     if ($rights = $requete->fetch())
     {
       return $rights;

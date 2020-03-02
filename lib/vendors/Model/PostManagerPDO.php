@@ -33,7 +33,7 @@ class PostManagerPDO extends PostManager
   {
     $this->dao->exec('DELETE FROM posts WHERE users_id = '.(int) $id);
   }
-  
+
   public function getList($debut = -1, $limite = -1)
   {
     $sql = 'SELECT posts.id, title, chapo, contenu, edition_date, update_date, users_id, login AS autor_name '

@@ -36,6 +36,7 @@ abstract class Application
       {
         if($this->user()->getAttribute($cookieName) != $this->httpRequest()->cookieData($cookieName))
         {
+
           $this->user()->endSession();
         }
       }

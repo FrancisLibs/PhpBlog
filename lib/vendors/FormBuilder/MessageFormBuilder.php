@@ -50,7 +50,7 @@ class MessageFormBuilder extends FormBuilder
           new MaxLengthValidator('L\'email spécifié est trop long (100 caractères maximum)', 100),
           new NotNullValidator('Merci de spécifier votre adresse email'),
           new EmailValidator('Le format de l\'adresse mail n\'est pas correct'),
-          
+
         ],
        ]))
        ->add(new TextField([
