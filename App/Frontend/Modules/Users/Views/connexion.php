@@ -1,6 +1,6 @@
 <!-- Zone formulaire  -->
 <div class="zone-formulaire">
-  <div class="formulaire">
+  <div class="formulaire-connexion">
     <p id="titreFormulaire">Connexion</p>
     <form action ="" method="post" class="formulaireMessage">
       <?= $form ?>

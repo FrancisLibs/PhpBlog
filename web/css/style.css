@@ -82,32 +82,40 @@ hr{
   margin-left: 10px;
 }
 
-.zone-formulaire{
+.zone-formulaire-index{
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
 }
 
-.formulaire{
-  width: 79%;
+.zone-formulaire-index .formulaire{
+  width: 95%;
   margin: auto;
   border: white solid 1px;
   border-radius: 3%;
 }
 
-.form-group {
+.zone-formulaire-index .form-group {
   margin-bottom: 0.5rem;
 }
 
-#titreFormulaire{
+.zone-formulaire-index #titreFormulaire{
   margin-top: 2px;
   margin-left: 10px;
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 
-.widget{
+.zone-formulaire-index .label{
+  font-size: .775rem;
+  padding-left: 3px;
+}
+
+.zone-formulaire-index .widget{
   display: inline;
+  width: 50%;
+  height: 20px;
+  font-size: 0.7rem;
 }
 
 .btnValid{
@@ -173,6 +181,23 @@ hr{
   text-align: center;
 }
 
+/* ---- Page connexion ------*/
+.formulaire-connexion{
+  width: 75%;
+  margin: auto;
+  border: 1px white solid;
+  border-radius: 5px;
+}
+
+.formulaire-connexion #titreFormulaire{
+  font-size: 1em;
+  margin-left: 10px;
+}
+
+.formulaire-connexion .widget{
+  width: 80%;
+  margin-left: 15px;
+}
 
 /* ---- Page Articles  / showPosts------*/
 .contenu-principal .showposts{
@@ -267,6 +292,26 @@ hr{
 
 .pageConnexion .titreConnexion{
   color: white;
+}
+
+/* -----Page enregistrement   -------------*/
+
+.formulaire-inscription{
+  width: 95%;
+  border: 1px white solid;
+  border-radius: 5px;
+  margin: auto;
+}
+
+.formulaire-inscription #titreFormulaire{
+  font-size: 1.5em;
+  margin-left: 10px;
+}
+
+.formulaire-inscription .widget{
+  width: 50%;
+  height: 30px;
+  display: inline;
 }
 
 /*---------------Page admin - backend -----------------*/
@@ -420,17 +465,51 @@ footer .liens{
   h2{
     font-size: 1.3em;
   }
+  /*    Page index   */
 
   .page-accueil .titre-page {
     padding-top: 20px;
   }
-
-  .formulaire{
-    width: 60%;
+  /*   zone formulaire index---*/
+  .col-titre{
+    width: 55%;
+    margin-left: 10px;
   }
 
+  .zone-formulaire-index #titreFormulaire{
+    font-size: 1.3em;
+  }
+
+  .zone-formulaire-index .widget{
+    height: 30px;
+  }
+
+  .zone-formulaire-index .label{
+    font-size: 1rem;
+    padding-left: 10px;
+  }
+
+  /* ---- Page connexion ------*/
+  .formulaire-connexion{
+    width: 55%;
+  }
+
+  .formulaire-connexion #titreFormulaire{
+    font-size: 1.4em;
+    margin-left: 10px;
+  }
+
+  /* -----Page enregistrement   -------------*/
+
+.formulaire-inscription{
+  width: 95%;
+  border: 1px white solid;
+  border-radius: 5px;
+  margin: auto;
+}
+
   footer .liens{
-    margin-top: 0;
+      margin-top: 0;
   }
 
 }
@@ -451,8 +530,30 @@ footer .liens{
     font-size: 1.5em;
   }
 
-  .formulaire{
-    width: 35%;
+ .col-titre{
+    width: 45%;
+  }
+
+  .zone-formulaire-index #titreFormulaire{
+    font-size: 1.4em;
+  }
+
+   /* ---- Page connexion ------*/
+  .formulaire-connexion{
+    width: 45%;
+  }
+
+  .formulaire-connexion #titreFormulaire{
+    font-size: 1.3em;
+  }
+
+  /* -----Page enregistrement   -------------*/
+
+  .formulaire-inscription{
+    width: 60%;
+    border: 1px white solid;
+    border-radius: 5px;
+    margin: auto;
   }
 
 }
@@ -477,9 +578,35 @@ footer .liens{
     font-size: 1.7rem;
   }
 
-  .formulaire{
-    width: 30%;
+ .col-titre{
+    width: 35%;
   }
+
+  .zone-formulaire-index #titreFormulaire{
+    font-size: 1.4em;
+  }
+
+  /* ---- Page connexion ------*/
+  .formulaire-connexion{
+    width: 45%;
+    margin: auto;
+    border: 1px white solid;
+    border-radius: 5px;
+  }
+
+  .formulaire-connexion #titreFormulaire{
+    font-size: 1.3em;
+  }
+
+  /* -----Page enregistrement   -------------*/
+
+  .formulaire-inscription{
+    width: 40%;
+    border: 1px white solid;
+    border-radius: 5px;
+    margin: auto;
+  }
+
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -509,4 +636,24 @@ footer .liens{
   .formulaire{
     width: 40%;
   }
+
+  /* ---- Page connexion ------*/
+  .formulaire-connexion{
+    width: 40%;
+  }
+
+  .formulaire-connexion #titreFormulaire{
+    font-size: 1em;
+    margin-left: 10px;
+  }
+
+  /* -----Page enregistrement   -------------*/
+
+  .formulaire-inscription{
+    width: 30%;
+    border: 1px white solid;
+    border-radius: 5px;
+    margin: auto;
+  }
+
 }

@@ -25,7 +25,7 @@
         } ?>
     </div>
      <!-- Zone formulaire  -->
-    <div class="zone-formulaire">
+    <div class="zone-formulaire-index">
       <div class="formulaire">
         <p id="titreFormulaire">Contact</p>
         <form action ="" method="post" class="formulaireMessage">
