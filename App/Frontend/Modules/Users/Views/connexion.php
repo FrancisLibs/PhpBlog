@@ -1,5 +1,5 @@
 <!-- Zone formulaire  -->
-<div class="zone-formulaire">
+<div class="zone-formulaire-connexion">
   <div class="formulaire-connexion">
     <p id="titreFormulaire">Connexion</p>
     <form action ="" method="post" class="formulaireMessage">

@@ -77,16 +77,12 @@ hr{
 /*------Zone centrale  -----  Règles générales---------*/
 
 .contenu-principal{
-  min-height: 450px;
+  min-height: 320px;
   color: white;
-  margin-left: 10px;
 }
 
 .zone-formulaire-index{
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
+  margin-bottom: 10px;
 }
 
 .zone-formulaire-index .formulaire{
@@ -138,43 +134,51 @@ hr{
 
 /* ----  Page d'accueil / index------*/
 
-.bloc-texte{
+.bloc-texte-index{
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-  align-items: flex-start;
-  margin-top: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.zone-formulaire-connexion{
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .bloc-perso{
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: flex-center;
+  flex-wrap: nowrap;
+  justify-content: center;
 }
 
-.sous-titre{
+.titre-index{
+  margin-bottom: 15px;
+}
+
+.nom-index,
+.titre-index,
+.logo-index,
+.sous-titre-index
+{
   text-align: center;
 }
 
-.zone-formulaire{
-  margin-top: 20px;
+.logo-index{
   margin-bottom: 10px;
 }
 
-.logo{
-  width: 70%;
-  align-self: center;
-  margin-top: 20px;
+.logo-index img{
+  width: 39%;
 }
 
-.col-titre{
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
+.sous-titre-index{
+  margin: 10px 0px 10px 0px;
+  font-family: 'Bree Serif', serif;
+  width: 90%;
+  margin: auto;
+  font-size: 1.3rem;
 }
 
 .col-titre .zone-message{
@@ -182,6 +186,10 @@ hr{
 }
 
 /* ---- Page connexion ------*/
+.zone-formulaire-connexion{
+  margin-top: 58px;
+}
+
 .formulaire-connexion{
   width: 75%;
   margin: auto;
@@ -295,20 +303,23 @@ hr{
 }
 
 /* -----Page enregistrement   -------------*/
+.zone-formulaire-registration{
+  margin-bottom: 10px;
+}
 
-.formulaire-inscription{
-  width: 95%;
+.formulaire-registration{
+  width: 90%;
   border: 1px white solid;
   border-radius: 5px;
   margin: auto;
 }
 
-.formulaire-inscription #titreFormulaire{
+.formulaire-registration #titreFormulaire{
   font-size: 1.5em;
   margin-left: 10px;
 }
 
-.formulaire-inscription .widget{
+.formulaire-registration .widget{
   width: 50%;
   height: 30px;
   display: inline;
@@ -465,6 +476,12 @@ footer .liens{
   h2{
     font-size: 1.3em;
   }
+
+  .contenu-principal{
+    min-height: 360px;
+    color: white;
+  }
+
   /*    Page index   */
 
   .page-accueil .titre-page {
@@ -474,6 +491,10 @@ footer .liens{
   .col-titre{
     width: 55%;
     margin-left: 10px;
+  }
+
+  .logo-index img{
+    width: 18%;
   }
 
   .zone-formulaire-index #titreFormulaire{
@@ -501,16 +522,18 @@ footer .liens{
 
   /* -----Page enregistrement   -------------*/
 
-.formulaire-inscription{
-  width: 95%;
+.formulaire-registration{
+  width: 60%;
   border: 1px white solid;
   border-radius: 5px;
   margin: auto;
 }
 
+/* --------------------------Footer------------------*/
   footer .liens{
       margin-top: 0;
   }
+
 
 }
 
@@ -538,6 +561,11 @@ footer .liens{
     font-size: 1.4em;
   }
 
+  .contenu-principal{
+    min-height: 370px;
+    color: white;
+  }
+
    /* ---- Page connexion ------*/
   .formulaire-connexion{
     width: 45%;
@@ -549,13 +577,12 @@ footer .liens{
 
   /* -----Page enregistrement   -------------*/
 
-  .formulaire-inscription{
-    width: 60%;
+  .formulaire-registration{
+    width: 45%;
     border: 1px white solid;
     border-radius: 5px;
     margin: auto;
   }
-
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -582,8 +609,25 @@ footer .liens{
     width: 35%;
   }
 
+  .contenu-principal{
+    min-height: 380px;
+    color: white;
+  }
+
+  .bloc-texte-index {
+    margin-top: 60px;
+  }
+
+  .bloc-perso{
+    width: 50%;
+  }
+
   .zone-formulaire-index #titreFormulaire{
     font-size: 1.4em;
+  }
+
+  .logo-index img{
+    width: 18%;
   }
 
   /* ---- Page connexion ------*/
@@ -600,7 +644,7 @@ footer .liens{
 
   /* -----Page enregistrement   -------------*/
 
-  .formulaire-inscription{
+  .formulaire-registration{
     width: 40%;
     border: 1px white solid;
     border-radius: 5px;
@@ -629,6 +673,11 @@ footer .liens{
   font-size: 1.8rem;
   }
 
+  .contenu-principal{
+    min-height: 390px;
+    color: white;
+  }
+
   .page-accueil .titre-page {
     font-size: 3rem;
   }
@@ -649,7 +698,7 @@ footer .liens{
 
   /* -----Page enregistrement   -------------*/
 
-  .formulaire-inscription{
+  .formulaire-registration{
     width: 30%;
     border: 1px white solid;
     border-radius: 5px;

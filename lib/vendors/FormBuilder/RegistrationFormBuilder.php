@@ -59,7 +59,7 @@ class RegistrationFormBuilder extends FormBuilder
         ]))
       ->add(new PasswordField([
         'divClass'=>'form-group',
-        'label' => 'confirmation : ',
+        'label' => 'confirm. : ',
         'name' => 'verifyPassword',
         'labelClass' => 'label col-5 col-form-label col-form-label-sm inputsm font-weight-bold  ',
         'widgetClass' => 'widget form-control input-sm col-7',
