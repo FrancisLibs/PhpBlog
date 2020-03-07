@@ -96,7 +96,7 @@
     <hr/>
     <div class="footer container-fluid">
       <div class="row ligneLiens">
-        <?php 
+        <?php
           if(isset($_SESSION['users']) && ($_SESSION['users']->role_id() >= 2)) { ?>
             <div class="icones col">
               <a class="lienAdmin" href="/admin/" role="button">Administration</a>

@@ -10,6 +10,9 @@
       <div class="index-btn-valid">
         <input type="submit" value="Valider" class="btnValid font-weight-bold" />
       </div>
+      <div class="rgpd">
+
+      </div>
     </form>
   </div>
 </div>

@@ -30,7 +30,7 @@
             <td>
               <a href="users-adminDelete-<?= $users->id() ?>.html"><img src="/images/delete.png" alt="Supprimer"></a>
               <a href="admin-upgrade-<?= $users->id() ?>.html"><img src="/images/fleche2verte.png" alt="Upgrade"></a>
-            </td>     
+            </td>
           </tr>
           <?php }?>
       </table>

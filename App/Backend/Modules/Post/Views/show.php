@@ -2,8 +2,8 @@
   <div class="entete">
     <h2><?= htmlspecialchars($post['title']) ?></h2>
     <p class="show-autor">Par <em><?= htmlspecialchars($post['autor_name']) ?></em> le <?= htmlspecialchars($post['edition_date']->format('d/m/Y à H\hi')) ?>
-    <?php 
-    if($post['edition_date'] != $post['updatedate'] && isset($post['update_date'])) 
+    <?php
+    if($post['edition_date'] != $post['updatedate'] && isset($post['update_date']))
     { ?>
        , modifié le <?= htmlspecialchars($post['update_date']->format('d/m/Y à H\hi')) ?></p>
     <?php } ?>
@@ -18,8 +18,8 @@
     <p class="show-ajout-commentaire">Aucun commentaire n'a encore été posté. Soyez le premier à en laisser un !</p>
   <?php }
   else
-  { 
-    foreach ($comments as $comment) 
+  {
+    foreach ($comments as $comment)
     { ?>
       <div class="back-show-entete">
         <span>Commentaire laissé par <?= htmlspecialchars($comment->author_name()) ?></span>
@@ -27,18 +27,18 @@
         <div>
           <a class="btn btn-info btn-xs" role="button" href="comment-update-<?= $comment->id() ?>.html">Modifier</a>
           <a class="btn btn-info btn-xs" role="button" href="comment-refuse-<?= $comment->id() ?>.html">Refuser</a>
-          <?php 
-            if($comment->state()==0) 
+          <?php
+            if($comment->state()==0)
             { ?>
-              <a class="btn btn-info btn-xs" role="button" href="comment-validate-<?= $comment->id() ?>.html">Valider</a> 
+              <a class="btn btn-info btn-xs" role="button" href="comment-validate-<?= $comment->id() ?>.html">Valider</a>
           <?php } ?>
         </div>
       </div>
       <div>
         <?= htmlspecialchars($comment->contenu()) ?>
       </div>
-    <?php } 
-  }?> 
+    <?php }
+  }?>
 
   <a class="btn btn-info btn-xs ajout-commentaire" role="button" href="commenter-<?= $post['id'] ?>.html">Ajouter un commentaire</a>
   <br /><br />
