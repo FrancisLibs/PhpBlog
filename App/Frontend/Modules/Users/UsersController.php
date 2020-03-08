@@ -169,7 +169,7 @@ class UsersController extends BackController
         Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
         ou copier/coller dans votre navigateur Internet.
 
-        http://phpblog/activation-'.urlencode($users->login()).'-'.urlencode($users->vkey()).'.html
+        http://projet4.francislibs.fr/activation-'.urlencode($users->login()).'-'.urlencode($users->vkey()).'.html
 
         ---------------
         Ceci est un mail automatique, Merci de ne pas y répondre.';

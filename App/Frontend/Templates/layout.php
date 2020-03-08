@@ -79,27 +79,29 @@
   <!-- Footer -->
   <footer>
     <hr/>
-    <div class="footer container-fluid">
-      <div class="row ligneLiens">
+    <div class="footer">
+
         <?php
           if(isset($_SESSION['users']) && ($_SESSION['users']->role_id() >= 2)) { ?>
-            <div class="liens col-sm">
+            <div class="element">
               <a class="lienAdmin" href="/admin/" role="button">Administration</a>
             </div>
         <?php }
         else
         { ?>
-          <div id="adminVide" class="col-sm">
+          <div class="element">
           </div>
         <?php } ?>
-        <div class="icones col-sm">
-          <a btn-linkedin #007BB6 href="https://www.linkedin.com/in/francis-libs-480a68150"><img src="/images/linkedin.jpg" alt="linkedin"></a>
-          <a btn-github #444444 href="https://github.com/FrancisLibs/phpBlog"><img src="/images/github.png" alt="github"></a>
+
+        <div class="icones element">
+          <a class="icones-sociales" btn-linkedin #007BB6 href="https://www.linkedin.com/in/francis-libs-480a68150"><img src="/images/linkedin.jpg" alt="linkedin"></a>
+          <a class="icones-sociales" btn-github #444444 href="https://github.com/FrancisLibs/phpBlog"><img src="/images/github.png" alt="github"></a>
         </div>
-        <div class="liens col-sm">
+
+        <div class="element">
           <a class="lienCV" href="../images/CvLibs.pdf" role="button" target="_blank">Mon parcours</a>
         </div>
-      </div>
+
     </div>
   </footer>
 

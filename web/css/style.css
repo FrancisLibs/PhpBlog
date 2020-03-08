@@ -37,6 +37,7 @@ h3{
 }
 /*---------Layout-----------------*/
 
+/*---------Header------------------*/
 .navbar .navbar-default{
      background-color: transparent;
      font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -72,6 +73,44 @@ hr{
 
 #adminVide{
   width : 200px;
+}
+
+/* ---- Footer ------*/
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  justify-content: space-around;
+  margin-bottom: 9px;
+}
+
+footer .element{
+  width: 30%;
+  margin-bottom: 10px;
+  margin: auto;
+  text-align: center;
+}
+
+footer .icones{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+.icones-sociales{
+  margin-right: 2%;
+  margin-left: 2%;
+}
+
+.lienAdmin, .lienCV{
+  color: white;
+  border: solid 1px white;
+  border-radius: 5px;
+  padding: 2px;
+  font-size: 0.8rem;
+
 }
 
 /*------Zone centrale  -----  Règles générales---------*/
@@ -131,6 +170,12 @@ hr{
   justify-content: center;
 }
 
+.ligne-erreur{
+  text-align: center;
+  border: 1px white solid;
+  border-radius: 5px;
+}
+
 
 /* ----  Page d'accueil / index------*/
 
@@ -187,7 +232,14 @@ hr{
 
 /* ---- Page connexion ------*/
 .zone-formulaire-connexion{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 58px;
+}
+
+.flash-connexion{
+  width: 75%;
 }
 
 .formulaire-connexion{
@@ -211,7 +263,6 @@ hr{
 .contenu-principal .showposts{
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   color: white;
 }
 
@@ -433,31 +484,6 @@ hr{
   text-align: center;
 }
 
-/* ---- Footer ------*/
-
-.footer .ligneLiens{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: baseline;
-}
-
-.footer .row, .footer .liens{
-  text-align: center;
-}
-
-footer .liens{
-  margin-top: 10px;
-}
-
-.lienAdmin, .lienCV{
-  color: white;
-  border: solid 1px white;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 5px;
-}
-
 /* Extra small devices (portrait phones, less than 576px) */
 /* No media query for `xs` since this is the default in Bootstrap */
 
@@ -529,9 +555,15 @@ footer .liens{
   margin: auto;
 }
 
+/* -----Page connexion   -------------*/
+.flash-connexion{
+  width: 55%;
+}
+
 /* --------------------------Footer------------------*/
   footer .liens{
-      margin-top: 0;
+    margin-top: 0;
+    margin-bottom: 10px;
   }
 
 
@@ -583,6 +615,15 @@ footer .liens{
     border-radius: 5px;
     margin: auto;
   }
+
+   /* ---- Page connexion ------*/
+  .formulaire-connexion{
+    width: 40%;
+  }
+
+  .flash-connexion{
+    width: 40%;
+  }
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -632,10 +673,11 @@ footer .liens{
 
   /* ---- Page connexion ------*/
   .formulaire-connexion{
-    width: 45%;
-    margin: auto;
-    border: 1px white solid;
-    border-radius: 5px;
+    width: 33%;
+  }
+
+  .flash-connexion{
+    width: 33%;
   }
 
   .formulaire-connexion #titreFormulaire{
@@ -687,14 +729,19 @@ footer .liens{
   }
 
   /* ---- Page connexion ------*/
+
   .formulaire-connexion{
-    width: 40%;
+    width: 33%;
+  }
+
+  .flash-connexion{
+    width: 33%;
   }
 
   .formulaire-connexion #titreFormulaire{
-    font-size: 1em;
-    margin-left: 10px;
+    font-size: 1.3em;
   }
+
 
   /* -----Page enregistrement   -------------*/
 
