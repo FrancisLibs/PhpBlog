@@ -14,10 +14,10 @@ class PostFormBuilder extends FormBuilder
   {
     $this->form->add(new StringField([
         'divClass'=>'form-group',
-        'label' => 'titre',
+        'label' => 'Titre :',
         'name' => 'title',
-        'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widget form-control input-sm w-50',
+        'labelClass' => 'label col-6 col-form-label',
+        'widgetClass' => 'widget form-control',
         'maxLength' => 100,
         'validators' => [
           new MaxLengthValidator('Le titre spécifié est trop long (100 caractères maximum)', 100),
@@ -26,10 +26,10 @@ class PostFormBuilder extends FormBuilder
        ]))
       ->add(new StringField([
         'divClass'=>'form-group',
-        'label' => 'chapo',
+        'label' => 'Chapô :',
         'name' => 'chapo',
-        'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widget form-control input-sm w-50',
+        'labelClass' => 'label col-6 col-form-label',
+        'widgetClass' => 'widget form-control',
         'maxLength' => 255,
         'validators' => [
           new MaxLengthValidator('Le chapo spécifié est trop long (255 caractères maximum)', 255),
@@ -38,10 +38,10 @@ class PostFormBuilder extends FormBuilder
         ]))
       ->add(new TextField([
         'divClass'=>'form-group',
-        'label' => 'contenu',
+        'label' => 'Contenu :',
         'name' => 'contenu',
-        'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widget form-control input-sm w-50',
+        'labelClass' => 'label col-6 col-form-label',
+        'widgetClass' => 'widgetText form-control',
         'rows' => 8,
         'cols' => 60,
         'validators' => [

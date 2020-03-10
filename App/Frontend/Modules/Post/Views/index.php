@@ -1,5 +1,5 @@
 
-<div class="bloc-texte-index">
+<div class="bloc-index">
   <div class="bloc-perso">
     <div class="nom-index">
       <h1>Francis Libs</h1>
@@ -14,24 +14,27 @@
       <p>Trait d'union entre votre immagination et votre communication Web</p>
     </div>
   </div>
-  <!-- Zone formulaire  -->
-  <div class="zone-formulaire-index">
-    <div class="formulaire">
-      <p id="titreFormulaire">Contact</p>
-      <form action ="" method="post" class="formulaireMessage">
-        <?= $form ?>
-      <div class="index-btn-valid">
-        <input type="submit" value="Valider" class="btnValid font-weight-bold" />
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
 
- <!-- Zone message flash  -->
+  <!-- Zone formulaire  -->
+  <div class="zoneFormulaire formulaireIndex">
+
+    <p class="titreFormulaire">Contact</p>
+
+    <!-- Zone message flash  -->
     <div class="zone-message">
       <?php if ($user->hasFlash())
         {
           echo '<p class="ligne-erreur">', $user->getFlash(), '</p>';
         } ?>
     </div>
+
+    <form action ="" method="post" class="formulaire">
+      <?= $form ?>
+      <div class="index-btn-valid">
+        <input type="submit" value="Valider" class="btnValid font-weight-bold" />
+      </div>
+    </form>
+
+</div>
+
+

@@ -20,8 +20,8 @@ class RegistrationFormBuilder extends FormBuilder
         'divClass'=>'form-group',
         'label' => 'pseudo : ',
         'name' => 'login',
-        'labelClass' => 'label col-5 col-form-label col-form-label-sm inputsm font-weight-bold  ',
-        'widgetClass' => 'widget form-control input-sm col-7',
+        'labelClass' => 'label col-5 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widget form-control input-sm',
         'maxLength' => 50,
         'maxLength' => 50,
         'validators' => [
@@ -33,8 +33,8 @@ class RegistrationFormBuilder extends FormBuilder
         'divClass'=>'form-group',
         'label' => 'email : ',
         'name' => 'email',
-        'labelClass' => 'label col-5 col-form-label col-form-label-sm inputsm font-weight-bold  ',
-        'widgetClass' => 'widget form-control input-sm col-7',
+        'labelClass' => 'label col-5 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widget form-control input-sm',
         'maxLength' => 50,
         'maxLength' => 50,
         'validators' => [
@@ -47,8 +47,8 @@ class RegistrationFormBuilder extends FormBuilder
         'divClass'=>'form-group',
         'label' => 'mdp : ',
         'name' => 'password',
-        'labelClass' => 'label col-5 col-form-label col-form-label-sm inputsm font-weight-bold ',
-        'widgetClass' => 'widget form-control input-sm col-7',
+        'labelClass' => 'label col-5 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widget form-control input-sm',
         'maxLength' => 50,
         'maxLength' => 50,
         'validators' => [
@@ -61,8 +61,8 @@ class RegistrationFormBuilder extends FormBuilder
         'divClass'=>'form-group',
         'label' => 'confirm. : ',
         'name' => 'verifyPassword',
-        'labelClass' => 'label col-5 col-form-label col-form-label-sm inputsm font-weight-bold  ',
-        'widgetClass' => 'widget form-control input-sm col-7',
+        'labelClass' => 'label col-5 col-form-label col-form-label-sm inputsm',
+        'widgetClass' => 'widget form-control input-sm',
         'maxLength' => 50,
         'maxLength' => 50,
         'validators' => [
