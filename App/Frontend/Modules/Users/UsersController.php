@@ -169,7 +169,9 @@ class UsersController extends BackController
         Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
         ou copier/coller dans votre navigateur Internet.
 
-        http://projet4.francislibs.fr/activation-'.urlencode($users->login()).'-'.urlencode($users->vkey()).'.html
+
+        http://phpblog/activation-'.urlencode($users->login()).'-'.urlencode($users->vkey()).'.html
+
 
         ---------------
         Ceci est un mail automatique, Merci de ne pas y répondre.';
@@ -186,7 +188,7 @@ class UsersController extends BackController
       // Create a message
       $message = (new Swift_Message('Activer votre compte'))
         ->setFrom(['fr.libs@gmail.com' => 'Francis Libs'])
-        ->setTo([$users->email(), 'fr.libs@gmail.com'])
+        ->setTo([$users->email()])
         ->setBody($txtMessage);
 
       // Send the message

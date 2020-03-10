@@ -44,7 +44,7 @@ abstract class PostManager extends Manager
    * @return void
    */
   abstract public function delete($id);
-  
+
   /**
    * Méthode permettant de supprimer les posts d'un utilisateur.
    * @param $id int L'identifiant de l'utilisateur

@@ -10,7 +10,7 @@
   </div>
 
   <h3 class="show-chapo"><?= htmlspecialchars($post['chapo']) ?></h3>
-  
+
   <p class="show-contenu"><?= nl2br(htmlspecialchars($post['contenu'])) ?></p>
 
   <div class="commentaires">
@@ -32,7 +32,7 @@
     </div>
     <div class="commentaires">
       <?php foreach ($comments as $comment) { ?>
-        <p>Posté par <strong><?= htmlspecialchars($comment['author_name']) ?></strong> le 
+        <p>Posté par <strong><?= htmlspecialchars($comment['author_name']) ?></strong> le
           <?= htmlspecialchars($comment['edition_date']->format('d/m/Y à H\hi')) ?></p>
 
         <?php if ($user->isAuthenticated() && $comment['users_id'] == $users->id()) { ?>
@@ -45,4 +45,3 @@
     </div>
   </div>
 </div>
-

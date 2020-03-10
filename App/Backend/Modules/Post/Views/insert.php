@@ -9,5 +9,4 @@
         <input type="submit" value="Valider" class="btnValid font-weight-bold" />
       </div>
     </form>
-
 </div>

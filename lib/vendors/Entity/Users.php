@@ -104,12 +104,12 @@ class Users extends Entity
   {
     $this->role = $role;
   }
-  
+
   public function setVkey($vkey)
   {
     $this->vkey = $vkey;
   }
-  
+
   public function setFormToken($formToken)
   {
     $this->formToken = $formToken;
@@ -161,7 +161,7 @@ class Users extends Entity
   {
     return $this->role;
   }
-  
+
   public function vkey()
   {
     return $this->vkey;
@@ -171,5 +171,5 @@ class Users extends Entity
   {
     return $this->formToken;
   }
-  
+
 }

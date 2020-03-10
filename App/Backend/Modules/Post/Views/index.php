@@ -9,7 +9,7 @@
 <div class="backend-admin-liens">
     <a class="nav-link" href="/admin/posts.html">Gestion Articles</a>
     <a class="nav-link" href="/admin/users.html">Gestion utilisateurs</a>
-    <?php 
+    <?php
     if($usersRole ==3){ ?>
       <a class="nav-link" href="/admin/admin.html">Gestion administrateurs</a>
     <?php } ?>

@@ -9,5 +9,4 @@
       <input type="submit" value="Commenter" class="btnValid font-weight-bold" />
     </div>
   </form>
-
 </div>
