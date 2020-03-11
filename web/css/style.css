@@ -584,7 +584,7 @@ footer .icones{
   }
 
   .contenu-principal{
-    min-height: 370px;
+    min-height: 880px;
     margin-left: 10px;
   }
 
@@ -618,7 +618,7 @@ footer .icones{
   }
 
   .contenu-principal{
-    min-height: 380px;
+    min-height: 592px;
     margin-left: 10px;
   }
 
@@ -661,7 +661,7 @@ footer .icones{
   }
 
   .contenu-principal{
-    min-height: 390px;
+    min-height: 450px;
     margin-left: 10px;
   }
 
@@ -681,5 +681,44 @@ footer .icones{
 
   .formulaireIndex{
   width: 28%;
+  }
+
+  /* Extra extra large devices (large desktops, 1200px and up) --------------------------------------------------------*/
+
+@media (min-width: 1800px){
+
+  h1{
+    font-size: 4rem;
+  }
+
+  h2{
+  font-size: 2.2rem;
+  }
+
+  h3{
+  font-size: 1.8rem;
+  }
+
+  .contenu-principal{
+    min-height: 750px;
+    margin-left: 10px;
+  }
+
+  .page-accueil .titre-page {
+    font-size: 3rem;
+  }
+
+  /* ---- Page connexion ------*/
+
+  .formulaire-connexion #titreFormulaire{
+    font-size: 1.3em;
+  }
+
+  .zoneFormulaire{
+    width: 30%;
+  }
+
+  .formulaireIndex{
+    width: 28%;
   }
 }
