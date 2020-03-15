@@ -123,7 +123,7 @@ class Post extends Entity
   {
     return $this->update_date;
   }
-  
+
   public function autor_name()
   {
     return $this->autor_name;

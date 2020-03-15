@@ -28,7 +28,7 @@ class TextField extends Field
     {
       $widget .= ' class="'.$this->widgetClass.'"';
     }
-    
+
     $widget .= ' name="'.$this->name.'"';
 
     if (!empty($this->cols))

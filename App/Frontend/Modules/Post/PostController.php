@@ -20,9 +20,8 @@ class PostController extends BackController
   	if ($request->method() == 'POST')
   	{
       // Le formulaire a t-il été détourné ? (CSRF) On vérifie la présence des tokens
-      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken'))) 
+      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken')))
       {
-
         if($request->postData('formToken') != $_SESSION["formToken"])
         {
           $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
@@ -41,6 +40,8 @@ class PostController extends BackController
   		'email' =>      $request->postData('email'),
   		'message' =>    $request->postData('message')
   	  ]);
+
+      $messageValide = true;
     }
     else
     {
@@ -58,9 +59,7 @@ class PostController extends BackController
 
 		$form = $formBuilder->form();
 
-    $formHandler = new FormHandler($form, $this->managers->getManagerOf('Message'), $request);
-
-    if ($formHandler->process())
+    if (isset($messageValide) && $messageValide)
     {
       $textMessage=
         $message->lastName()."\n".
@@ -146,13 +145,13 @@ class PostController extends BackController
   }
 
   public function executeInsertComment(HTTPRequest $request)
-  {  
+  {
     // Si le formulaire a été envoyé.
     if ($request->method() == 'POST')
     {
       // Le formulaire a t-il été détourné ? (CSRF)
       //On vérifie que la présence des  tokens
-      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken'))) 
+      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken')))
       {
         if($request->postData('formToken') != $_SESSION["formToken"])
         {
@@ -203,28 +202,28 @@ class PostController extends BackController
   }
 
   public function executeUpdateComment(HTTPRequest $request)
-  {       
+  {
     $this->page->addVar('title', 'Modification d\'un commentaire');
 
     if ($request->method() == 'POST')
     {
       // Le formulaire a t-il été détourné ? (CSRF)
       //On vérifie que la présence des  tokens
-      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken'))) 
+      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken')))
       {
         if($request->postData('formToken') != $_SESSION["formToken"])
         {
           $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
           $this->app->httpResponse()->redirect('/post-'.$request->getData('post_id').'.html');
         }
-      } 
+      }
       else
       {
         $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
         $this->app->httpResponse()->redirect('/post-'.$request->getData('post_id').'.html');
       }
 
-      
+
       $comment = new Comment([
     	'id'      =>  $request->postData('id'),
     	'contenu' =>  $request->postData('contenu'),
@@ -252,7 +251,7 @@ class PostController extends BackController
     if ($formHandler->process())
     {
       $this->app->user()->setFlash('Le commentaire a bien été modifié');
-      
+
       $this->app->httpResponse()->redirect('/post-'.$request->postData('post_id').'.html');
     }
 

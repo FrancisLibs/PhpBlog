@@ -5,6 +5,7 @@
     <?php if ($user->hasFlash()) {echo '<p class="ligne-erreur">', $user->getFlash(), '</p>';} ?>
   </div>
 
+
   <p class="titreFormulaire">Inscription</p>
 
   <form action ="" method="post" clegistrationass="formulaire">
@@ -13,5 +14,4 @@
       <input type="submit" value="Valider" class="btnValid font-weight-bold" />
     </div>
   </form>
-
 </div>

@@ -33,7 +33,7 @@ abstract class CommentManager extends Manager
    * @return void
    */
   abstract public function deleteFromUsers($userId);
-  
+
   /**
    * Méthode permettant de récupérer une liste de commentaires d'un post.
    * @param $post Le post duquel on veut récupérer les commentaires
@@ -41,14 +41,14 @@ abstract class CommentManager extends Manager
    * @return array
    */
   abstract public function getListOf($post, $state);
-  
+
   /**
    * Méthode permettant d'enregistrer une modification de commentaire
    * @param $comment Le commentaire à enregistrer
    * @return void
    */
   abstract public function update(Comment $comment);
-  
+
   /**
    * Méthode permettant d'enregistrer un commentaire.
    * @param $comment Le commentaire à enregistrer
@@ -65,13 +65,6 @@ abstract class CommentManager extends Manager
       throw new \RuntimeException('Le commentaire doit être validé pour être enregistré');
     }
   }
-  
-  /**
-   * Méthode permettant de modifier un commentaire.
-   * @param $comment Le commentaire à modifier
-   * @return void
-
-  abstract protected function update(Comment $comment); */
 
   /**
    * Méthode permettant d'obtenir un commentaire spécifique.
@@ -86,9 +79,4 @@ abstract class CommentManager extends Manager
    */
   abstract public function count();
 
-  /**
-   * Méthode renvoyant le nombre de commentaires non validés.
-   * @return int
-   */
-  abstract public function countUnvalidate();
 }

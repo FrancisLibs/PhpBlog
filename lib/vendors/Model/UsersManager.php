@@ -33,7 +33,7 @@ abstract class UsersManager extends Manager
    * @return Void
    */
   abstract public function update(Users $users);
-  
+
   /**
    * Méthode permettant d'enregistrer un users.
    * @param $users Users le users à enregistrer
