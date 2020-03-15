@@ -30,7 +30,7 @@ abstract class Application
     {
       $cookieName='ver-sio';
       $duration = time() + (60 * 20);
-      $value = bin2hex(random_bytes(2));
+      $value = bin2hex(random_bytes(10));
 
       if($this->user()->sessionExist($cookieName) && $this->httpRequest()->cookieExists($cookieName))
       {
