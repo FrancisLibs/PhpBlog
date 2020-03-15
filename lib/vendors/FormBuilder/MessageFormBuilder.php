@@ -19,8 +19,8 @@ class MessageFormBuilder extends FormBuilder
         'divClass'    => 'form-group',
         'label'       => 'Nom : ',
         'name'        => 'lastName',
-        'labelClass'  => 'label col-4 col-form-label col-form-label-sm inputsm font-weight-bold',
-        'widgetClass' => 'widget form-control input-sm col-7',
+        'labelClass'  => 'label col-form-label col-form-label-sm',
+        'widgetClass' => 'widget form-control',
         'maxLength'   =>100,
         'validators'  => [
           new MaxLengthValidator('Le nom spécifié est trop long (100 caractères maximum)', 100),
@@ -31,8 +31,8 @@ class MessageFormBuilder extends FormBuilder
         'divClass'=>  'form-group',
         'label' =>        'Prénom : ',
         'name' =>         'firstName',
-        'labelClass' =>   'label col-4 col-form-label col-form-label-sm inputsm font-weight-bold',
-        'widgetClass' =>  'widget form-control input-sm col-7',
+        'labelClass' =>   'label col-form-label col-form-label-sm',
+        'widgetClass' =>  'widget form-control',
         'maxLength' =>100,
         'validators' => [
           new MaxLengthValidator('Le prénom spécifié est trop long (100 caractères maximum)', 100),
@@ -43,8 +43,8 @@ class MessageFormBuilder extends FormBuilder
         'divClass'=>  'form-group',
         'label' =>        'Email : ',
         'name' =>         'email',
-        'labelClass' =>   'label col-4 col-form-label col-form-label-sm inputsm font-weight-bold',
-        'widgetClass' =>  'widget form-control input-sm col-7',
+        'labelClass' =>   'label col-form-label col-form-label-sm ',
+        'widgetClass' =>  'widget form-control',
         'maxLength' => 100,
         'validators' => [
           new MaxLengthValidator('L\'email spécifié est trop long (100 caractères maximum)', 100),
@@ -57,8 +57,8 @@ class MessageFormBuilder extends FormBuilder
         'divClass'=>  'form-group',
         'label' =>        'Message : ',
         'name' =>         'message',
-        'labelClass' =>   'label col-4 col-form-label col-form-label-sm inputsm font-weight-bold',
-        'widgetClass' =>  'widget form-control input-sm col-7',
+        'labelClass' =>   'label col-form-label col-form-label-sm',
+        'widgetClass' =>  'widgetText form-control',
         'rows' =>3,
         'cols' => 40,
         'validators' => [

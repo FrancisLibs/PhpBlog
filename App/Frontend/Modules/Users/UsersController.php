@@ -16,6 +16,7 @@ class UsersController extends BackController
 {
   public function executeConnexion(HTTPRequest $request)
   {
+
     // Traitement du formulaire s'il a été envoyé
     if ($request->method() == 'POST')
     {
@@ -168,7 +169,9 @@ class UsersController extends BackController
         Pour activer votre compte, veuillez cliquer sur le lien ci-dessous
         ou copier/coller dans votre navigateur Internet.
 
+
         http://phpblog/activation-'.urlencode($users->login()).'-'.urlencode($users->vkey()).'.html
+
 
         ---------------
         Ceci est un mail automatique, Merci de ne pas y répondre.';

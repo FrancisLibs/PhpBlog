@@ -13,10 +13,10 @@ class CommentFormBuilder extends FormBuilder
     $this->form
        ->add(new TextField([
         'divClass'=>'form-group',
-        'label' => 'Commentaire',
+        'label' => 'Commentaire :',
         'name' => 'contenu',
-        'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widget form-control input-sm w-50',
+        'labelClass' => 'label-insertComment col-6 col-form-label',
+        'widgetClass' => 'widget-insertComment form-control',
         'rows' => 7,
         'cols' => 50,
         'validators' => [

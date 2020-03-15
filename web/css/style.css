@@ -3,11 +3,12 @@ body {
   margin:0;
   padding:0;
   background-color: white;
-  background: url(../images/Guadeloupe576.jpg)center top no-repeat fixed;
+  background: url(../images/Guadeloupe1200.png) center top no-repeat fixed;
   background-size: cover;
   background-position: top;
   -webkit-background-size: cover; /* pour anciens Chrome et Safari */
 }
+
 a{
   color: white;
 }
@@ -27,16 +28,11 @@ h3{
   font-size: 1.2em;
 }
 
-.ligneErreur{
-  text-align: center;
-  color: white;
-}
-
 .table{
   color:white;
 }
-/*---------Layout-----------------*/
 
+/*---------Header------------------*/
 .navbar .navbar-default{
      background-color: transparent;
      font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -74,40 +70,110 @@ hr{
   width : 200px;
 }
 
+/* ---- Footer ------*/
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  justify-content: space-around;
+  margin-bottom: 9px;
+}
+
+footer .element{
+  width: 30%;
+  margin-bottom: 10px;
+  margin: auto;
+  text-align: center;
+}
+
+footer .icones{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+.icones-sociales{
+  margin-right: 2%;
+  margin-left: 2%;
+}
+
+.lienAdmin, .lienCV{
+  color: white;
+  border: solid 1px white;
+  border-radius: 5px;
+  padding: 2px;
+  font-size: 0.8rem;
+}
+
+/*------------------------------Formulaires ------------*/
+
+.zoneFormulaire{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border: white solid 1px;
+  border-radius: 3%;
+  margin-bottom: 5px;
+}
+
+.titreFormulaire{
+  margin-left: 7px;
+  font-size : 1.4rem;
+}
+
+.zoneFormulaire .label{
+ margin-left: 10px;
+}
+
+.zoneFormulaire .widget{
+  width: 85%;
+  margin: auto;
+  height: 28px;
+}
+
+.zoneFormulaire .widgetText{
+  width: 85%;
+  margin: auto;
+}
+
+.form-group{
+  margin-bottom: 0;
+}
+
 /*------Zone centrale  -----  Règles générales---------*/
 
 .contenu-principal{
-  min-height: 450px;
+  min-height: 320px;
   color: white;
   margin-left: 10px;
 }
 
-.zone-formulaire{
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
+.formulaire-index{
+  margin-bottom: 10px;
 }
 
-.formulaire{
-  width: 79%;
-  margin: auto;
-  border: white solid 1px;
-  border-radius: 3%;
-}
-
-.form-group {
+.formulaire-index .form-group {
   margin-bottom: 0.5rem;
 }
 
-#titreFormulaire{
+.formulaire-index #titreFormulaire{
   margin-top: 2px;
   margin-left: 10px;
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 
-.widget{
+.formulaire-index .label{
+  font-size: .775rem;
+  padding-left: 3px;
+}
+
+.formulaire-index .widget{
   display: inline;
+  width: 50%;
+  height: 20px;
+  font-size: 0.7rem;
 }
 
 .btnValid{
@@ -127,60 +193,98 @@ hr{
   justify-content: center;
 }
 
+.ligne-erreur{
+  text-align: center;
+  border: 1px white solid;
+  border-radius: 5px;
+  background: #447fb9;
+  font-weight: 600;
+}
+
 
 /* ----  Page d'accueil / index------*/
 
-.bloc-texte{
+.bloc-index{
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-  align-items: flex-start;
-  margin-top: 40px;
-}
-
-.bloc-perso{
-  display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: flex-center;
+  justify-content: center;
 }
 
-.sous-titre{
-  text-align: center;
-}
-
-.zone-formulaire{
+.zone-formulaire-connexion{
   margin-top: 20px;
   margin-bottom: 10px;
 }
 
-.logo{
-  width: 70%;
-  align-self: center;
-  margin-top: 20px;
-}
-
-.col-titre{
-  margin-top: 20px;
+.bloc-perso{
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
 }
 
+.titre-index{
+  margin-bottom: 15px;
+}
+
+.nom-index,
+.titre-index,
+.logo-index,
+.sous-titre-index
+{
+  text-align: center;
+}
+
+.logo-index{
+  margin-bottom: 10px;
+}
+
+.logo-index img{
+  width: 28%;
+}
+
+.sous-titre-index{
+  margin: 10px 0px 10px 0px;
+  font-family: 'Bree Serif', serif;
+  width: 90%;
+  margin: auto;
+  font-size: 1.3rem;
+}
+
 .col-titre .zone-message{
   text-align: center;
 }
 
-
-/* ---- Page Articles  / showPosts------*/
-.contenu-principal .showposts{
+/* ---- Page connexion ------*/
+.zone-formulaire-connexion{
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  color: white;
+  align-items: center;
+  margin-top: 58px;
 }
+
+.flash-connexion{
+  width: 100%;
+}
+
+.formulaire-connexion{
+  width: 75%;
+  margin: auto;
+  border: 1px white solid;
+  border-radius: 5px;
+}
+
+.formulaire-connexion #titreFormulaire{
+  font-size: 1em;
+  margin-left: 10px;
+}
+
+.formulaire-connexion .widget{
+  width: 80%;
+  margin-left: 15px;
+}
+
+/* ---- Page Articles  / showPosts------*/
 
 .front-showPosts-title{
   display: flex;
@@ -269,6 +373,29 @@ hr{
   color: white;
 }
 
+/* -----Page enregistrement   -------------*/
+.zone-formulaire-registration{
+  margin-bottom: 10px;
+}
+
+.formulaire-registration{
+  width: 90%;
+  border: 1px white solid;
+  border-radius: 5px;
+  margin: auto;
+}
+
+.formulaire-registration #titreFormulaire{
+  font-size: 1.5em;
+  margin-left: 10px;
+}
+
+.formulaire-registration .widget{
+  width: 50%;
+  height: 30px;
+  display: inline;
+}
+
 /*---------------Page admin - backend -----------------*/
 
 .backend-admin-liens{
@@ -352,14 +479,17 @@ hr{
 
 /*---------------Page admin - post-insert -----------------*/
 
-.back-postInsert-contenu{
+.back-commentInsert-contenu{
   color: white;
 }
 
-/*---------------Page admin - post-insert -----------------*/
+.zone-formulaire-insertPost .label{
+  margin-left: -8px;
+}
 
-.back-commentInsert-contenu{
-  color: white;
+.zone-formulaire-insertPost .widget{
+  margin-left: 8px;
+  width: 93%;
 }
 
 /*---------------Page admin - users-show -----------------*/
@@ -377,41 +507,27 @@ hr{
   text-align: center;
 }
 
-/* ---- Footer ------*/
+/*---------------Page front - insert-comment -----------------*/
 
-.footer .ligneLiens{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: baseline;
+#titreFormulaire-insertComment{
+  margin-left: 10px;
 }
 
-.footer .row, .footer .liens{
-  text-align: center;
+.label-insertComment{
+  margin-left: -7px;
 }
 
-footer .liens{
-  margin-top: 10px;
-}
-
-.lienAdmin, .lienCV{
-  color: white;
-  border: solid 1px white;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 5px;
+.widget-insertComment{
+  margin-left: 9px;
+  width: 94%;
 }
 
 /* Extra small devices (portrait phones, less than 576px) */
 /* No media query for `xs` since this is the default in Bootstrap */
 
-/* Small devices (landscape phones, 576px and up) */
+/* Small devices (landscape phones, 576px and up) ------------------------------------------*/
 
 @media (min-width: 576px) {
-
-  body {
-    background: url(../images/Guadeloupe576.jpg)center top no-repeat fixed;
-  }
 
   h1{
     font-size: 2rem;
@@ -421,27 +537,40 @@ footer .liens{
     font-size: 1.3em;
   }
 
+  .contenu-principal{
+    min-height: 360px;
+    margin-left: 10px;
+  }
+
+  /*    Page index   */
+
   .page-accueil .titre-page {
     padding-top: 20px;
   }
 
-  .formulaire{
-    width: 60%;
+  .col-titre{
+    width: 55%;
+    margin-left: 10px;
   }
 
+  .logo-index img{
+    width: 18%;
+  }
+
+  .zoneFormulaire{
+    width: 52%;
+  }
+
+  /* --------------------------Footer------------------*/
   footer .liens{
     margin-top: 0;
+    margin-bottom: 10px;
   }
-
 }
 
-/* Medium devices (tablets, 768px and up) */
+/* Medium devices (tablets, 768px and up) --------------------------------------------*/
 
 @media (min-width: 768px) {
-
-  body {
-    background: url(../images/Guadeloupe768.jpg)center top no-repeat fixed;
-  }
 
   h1{
     font-size: 2.8rem;
@@ -451,19 +580,27 @@ footer .liens{
     font-size: 1.5em;
   }
 
-  .formulaire{
-    width: 35%;
+ .col-titre{
+    width: 45%;
   }
 
+  .contenu-principal{
+    min-height: 370px;
+    margin-left: 10px;
+  }
+
+  .formulaire-connexion #titreFormulaire{
+    font-size: 1.3em;
+  }
+
+  .zoneFormulaire{
+    width: 40%;
+  }
 }
 
-/* Large devices (desktops, 992px and up) */
+/* Large devices (desktops, 992px and up) ----------------------------------------------------------------*/
 
 @media (min-width: 992px) {
-
-  body {
-    background: url(../images/Guadeloupe992.jpg)center top no-repeat fixed;
-  }
 
   h1{
     font-size: 3.2rem;
@@ -477,18 +614,40 @@ footer .liens{
     font-size: 1.7rem;
   }
 
-  .formulaire{
+ .col-titre{
+    width: 35%;
+  }
+
+  .contenu-principal{
+    min-height: 380px;
+    margin-left: 10px;
+  }
+
+  .bloc-index {
+    margin-top: 60px;
+  }
+
+  .bloc-perso{
+    width: 50%;
+  }
+
+  .logo-index img{
+    width: 18%;
+  }
+
+  .formulaire-connexion #titreFormulaire{
+    font-size: 1.3em;
+  }
+
+  .zoneFormulaire{
     width: 30%;
   }
+
 }
 
-/* Extra large devices (large desktops, 1200px and up) */
+/* Extra large devices (large desktops, 1200px and up) --------------------------------------------------------*/
 
 @media (min-width: 1200px){
-
-  body {
-    background: url(../images/Guadeloupe1200.jpg)center top no-repeat fixed;
-  }
 
   h1{
     font-size: 4rem;
@@ -502,11 +661,26 @@ footer .liens{
   font-size: 1.8rem;
   }
 
+  .contenu-principal{
+    min-height: 390px;
+    margin-left: 10px;
+  }
+
   .page-accueil .titre-page {
     font-size: 3rem;
   }
 
-  .formulaire{
-    width: 40%;
+  /* ---- Page connexion ------*/
+
+  .formulaire-connexion #titreFormulaire{
+    font-size: 1.3em;
+  }
+
+  .zoneFormulaire{
+    width: 30%;
+  }
+
+  .formulaireIndex{
+  width: 28%;
   }
 }
