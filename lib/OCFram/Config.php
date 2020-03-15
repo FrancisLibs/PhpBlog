@@ -1,4 +1,5 @@
 <?php
+
 namespace OCFram;
 
 class Config extends ApplicationComponent
