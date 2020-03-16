@@ -20,7 +20,7 @@ h1{
 
 h2{
   font-family: 'Bree Serif', serif;
-  font-size: 1.3em;
+  font-size: 1.6em;
 }
 
 h3{
@@ -312,7 +312,7 @@ footer .icones{
 }
 
 .front-showPosts-chapo{
-  font-size: 1.5em;
+  font-size: 1.1em;
   margin-bottom: 30px;
 }
 
@@ -465,16 +465,29 @@ footer .icones{
 }
 
 /*---------------Page admin - Post - show -----------------*/
-.back-show-entete{
+.back-show-contenu{
+  color: white;
+}
+
+.back-show-contenu .titre{
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
 }
 
-.back-show-contenu{
-  color: white;
+.back-show-contenu .modif-article,
+.back-show-contenu .show-ajout-commentaire{
+  height: 37px;
+  margin-left: 20px;
+  text-align: center;
+  padding-bottom: 8px;
+}
+
+.back-show-contenu show-btn-ajout-commentaire{
+  text-align: left;
+
 }
 
 /*---------------Page admin - post-insert -----------------*/
@@ -658,7 +671,7 @@ footer .icones{
   }
 
   h3{
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   }
 
   .contenu-principal{

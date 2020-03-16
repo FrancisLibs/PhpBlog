@@ -28,7 +28,7 @@ abstract class Application
 
     if ($this->user()->isAuthenticated())
     {
-      $cookieName='ver-sio';
+      $cookieName='Gt_grex78lof';
       $duration = time() + (60 * 20);
       $value = bin2hex(random_bytes(10));
 
