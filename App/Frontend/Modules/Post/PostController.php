@@ -4,6 +4,7 @@ namespace App\Frontend\Modules\Post;
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
 use \OCFram\FormHandler;
+use \OCFram\Conf;
 use \Entity\Comment;
 use \Entity\Message;
 use \FormBuilder\MessageFormBuilder;
@@ -19,16 +20,11 @@ class PostController extends BackController
   	// Traitement du formulaire de contact si le formulaire a été envoyé.
   	if ($request->method() == 'POST')
   	{
-      // Le formulaire a t-il été détourné ? (CSRF) On vérifie la présence des tokens
-      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken')))
-      {
-        if($request->postData('formToken') != $_SESSION["formToken"])
-        {
-          $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
-          $this->app->httpResponse()->redirect('/');
-        }
-      }
-      else
+      /* Le formulaire a t-il été détourné ? (CSRF) On vérifie la présence des tokens
+        et l'égalité entre celui en session et celui du formulaire  */
+      if (
+        empty($_SESSION['formToken']) OR empty($request->postData('formToken')) OR
+        ($request->postData('formToken') != $_SESSION["formToken"]))
       {
         $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
         $this->app->httpResponse()->redirect('/');
@@ -67,16 +63,26 @@ class PostController extends BackController
         $message->email()."\n".
         $message->message();
 
+        // Recherche des paramètres
+      $conf= Conf::getInstance();
+      $mail_userAdress  = $conf->get('mail_userAdress');
+      $mail_password    = $conf->get('mail_password');
+      $mail_encryption  = $conf->get('mail_encryption');
+      $mail_port        = $conf->get('mail_port');
+      $mail_host        = $conf->get('mail_host');
+      $mail_name        = $conf->get('mail_name');
+      $mail_ident       = $conf->get('mail_ident');
+
       // Envoi du mail du formulaire
-      $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
-      ->setUserName('fr.libs@gmail.com')
-      ->setPassword('uaehjeerxotzfpqt');
+      $transport = (new Swift_SmtpTransport($mail_host, $mail_port, $mail_encryption))
+      ->setUserName($mail_ident)
+      ->setPassword($mail_password);
 
       $mailer = new Swift_Mailer($transport);
 
       $message = (new Swift_Message('Message du blog php'))
       ->setFrom([$message->email() => $message->lastName()])
-      ->setTo(['fr.libs@gmail.com'])
+      ->setTo([$mail_userAdress])
       ->setBody($textMessage);
 
       $mailer->send($message);

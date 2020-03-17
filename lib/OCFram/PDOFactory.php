@@ -5,7 +5,7 @@ class PDOFactory
 {
     public static function getMysqlConnexion()
     {
-        $conf= conf::getInstance();
+        $conf= Conf::getInstance();
         $db_user = $conf->get('db_user');
         $db_pass = $conf->get('db_pass');
         $db_host = $conf->get('db_host');

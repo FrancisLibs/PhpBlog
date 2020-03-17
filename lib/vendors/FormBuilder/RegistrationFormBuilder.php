@@ -6,7 +6,6 @@ use \OCFram\StringField;
 use \OCFram\PasswordField;
 use \OCFram\EmailField;
 use \OCFram\HiddenField;
-use \OCFram\CheckBoxField;
 use \OCFram\MaxLengthValidator;
 use \OCFram\NotNullValidator;
 use \OCFram\EmailValidator;
@@ -70,16 +69,6 @@ class RegistrationFormBuilder extends FormBuilder
           new MaxLengthValidator('Le mot de passe spécifié est trop long (50 caractères maximum)', 50),
           new NotNullValidator('Merci de spécifier le mot de passe'),
           new PasswordValidator('Le mot de passe doit être composé d\'au moins 6 caractères, avec une minuscule, une majuscule, un chiffre, un caractère spécial'),
-        ],
-        ]))
-      ->add(new CheckBoxField([
-        'divClass'=>'form-group',
-        'label' => 'confirmation : ',
-        'name' => 'rgpd',
-        'labelClass' => 'label col-4 col-form-label col-form-label-sm inputsm',
-        'widgetClass' => 'widget form-control input-sm w-50',
-        'validators' => [
-          new NotNullValidator('Merci de sélectionner la case'),
         ],
         ]))
       ->add(new HiddenField([

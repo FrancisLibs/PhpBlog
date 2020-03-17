@@ -3,6 +3,7 @@ namespace App\Frontend\Modules\Users;
 
 use \OCFram\BackController;
 use \OCFram\HTTPRequest;
+use \OCFram\Conf;
 use \Entity\Users;
 use \FormBuilder\ConnexionFormBuilder;
 use \FormBuilder\RegistrationFormBuilder;
@@ -177,17 +178,28 @@ class UsersController extends BackController
         Ceci est un mail automatique, Merci de ne pas y répondre.';
 
       // Envoi du mail de confirmation
+      // Recherche des paramètres
+          $conf= Conf::getInstance();
+          $mail_userAdress = $conf->get('mail_userAdress');
+          $mail_password = $conf->get('mail_password');
+          $mail_encryption = $conf->get('mail_encryption');
+          $mail_port = $conf->get('mail_port');
+          $mail_host = $conf->get('mail_host');
+          $mail_name = $conf->get('mail_name');
+          $mail_ident = $conf->get('mail_ident');
+
+
       // Create the Transport
-      $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'TLS'))
-        ->setUserName('fr.libs@gmail.com')
-        ->setPassword('uaehjeerxotzfpqt');
+      $transport = (new Swift_SmtpTransport($mail_host, $mail_port, $mail_encryption))
+        ->setUserName($mail_ident)
+        ->setPassword($mail_password);
 
       // Create the Mailer using your created Transport
       $mailer = new Swift_Mailer($transport);
 
       // Create a message
       $message = (new Swift_Message('Activer votre compte'))
-        ->setFrom(['fr.libs@gmail.com' => 'Francis Libs'])
+        ->setFrom([$mail_userAdress => $mail_name])
         ->setTo([$users->email()])
         ->setBody($txtMessage);
 
@@ -221,13 +233,7 @@ class UsersController extends BackController
     $users = $manager->getUsers($login);
 
 
-    if(!isset($users))
-    {
-      $this->app->user()->setFlash('La validation n\'est pas possible, vous n\'êtes pas connu du système');
-      $this->app->httpResponse()->redirect('/');
-    }
-
-    if(!$users->vKey() == $key)  // Check de la clé
+    if(!isset($users) OR !$users->vKey() == $key)
     {
       $this->app->user()->setFlash('La validation n\'est pas possible, vous n\'êtes pas connu du système');
       $this->app->httpResponse()->redirect('/');
