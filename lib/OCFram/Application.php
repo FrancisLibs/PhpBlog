@@ -15,7 +15,7 @@ abstract class Application
     $this->httpRequest = new HTTPRequest($this);
     $this->httpResponse = new HTTPResponse($this);
     $this->managers = new Managers('PDO', PDOFactory::getMysqlConnexion());
-    $this->user = new User($this);
+    $this->user = new User();
     $this->config = new Config($this);
 
     $this->name = '';

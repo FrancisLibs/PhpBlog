@@ -20,40 +20,37 @@ class PostController extends BackController
   	// Traitement du formulaire de contact si le formulaire a été envoyé.
   	if ($request->method() == 'POST')
   	{
-      /* Le formulaire a t-il été détourné ? (CSRF) On vérifie la présence des tokens
-        et l'égalité entre celui en session et celui du formulaire  */
-      if (
-        empty($_SESSION['formToken']) OR empty($request->postData('formToken')) OR
-        ($request->postData('formToken') != $_SESSION["formToken"]))
-      {
-        $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
-        $this->app->httpResponse()->redirect('/');
-      }
+        // Le formulaire a t-il été détourné ? (CSRF)
+        if(!$this->formToken->checkFormToken($request))
+        {
+            $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
+            $this->app->httpResponse()->redirect('/');
+        }
+        // Fin CSRF-----------------
 
-      $message = new Message([
-  		'firstName' =>  $request->postData('firstName'),
-  		'lastName' =>   $request->postData('lastName'),
-  		'email' =>      $request->postData('email'),
-  		'message' =>    $request->postData('message')
-  	  ]);
+        $message = new Message([
+        	'firstName' =>  $request->postData('firstName'),
+        	'lastName' =>   $request->postData('lastName'),
+        	'email' =>      $request->postData('email'),
+        	'message' =>    $request->postData('message')
+        ]);
 
-      $messageValide = true;
+        $messageValide = true;
     }
     else
     {
   		$message = new Message;
     }
 
-    // Sécurité CSRF
-    $formToken = bin2hex(random_bytes(20));
-    $_SESSION['formToken'] = $formToken;
+    // CSRF...
+    $formtoken = $this->formToken->setFormToken();
+    $message->setFormToken($formtoken);
 
-    $message->setFormToken($formToken);
 
-		$formBuilder = new MessageFormBuilder($message);
-		$formBuilder->build();
+	$formBuilder = new MessageFormBuilder($message);
+	$formBuilder->build();
 
-		$form = $formBuilder->form();
+	$form = $formBuilder->form();
 
     if (isset($messageValide) && $messageValide)
     {
@@ -155,38 +152,29 @@ class PostController extends BackController
     // Si le formulaire a été envoyé.
     if ($request->method() == 'POST')
     {
-      // Le formulaire a t-il été détourné ? (CSRF)
-      //On vérifie que la présence des  tokens
-      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken')))
-      {
-        if($request->postData('formToken') != $_SESSION["formToken"])
+        // Le formulaire a t-il été détourné ? (CSRF)
+        if(!$this->formToken->checkFormToken($request))
         {
-          $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
-          $this->app->httpResponse()->redirect('/post-'.$request->getData('post_id').'.html');
+            $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
+            $this->app->httpResponse()->redirect('/post-'.$request->getData('post_id').'.html');
         }
-      }
-      else
-      {
-        $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
-        $this->app->httpResponse()->redirect('/post-'.$request->getData('post_id').'.html');
-      }
+        // Fin CSRF-----------------
 
-      $comment = new Comment([
-    	'contenu'   =>  $request->postData('contenu'),
-    	'post_id'   =>  $request->getData('post'),
-    	'state'     =>  0,
-    	'users_id'  =>  $_SESSION['users']->id(),
-      ]);
+        $comment = new Comment([
+        	'contenu'   =>  $request->postData('contenu'),
+        	'post_id'   =>  $request->getData('post'),
+        	'state'     =>  0,
+        	'users_id'  =>  $_SESSION['users']->id(),
+        ]);
     }
     else
     {
-      $comment = new Comment;
+        $comment = new Comment;
     }
 
-    $formToken = bin2hex(random_bytes(20));
-    $_SESSION['formToken'] = $formToken;
-
-    $comment->setFormToken($formToken);
+    // CSRF...
+    $formtoken = $this->formToken->setFormToken();
+    $comment->setFormToken($formtoken);
 
     $formBuilder = new CommentFormBuilder($comment);
     $formBuilder->build();
@@ -213,39 +201,30 @@ class PostController extends BackController
 
     if ($request->method() == 'POST')
     {
-      // Le formulaire a t-il été détourné ? (CSRF)
-      //On vérifie que la présence des  tokens
-      if (!empty($_SESSION['formToken']) AND !empty($request->postData('formToken')))
-      {
-        if($request->postData('formToken') != $_SESSION["formToken"])
+        // Le formulaire a t-il été détourné ? (CSRF)
+        if(!$this->formToken->checkFormToken($request))
         {
-          $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
-          $this->app->httpResponse()->redirect('/post-'.$request->getData('post_id').'.html');
+            $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
+            $this->app->httpResponse()->redirect('/post-'.$request->getData('post_id').'.html');
         }
-      }
-      else
-      {
-        $this->app->user()->setFlash('Le formulaire n\'est pas valide, merci de réessayer.');
-        $this->app->httpResponse()->redirect('/post-'.$request->getData('post_id').'.html');
-      }
+        // Fin CSRF-----------------
 
 
-      $comment = new Comment([
-    	'id'      =>  $request->postData('id'),
-    	'contenu' =>  $request->postData('contenu'),
-    	'post_id' =>  $request->postData('post_id'),
-    	'state'   =>  0,
-      ]);
+        $comment = new Comment([
+        	'id'      =>  $request->postData('id'),
+        	'contenu' =>  $request->postData('contenu'),
+        	'post_id' =>  $request->postData('post_id'),
+        	'state'   =>  0,
+        ]);
     }
     else
     {
-      $comment = $this->managers->getManagerOf('Comment')->get($request->getData('id'));
+        $comment = $this->managers->getManagerOf('Comment')->get($request->getData('id'));
     }
 
-    $formToken = bin2hex(random_bytes(20));
-    $_SESSION['formToken'] = $formToken;
-
-    $comment->setFormToken($formToken);
+     // CSRF...
+    $formtoken = $this->formToken->setFormToken();
+    $comment->setFormToken($formtoken);
 
     $formBuilder = new CommentFormBuilder($comment);
     $formBuilder->build();
@@ -256,9 +235,9 @@ class PostController extends BackController
 
     if ($formHandler->process())
     {
-      $this->app->user()->setFlash('Le commentaire a bien été modifié');
+        $this->app->user()->setFlash('Le commentaire a bien été modifié');
 
-      $this->app->httpResponse()->redirect('/post-'.$request->postData('post_id').'.html');
+        $this->app->httpResponse()->redirect('/post-'.$request->postData('post_id').'.html');
     }
 
     $this->page->addVar('form', $form->createView());

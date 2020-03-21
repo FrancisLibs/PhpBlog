@@ -8,6 +8,7 @@ abstract class BackController extends ApplicationComponent
   protected $page = null;
   protected $view = '';
   protected $managers = null;
+  protected $formToken;
 
   public function __construct(Application $app, $module, $action)
   {
@@ -15,10 +16,13 @@ abstract class BackController extends ApplicationComponent
 
     $this->managers = new Managers('PDO', PDOFactory::getMysqlConnexion());
     $this->page = new Page($app);
+    $this->formToken = new FormToken($this->app()->user());
 
     $this->setModule($module);
     $this->setAction($action);
     $this->setView($action);
+
+
   }
 
   public function execute()

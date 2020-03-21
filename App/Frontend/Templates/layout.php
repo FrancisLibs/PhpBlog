@@ -99,7 +99,7 @@
         </div>
 
         <div class="element">
-          <a class="lienCV" href="../images/CvLibs.pdf" role="button" target="_blank">Mon parcours</a>
+          <a class="lienCV" href="../images/CvLibs.pdf" role="button" target="_blank"rel="noopener noreferrer">Mon parcours</a>
         </div>
 
     </div>
