@@ -8,7 +8,7 @@
 
   <p class="titreFormulaire">Inscription</p>
 
-  <form action ="" method="post" clegistrationass="formulaire">
+  <form action ="" method="post">
     <?= $form ?>
     <div class="index-btn-valid">
       <input type="submit" value="Valider" class="btnValid font-weight-bold" />

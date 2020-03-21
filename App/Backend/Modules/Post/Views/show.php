@@ -1,6 +1,10 @@
 <div class="back-show-contenu">
   <div class="entete">
-    <h2><?= htmlspecialchars($post['title']) ?></h2>
+    <div class="titre">
+        <h2><?= htmlspecialchars($post['title']) ?></h2>
+        <a class="btn btn-info btn-xs modif-article" role="button" href="post-update-<?= $post->id(); ?>.html">Modifier</a>
+        <a class="btn btn-info btn-xs show-ajout-commentaire"href="posts.html">Retour à la liste des posts</a>
+    </div>
     <p class="show-autor">Par <em><?= htmlspecialchars($post['autor_name']) ?></em> le <?= htmlspecialchars($post['edition_date']->format('d/m/Y à H\hi')) ?>
     <?php
     if($post['edition_date'] != $post['updatedate'] && isset($post['update_date']))
@@ -15,7 +19,7 @@
   <?php
   if (empty($comments))
   { ?>
-    <p class="show-ajout-commentaire">Aucun commentaire n'a encore été posté. Soyez le premier à en laisser un !</p>
+    <p class="show-btn-ajout-commentaire">Aucun commentaire n'a encore été posté. Soyez le premier à en laisser un !</p>
   <?php }
   else
   {
@@ -42,5 +46,5 @@
 
   <a class="btn btn-info btn-xs ajout-commentaire" role="button" href="commenter-<?= $post['id'] ?>.html">Ajouter un commentaire</a>
   <br /><br />
-  <a class="btn btn-info btn-xs show-ajout-commentaire"href="posts.html">Retour à la liste des posts</a>
+
 </div>

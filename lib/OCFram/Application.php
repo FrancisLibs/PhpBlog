@@ -15,7 +15,7 @@ abstract class Application
     $this->httpRequest = new HTTPRequest($this);
     $this->httpResponse = new HTTPResponse($this);
     $this->managers = new Managers('PDO', PDOFactory::getMysqlConnexion());
-    $this->user = new User($this);
+    $this->user = new User();
     $this->config = new Config($this);
 
     $this->name = '';
@@ -28,9 +28,9 @@ abstract class Application
 
     if ($this->user()->isAuthenticated())
     {
-      $cookieName='ver-sio';
+      $cookieName='Gt_grex78lof';
       $duration = time() + (60 * 20);
-      $value = bin2hex(random_bytes(2));
+      $value = bin2hex(random_bytes(10));
 
       if($this->user()->sessionExist($cookieName) && $this->httpRequest()->cookieExists($cookieName))
       {
