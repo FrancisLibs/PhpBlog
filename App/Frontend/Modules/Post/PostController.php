@@ -34,8 +34,6 @@ class PostController extends BackController
         	'email' =>      $request->postData('email'),
         	'message' =>    $request->postData('message')
         ]);
-
-        $messageValide = true;
     }
     else
     {
@@ -46,13 +44,12 @@ class PostController extends BackController
     $formtoken = $this->formToken->setFormToken();
     $message->setFormToken($formtoken);
 
+  	$formBuilder = new MessageFormBuilder($message);
+  	$formBuilder->build();
 
-	$formBuilder = new MessageFormBuilder($message);
-	$formBuilder->build();
+  	$form = $formBuilder->form();
 
-	$form = $formBuilder->form();
-
-    if (isset($messageValide) && $messageValide)
+    if ($request->method() == 'POST')
     {
       $textMessage=
         $message->lastName()."\n".
@@ -134,7 +131,7 @@ class PostController extends BackController
 
     $this->page->addVar('post', $post);
 
-    $state = 1; // State = 1, sont les commentaires validés
+    $state = 1; // State = 1 : Ce sont les commentaires validés
     $comments = $this->managers->getManagerOf('Comment')->getListOf($post->id(), $state);
 
     $this->page->addVar('comments', $comments);

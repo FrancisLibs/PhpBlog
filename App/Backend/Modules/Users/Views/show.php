@@ -18,20 +18,21 @@
           { ?>
             <tr>
               <td>
-                <?= htmlspecialchars($users->login()) ?>
+                <?= htmlentities($users->login()); ?>
               </td>
               <td>
-                <?= htmlspecialchars($users->email()) ?>
+                <?= htmlentities($users->email()); ?>
               </td>
               <td>
-                <?= htmlspecialchars($users->create_date()->format('d/m/Y à H\hi')) ?>
+                <?= $users->create_date()->format('d/m/Y à H\hi'); ?>
               </td>
               <td>
-                <?= htmlspecialchars($users->role()) ?>
+                <?= $users->role(); ?>
               </td>
               <td>
-                <a href="users-delete-<?= htmlspecialchars($users->id()) ?>.html"><img src="/images/delete.png" alt="Supprimer"></a>
-                <a href="users-upgrade-<?= htmlspecialchars($users->id()) ?>.html"><img src="/images/fleche2verte.png" alt="Upgrade"></a>
+                <a href="users-delete-<?= $users->id(); ?>.html"><img src="/images/delete.png" alt="Supprimer"></a>
+                <a href="users-upgrade-<?= $users->id(); ?>.html"><img src="/images/fleche2verte.png" alt="Upgrade"></a>
+                <a href="users-downgrade-<?= $users->id(); ?>.html"><img src="/images/fleche2vertebas.png" alt="Downgrade"></a>
               </td>
             </tr>
             <?php }?>

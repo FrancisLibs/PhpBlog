@@ -72,7 +72,6 @@ class PostController extends BackController
     $this->managers->getManagerOf('Comment')->deleteFromPost($postId);
     $this->managers->getManagerOf('Post')->delete($postId);
 
-    $this->app->user()->setFlash('L\'article a bien été supprimé ! ');
     $this->app->httpResponse()->redirect('/admin/posts.html');
   }
 
@@ -138,8 +137,6 @@ class PostController extends BackController
 
     if ($formHandler->process())
     {
-      $this->app->user()->setFlash('Le commentaire a bien été modifié');
-
       $this->app->httpResponse()->redirect("post-show-". $comment->post_id().'.html');
     }
 
@@ -167,7 +164,6 @@ class PostController extends BackController
         'chapo'         => $request->postData('chapo'),
         'contenu'       => $request->postData('contenu'),
         'users_id'      => $users->id(),
-
       ]);
     }
     else
@@ -196,15 +192,6 @@ class PostController extends BackController
 
     if ($formHandler->process())
     {
-      if($this->app->user()->getAttribute('postState') == 'insert')
-      {
-        $this->app->user()->setFlash('L\'article a bien été ajouté !');
-      }
-      elseif($this->app->user()->getAttribute('postState') == 'update')
-      {
-        $this->app->user()->setFlash('L\'article a bien été modifié !');
-      }
-
       $this->app->httpResponse()->redirect('/admin/posts.html');
     }
 
@@ -249,7 +236,6 @@ class PostController extends BackController
 
     if ($formHandler->process())
     {
-      $this->app->user()->setFlash('Le commentaire a bien été ajouté, merci !');
       $this->app->httpResponse()->redirect('/admin/post-show-'.$request->getData('post').'.html');
     }
 

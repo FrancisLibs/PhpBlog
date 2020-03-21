@@ -33,7 +33,7 @@ class StringField extends Field
 
     if (!empty($this->value))
     {
-      $widget .= ' value="'.htmlspecialchars($this->value).'"';
+      $widget .= ' value="'.htmlentities($this->value).'"';
     }
 
     if (!empty($this->maxLength))

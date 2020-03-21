@@ -1,17 +1,17 @@
 
 <div class="front-show-contenu">
   <div class="entete">
-    <h2><?= htmlspecialchars($post['title']) ?></h2>
-    <p class="show-autor">Par <em><?= htmlspecialchars($post['autor_name']) ?></em>, le <?= htmlspecialchars($post['edition_date']->format('d/m/Y à H\hi'))?></p>
+    <h2><?= htmlentities($post['title']); ?></h2>
+    <p class="show-autor">Par <em><?= htmlentities($post['autor_name']); ?></em>, le <?= $post['edition_date']->format('d/m/Y à H\hi'); ?></p>
 
     <?php if($post['edition_date'] != $post['update_date'] && isset($post['update_date'])) { ?>
-        <p>, modifié le <?= htmlspecialchars($post['update_date']->format('d/m/Y à H\hi')) ?></p>
+        <p>, modifié le <?= $post['update_date']->format('d/m/Y à H\hi'); ?></p>
     <?php } ?>
   </div>
 
-  <h3 class="show-chapo"><?= htmlspecialchars($post['chapo']) ?></h3>
+  <h3 class="show-chapo"><?= htmlentities($post['chapo']); ?></h3>
 
-  <p class="show-contenu"><?= nl2br(htmlspecialchars($post['contenu'])) ?></p>
+  <p class="show-contenu"><?= nl2br(htmlentities($post['contenu'])); ?></p>
 
   <div class="commentaires">
 
@@ -32,14 +32,14 @@
     </div>
     <div class="commentaires">
       <?php foreach ($comments as $comment) { ?>
-        <p>Posté par <strong><?= htmlspecialchars($comment['author_name']) ?></strong> le
-          <?= htmlspecialchars($comment['edition_date']->format('d/m/Y à H\hi')) ?></p>
+        <p>Posté par <strong><?= htmlentities($comment['author_name']); ?></strong> le
+          <?= $comment['edition_date']->format('d/m/Y à H\hi'); ?></p>
 
         <?php if ($user->isAuthenticated() && $comment['users_id'] == $users->id()) { ?>
           <a class="btn btn-info btn-xs" role="button" href="comment-update-<?= $comment['id'] ?>.html">Modifier</a>
         <?php } ?>
 
-        <p><?= nl2br(htmlspecialchars($comment['contenu'])) ?></p>
+        <p><?= nl2br(htmlentities($comment['contenu'])); ?></p>
 
       <?php } ?>
     </div>

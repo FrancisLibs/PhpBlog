@@ -1,20 +1,20 @@
 <div class="back-show-contenu">
   <div class="entete">
     <div class="titre">
-        <h2><?= htmlspecialchars($post['title']) ?></h2>
+        <h2><?= htmlentities($post['title']); ?></h2>
         <a class="btn btn-info btn-xs modif-article" role="button" href="post-update-<?= $post->id(); ?>.html">Modifier</a>
         <a class="btn btn-info btn-xs show-ajout-commentaire"href="posts.html">Retour à la liste des posts</a>
     </div>
-    <p class="show-autor">Par <em><?= htmlspecialchars($post['autor_name']) ?></em> le <?= htmlspecialchars($post['edition_date']->format('d/m/Y à H\hi')) ?>
+    <p class="show-autor">Par <em><?= htmlentities($post['autor_name']); ?></em> le <?= $post['edition_date']->format('d/m/Y à H\hi'); ?>
     <?php
     if($post['edition_date'] != $post['updatedate'] && isset($post['update_date']))
     { ?>
-       , modifié le <?= htmlspecialchars($post['update_date']->format('d/m/Y à H\hi')) ?></p>
+       , modifié le <?= $post['update_date']->format('d/m/Y à H\hi'); ?></p>
     <?php } ?>
   </div>
 
-  <h3 class="show-chapo"><?= htmlspecialchars($post['chapo']) ?></h3>
-  <p class="show-contenu"><?= htmlspecialchars($post['contenu']) ?></p>
+  <h3 class="show-chapo"><?= htmlentities($post['chapo']); ?></h3>
+  <p class="show-contenu"><?= htmlentities($post['contenu']); ?></p>
 
   <?php
   if (empty($comments))
@@ -26,8 +26,8 @@
     foreach ($comments as $comment)
     { ?>
       <div class="back-show-entete">
-        <span>Commentaire laissé par <?= htmlspecialchars($comment->author_name()) ?></span>
-        <span>, le &nbsp;<?= htmlspecialchars($comment->edition_date()->format('d/m/Y à H\hi')) ?> &nbsp;</span>
+        <span>Commentaire laissé par <?= htmlentities($comment->author_name()); ?></span>
+        <span>, le &nbsp;<?= $comment->edition_date()->format('d/m/Y à H\hi'); ?> &nbsp;</span>
         <div>
           <a class="btn btn-info btn-xs" role="button" href="comment-update-<?= $comment->id() ?>.html">Modifier</a>
           <a class="btn btn-info btn-xs" role="button" href="comment-refuse-<?= $comment->id() ?>.html">Refuser</a>
@@ -39,7 +39,7 @@
         </div>
       </div>
       <div>
-        <?= htmlspecialchars($comment->contenu()) ?>
+        <?= htmlentities($comment->contenu()); ?>
       </div>
     <?php }
   }?>
