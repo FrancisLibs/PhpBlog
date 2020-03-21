@@ -42,6 +42,23 @@ class UsersController extends BackController
     $this->app->httpResponse()->redirect('/admin/users.html');
   }
 
+  public function executeDowngrade(HTTPRequest $request)
+  {
+    $usersId = $request->getData('id');
+
+    $this->page->addVar('title', 'Gestion des utilisateurs');
+
+    $manager = $this->managers->getManagerOf('Users');
+    $users=$manager->getUsersId($usersId);
+
+    $usersRole = $users->role_id();
+    $newRole = $usersRole-1;
+    $users->setRole_id($newRole);
+    $manager->update($users);
+
+    $this->app->httpResponse()->redirect('/admin/users.html');
+  }
+
   public function executeDelete(HTTPRequest $request)
   {
     $this->page->addVar('title', 'Suppresssion utilisateur');
@@ -88,6 +105,23 @@ class UsersController extends BackController
 
     $usersRole = $users->role_id();
     $newRole = $usersRole+1;
+    $users->setRole_id($newRole);
+    $manager->update($users);
+
+    $this->app->httpResponse()->redirect('/admin/admin.html');
+  }
+
+  public function executeAdminDowngrade(HTTPRequest $request)
+  {
+    $usersId = $request->getData('id');
+
+    $this->page->addVar('title', 'Gestion des utilisateurs');
+
+    $manager = $this->managers->getManagerOf('Users');
+    $users=$manager->getUsersId($usersId);
+
+    $usersRole = $users->role_id();
+    $newRole = $usersRole-1;
     $users->setRole_id($newRole);
     $manager->update($users);
 

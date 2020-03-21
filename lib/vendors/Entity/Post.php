@@ -20,12 +20,6 @@ class Post extends Entity
   const CHAPO_INVALIDE = 3;
   const CONTENU_INVALIDE = 4;
 
-  public function isValid()
-  {
-    return !(empty($this->title) || empty($this->chapo) || empty($this->contenu));
-  }
-
-
   // SETTERS //
 
   public function setId($id)

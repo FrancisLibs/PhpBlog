@@ -32,16 +32,16 @@
           echo '
           <tr>
             <td>
-              <em>', htmlspecialchars($post['autor_name']), '</em>
+              <em>', htmlentities($post['autor_name']), '</em>
             </td>
             <td>
-               <a href="post-show-', $post['id'] ,'.html">',htmlspecialchars($post['title']) ,'</a>
+               <a href="post-show-', $post['id'] ,'.html">', htmlentities($post['title']) ,'</a>
             </td>
             <td>
-              le ', htmlspecialchars($post['edition_date']->format('d/m/Y à H\hi')), '
+              le ', $post['edition_date']->format('d/m/Y à H\hi'), '
             </td>
             <td>
-              ', ($post['edition_date'] == $post['update_date'] ? '-' : 'le '.htmlspecialchars($post['update_date']->format('d/m/Y à H\hi'))), '
+              ', ($post['edition_date'] == $post['update_date'] ? '-' : 'le '.$post['update_date']->format('d/m/Y à H\hi')), '
             </td>
             <td>
               <a href="post-update-', $post['id'], '.html"><img src="/images/update.png" alt="Modifier" /></a>
