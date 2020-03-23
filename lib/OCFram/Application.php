@@ -36,13 +36,14 @@ abstract class Application
       {
         if($this->user()->getAttribute($cookieName) != $this->httpRequest()->cookieData($cookieName))
         {
-
           $this->user()->endSession();
         }
       }
 
       $this->user()->setSession($cookieName, $value);
-      $this->httpResponse()->setCookie($cookieName, $value, $duration, '/', 'projet4.francislibs.fr');
+
+      $site_adress = Conf::getInstance()->get('site_adress');
+      $this->httpResponse()->setCookie($cookieName, $value, $duration, '/', $site_adress);
     }
 
     //------------Fin sécurité Hijack--------------------
@@ -68,12 +69,10 @@ abstract class Application
       // On ajoute la route au routeur.
       $router->addRoute(new Route($route->getAttribute('url'), $route->getAttribute('module'), $route->getAttribute('action'), $vars));
     }
-
     try
     {
       // On récupère la route correspondante à l'URL.
       $matchedRoute = $router->getRoute($this->httpRequest->requestURI());
-
     }
     catch (\RuntimeException $e)
     {
