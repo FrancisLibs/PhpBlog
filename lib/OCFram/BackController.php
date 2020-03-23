@@ -16,7 +16,7 @@ abstract class BackController extends ApplicationComponent
 
     $this->managers = new Managers('PDO', PDOFactory::getMysqlConnexion());
     $this->page = new Page($app);
-    $this->formToken = new FormToken($this->app()->user());
+    $this->formToken = new FormToken($app->user());
 
     $this->setModule($module);
     $this->setAction($action);
